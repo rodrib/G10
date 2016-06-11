@@ -1,18 +1,16 @@
 package clases;
 
-public class LocalComercial extends TipoPoi {
-	RubroLocal rubro;
+public class CGP extends TipoPoi {
 
 	@Override
 	public float getDistanciaMaxima() {
 		// TODO Auto-generated method stub
-		return rubro.getDistanciaMaxima();
+		return 0;
 	}
 
 	@Override
 	public boolean estaCerca(Locacion miLocacion, Locacion otraLocacion) {
 		// TODO Auto-generated method stub
-		return false;
+		return miLocacion.getCodigoComuna() == otraLocacion.getCodigoComuna();
 	}
-
 }

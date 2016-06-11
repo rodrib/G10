@@ -1,5 +1,7 @@
 package clases;
 
-public class RubroLocal {
+public interface  RubroLocal {
+	
+	public float getDistanciaMaxima();
 
 }

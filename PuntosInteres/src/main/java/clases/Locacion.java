@@ -12,6 +12,7 @@ public class Locacion {
 	String pais;
 	int piso;
 	String provincia;
+	int codigoComuna;
 
 	public String getBarrio() {
 		return barrio;
@@ -99,6 +100,14 @@ public class Locacion {
 
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
+	}
+
+	public int getCodigoComuna() {
+		return codigoComuna;
+	}
+
+	public void setCodigoComuna(int codigoComuna) {
+		this.codigoComuna = codigoComuna;
 	}
 
 }

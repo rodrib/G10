@@ -1,5 +1,8 @@
 package gestores;
 
+
+import java.time.LocalDateTime;
+
 import clases.*;
 
 public class GestorPoi {
@@ -20,5 +23,10 @@ public class GestorPoi {
 	public boolean EstaCerca(POI poiUno, Locacion miLocacion)
 	{
 		return poiUno.getTipo().estaCerca(poiUno.getLocacion(), miLocacion);
+	}
+	
+	public boolean EstaDisponible(POI poi, LocalDateTime fecha)
+	{
+		return poi.getTipo().estaDisponible(fecha);
 	}
 }

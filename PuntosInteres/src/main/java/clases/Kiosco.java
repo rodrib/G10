@@ -6,5 +6,4 @@ public class Kiosco implements RubroLocal {
 		// TODO Auto-generated method stub
 		return 200;
 	}
-
 }

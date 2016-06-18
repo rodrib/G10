@@ -1,25 +1,27 @@
-package clases;
+package utn.dds.g10.entidades;
 
 import java.time.LocalDateTime;
 
-public class ParadaColectivo extends TipoPoi {
+public class LocalComercial extends TipoPoi {
+	RubroLocal rubro;
+	//List<DayOfWeek> diasDisponible;
 
 	@Override
 	public float getDistanciaMaxima() {
 		// TODO Auto-generated method stub
-		return 100;
+		return rubro.getDistanciaMaxima();
 	}
 
 	@Override
 	public boolean estaCerca(Locacion miLocacion, Locacion otraLocacion) {
 		// TODO Auto-generated method stub
-		return Utiles.Util.CalcularDistancia(miLocacion, otraLocacion) < getDistanciaMaxima();
+		return utn.dds.g10.Utiles.Util.CalcularDistancia(miLocacion, otraLocacion) < this.getDistanciaMaxima();
 	}
 
 	@Override
 	public boolean estaDisponible(LocalDateTime fecha) {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
-
 }
+

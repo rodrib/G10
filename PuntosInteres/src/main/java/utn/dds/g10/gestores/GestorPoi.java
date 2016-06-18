@@ -1,9 +1,9 @@
-package gestores;
+package utn.dds.g10.gestores;
 
 
 import java.time.LocalDateTime;
 
-import clases.*;
+import utn.dds.g10.entidades.*;
 
 public class GestorPoi {
 
@@ -12,12 +12,12 @@ public class GestorPoi {
 	}
 
 	public float CalcularDistanciaEntrePuntos(POI puntoUno, POI puntoDos) {
-		return Utiles.Util.CalcularDistancia(puntoUno.getLocacion(), puntoDos.getLocacion());
+		return utn.dds.g10.Utiles.Util.CalcularDistancia(puntoUno.getLocacion(), puntoDos.getLocacion());
 	}	
 	
 	public boolean EstaCerca(POI poiUno, POI poiDos)
 	{
-		return poiUno.getTipo().estaCerca(poiUno.getLocacion(), poiDos.getLocacion());
+		return this.EstaCerca(poiUno, poiDos.getLocacion());
 	}
 	
 	public boolean EstaCerca(POI poiUno, Locacion miLocacion)

@@ -1,4 +1,4 @@
-package clases;
+package utn.dds.g10.entidades;
 
 public class Contexto {
 	

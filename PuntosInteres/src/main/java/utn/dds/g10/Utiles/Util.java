@@ -1,6 +1,6 @@
-package Utiles;
+package utn.dds.g10.Utiles;
 
-import clases.*;
+import utn.dds.g10.entidades.*;
 
 public final class Util {
 

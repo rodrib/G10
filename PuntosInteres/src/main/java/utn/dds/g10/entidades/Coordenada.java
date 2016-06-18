@@ -1,10 +1,16 @@
-package clases;
+package utn.dds.g10.entidades;
 
 public class Coordenada {
 
 	float latitud;
 	float longitud;
 
+	public Coordenada(float lat, float longi)
+	{
+		this.setLatitud(lat);
+		this.setLongitud(longi);
+	}
+	
 	public float getLatitud() {
 		return latitud;
 	}

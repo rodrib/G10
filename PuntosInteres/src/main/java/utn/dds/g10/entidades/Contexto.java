@@ -1,11 +1,18 @@
 package utn.dds.g10.entidades;
-
+import java.time.LocalDate;
 public class Contexto {
 	
 	Locacion locacion;
 
 	public ResultadoConsulta BuscarPoiSegunCriterio(String criterio) {
-		return new ResultadoConsulta();
+		GestorPOI gp = new GestorPOI();
+		ResultadoConsulta rc = new ResultadoConsulta();
+		rc = gp.ObtenerPoiPorCriterio(criterio);
+		return rc;
+	}
+	
+	public ResultadoConsulta BuscarPoiSegunDisponibilidad(String nombrePoi, LocalDate fechayhora) {
+		
 	}
 
 	public Locacion getLocacion() {

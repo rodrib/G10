@@ -21,7 +21,18 @@ public class LocalComercial extends TipoPoi {
 	@Override
 	public boolean estaDisponible(LocalDateTime fecha) {
 		// TODO Auto-generated method stub
-		return false;
+		return EsDiaDisponible(fecha) && EsHorarioDisponible(fecha);
+	}
+	
+	
+	private boolean EsDiaDisponible(LocalDateTime fecha)
+	{
+		return rubro.EsDiasDisponible(fecha);
+	}
+	
+	private boolean EsHorarioDisponible(LocalDateTime fecha)
+	{
+		return rubro.EsHorarioDisponible(fecha);
 	}
 }
 

@@ -10,10 +10,6 @@ public class Contexto {
 		rc = gp.ObtenerPoiPorCriterio(criterio);
 		return rc;
 	}
-	
-	public ResultadoConsulta BuscarPoiSegunDisponibilidad(String nombrePoi, LocalDate fechayhora) {
-		
-	}
 
 	public Locacion getLocacion() {
 		return locacion;

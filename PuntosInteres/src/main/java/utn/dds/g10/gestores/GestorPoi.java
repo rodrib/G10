@@ -25,8 +25,8 @@ public class GestorPoi {
 		return poiUno.getTipo().estaCerca(poiUno.getLocacion(), miLocacion);
 	}
 	
-	public boolean EstaDisponible(POI poi, LocalDateTime fecha)
+	public boolean EstaDisponible(POI poi, LocalDateTime fecha, String x)
 	{
-		return poi.getTipo().estaDisponible(fecha);
+		return poi.getTipo().estaDisponible(fecha, x);
 	}
 }

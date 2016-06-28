@@ -21,7 +21,7 @@ public class SucursalBanco extends TipoPoi {
 	}
 
 	@Override
-	public boolean estaDisponible(LocalDateTime fecha) {
+	public boolean estaDisponible(LocalDateTime fecha, String x) {
 		// TODO Auto-generated method stub
 		return EsDiaSemana(fecha) && EsHorarioDisponible(fecha);
 	}

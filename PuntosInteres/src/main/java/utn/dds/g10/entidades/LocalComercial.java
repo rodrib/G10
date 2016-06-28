@@ -19,7 +19,7 @@ public class LocalComercial extends TipoPoi {
 	}
 
 	@Override
-	public boolean estaDisponible(LocalDateTime fecha) {
+	public boolean estaDisponible(LocalDateTime fecha, String x){
 		// TODO Auto-generated method stub
 		return EsDiaDisponible(fecha) && EsHorarioDisponible(fecha);
 	}

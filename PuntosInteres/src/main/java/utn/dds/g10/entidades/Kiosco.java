@@ -17,11 +17,12 @@ public class Kiosco implements RubroLocal {
 		// TODO Auto-generated method stub
 		return 200;
 	}
+	
 	public boolean EsDiaDisponible(LocalDateTime fecha){
 		return fecha.getDayOfWeek() != DayOfWeek.SUNDAY;
 	}
 	public boolean EsHorarioDisponible(LocalDateTime fecha){
-		Localtime HoraPOI = Localtime.of(fecha.getHour(),fecha.getMinutes(),0);
+		Localtime HoraPoi = Localtime.of(fecha.getHour(),fecha.getMinutes(),0);
 		return (HoraPoi.compareTo(HorarioInicio1)&&!HoraPoi.compareTo(HorarioFin1))||(HoraPoi.compareTo(HorarioInicio2)&&!HoraPoi.compareTo(HorarioFin2));
 	}
 }

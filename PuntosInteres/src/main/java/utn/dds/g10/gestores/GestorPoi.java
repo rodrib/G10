@@ -9,10 +9,8 @@ import utn.dds.g10.datos.PoiDatos;
 import utn.dds.g10.entidades.*;
 
 public class GestorPoi {
-	//
-	// public listaPOIsSeleccionados buscarPOI(String tag) {
-	// return new listaPOIsSeleccionados();
-	// }
+	
+	HistorialConsultas historial = new HistorialConsultas();
 
 	public ResultadoConsulta BuscarPoi(String criterioBusqueda) {
 		PoiDatos datosPoi = new PoiDatos();
@@ -27,6 +25,9 @@ public class GestorPoi {
 		ResultadoConsulta resultado = new ResultadoConsulta();
 		resultado.setPuntos(listadoPoiTodos);
 		resultado.setFechaHora(LocalDate.now());
+		
+		//Guardo la consulta en el Historial
+		//historial.AgregarResultado(resultado);
 
 		return resultado;
 	}

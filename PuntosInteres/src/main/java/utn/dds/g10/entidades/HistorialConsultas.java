@@ -6,7 +6,7 @@ public class HistorialConsultas {
 	List<ResultadoConsulta> consultas;
 
 	public void AgregarResultado(ResultadoConsulta resultado) {
-
+		consultas.add(resultado);
 	}
 
 }

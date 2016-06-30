@@ -10,7 +10,7 @@ import utn.dds.g10.gestores.GestorPoi;
 import org.junit.Before;
 import org.junit.Test;
 
-public class poiTest {
+public class PoiTest {
 
 	Locacion locacionBanco;
 	GestorPoi miGestor;

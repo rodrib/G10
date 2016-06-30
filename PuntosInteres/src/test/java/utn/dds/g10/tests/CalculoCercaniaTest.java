@@ -116,14 +116,15 @@ public class CalculoCercaniaTest {
 		//150 metros entre locacion A y B
 		locacionA.setCoordenada(new Coordenada((float) -34.627310, (float) -58.446237));
 		locacionB.setCoordenada(new Coordenada((float) -34.627045, (float) -58.444649));	
+		//miGestor.CalcularDistanciaEntrePuntos(puntoUno, puntoDos)
 		
+		//Seteo los propiedades del Kiosco
 		localComercial.setRubro(kiosco);
-		
 		puntoDos.setNombre("King Kios Kong");	
 		puntoDos.setTipo(localComercial);
-		puntoDos.setLocacion(locacionA);				
-		
-		Assert.assertTrue("El kiosko esta dentro de un radio de 2 cuadras", miGestor.EstaCerca(puntoUno, locacionB));		
+		//La locacionA es la locacion del Kiosco.
+		puntoDos.setLocacion(locacionA);		
 	
+		Assert.assertTrue("El kiosko esta dentro de un radio de 2 cuadras", miGestor.EstaCerca(puntoDos, locacionB));
 	}
 }

@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 public class CGP extends TipoPoi {
 
-	List<ServicioCGP> servicios;
-	
+	List<ServicioCGP> servicios;	
+
 	@Override
 	public float getDistanciaMaxima() {
 		// TODO Auto-generated method stub
@@ -46,4 +46,13 @@ public class CGP extends TipoPoi {
 		}
 		return false;
 	}
+	
+	public List<ServicioCGP> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<ServicioCGP> servicios) {
+		this.servicios = servicios;
+	}
+
 }

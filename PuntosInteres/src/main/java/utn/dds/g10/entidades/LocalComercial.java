@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class LocalComercial extends TipoPoi {
 	RubroLocal rubro;
-	//List<DayOfWeek> diasDisponible;
+	//List<DayOfWeek> diasDisponible;	
 
 	@Override
 	public float getDistanciaMaxima() {
@@ -33,6 +33,14 @@ public class LocalComercial extends TipoPoi {
 	private boolean EsHorarioDisponible(LocalDateTime fecha)
 	{
 		return rubro.EsHorarioDisponible(fecha);
+	}
+	
+	public RubroLocal getRubro() {
+		return rubro;
+	}
+
+	public void setRubro(RubroLocal rubro) {
+		this.rubro = rubro;
 	}
 }
 

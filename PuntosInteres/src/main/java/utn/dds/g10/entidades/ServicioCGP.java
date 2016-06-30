@@ -1,6 +1,6 @@
-
+package utn.dds.g10.entidades;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ServicioCGP {
@@ -13,11 +13,14 @@ public class ServicioCGP {
 		return EsDiaDisponible(fecha)&&EsHorarioDisponible(fecha);
 	}
 	public boolean EsHorarioDisponible(LocalDateTime fecha){
-		Localtime HoraPoi = Localtime.of(fecha.getHour(),fecha.getMinutes(),0);
-		return (HoraPoi.compareTo(HorarioInicio1)&&!HoraPoi.compareTo(HorarioFin1))||(HoraPoi.compareTo(HorarioInicio2)&&!HoraPoi.compareTo(HorarioFin2));
+		LocalTime HoraPoi = LocalTime.of(fecha.getHour(),fecha.getMinute(),0);
+		if ( ((HoraPoi.compareTo(HorarioInicio1)==1) && (HoraPoi.compareTo(HorarioFin1)==-1)) || ( (HoraPoi.compareTo(HorarioInicio2)==1) && (HoraPoi.compareTo(HorarioFin2)==-1)) ){
+			return true;
+		}	
+		return false;
 	}
 	
 	public boolean EsDiaDisponible(LocalDateTime fecha){
-		return fecha.getDayOfWeek() != DayOfWeek.SUNDAY;
+		return fecha.getDayOfWeek()!= DayOfWeek.SUNDAY;
 	}
 }

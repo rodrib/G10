@@ -1,8 +1,7 @@
-import PuntosInteres.src.main.java.utn.dds.g10.entidades.Locacion;
-import PuntosInteres.src.main.java.utn.dds.g10.entidades.TipoPoi;
-import PuntosInteres.src.main.java.utn.dds.g10.entidades.ServicioCGP;
+package utn.dds.g10.entidades;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 public class CGP extends TipoPoi {
 
@@ -27,18 +26,18 @@ public class CGP extends TipoPoi {
 			return false;
 		
 		if (x == null){ // no se ingreso un valor en x
-			Iterator i = servicios.iterator();
+			Iterator<ServicioCGP> i = servicios.iterator();
 			while(i.hasNext()){
-				ServicioCGP servicio = i.next();
+				ServicioCGP servicio = (ServicioCGP) i.next();
 				if(servicio.estaDisponible(fecha)){
 					return true;
 				}
 			
 			}
 		}else{ // x es el nombre del servicio
-			Iterator i = servicios.iterator();
+			Iterator<ServicioCGP> i = servicios.iterator();
 			while(i.hasNext()){
-				ServicioCGP servicio = i.next();
+				ServicioCGP servicio = (ServicioCGP) i.next();
 				if(servicio.nombre==x){
 					return servicio.estaDisponible(fecha);
 				}

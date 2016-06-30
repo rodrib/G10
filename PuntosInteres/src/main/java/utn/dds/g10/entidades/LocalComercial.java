@@ -27,7 +27,7 @@ public class LocalComercial extends TipoPoi {
 	
 	private boolean EsDiaDisponible(LocalDateTime fecha)
 	{
-		return rubro.EsDiasDisponible(fecha);
+		return rubro.EsDiaDisponible(fecha);
 	}
 	
 	private boolean EsHorarioDisponible(LocalDateTime fecha)

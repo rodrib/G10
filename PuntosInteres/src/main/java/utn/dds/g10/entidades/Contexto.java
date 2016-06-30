@@ -4,10 +4,10 @@ public class Contexto {
 	
 	Locacion locacion;
 
-	public ResultadoConsulta BuscarPoiSegunCriterio(String criterio) {
-		GestorPoi gp = new GestorPoi();
+		public ResultadoConsulta buscarPOI(String tag) {
+		GestorPOI gp = new GestorPOI();
 		ResultadoConsulta rc = new ResultadoConsulta();
-		rc = gp.ObtenerPoiPorCriterio(criterio);
+		rc = gp.buscarPOI(tag);
 		return rc;
 	}
 

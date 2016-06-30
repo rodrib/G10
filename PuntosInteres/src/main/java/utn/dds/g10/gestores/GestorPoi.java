@@ -7,8 +7,8 @@ import utn.dds.g10.entidades.*;
 
 public class GestorPoi {
 
-	public ResultadoConsulta ObtenerPoiPorCriterio(String textoLibre) {
-		return new ResultadoConsulta();
+	public listaPOIsSeleccionados buscarPOI(String tag) {
+		return new listaPOIsSeleccionados();
 	}
 
 	public float CalcularDistanciaEntrePuntos(POI puntoUno, POI puntoDos) {

@@ -22,10 +22,8 @@ public class CGP extends TipoPoi {
 	@Override
 	public boolean estaDisponible(LocalDateTime fecha, String x) {
 		// TODO Auto-generated method stub
-		if (servicios.isEmpty())
-			return false;
 		
-		if (x == null){ // no se ingreso un valor en x
+		if (x == ""){ // no se ingreso un valor en x
 			Iterator<ServicioCGP> i = servicios.iterator();
 			while(i.hasNext()){
 				ServicioCGP servicio = (ServicioCGP) i.next();

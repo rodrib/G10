@@ -16,8 +16,7 @@ public class SucursalBanco extends TipoPoi {
 
 	@Override
 	public boolean estaCerca(Locacion miLocacion, Locacion otraLocacion) {
-		// TODO Auto-generated method stub
-		return false;
+		return utn.dds.g10.Utiles.Util.CalcularDistancia(miLocacion, otraLocacion) < getDistanciaMaxima();
 	}
 
 	@Override

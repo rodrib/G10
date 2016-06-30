@@ -1,6 +1,9 @@
 package utn.dds.g10.tests;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,12 +23,16 @@ public class CalculoDisponibilidadTest {
 	POI puntoUno;
 	POI puntoDos;
 	CGP cgp1;
+	CGP cgp2;
 	ServicioCGP servicioCGP1;
 	ServicioCGP servicioCGP2;
 	ServicioCGP servicioCGP3;
+	ServicioCGP servicioCGP4;
 	LocalComercial localComercial;
 	Libreria libreria;
 	Kiosco kiosco;
+	List<ServicioCGP> listaServiciosCGP1;
+	List<ServicioCGP> listaServiciosCGP2;
 	
 	
 	private void InicializarTest() {		
@@ -38,9 +45,14 @@ public class CalculoDisponibilidadTest {
 		
 		//Inicializo CGP
 		this.cgp1 = new CGP();
+		this.cgp2 = new CGP();
+		
+		this.listaServiciosCGP1 = new ArrayList<ServicioCGP>();
+		this.listaServiciosCGP2 = new ArrayList<ServicioCGP>();
 		this.servicioCGP1 = new ServicioCGP();
 		this.servicioCGP2 = new ServicioCGP();
 		this.servicioCGP3 = new ServicioCGP();
+		this.servicioCGP4 = new ServicioCGP();
 		
 		//Inicializo Locales Comerciales
 		this.localComercial= new LocalComercial();
@@ -71,9 +83,11 @@ public class CalculoDisponibilidadTest {
 		servicioCGP2.setNombre("Rentas2");
 		servicioCGP3.setNombre("Rentas3");
 		
-		cgp1.getServicios().add(servicioCGP1);
-		cgp1.getServicios().add(servicioCGP2);
-		cgp1.getServicios().add(servicioCGP3);
+		listaServiciosCGP1.add(servicioCGP1);
+		listaServiciosCGP1.add(servicioCGP2);
+		listaServiciosCGP1.add(servicioCGP3);
+				
+		cgp1.setServicios(listaServiciosCGP1);
 		
 		puntoUno.setTipo(cgp1);
 		
@@ -85,10 +99,12 @@ public class CalculoDisponibilidadTest {
 	@Test //2b
 	public void estaDisponibleUnCGPSinNombreServicio(){
 	
-		cgp1.getServicios().add(servicioCGP1);
-		cgp1.getServicios().add(servicioCGP2);
+		listaServiciosCGP2.add(servicioCGP3);
+		listaServiciosCGP2.add(servicioCGP4);
 		
-		puntoDos.setTipo(cgp1);
+		cgp2.setServicios(listaServiciosCGP2);
+		
+		puntoDos.setTipo(cgp2);
 		
 		String strDatewithTime = "2016-06-28T11:11:11";
 		LocalDateTime aLDT = LocalDateTime.parse(strDatewithTime);		

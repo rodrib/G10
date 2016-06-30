@@ -24,18 +24,18 @@ public class POI {
 		this.tipo = tipo;
 	}
 	
-	private ArrayList<String> tags;
-	
-	public boolean buscarTag(String tag){
-		Boolean coincide = false;
-		if (this.getNombre().contains(tag))
-			coincide = true;
-		if (tags != null &&  tags.contains(tag))
-			coincide = true;
-
-		
-		return coincide;		
-	}
+//	private ArrayList<String> tags;
+//	
+//	public boolean buscarTag(String tag){
+//		Boolean coincide = false;
+//		if (this.getNombre().contains(tag))
+//			coincide = true;
+//		if (tags != null &&  tags.contains(tag))
+//			coincide = true;
+//
+//		
+//		return coincide;		
+//	}
 
 	
 }

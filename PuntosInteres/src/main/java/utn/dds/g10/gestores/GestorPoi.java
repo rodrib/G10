@@ -6,9 +6,15 @@ import java.time.LocalDateTime;
 import utn.dds.g10.entidades.*;
 
 public class GestorPoi {
-
-	public listaPOIsSeleccionados buscarPOI(String tag) {
-		return new listaPOIsSeleccionados();
+//
+//	public listaPOIsSeleccionados buscarPOI(String tag) {
+//		return new listaPOIsSeleccionados();
+//	}
+	
+	public ResultadoConsulta BuscarPoi(String criterioBusqueda)
+	{
+		ResultadoConsulta resultado = null;
+		return resultado;
 	}
 
 	public float CalcularDistanciaEntrePuntos(POI puntoUno, POI puntoDos) {

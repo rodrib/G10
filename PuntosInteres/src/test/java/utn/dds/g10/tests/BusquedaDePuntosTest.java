@@ -1,17 +1,11 @@
 package utn.dds.g10.tests;
 
 import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import utn.dds.g10.entidades.Coordenada;
-import utn.dds.g10.entidades.Locacion;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
-import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.gestores.GestorPoi;
 
 public class BusquedaDePuntosTest {

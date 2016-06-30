@@ -12,7 +12,6 @@ public class Libreria implements RubroLocal {
 	LocalTime HorarioFin2 = LocalTime.of(20,30,0);
 	
 	public float getDistanciaMaxima() {
-		// TODO Auto-generated method stub
 		return 500;
 	}
 

@@ -9,19 +9,16 @@ public class CGP extends TipoPoi {
 
 	@Override
 	public float getDistanciaMaxima() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public boolean estaCerca(Locacion miLocacion, Locacion otraLocacion) {
-		// TODO Auto-generated method stub
 		return miLocacion.getCodigoComuna() == otraLocacion.getCodigoComuna();
 	}
 
 	@Override
 	public boolean estaDisponible(LocalDateTime fecha, String x) {
-		// TODO Auto-generated method stub
 		
 		if (x == ""){ // no se ingreso un valor en x
 			Iterator<ServicioCGP> i = servicios.iterator();

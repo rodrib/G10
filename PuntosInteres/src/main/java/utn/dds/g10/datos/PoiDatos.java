@@ -9,17 +9,7 @@ import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.SucursalBanco;
 
 public class PoiDatos {
-	
-	
-//	public static List<POI> buscarPOI (String tag){
-//		List<POI> listaPOIsSeleccionados = new ArrayList <POI>();
-//		for(int i=0;i<listaPOIs.size();i++) {
-//			if (listaPOIs.get(i).buscarTag(tag)){
-//				listaPOIsSeleccionados.add(listaPOIs.get(i));
-//			}
-//		}
-//		return listaPOIsSeleccionados;
-//	}
+
 	
 	public List<POI> ObtenerPoiTodos()
 	{

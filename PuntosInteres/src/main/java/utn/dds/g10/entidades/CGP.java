@@ -50,4 +50,16 @@ public class CGP extends TipoPoi {
 		this.servicios = servicios;
 	}
 
+	@Override
+	public boolean CumpleCondicionBusqueda(String condicion) {
+	
+		for (Iterator<ServicioCGP> serviciosBusqueda = this.servicios.iterator(); serviciosBusqueda.hasNext();) {
+			String nombre =serviciosBusqueda.next().getNombre();
+			if (nombre != null && nombre.contains(condicion))
+				return true;
+		}
+		
+		return false;
+	}
+
 }

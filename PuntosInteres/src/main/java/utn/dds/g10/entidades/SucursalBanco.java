@@ -34,4 +34,10 @@ public class SucursalBanco extends TipoPoi {
 		return  fecha.getHour() > HoraInicio && fecha.getHour() < HoraFin;
 	}
 
+	@Override
+	public boolean CumpleCondicionBusqueda(String condicion) {
+		//En este caso al no tener rubro, ni servicios, hacemos que siempre sea válido.
+		return false;
+	}
+
 }

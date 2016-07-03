@@ -39,5 +39,11 @@ public class LocalComercial extends TipoPoi {
 	public void setRubro(RubroLocal rubro) {
 		this.rubro = rubro;
 	}
+
+	@Override
+	public boolean CumpleCondicionBusqueda(String condicion) {
+		// TODO Auto-generated method stub
+		return  (this.getRubro() != null && this.getRubro().CumpleCondicionBusqueda(condicion));
+	}
 }
 

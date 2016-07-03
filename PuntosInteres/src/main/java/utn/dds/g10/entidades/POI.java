@@ -1,10 +1,20 @@
 package utn.dds.g10.entidades;
 
+import java.util.List;
+
 public class POI {
 	
 	Locacion locacion;
 	String nombre;
 	TipoPoi tipo;
+	List<String> palabrasClaves;
+	
+	public List<String> getPalabrasClaves() {
+		return palabrasClaves;
+	}
+	public void setPalabrasClaves(List<String> palabrasClaves) {
+		this.palabrasClaves = palabrasClaves;
+	}
 	public Locacion getLocacion() {
 		return locacion;
 	}

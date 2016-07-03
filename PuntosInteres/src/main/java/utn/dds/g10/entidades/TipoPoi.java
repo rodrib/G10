@@ -9,5 +9,6 @@ public abstract class TipoPoi {
 	public abstract float getDistanciaMaxima();
 	public abstract boolean estaCerca(Locacion miLocacion, Locacion otraLocacion);
 	public abstract boolean estaDisponible(LocalDateTime fecha, String x);
+	public abstract boolean CumpleCondicionBusqueda(String condicion);
 
 }

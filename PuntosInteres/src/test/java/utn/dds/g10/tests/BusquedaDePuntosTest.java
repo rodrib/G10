@@ -54,4 +54,19 @@ public class BusquedaDePuntosTest {
 		Assert.assertTrue("Encontro la parada 114", resultado.getPuntos().get(0).getNombre().equals("Parada 114"));		
 	}
 	
+	///Busco un local comercial de tipo libreria.
+	@Test
+	public void BuscarLocalLibreria() throws Exception {
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Libreria");
+		
+		Assert.assertTrue("Existe al menos un poi de tipo libreria", resultado.getPuntos().size() > 0);	
+	}
+	
+	@Test
+	public void BuscarPorPalabraClave() throws Exception {
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Descuentos");
+		
+		Assert.assertTrue("Existe poi con la palabra clave ingresada", resultado.getPuntos().size() > 0);	
+	}
+	
 }

@@ -24,4 +24,9 @@ public class Kiosco implements RubroLocal {
 		
 		return false;
 	}
+
+	public boolean CumpleCondicionBusqueda(String condicion) {
+		//El nobre de la clase es el nombre del rubro. 
+		return (this.getClass().getName().contains(condicion));
+	}
 }

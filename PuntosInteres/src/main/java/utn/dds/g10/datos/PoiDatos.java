@@ -1,7 +1,13 @@
 package utn.dds.g10.datos;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+
+import utn.dds.g10.entidades.Kiosco;
+import utn.dds.g10.entidades.Libreria;
 import utn.dds.g10.entidades.Locacion;
 import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
@@ -66,6 +72,33 @@ public class PoiDatos {
 		miPoi.setNombre("Parada 114");
 		miPoi.setTipo(new ParadaColectivo());
 		listadoPoi.add(miPoi);
+		
+		
+		LocalComercial localLibreria = new LocalComercial();
+		localLibreria.setRubro(new Libreria());
+		
+		POI libreria = new POI();
+		libreria.setLocacion(new Locacion());
+		libreria.setNombre("lapices");
+		libreria.setTipo(localLibreria);
+		listadoPoi.add(libreria);
+		
+		
+		LocalComercial localKiosco = new LocalComercial();
+		localKiosco.setRubro(new Kiosco());
+		
+		POI localConDescuento = new POI();
+		localConDescuento.setLocacion(new Locacion());
+		localConDescuento.setNombre("24hs");
+		localConDescuento.setTipo(localKiosco);
+		
+		List<String> palabrasPoi = new LinkedList<String>();
+		palabrasPoi.add("Viernes");
+		palabrasPoi.add("Descuentos");
+		localConDescuento.setPalabrasClaves(palabrasPoi);
+		
+		listadoPoi.add(localConDescuento);
+		
 		
 		return listadoPoi;
 		

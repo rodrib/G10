@@ -16,8 +16,16 @@ import utn.dds.g10.entidades.SucursalBanco;
 
 public class PoiDatos {
 
+	public static List<POI> ListaPois;
+	
+	public PoiDatos()
+	{
+		
+		ListaPois = this.ObtenerPoiTodos();
+	}
 	
 	public List<POI> ObtenerPoiTodos()
+
 	{
 		List<POI> listadoPoi = new ArrayList<POI>();;
 		POI miPoi; 
@@ -103,4 +111,21 @@ public class PoiDatos {
 		return listadoPoi;
 		
 	}
+
+	public static void AgregarPOI(POI poi){
+		ListaPois.add(poi);
+		
+	}
+	
+	public static void EliminarPOI(POI poi){
+		ListaPois.remove(poi);
+		
+	}
+	
+	public static void ModificarPOI(POI poi, POI poiNuevo){
+		ListaPois.set(ListaPois.indexOf((POI) poi) , poiNuevo);
+		
+	}
+	
 }
+

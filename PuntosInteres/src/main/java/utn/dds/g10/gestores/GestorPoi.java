@@ -73,4 +73,24 @@ public class GestorPoi {
 	public boolean EstaDisponible(POI poi, LocalDateTime fecha, String x) {
 		return poi.getTipo().estaDisponible(fecha, x);
 	}
+
+	public String Agregar(POI poi){
+		PoiDatos.AgregarPOI (poi);
+		return "Realizado";
+	}
+	
+
+	public String Modificar(POI poi,POI poinuevo){
+		PoiDatos.ModificarPOI (poi, poinuevo);
+		return "Realizado";
+	}
+
+	public String Eliminar(POI poi){
+		PoiDatos.EliminarPOI (poi);
+		return "Realizado";
+	}
+	
 }
+	
+	
+

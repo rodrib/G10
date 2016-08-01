@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import utn.dds.g10.entidades.ParadaColectivo;
+import utn.dds.g10.mappers.BancosJSON;
 
 public class pruebaAPI {
 	
@@ -53,6 +54,15 @@ public class pruebaAPI {
 		  }
 		  		
 		Assert.assertTrue("El colectivo siempre esta disponible",true);		
+	}
+	
+	@Test //1
+	public void testBancoJson () throws IOException{		
+	
+	BancosJSON bjs = new BancosJSON();
+	
+	bjs.obtenerBancos("Santander", "Pagos");
+		
 	}
 
 }

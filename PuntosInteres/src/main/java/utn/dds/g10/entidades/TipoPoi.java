@@ -5,7 +5,15 @@ import java.time.LocalDateTime;
 public abstract class TipoPoi {
 	
 	public float distanciaDefecto = 500;
+	
+	private String nombre;
 
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	public abstract float getDistanciaMaxima();
 	public abstract boolean estaCerca(Locacion miLocacion, Locacion otraLocacion);
 	public abstract boolean estaDisponible(LocalDateTime fecha, String x);

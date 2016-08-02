@@ -1,8 +1,12 @@
 package utn.dds.g10.datos;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.json.JSONException;
 
 import utn.dds.g10.entidades.Kiosco;
 import utn.dds.g10.entidades.Libreria;
@@ -11,23 +15,28 @@ import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.SucursalBanco;
+import utn.dds.g10.mappers.BancosJSON;
 
 public class PoiDatos {
 
 	public static List<POI> ListaPois;
 	
-	public PoiDatos()
+	public PoiDatos() throws MalformedURLException, JSONException, IOException
 	{
 		
 		ListaPois = this.ObtenerPoiTodos();
+	
 	}
 	
-	public List<POI> ObtenerPoiTodos()
+	public List<POI> ObtenerPoiTodos() throws MalformedURLException, JSONException, IOException
 
 	{
 		List<POI> listadoPoi = new ArrayList<POI>();;
 		POI miPoi; 
 		
+		//AGREGO BANCOS DEL SERVICIO
+		
+		listadoPoi.addAll(BancosJSON.obtenerBancos());
 		///BANCOS
 		miPoi = new POI();
 		miPoi.setLocacion(new Locacion());

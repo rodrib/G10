@@ -1,9 +1,13 @@
 package utn.dds.g10.gestores;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
+
+import org.json.JSONException;
 
 import utn.dds.g10.datos.PoiDatos;
 import utn.dds.g10.entidades.*;
@@ -12,7 +16,7 @@ public class GestorPoi {
 
 	HistorialConsultas historial = new HistorialConsultas();
 
-	public ResultadoConsulta BuscarPoi(String criterioBusqueda) {
+	public ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
 		PoiDatos datosPoi = new PoiDatos();
 		List<POI> listadoPoiTodos = datosPoi.ObtenerPoiTodos();
 

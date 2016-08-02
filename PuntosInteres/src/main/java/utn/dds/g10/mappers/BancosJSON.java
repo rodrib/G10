@@ -15,8 +15,8 @@ import utn.dds.g10.entidades.*;
 
 public class BancosJSON {
 
-	public static List<SucursalBanco> obtenerBancos(String nombreBanco, String servicioBanco) throws MalformedURLException, IOException, JSONException {
-		List<SucursalBanco> bancos = new ArrayList<SucursalBanco>();
+	public static List<POI> obtenerBancos(String nombreBanco, String servicioBanco) throws MalformedURLException, IOException, JSONException {
+		List<POI> listaBancosPois = new ArrayList<POI>();
 
 		String urlGenerica = "http://trimatek.org/Consultas/banco";
 		String urlString = "";
@@ -41,7 +41,9 @@ public class BancosJSON {
 			//Json array para los servicios del banco
 			JSONArray jsonServiciosBancosArray = null;
 			
-			SucursalBanco miBanco = null;
+			SucursalBanco miTipoPoiBanco = null;
+			POI miPoiBanco = null;
+			Locacion locacion = null;
 			
 			List<String> serviciosBanco = new ArrayList<String>();
 
@@ -50,30 +52,35 @@ public class BancosJSON {
 				
 				jsonObjetoBanco = (JSONObject) jsonBancosArray.get(i);
 				
-				miBanco = new SucursalBanco();
-				miBanco.setNombre(jsonObjetoBanco.get("banco").toString());
-				miBanco.setNombreSucursal(jsonObjetoBanco.get("sucursal").toString());
-				miBanco.setNombreGerente(jsonObjetoBanco.get("gerente").toString());
-
+				miPoiBanco = new POI();
+				miTipoPoiBanco = new SucursalBanco();
+				
+				locacion = new Locacion();
+				locacion.setBarrio(jsonObjetoBanco.get("sucursal").toString());
+				
+				miTipoPoiBanco.setNombreGerente(jsonObjetoBanco.get("gerente").toString());
 				//Cargo los servicios
 				jsonServiciosBancosArray = new JSONArray(jsonObjetoBanco.get("servicios").toString());				
 				for (int j = 0; j < jsonServiciosBancosArray.length(); j++) {
 					serviciosBanco.add(jsonServiciosBancosArray.get(j).toString());
 				}
+				miTipoPoiBanco.setServicios(serviciosBanco);
 				
-				miBanco.setServicios(serviciosBanco);
+				miPoiBanco.setNombre(jsonObjetoBanco.get("banco").toString());
+				miPoiBanco.setLocacion(locacion);
+				miPoiBanco.setTipo(miTipoPoiBanco);
 				
-				bancos.add(miBanco);
+				listaBancosPois.add(miPoiBanco);
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
-		return bancos;
+		return listaBancosPois;
 	}
 
-	public static List<SucursalBanco> obtenerBancos() throws MalformedURLException, IOException, JSONException
+	public static List<POI> obtenerBancos() throws MalformedURLException, IOException, JSONException
 	{
 		return obtenerBancos(null,null);
 	}

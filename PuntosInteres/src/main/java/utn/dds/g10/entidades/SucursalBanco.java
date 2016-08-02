@@ -9,7 +9,6 @@ public class SucursalBanco extends TipoPoi {
 	private static int HoraInicio = 10;
 	private static int HoraFin = 15;
 	
-	private String nombreSucursal;
 	private String nombreGerente;
 	private List<String> servicios;
 
@@ -19,14 +18,6 @@ public class SucursalBanco extends TipoPoi {
 
 	public void setNombreGerente(String nombreGerente) {
 		this.nombreGerente = nombreGerente;
-	}
-
-	public String getNombreSucursal() {
-		return nombreSucursal;
-	}
-
-	public void setNombreSucursal(String nombreSucursal) {
-		this.nombreSucursal = nombreSucursal;
 	}
 	
 	public List<String> getServicios() {

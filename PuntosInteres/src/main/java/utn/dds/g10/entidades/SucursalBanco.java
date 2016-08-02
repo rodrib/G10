@@ -2,6 +2,7 @@ package utn.dds.g10.entidades;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class SucursalBanco extends TipoPoi {
 	
@@ -10,6 +11,7 @@ public class SucursalBanco extends TipoPoi {
 	
 	private String nombreSucursal;
 	private String nombreGerente;
+	private List<String> servicios;
 
 	public String getNombreGerente() {
 		return nombreGerente;
@@ -25,6 +27,14 @@ public class SucursalBanco extends TipoPoi {
 
 	public void setNombreSucursal(String nombreSucursal) {
 		this.nombreSucursal = nombreSucursal;
+	}
+	
+	public List<String> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<String> servicios) {
+		this.servicios = servicios;
 	}
 
 	@Override

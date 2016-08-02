@@ -1,10 +1,8 @@
 package utn.dds.g10.datos;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 import utn.dds.g10.entidades.Kiosco;
 import utn.dds.g10.entidades.Libreria;

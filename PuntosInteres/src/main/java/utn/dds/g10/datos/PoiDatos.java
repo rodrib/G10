@@ -16,6 +16,7 @@ import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.mappers.BancosJSON;
+import utn.dds.g10.mappers.CGPJSON;
 
 public class PoiDatos {
 
@@ -34,9 +35,11 @@ public class PoiDatos {
 		List<POI> listadoPoi = new ArrayList<POI>();;
 		POI miPoi; 
 		
-		//AGREGO BANCOS DEL SERVICIO
-		
+		//AGREGO BANCOS DEL SERVICIO		
 		listadoPoi.addAll(BancosJSON.obtenerBancos());
+		//AGREGO BANCOS DEL SERVICIO		
+		listadoPoi.addAll(CGPJSON.obtenerListadoPOICGP());
+		
 		///BANCOS
 		miPoi = new POI();
 		miPoi.setLocacion(new Locacion());

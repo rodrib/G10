@@ -78,21 +78,22 @@ public class GestorPoi {
 		return poi.getTipo().estaDisponible(fecha, x);
 	}
 
-	public String Agregar(POI poi){
-		PoiDatos.AgregarPOI (poi);
-		return "Realizado";
+	public boolean Agregar(POI poi){
+		if (PoiDatos.AgregarPOI (poi) == true);
+		return true;
 	}
 	
 
-	public String Modificar(POI poi,POI poinuevo){
-		PoiDatos.ModificarPOI (poi, poinuevo);
-		return "Realizado";
+	public boolean Modificar(POI poi,POI poinuevo){
+		if (PoiDatos.ModificarPOI (poi, poinuevo) == true); 
+		return true;
 	}
 
-	public String Eliminar(POI poi){
-		PoiDatos.EliminarPOI (poi);
-		return "Realizado";
-	}
+	public boolean Eliminar(POI poi){
+		if (PoiDatos.EliminarPOI (poi) == true); 
+		return true;
+				
+		}
 	
 }
 	

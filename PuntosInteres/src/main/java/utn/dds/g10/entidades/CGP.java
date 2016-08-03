@@ -2,6 +2,7 @@ package utn.dds.g10.entidades;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 public class CGP extends TipoPoi {
 
 	String comuna;
@@ -61,85 +62,51 @@ public class CGP extends TipoPoi {
 
 	@Override
 	public float getDistanciaMaxima() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public boolean estaCerca(Locacion miLocacion, Locacion otraLocacion) {
-		// TODO Auto-generated method stub
-		return false;
+		return miLocacion.getCodigoComuna() == otraLocacion.getCodigoComuna();
 	}
 
 	@Override
 	public boolean estaDisponible(LocalDateTime fecha, String x) {
-		// TODO Auto-generated method stub
+		
+		if (x == ""){ // no se ingreso un valor en x
+			Iterator<ServicioCGP> i = servicios.iterator();
+			while(i.hasNext()){
+				ServicioCGP servicio = (ServicioCGP) i.next();
+				if(servicio.estaDisponible(fecha)){
+					return true;
+				}
+			
+			}
+		}else{ // x es el nombre del servicio
+			Iterator<ServicioCGP> i = servicios.iterator();
+			while(i.hasNext()){
+				ServicioCGP servicio = (ServicioCGP) i.next();
+				if(servicio.nombre==x){
+					return servicio.estaDisponible(fecha);
+				}
+			
+			}
+		}
 		return false;
 	}
+	
 
 	@Override
 	public boolean CumpleCondicionBusqueda(String condicion) {
-		// TODO Auto-generated method stub
+	
+		for (Iterator<ServicioCGP> serviciosBusqueda = this.servicios.iterator(); serviciosBusqueda.hasNext();) {
+			String nombre =serviciosBusqueda.next().getNombre();
+			if (nombre != null && nombre.contains(condicion))
+				return true;
+		}
+		
 		return false;
 	}
-
-
-//	List<ServicioCGP> servicios;	
-//
-//	@Override
-//	public float getDistanciaMaxima() {
-//		return 0;
-//	}
-//
-//	@Override
-//	public boolean estaCerca(Locacion miLocacion, Locacion otraLocacion) {
-//		return miLocacion.getCodigoComuna() == otraLocacion.getCodigoComuna();
-//	}
-//
-//	@Override
-//	public boolean estaDisponible(LocalDateTime fecha, String x) {
-//		
-//		if (x == ""){ // no se ingreso un valor en x
-//			Iterator<ServicioCGP> i = servicios.iterator();
-//			while(i.hasNext()){
-//				ServicioCGP servicio = (ServicioCGP) i.next();
-//				if(servicio.estaDisponible(fecha)){
-//					return true;
-//				}
-//			
-//			}
-//		}else{ // x es el nombre del servicio
-//			Iterator<ServicioCGP> i = servicios.iterator();
-//			while(i.hasNext()){
-//				ServicioCGP servicio = (ServicioCGP) i.next();
-//				if(servicio.nombre==x){
-//					return servicio.estaDisponible(fecha);
-//				}
-//			
-//			}
-//		}
-//		return false;
-//	}
-//	
-//	public List<ServicioCGP> getServicios() {
-//		return servicios;
-//	}
-//
-//	public void setServicios(List<ServicioCGP> servicios) {
-//		this.servicios = servicios;
-//	}
-//
-//	@Override
-//	public boolean CumpleCondicionBusqueda(String condicion) {
-//	
-//		for (Iterator<ServicioCGP> serviciosBusqueda = this.servicios.iterator(); serviciosBusqueda.hasNext();) {
-//			String nombre =serviciosBusqueda.next().getNombre();
-//			if (nombre != null && nombre.contains(condicion))
-//				return true;
-//		}
-//		
-//		return false;
-//	}
 
 	
 	

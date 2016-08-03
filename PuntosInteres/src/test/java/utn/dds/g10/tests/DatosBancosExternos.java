@@ -10,6 +10,9 @@ import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.GestorPoi;
 
+//Lo que se encuentra en la API: 
+//[{"banco":"Galicia","x":9999.0,"y":9999.0,"sucursal":"Flores","gerente":"Roberto Gomez","servicios":["Plazo Fijo","Acciones","Cobros","Pagos"]},{"banco":"Santander Rio","x":1234.0,"y":1234.0,"sucursal":"Almagro","gerente":"Lorenzo","servicios":["Moneda extranjera","Cobros","Pagos"]}]
+
 public class DatosBancosExternos {
 	
 	ResultadoConsulta resultadoConsulta;
@@ -38,8 +41,8 @@ public class DatosBancosExternos {
 	
 	@Test
 	public void BusquedaBanco() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("114");
-		Assert.assertTrue("Encontro el Banco", resultado.getPuntos().get(0).getNombre().equals("Banco"));	
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Galicia");
+		Assert.assertTrue("Encontro el Banco", resultado.getPuntos().get(0).getNombre().equals("Galicia"));	
 
 	}
 	

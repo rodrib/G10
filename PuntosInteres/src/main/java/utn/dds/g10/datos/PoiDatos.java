@@ -122,20 +122,23 @@ public class PoiDatos {
 		
 	}
 
-	public static void AgregarPOI(POI poi){
+	public static boolean AgregarPOI(POI poi){
 		ListaPois.add(poi);
+		return true;
 		
 	}
 	
-	public static void EliminarPOI(POI poi){
+	public static boolean EliminarPOI(POI poi){
 		ListaPois.remove(poi);
+		return true;
+	}
+	
+	public static boolean ModificarPOI(POI poi, POI poiNuevo){
+		ListaPois.set(ListaPois.indexOf((POI) poi) , poiNuevo);
+		return true;
 		
 	}
 	
-	public static void ModificarPOI(POI poi, POI poiNuevo){
-		ListaPois.set(ListaPois.indexOf((POI) poi) , poiNuevo);
-		
-	}
 	
 }
 

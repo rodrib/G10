@@ -87,7 +87,13 @@ public class PoiDatos {
 		////////COLECTIVOS
 		miPoi = new POI();
 		miPoi.setLocacion(new Locacion());
-		miPoi.setNombre("Parada 114");
+		miPoi.setNombre("Parada114");
+		miPoi.setTipo(new ParadaColectivo());
+		listadoPoi.add(miPoi);
+		
+		miPoi = new POI();
+		miPoi.setLocacion(new Locacion());
+		miPoi.setNombre("Parada25");
 		miPoi.setTipo(new ParadaColectivo());
 		listadoPoi.add(miPoi);
 		

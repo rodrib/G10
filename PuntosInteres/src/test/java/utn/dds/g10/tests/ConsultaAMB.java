@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import utn.dds.g10.datos.PoiDatos;
 import utn.dds.g10.entidades.Libreria;
 import utn.dds.g10.entidades.Locacion;
 import utn.dds.g10.entidades.LocalComercial;
@@ -16,7 +17,7 @@ import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.GestorPoi;
 
-public class ConsultaABM {
+public class ConsultaAMB {
 
 	ResultadoConsulta resultadoConsulta;
 	List<POI> listaPuntos;
@@ -73,15 +74,21 @@ public class ConsultaABM {
 	
 	@Test
 	public void ModificarPOI() throws Exception {
+		
+		POI Parada25 = new POI();
+		Parada25.setLocacion(new Locacion());
+		Parada25.setNombre("Parada25");
+		Parada25.setTipo(new ParadaColectivo());
+		boolean result;
+		
 		POI miPoi = new POI();
-		POI Parada114 = new POI();
-		boolean result; 
 		miPoi.setLocacion(new Locacion());
 		miPoi.setNombre("Parada26");
 		miPoi.setTipo(new ParadaColectivo());
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Parada114");
-		//result = miGestor.Modificar(resultado, miPoi);
-		ResultadoConsulta resultado2 = miGestor.BuscarPoi("Parada114");	
+		
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Parada25");
+		result = miGestor.Modificar(Parada25, miPoi);
+		ResultadoConsulta resultado2 = miGestor.BuscarPoi("Parada25");	
 		assertTrue("Se modificó correctamente",result == true || resultado2.getPuntos().size() <= resultado.getPuntos().size());
 		
 	}

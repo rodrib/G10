@@ -87,7 +87,7 @@ public class CalculoDisponibilidadTest {
 		listaServiciosCGP1.add(servicioCGP2);
 		listaServiciosCGP1.add(servicioCGP3);
 				
-		cgp1.setServicios(listaServiciosCGP1);
+//		cgp1.setServicios(listaServiciosCGP1);
 		
 		puntoUno.setTipo(cgp1);
 		
@@ -102,7 +102,7 @@ public class CalculoDisponibilidadTest {
 		listaServiciosCGP2.add(servicioCGP3);
 		listaServiciosCGP2.add(servicioCGP4);
 		
-		cgp2.setServicios(listaServiciosCGP2);
+//		cgp2.setServicios(listaServiciosCGP2);
 		
 		puntoDos.setTipo(cgp2);
 		

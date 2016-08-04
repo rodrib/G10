@@ -18,7 +18,7 @@ public class BancosJSON {
 	public static List<POI> obtenerBancos(String nombreBanco, String servicioBanco) throws MalformedURLException, IOException, JSONException {
 		List<POI> listaBancosPois = new ArrayList<POI>();
 
-		String urlGenerica = "http://trimatek.org/Consultas/banco";
+		String urlGenerica = "http://localhost:8080/Consultas/banco";
 		String urlString = "";
 		
 		if((nombreBanco == null || nombreBanco == "") && (servicioBanco == null || servicioBanco == "") )

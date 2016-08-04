@@ -24,7 +24,7 @@ public class CGPJSON {
 		Gson gson = new Gson();	
 		Locacion locacion = new Locacion();
 		
-		String urlGenerica = "http://trimatek.org/Consultas/centro";
+		String urlGenerica = "http://localhost:8080/Consultas/centro";
 //		String urlString = urlGenerica + "?zona=" + zona ;
 
 		try {

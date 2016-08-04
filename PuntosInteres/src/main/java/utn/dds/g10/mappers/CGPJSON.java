@@ -21,8 +21,8 @@ public class CGPJSON {
 		
 		CentroDTO centroDTO = null;
 		List<POI> listadoPoiCGP= new ArrayList<POI>();
-		POI poi= new POI();
 		Gson gson = new Gson();	
+		Locacion locacion = new Locacion();
 		
 		String urlGenerica = "http://trimatek.org/Consultas/centro";
 //		String urlString = urlGenerica + "?zona=" + zona ;
@@ -41,12 +41,14 @@ public class CGPJSON {
 			Iterator<CGP> i = cgp.iterator();
 			
 			while(i.hasNext()){
-				CGP cgpElemento = (CGP) i.next();
+				POI poi= new POI();
+				CGP cgpElemento = (CGP)i.next();			
+				locacion.setBarrio(cgpElemento.getZonas());
+				poi.setLocacion(locacion);
 				poi.setNombre("Comuna "+cgpElemento.getComuna().toString());
 				poi.setTipo(cgpElemento);
 				listadoPoiCGP.add(poi);
-			}		   
-		    
+			}		    
 			
 		} catch (Exception e) {
 			// TODO: handle exception

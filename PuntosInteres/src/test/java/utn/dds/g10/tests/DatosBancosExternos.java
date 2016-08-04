@@ -40,12 +40,16 @@ public class DatosBancosExternos {
 	}
 	
 	@Test
-	public void BusquedaBanco() throws Exception {
+	public void BusquedaBancoPorNombre() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Galicia");
-		Assert.assertTrue("Encontro el Banco", resultado.getPuntos().get(0).getNombre().equals("Galicia"));	
-
+		Assert.assertTrue("Encontro el Banco por Nombre", resultado.getPuntos().get(0).getNombre().equals("Galicia"));
 	}
 	
+	@Test
+	public void BusquedaBancoPorServicio() throws Exception {
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Cobros");
+		Assert.assertTrue("Encontro el Banco por Nombre de Servicio", resultado.getPuntos().get(0)!=null);
+	}
 }
 
 

@@ -42,9 +42,14 @@ public class DatosCGPExternos {
 	@Test
 	public void BusquedaCGP() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Comuna 3");
-		Assert.assertTrue("Encontro el CGP", resultado.getPuntos().get(0).getNombre().equals("Comuna 3"));	
-
-	}
+		Assert.assertTrue("Encontro el CGP", resultado.getPuntos().get(0).getNombre().equals("Comuna 3"));
+		}
+	
+//	@Test
+//	public void BusquedaCGPZona() throws Exception {
+//		ResultadoConsulta resultado = miGestor.BuscarPoi("Parque Patricios");
+//		Assert.assertTrue("Encontro el CGP", resultado.getPuntos().get(0).getNombre().equals("Parque Patricios"));
+//		}
 	
 }
 

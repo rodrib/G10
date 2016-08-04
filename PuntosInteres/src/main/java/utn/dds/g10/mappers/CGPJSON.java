@@ -41,7 +41,8 @@ public class CGPJSON {
 			Iterator<CGP> i = cgp.iterator();
 			
 			while(i.hasNext()){
-				CGP cgpElemento = (CGP) i.next();			
+				CGP cgpElemento = (CGP) i.next();
+				poi.setNombre("Comuna "+cgpElemento.getComuna().toString());
 				poi.setTipo(cgpElemento);
 				listadoPoiCGP.add(poi);
 			}		   

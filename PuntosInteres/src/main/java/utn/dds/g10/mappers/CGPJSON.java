@@ -23,7 +23,6 @@ public class CGPJSON {
 		List<POI> listadoPoiCGP= new ArrayList<POI>();
 		POI poi= new POI();
 		Gson gson = new Gson();	
-		Locacion locacion = new Locacion();
 		
 		String urlGenerica = "http://trimatek.org/Consultas/centro";
 //		String urlString = urlGenerica + "?zona=" + zona ;
@@ -43,8 +42,6 @@ public class CGPJSON {
 			
 			while(i.hasNext()){
 				CGP cgpElemento = (CGP) i.next();			
-				locacion.setBarrio(cgpElemento.getZonas());
-				poi.setLocacion(locacion);
 				poi.setTipo(cgpElemento);
 				listadoPoiCGP.add(poi);
 			}		   

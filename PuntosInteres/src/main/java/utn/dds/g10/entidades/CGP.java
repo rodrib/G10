@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class CGP extends TipoPoi {
 
 	String comuna;
-	String zonas;
+	ArrayList<String> zonas;
 	String director;
 	String domicilio;
 	String telefono;
@@ -20,11 +20,11 @@ public class CGP extends TipoPoi {
 		this.comuna = comuna;
 	}
 
-	public String getZonas() {
+	public ArrayList<String> getZonas() {
 		return zonas;
 	}
 
-	public void setZonas(String zonas) {
+	public void setZonas(ArrayList<String> zonas) {
 		this.zonas = zonas;
 	}
 
@@ -101,8 +101,23 @@ public class CGP extends TipoPoi {
 	
 		for (Iterator<ServicioCGP> serviciosBusqueda = this.servicios.iterator(); serviciosBusqueda.hasNext();) {
 			String nombre =serviciosBusqueda.next().getNombre();
-			if (nombre != null && nombre.contains(condicion))
+			ArrayList<String> zonas = this.getZonas();
+			
+			//Recorrer listado de zonas zonas.contains(condicion
+			
+			if  (nombre != null && nombre.contains(condicion))
 				return true;
+				
+			else if (zonas.size() != 0 && zonas.contains(condicion)){
+					
+					Iterator<String> i = zonas.iterator();
+					while(i.hasNext()){
+						String zona = (String) i.next();
+						if(zona.contains(condicion)){
+							return true;
+						}					
+					}					
+				}		
 		}
 		
 		return false;

@@ -6,10 +6,10 @@ import java.time.LocalTime;
 
 public class Libreria implements RubroLocal {
 
-	LocalTime HorarioInicio1 = LocalTime.of(10, 0, 0);
-	LocalTime HorarioFin1 = LocalTime.of(13, 0, 0);
-	LocalTime HorarioInicio2 = LocalTime.of(17, 0, 0);
-	LocalTime HorarioFin2 = LocalTime.of(20, 30, 0);
+	private LocalTime HorarioInicio1 = LocalTime.of(10, 0, 0);
+	private LocalTime HorarioFin1 = LocalTime.of(13, 0, 0);
+	private LocalTime HorarioInicio2 = LocalTime.of(17, 0, 0);
+	private LocalTime HorarioFin2 = LocalTime.of(20, 30, 0);
 
 	public float getDistanciaMaxima() {
 		return 500;

@@ -4,10 +4,10 @@ import java.util.List;
 
 public class POI {
 	
-	Locacion locacion;
-	String nombre;
-	TipoPoi tipo;
-	List<String> palabrasClaves;
+	private Locacion locacion;
+	private String nombre;
+	private TipoPoi tipo;
+	private List<String> palabrasClaves;
 	
 	public List<String> getPalabrasClaves() {
 		return palabrasClaves;

@@ -6,8 +6,8 @@ import java.util.Iterator;
 
 public class ServicioCGP {
 	
-	String nombre;
-	ArrayList<Horarios> horarios;
+	private String nombre;
+	private ArrayList<Horarios> horarios = new ArrayList<Horarios>();
 	
 	public String getNombre() {
 		return nombre;
@@ -27,6 +27,7 @@ public class ServicioCGP {
 		Iterator<Horarios> i = horarios.iterator();
 		while(i.hasNext()){
 			Horarios horario = (Horarios) i.next();
+			if(horario != null){
 			if(horario.getDiaSemana()==fecha.getDayOfWeek().getValue()){
 		
 				LocalTime HoraPoi = LocalTime.of(fecha.getHour(),fecha.getMinute(),0);
@@ -38,6 +39,7 @@ public class ServicioCGP {
 				}	
 				
 			}
+		}
 		
 		}
 		return false;

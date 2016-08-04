@@ -2,8 +2,8 @@ package utn.dds.g10.entidades;
 
 public class Coordenada {
 
-	float latitud;
-	float longitud;
+	private float latitud;
+	private float longitud;
 
 	public Coordenada(float lat, float longi)
 	{

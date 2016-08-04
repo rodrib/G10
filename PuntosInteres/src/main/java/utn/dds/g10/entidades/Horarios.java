@@ -2,11 +2,11 @@ package utn.dds.g10.entidades;
 
 public class Horarios {
 
-	int diaSemana;
-	int horaDesde;
-	int minutosDesde;
-	int horaHasta;
-	int minutosHasta;
+	private int diaSemana;
+	private int horaDesde;
+	private int minutosDesde;
+	private int horaHasta;
+	private int minutosHasta;
 	
 	public int getDiaSemana() {
 		return diaSemana;

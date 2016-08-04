@@ -1,13 +1,16 @@
 package utn.dds.g10.tests;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import utn.dds.g10.entidades.CGP;
+import utn.dds.g10.entidades.Horarios;
 import utn.dds.g10.entidades.Kiosco;
 import utn.dds.g10.entidades.Libreria;
 import utn.dds.g10.entidades.LocalComercial;
@@ -31,8 +34,8 @@ public class CalculoDisponibilidadTest {
 	LocalComercial localComercial;
 	Libreria libreria;
 	Kiosco kiosco;
-	List<ServicioCGP> listaServiciosCGP1;
-	List<ServicioCGP> listaServiciosCGP2;
+	ArrayList<ServicioCGP> listaServiciosCGP1 = new ArrayList<ServicioCGP>();
+	ArrayList<ServicioCGP> listaServiciosCGP2 = new ArrayList<ServicioCGP>();
 	
 	
 	private void InicializarTest() {		
@@ -98,16 +101,22 @@ public class CalculoDisponibilidadTest {
 	
 	@Test //2b
 	public void estaDisponibleUnCGPSinNombreServicio(){
-	
+		Horarios horario = new Horarios();
+		horario.setDiaSemana(1);
+		horario.setHoraDesde(12);
+		horario.setHoraHasta(20);
+		ArrayList<Horarios> horarios = new ArrayList<Horarios>();
+		horarios.add(horario);
+		servicioCGP3.setHorarios(horarios);
 		listaServiciosCGP2.add(servicioCGP3);
-		listaServiciosCGP2.add(servicioCGP4);
 		
 //		cgp2.setServicios(listaServiciosCGP2);
 		
 		puntoDos.setTipo(cgp2);
 		
-		String strDatewithTime = "2016-06-28T11:11:11";
-		LocalDateTime aLDT = LocalDateTime.parse(strDatewithTime);		
+		LocalTime hora = LocalTime.of(17,0,0);
+		LocalDate dia = LocalDate.of(2016, 8, 1);
+		LocalDateTime aLDT = LocalDateTime.of(dia, hora);		
 		Assert.assertTrue("Es dia de semana, y es horario disponible y no ingreso nombre servicio",miGestor.EstaDisponible(puntoDos, aLDT,""));
 	}
 	

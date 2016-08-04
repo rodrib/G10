@@ -1,18 +1,18 @@
 package utn.dds.g10.entidades;
 
 public class Locacion {
-	String barrio;
-	String callePrincipal;
-	int codigoPostal;
-	Coordenada coordenada;
-	char departamento;
-	String direccion;
-	String entreCalles;
-	int numero;
-	String pais;
-	int piso;
-	String provincia;
-	int codigoComuna;
+	private String barrio;
+	private String callePrincipal;
+	private int codigoPostal;
+	private Coordenada coordenada;
+	private char departamento;
+	private String direccion;
+	private String entreCalles;
+	private int numero;
+	private String pais;
+	private int piso;
+	private String provincia;
+	private int codigoComuna;
 
 	public String getBarrio() {
 		return barrio;

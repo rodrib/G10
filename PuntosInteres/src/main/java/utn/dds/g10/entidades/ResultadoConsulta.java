@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ResultadoConsulta {
-	LocalDate fechaHora;
-	List<POI> puntos;
+	private LocalDate fechaHora;
+	private List<POI> puntos;
 
 	public LocalDate getFechaHora() {
 		return fechaHora;

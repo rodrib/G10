@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 public class CGP extends TipoPoi {
 
-	String comuna;
-	ArrayList<String> zonas;
-	String director;
-	String domicilio;
-	String telefono;
-	ArrayList<ServicioCGP> servicios ;	
+	private String comuna;
+	private ArrayList<String> zonas = new ArrayList<String>();
+	private String director;
+	private String domicilio;
+	private String telefono;
+	private ArrayList<ServicioCGP> servicios = new ArrayList<ServicioCGP>();	
 	
 	public String getComuna() {
 		return comuna;
@@ -77,17 +77,21 @@ public class CGP extends TipoPoi {
 			Iterator<ServicioCGP> i = servicios.iterator();
 			while(i.hasNext()){
 				ServicioCGP servicio = (ServicioCGP) i.next();
-				if(servicio.estaDisponible(fecha)){
-					return true;
+				if(servicio!=null){
+					if(servicio.estaDisponible(fecha)){
+						return true;
+					}
 				}
-			
 			}
 		}else{ // x es el nombre del servicio
 			Iterator<ServicioCGP> i = servicios.iterator();
 			while(i.hasNext()){
 				ServicioCGP servicio = (ServicioCGP) i.next();
-				if(servicio.nombre==x){
-					return servicio.estaDisponible(fecha);
+				
+				if(servicio!=null){
+					if(servicio.getNombre()==x){
+						return servicio.estaDisponible(fecha);
+					}
 				}
 			
 			}

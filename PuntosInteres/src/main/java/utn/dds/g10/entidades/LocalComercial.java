@@ -3,7 +3,7 @@ package utn.dds.g10.entidades;
 import java.time.LocalDateTime;
 
 public class LocalComercial extends TipoPoi {
-	RubroLocal rubro;
+	private RubroLocal rubro;
 	//List<DayOfWeek> diasDisponible;	
 
 	@Override

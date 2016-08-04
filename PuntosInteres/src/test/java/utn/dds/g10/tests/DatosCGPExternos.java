@@ -40,9 +40,9 @@ public class DatosCGPExternos {
 	}
 	
 	@Test
-	public void BusquedaCGP() throws Exception {
+	public void BusquedaCGPNombre() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Comuna 3");
-		Assert.assertTrue("Encontro el CGP", resultado.getPuntos().get(0).getNombre().equals("Comuna 3"));
+		Assert.assertTrue("Encontro el CGP por nombre", resultado.getPuntos().get(0).getNombre().equals("Comuna 3"));
 		}
 	
 	@Test

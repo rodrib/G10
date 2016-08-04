@@ -29,7 +29,7 @@ public class ServicioCGP {
 			Horarios horario = (Horarios) i.next();
 			if(horario != null){
 			if(horario.getDiaSemana()==fecha.getDayOfWeek().getValue()){
-		
+				
 				LocalTime HoraPoi = LocalTime.of(fecha.getHour(),fecha.getMinute(),0);
 				LocalTime HoraDesde = LocalTime.of(horario.getHoraDesde(),horario.getMinutosDesde(),0);
 				LocalTime HoraHasta = LocalTime.of(horario.getHoraHasta(),horario.getMinutosHasta(),0);

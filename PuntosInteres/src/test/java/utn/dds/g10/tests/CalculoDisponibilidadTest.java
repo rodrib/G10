@@ -82,20 +82,26 @@ public class CalculoDisponibilidadTest {
 	@Test //2a
 	public void estaDisponibleUnCGPConNombreServicio(){
 	
-		servicioCGP1.setNombre("Rentas1");
+		Horarios horario = new Horarios();
+		horario.setDiaSemana(1);
+		horario.setHoraDesde(12);
+		horario.setMinutosDesde(0);
+		horario.setHoraHasta(20);
+		horario.setMinutosHasta(0);
+		ArrayList<Horarios> horarios = new ArrayList<Horarios>();
+		horarios.add(horario);
+		servicioCGP2.setHorarios(horarios);
 		servicioCGP2.setNombre("Rentas2");
-		servicioCGP3.setNombre("Rentas3");
-		
-		listaServiciosCGP1.add(servicioCGP1);
 		listaServiciosCGP1.add(servicioCGP2);
-		listaServiciosCGP1.add(servicioCGP3);
+		cgp1.setServicios(listaServiciosCGP1);
 				
 //		cgp1.setServicios(listaServiciosCGP1);
 		
 		puntoUno.setTipo(cgp1);
 		
-		String strDatewithTime = "2016-06-28T19:19:19";
-		LocalDateTime aLDT = LocalDateTime.parse(strDatewithTime);		
+		LocalTime hora = LocalTime.of(17,0,0);
+		LocalDate dia = LocalDate.of(2016, 8, 1);
+		LocalDateTime aLDT = LocalDateTime.of(dia, hora);	
 		Assert.assertTrue("Es dia de semana, y es horario disponible e ingreso el nombre del servicio",miGestor.EstaDisponible(puntoUno, aLDT,"Rentas2"));
 		}
 	
@@ -104,11 +110,14 @@ public class CalculoDisponibilidadTest {
 		Horarios horario = new Horarios();
 		horario.setDiaSemana(1);
 		horario.setHoraDesde(12);
+		horario.setMinutosDesde(0);
 		horario.setHoraHasta(20);
+		horario.setMinutosHasta(0);
 		ArrayList<Horarios> horarios = new ArrayList<Horarios>();
 		horarios.add(horario);
 		servicioCGP3.setHorarios(horarios);
 		listaServiciosCGP2.add(servicioCGP3);
+		cgp2.setServicios(listaServiciosCGP2);
 		
 //		cgp2.setServicios(listaServiciosCGP2);
 		

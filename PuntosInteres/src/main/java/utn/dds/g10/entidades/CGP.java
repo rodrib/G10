@@ -104,17 +104,15 @@ public class CGP extends TipoPoi {
 	public boolean CumpleCondicionBusqueda(String condicion) {
 	
 		for (Iterator<ServicioCGP> serviciosBusqueda = this.servicios.iterator(); serviciosBusqueda.hasNext();) {
-			String nombre =serviciosBusqueda.next().getNombre();
-			String zonas = this.getZonas();
-			
-			//Recorrer listado de zonas zonas.contains(condicion
-			
-			if  (nombre != null && nombre.contains(condicion))
-				return true;
-				
-			else if ((zonas != "")&&(zonas.indexOf(condicion)!=(-1))){			
-							return true;				
-				}		
+			String nombreServicio =serviciosBusqueda.next().getNombre();
+						
+			if  (nombreServicio.indexOf(condicion)!=(-1)){
+				return true;				
+			}		
+		}
+		
+		if ((this.getZonas().indexOf(condicion)!=(-1))){			
+			return true;				
 		}
 		
 		return false;

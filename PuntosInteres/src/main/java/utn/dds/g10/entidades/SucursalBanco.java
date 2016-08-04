@@ -2,6 +2,7 @@ package utn.dds.g10.entidades;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 public class SucursalBanco extends TipoPoi {
@@ -56,7 +57,16 @@ public class SucursalBanco extends TipoPoi {
 
 	@Override
 	public boolean CumpleCondicionBusqueda(String condicion) {
-		//En este caso al no tener rubro, ni servicios, hacemos que siempre sea válido.
+	
+		if (this.servicios!=null){
+			for (Iterator<String> serviciosBusqueda = this.servicios.iterator(); serviciosBusqueda.hasNext();) {
+				String nombreServicio =serviciosBusqueda.next();
+							
+				if  (nombreServicio.equals(condicion)){
+					return true;				
+				}		
+			}
+		}
 		return false;
 	}
 

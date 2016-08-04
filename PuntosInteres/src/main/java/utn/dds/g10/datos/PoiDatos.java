@@ -140,7 +140,10 @@ public class PoiDatos {
 	}
 	
 	public static boolean ModificarPOI(POI poi, POI poiNuevo){
-		ListaPois.set(ListaPois.indexOf((POI) poi) , poiNuevo);
+		boolean result;
+		result = EliminarPOI(poi);
+		if (result == true );
+		AgregarPOI(poiNuevo);
 		return true;
 		
 	}

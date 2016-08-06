@@ -10,6 +10,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import utn.dds.g10.datos.PoiDatos;
+import utn.dds.g10.datos.Repositorio;
 import utn.dds.g10.entidades.*;
 
 public class GestorPoi {
@@ -17,8 +18,8 @@ public class GestorPoi {
 	HistorialConsultas historial = new HistorialConsultas();
 
 	public ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
-		PoiDatos datosPoi = new PoiDatos();
-		List<POI> listadoPoiTodos = datosPoi.ObtenerPoiTodos();
+		
+		List<POI> listadoPoiTodos = Repositorio.getInstance().getDatos();
 
 		for (Iterator<POI> iterador = listadoPoiTodos.iterator(); iterador
 				.hasNext();) {
@@ -79,22 +80,17 @@ public class GestorPoi {
 	}
 
 	public boolean Agregar(POI poi){
-		if (PoiDatos.AgregarPOI (poi) == true);
-		return true;
+		return Repositorio.AgregarPOI (poi) ;
 	}
 	
 
 	public boolean Modificar(POI poi,POI poinuevo){
-		if (PoiDatos.ModificarPOI (poi, poinuevo) == true); 
-		return true;
+		return PoiDatos.ModificarPOI (poi, poinuevo);
 	}
 
 	public boolean Eliminar(POI poi){
-		if (PoiDatos.EliminarPOI (poi) == true); 
-		return true;
-				
+		return PoiDatos.EliminarPOI (poi);				
 		}
-	
 }
 	
 	

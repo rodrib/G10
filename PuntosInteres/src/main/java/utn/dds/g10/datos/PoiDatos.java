@@ -29,7 +29,7 @@ public class PoiDatos {
 	
 	}
 	
-	public List<POI> ObtenerPoiTodos() throws MalformedURLException, JSONException, IOException
+	public static List<POI> ObtenerPoiTodos() throws MalformedURLException, JSONException, IOException
 
 	{
 		List<POI> listadoPoi = new ArrayList<POI>();;

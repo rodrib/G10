@@ -37,7 +37,7 @@ public class BusquedaDePuntosTest {
 	}
 
 	@Test
-	public void ExisteAlMenosUnBanco() throws Exception {
+	public void ExisteAlMenosUnBancoSantander() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Santander");
 		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
 	}

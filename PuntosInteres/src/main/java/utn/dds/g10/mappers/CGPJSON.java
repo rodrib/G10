@@ -33,7 +33,7 @@ public class CGPJSON {
 			String jsonArmado = "{listaCGP:"+jsonString+"}";			
 								
 			centroDTO = gson.fromJson(jsonArmado, CentroDTO.class);						
-		    System.out.println(gson.toJson(centroDTO));
+		  //  System.out.println(gson.toJson(centroDTO));
 		    		    
 		    
 			List<CGP> cgp = centroDTO.getListaCGP();

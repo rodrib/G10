@@ -76,6 +76,7 @@ public class BancosJSON {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
 
 		return listaBancosPois;
 	}

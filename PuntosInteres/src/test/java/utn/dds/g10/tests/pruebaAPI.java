@@ -5,13 +5,23 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.json.JSONException;
+import org.junit.Before;
 import org.junit.Test;
 
+import utn.dds.g10.datos.Repositorio;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.mappers.BancosJSON;
 
 public class pruebaAPI {
+	
+	Repositorio repositorioDatos;
+	
+	@Before
+	public void setUp() throws Exception {
+		this.repositorioDatos = Repositorio.getInstance();
+	}
+	
 
 	@Test
 	public void testTraerBancoSantanderSoloPagos() throws MalformedURLException, IOException, JSONException {
@@ -35,6 +45,12 @@ public class pruebaAPI {
 				System.out.println("\t" +  servicioBanco);	
 			}
 		}
+	}
+	
+	@Test
+	public void probarSigleton()
+	{
+		
 	}
 	
 }

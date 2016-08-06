@@ -4,15 +4,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import utn.dds.g10.datos.PoiDatos;
 import utn.dds.g10.datos.Repositorio;
-import utn.dds.g10.entidades.Libreria;
 import utn.dds.g10.entidades.Locacion;
-import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;

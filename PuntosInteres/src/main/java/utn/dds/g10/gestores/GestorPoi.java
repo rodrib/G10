@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import utn.dds.g10.datos.PoiDatos;
 import utn.dds.g10.datos.Repositorio;
 import utn.dds.g10.entidades.*;
 
@@ -78,19 +77,6 @@ public class GestorPoi {
 	public boolean EstaDisponible(POI poi, LocalDateTime fecha, String x) {
 		return poi.getTipo().estaDisponible(fecha, x);
 	}
-
-	public boolean Agregar(POI poi){
-		return Repositorio.AgregarPOI (poi) ;
-	}
-	
-
-	public boolean Modificar(POI poi,POI poinuevo){
-		return PoiDatos.ModificarPOI (poi, poinuevo);
-	}
-
-	public boolean Eliminar(POI poi){
-		return PoiDatos.EliminarPOI (poi);				
-		}
 }
 	
 	

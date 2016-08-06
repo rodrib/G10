@@ -20,13 +20,9 @@ import utn.dds.g10.mappers.CGPJSON;
 
 public class PoiDatos {
 
-	public static List<POI> ListaPois;
-	
 	public PoiDatos() throws MalformedURLException, JSONException, IOException
 	{
-		
-		ListaPois = this.ObtenerPoiTodos();
-	
+
 	}
 	
 	public static List<POI> ObtenerPoiTodos() throws MalformedURLException, JSONException, IOException
@@ -125,26 +121,6 @@ public class PoiDatos {
 		
 		
 		return listadoPoi;
-		
-	}
-
-	public static boolean AgregarPOI(POI poi){
-		ListaPois.add(poi);
-		return true;
-		
-	}
-	
-	public static boolean EliminarPOI(POI poi){
-		ListaPois.remove(poi);
-		return true;
-	}
-	
-	public static boolean ModificarPOI(POI poi, POI poiNuevo){
-		boolean result;
-		result = EliminarPOI(poi);
-		if (result == true );
-		AgregarPOI(poiNuevo);
-		return true;
 		
 	}
 	

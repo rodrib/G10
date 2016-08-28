@@ -41,8 +41,8 @@ public class DatosBancosExternos {
 	
 	@Test
 	public void BusquedaBancoPorNombre() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Galicia");
-		Assert.assertTrue("Encontro el Banco por Nombre", resultado.getPuntos().get(0).getNombre().equals("Galicia"));
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Banco ICBC");
+		Assert.assertTrue("Encontro el Banco por Nombre", resultado.getPuntos().size() > 0);
 	}
 	
 	@Test

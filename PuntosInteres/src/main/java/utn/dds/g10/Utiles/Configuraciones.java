@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.fasterxml.jackson.databind.util.Converter;
-
 public class Configuraciones {
 	
 	private  static String  nombreConfig = "web.config";
 	private static String claveMailAdmin = "mailadmin";
 	private static String claveUrlBancos = "bancos";
 	private static String claveUrlCGP = "bancos";
+	private static String claveSegundosTimeOut = "segundostimeout";
 	
 	public static String obtenerMailAdministrador() {
 		return obtenerConfiguracionPorClave(claveMailAdmin);
@@ -23,6 +22,10 @@ public class Configuraciones {
 	
 	public static String obtenerUrlCGP() {
 		return obtenerConfiguracionPorClave(claveUrlCGP);
+	}
+	
+	public static int obtenerCantidadSegundosTimeOut() {
+		return obtenerConfiguracionTipoEntero(claveSegundosTimeOut);
 	}
 	
 	private static int obtenerConfiguracionTipoEntero(String clave)

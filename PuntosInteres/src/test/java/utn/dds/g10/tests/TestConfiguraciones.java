@@ -6,14 +6,16 @@ import utn.dds.g10.Utiles.Configuraciones;
 
 
 public class TestConfiguraciones {
-
-
+	
 	@Test
 	public void testGetMail()   {
-		
 		String miMail = Configuraciones.obtenerMailAdministrador();
 		String mailAdmin = "guille86598@gmail.com";
 		Assert.assertEquals(miMail, mailAdmin);
-		
+	}
+	
+	@Test
+	public void testGetTimeOutCincoSegundos()   {
+		Assert.assertEquals(Configuraciones.obtenerCantidadSegundosTimeOut(), 5);	
 	}
 }

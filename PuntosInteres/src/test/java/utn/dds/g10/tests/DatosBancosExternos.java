@@ -20,7 +20,7 @@ public class DatosBancosExternos {
 	
 	POI puntoUno;
 	POI puntoDos;
-	
+	String usuario;
 	
 	GestorPoi miGestor;
 
@@ -32,6 +32,8 @@ public class DatosBancosExternos {
 		//Inicializo POI
 		this.puntoUno = new POI();
 		this.puntoDos = new POI();
+		
+		usuario = "userTest";
 	}
 
 	@Before
@@ -41,13 +43,13 @@ public class DatosBancosExternos {
 	
 	@Test
 	public void BusquedaBancoPorNombre() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Banco ICBC");
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Banco ICBC",usuario);
 		Assert.assertTrue("Encontro el Banco por Nombre", resultado.getPuntos().size() > 0);
 	}
 	
 	@Test
 	public void BusquedaBancoPorServicio() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Cobros");
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Cobros",usuario);
 		Assert.assertTrue("Encontro el Banco por Nombre de Servicio", resultado.getPuntos().get(0)!=null);
 	}
 }

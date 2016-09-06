@@ -6,18 +6,12 @@ import java.util.TimerTask;
 
 public class ContadorSegundos {
 	
-	/**
-	 * @web http://www.jc-mouse.net
-	 * @author Mouse
-	 */
-
 	    private Timer timer = new Timer(); 
 	    private int segundos=0;
 
 	    class Contador extends TimerTask {
 	        public void run() {
 	            segundos++;
-	     System.out.println("segundo: " + segundos);
 	        }
 	    }
 	    public void Contar()

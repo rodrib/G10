@@ -20,7 +20,7 @@ public class DatosCGPExternos {
 	
 	POI puntoUno;
 	POI puntoDos;
-	
+	String usuario;
 	
 	GestorPoi miGestor;
 
@@ -32,6 +32,8 @@ public class DatosCGPExternos {
 		//Inicializo POI
 		this.puntoUno = new POI();
 		this.puntoDos = new POI();
+		
+		usuario = "userTest";
 	}
 
 	@Before
@@ -41,19 +43,19 @@ public class DatosCGPExternos {
 	
 	@Test
 	public void BusquedaCGPNombre() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Comuna 3");
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Comuna 3",usuario);
 		Assert.assertTrue("Encontro el CGP por nombre", resultado.getPuntos().get(0).getNombre().equals("Comuna 3"));
 		}
 	
 	@Test
 	public void BusquedaCGPZona() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Versalles");
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Versalles",usuario);
 		Assert.assertTrue("Encontro el CGP por zona", (resultado.getPuntos().get(0).getTipo())!=null);
 		}
 	
 	@Test
 	public void BusquedaCGPNombreServicio() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Atención ciudadana");
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Atención ciudadana",usuario);
 		Assert.assertTrue("Encontro el CGP por nombre de servicio", (resultado.getPuntos().get(0).getTipo())!=null);
 		}
 	

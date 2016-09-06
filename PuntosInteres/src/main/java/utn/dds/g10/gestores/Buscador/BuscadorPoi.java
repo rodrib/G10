@@ -33,9 +33,6 @@ public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURL
 		resultado.setPuntos(listadoPoiTodos);
 		resultado.setFechaHora(LocalDate.now());
 
-		// Guardo la consulta en el Historial
-		// historial.AgregarResultado(resultado);
-
 		return resultado;
 	}
 

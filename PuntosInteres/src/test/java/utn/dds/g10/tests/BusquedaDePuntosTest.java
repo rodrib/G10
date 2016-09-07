@@ -1,12 +1,18 @@
 package utn.dds.g10.tests;
 
 import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.SimpleTimeZone;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import utn.dds.g10.entidades.HistorialConsultas;
 import utn.dds.g10.entidades.POI;
+import utn.dds.g10.entidades.Reportes;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.GestorPoi;
 
@@ -42,7 +48,17 @@ public class BusquedaDePuntosTest {
 	@Test
 	public void ExisteAlMenosUnBancoSantander() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Santander",usuario);
+//		LocalDate date;
+//		resultado.setFechaHora("2016-09-07");
+		ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
+		ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);
+		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
+		
+		Reportes reporte = new Reportes(historial) ;
+		reporte.imprimirReportePorFecha();
+		
 		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
+
 	}
 	
 	@Test

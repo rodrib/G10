@@ -9,7 +9,7 @@ import org.json.JSONException;
 import utn.dds.g10.entidades.*;
 import utn.dds.g10.gestores.Buscador.HistorialConsultasFecha;
 import utn.dds.g10.gestores.Buscador.HistorialConsultasParcialUsuario;
-import utn.dds.g10.gestores.Buscador.HistorialConsultasTotalUsuario;
+//import utn.dds.g10.gestores.Buscador.HistorialConsultasTotalUsuario;
 import utn.dds.g10.gestores.Buscador.HistoricoProxy;
 
 public class GestorPoi {
@@ -18,23 +18,21 @@ public class GestorPoi {
 	private HistoricoProxy historicoProxy;
 	private HistorialConsultasFecha historialFecha;
 	private HistorialConsultasParcialUsuario historialParcialUsuario;
-	private HistorialConsultasTotalUsuario historialTotalUsuario;
+//	private HistorialConsultasTotalUsuario historialTotalUsuario;
+	ResultadoConsulta resultado;
 	
 	public GestorPoi(){
 		historicoProxy = new HistoricoProxy();
 		historial = new HistorialConsultas();
 		historialFecha = new HistorialConsultasFecha();
 		historialParcialUsuario = new HistorialConsultasParcialUsuario();
-		historialTotalUsuario = new HistorialConsultasTotalUsuario();
+//		historialTotalUsuario = new HistorialConsultasTotalUsuario();
+		resultado = new ResultadoConsulta();
 			
 	}
 
 
 	public ResultadoConsulta BuscarPoi(String criterioBusqueda, String usuario) throws MalformedURLException, JSONException, IOException {
-		
-		// Retorna el resultado de una consulta.
-		ResultadoConsulta resultado = new ResultadoConsulta();
-
 		
 		resultado = historicoProxy.BuscarPoi(criterioBusqueda);
 		resultado.setUsuario(usuario);
@@ -60,6 +58,10 @@ public class GestorPoi {
 
 	public boolean EstaDisponible(POI poi, LocalDateTime fecha, String x) {
 		return poi.getTipo().estaDisponible(fecha, x);
+	}
+	
+	public HistorialConsultas listadoHistorialConsultas(){
+		return historial;
 	}
 }
 	

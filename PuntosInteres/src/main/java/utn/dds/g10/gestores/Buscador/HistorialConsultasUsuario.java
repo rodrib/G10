@@ -74,7 +74,7 @@ public class HistorialConsultasUsuario {
 	public void AgregarResultadoTotal(ResultadoConsulta resultado) {
 		//Se recorre buscando el usuario
 		
-		if (!consultasParcial.isEmpty()){
+		if (!consultasTotal.isEmpty()){
 		
 		for (Iterator<ResultadoBusquedaTotalUsuario> consultaBusqueda = this.consultasTotal.iterator(); consultaBusqueda.hasNext();) {
 			ResultadoBusquedaTotalUsuario resultadoUsuarioTotalEncontrado = consultaBusqueda.next();

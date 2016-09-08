@@ -24,18 +24,26 @@ public class HistorialConsultasFecha {
 		resultadoFecha.setFechaHora(resultado.getFechaHora());
 		
 		//Busca por fecha. Si ya existe, le aumenta la cantidad de busquedas. Caso contrario, agrega un resultado nuevo
+		if (!consultas.isEmpty()){
+		
 		for (Iterator<ResultadoBusquedaFecha> consultaBusqueda = this.consultas.iterator(); consultaBusqueda.hasNext();) {
 			ResultadoBusquedaFecha resultadoFechaEncontrado = consultaBusqueda.next();
 			LocalDate fechaBusqueda = resultadoFechaEncontrado.getFechaHora();
 						
 			if  (fechaBusqueda.isEqual(resultadoFecha.getFechaHora())){
-				resultadoFechaEncontrado.setCantidadBusquedas(resultadoFechaEncontrado.getCantidadBusquedas()+1);			
+				resultadoFechaEncontrado.setCantidadBusquedas(resultadoFechaEncontrado.getCantidadBusquedas()+1);
+				consultas.add(resultadoFechaEncontrado);
 			}
 			else{
 				resultadoFecha.setCantidadBusquedas(INICIAL);
 				consultas.add(resultadoFecha);
 			}		
-		}	
+		}
+		
+		}else{
+			resultadoFecha.setCantidadBusquedas(INICIAL);
+			consultas.add(resultadoFecha);
+		}
 	}
 
 }

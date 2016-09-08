@@ -25,14 +25,12 @@ public class GestorPoi {
 		historicoProxy = new HistoricoProxy();
 		historial = new HistorialConsultas();
 		historialFecha = new HistorialConsultasFecha();
-		historialUsuario = new HistorialConsultasUsuario();
-		resultado = new ResultadoConsulta();
-			
+		historialUsuario = new HistorialConsultasUsuario();		
 	}
 
 
 	public ResultadoConsulta BuscarPoi(String criterioBusqueda, String usuario) throws MalformedURLException, JSONException, IOException {
-		
+		resultado = new ResultadoConsulta();
 		resultado = historicoProxy.BuscarPoi(criterioBusqueda);
 		resultado.setUsuario(usuario);
 		// Guardo la consulta en el Historial

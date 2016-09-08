@@ -33,6 +33,8 @@ public class HistorialConsultasUsuario {
 		resultadoParcial.setCantidadResultados(resultado.getCantidadResultados());
 		
 		//Busca por usuario. Si ya existe, se busca por el criterio de busqueda
+		if (!consultasParcial.isEmpty()){
+		
 		for (Iterator<ResultadoBusquedaParcialUsuario> consultaBusqueda = this.consultasParcial.iterator(); consultaBusqueda.hasNext();) {
 			ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado = consultaBusqueda.next();
 						
@@ -41,6 +43,7 @@ public class HistorialConsultasUsuario {
 					ResultadoBusquedaParcial resultadoParcialEncontrado = consultaBusquedaParcial.next();
 					if (!resultadoParcialEncontrado.getCriterioBusqueda().equalsIgnoreCase(resultadoParcial.getCriterioBusqueda())){
 						resultadoUsuarioParcialEncontrado.getResultados().add(resultadoParcial);
+						consultasParcial.add(resultadoUsuarioParcialEncontrado);
 						
 						AgregarResultadoTotal(resultado);
 						
@@ -57,19 +60,35 @@ public class HistorialConsultasUsuario {
 				//Se crea el usuario nuevo en Total
 				AgregarResultadoTotalNuevo(resultado);
 			}
-		}	
+		}
+		
+		}else{
+			ResultadoBusquedaParcialUsuario resultadoUsuarioParcialNuevo = new ResultadoBusquedaParcialUsuario();
+			resultadoUsuarioParcialNuevo.setUsuario(resultado.getUsuario());
+			resultadoUsuarioParcialNuevo.agregarResultado(resultadoParcial);
+			consultasParcial.add(resultadoUsuarioParcialNuevo);
+		}
 
 	}
 	
 	public void AgregarResultadoTotal(ResultadoConsulta resultado) {
 		//Se recorre buscando el usuario
+		
+		if (!consultasParcial.isEmpty()){
+		
 		for (Iterator<ResultadoBusquedaTotalUsuario> consultaBusqueda = this.consultasTotal.iterator(); consultaBusqueda.hasNext();) {
 			ResultadoBusquedaTotalUsuario resultadoUsuarioTotalEncontrado = consultaBusqueda.next();
 						
 			if  (resultadoUsuarioTotalEncontrado.getUsuario().equalsIgnoreCase(resultado.getUsuario())){
 				resultadoUsuarioTotalEncontrado.setCantidadResultados(resultadoUsuarioTotalEncontrado.getCantidadResultados()+resultado.getCantidadResultados());
-				
+				consultasTotal.add(resultadoUsuarioTotalEncontrado);
 			}
+		}
+		}else{
+			ResultadoBusquedaTotalUsuario resultadoUsuarioTotalNuevo = new ResultadoBusquedaTotalUsuario();
+			resultadoUsuarioTotalNuevo.setCantidadResultados(resultado.getCantidadResultados());
+			resultadoUsuarioTotalNuevo.setUsuario(resultado.getUsuario());
+			consultasTotal.add(resultadoUsuarioTotalNuevo);
 		}
 	}
 	

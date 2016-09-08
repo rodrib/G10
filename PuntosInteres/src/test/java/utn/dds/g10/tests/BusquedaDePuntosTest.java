@@ -79,11 +79,11 @@ public class BusquedaDePuntosTest {
 		Assert.assertTrue("Existe al menos un poi de tipo libreria", resultado.getPuntos().size() > 0);	
 	}
 	
-	@Test
-	public void BuscarPorPalabraClave() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Descuentos",usuario);
-		
-		Assert.assertTrue("Existe poi con la palabra clave ingresada", resultado.getPuntos().size() > 0);	
-	}
+//	@Test
+//	public void BuscarPorPalabraClave() throws Exception {
+//		ResultadoConsulta resultado = miGestor.BuscarPoi("Descuentos",usuario);
+//		
+//		Assert.assertTrue("Existe poi con la palabra clave ingresada", resultado.getPuntos().size() > 0);	
+//	}
 	
 }

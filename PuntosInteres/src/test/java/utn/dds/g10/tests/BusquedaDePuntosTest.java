@@ -8,12 +8,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import utn.dds.g10.entidades.HistorialConsultas;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.Reportes;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.GestorPoi;
-import utn.dds.g10.gestores.Buscador.HistorialConsultasFecha;
 
 public class BusquedaDePuntosTest {
 
@@ -51,7 +49,8 @@ public class BusquedaDePuntosTest {
 		ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
 		ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);
 		
-		HistorialConsultasFecha histoFecha = new HistorialConsultasFecha();				
+		//comentado porque no se usa.
+		//HistorialConsultasFecha histoFecha = new HistorialConsultasFecha();				
 		Reportes reportes = new Reportes();	
 		
 		reportes.setHistoConUsuario(miGestor.getHistorialUsuario());
@@ -82,7 +81,9 @@ public class BusquedaDePuntosTest {
 	@Test
 	public void BusquedaParadaColectivo() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("114",usuario);
-		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
+		
+		//comentado porque no se usa
+		//HistorialConsultas historial = miGestor.listadoHistorialConsultas();
 //		Reportes reporte = new Reportes(historial) ;
 //		reporte.imprimirReportePorFecha();
 		Assert.assertTrue("Encontro la parada 114", resultado.getPuntos().size() > 0);		
@@ -92,7 +93,8 @@ public class BusquedaDePuntosTest {
 	@Test
 	public void BuscarLocalLibreria() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Libreria",usuario);
-		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
+		//comentado porque no se usa
+		//HistorialConsultas historial = miGestor.listadoHistorialConsultas();
 //		Reportes reporte = new Reportes(historial) ;
 //		reporte.imprimirReportePorFecha();
 		Assert.assertTrue("Existe al menos un poi de tipo libreria", resultado.getPuntos().size() > 0);	

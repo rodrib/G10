@@ -1,9 +1,6 @@
 package utn.dds.g10.tests;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import org.junit.Assert;
 
 
 import org.junit.Test;

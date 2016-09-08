@@ -44,7 +44,7 @@ public class BusquedaDePuntosTest {
 
 	@Test
 	public void ExisteAlMenosUnBancoFrances() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Santander",usuario);
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Banco Frances",usuario);
 
 		ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
 		ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);

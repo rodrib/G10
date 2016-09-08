@@ -3,6 +3,7 @@ package utn.dds.g10.gestores.Buscador;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,9 +21,11 @@ HistorialConsultas historial = new HistorialConsultas();
 	
 public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
 		
-		List<POI> listadoPoiTodos = Repositorio.getInstance().getDatos();
+		ArrayList<POI> listadoPoiTodos = (ArrayList<POI>)Repositorio.getInstance().getDatos();
+		
+		List<POI> listadoPoiTodosFinal =  (ArrayList<POI>) listadoPoiTodos.clone();
 
-		for (Iterator<POI> iterador = listadoPoiTodos.iterator(); iterador
+		for (Iterator<POI> iterador = listadoPoiTodosFinal.iterator(); iterador
 				.hasNext();) {
 			if (!CumpleCondicionBusqueda(iterador.next(), criterioBusqueda))
 				iterador.remove();
@@ -30,7 +33,7 @@ public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURL
 
 		// Retorna el resultado de una consulta.
 		ResultadoConsulta resultado = new ResultadoConsulta();
-		resultado.setPuntos(listadoPoiTodos);
+		resultado.setPuntos(listadoPoiTodosFinal);
 		resultado.setFechaHora(LocalDate.now());
 
 		return resultado;

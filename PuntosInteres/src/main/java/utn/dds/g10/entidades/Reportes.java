@@ -5,6 +5,7 @@ import utn.dds.g10.gestores.Buscador.HistorialConsultasUsuario;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaFecha;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaTotalUsuario;
 
 public class Reportes {
 
@@ -49,8 +50,20 @@ public class Reportes {
 	
 	public void imprimirReporteParcial(){
 		
-		for(ResultadoBusquedaParcialUsuario resultBusqueda: histoConUsuario.getConsultasParcial()){
-			System.out.println(histoConUsuario.getConsultasParcial()+"--");
+		for(ResultadoBusquedaParcialUsuario resultadoBusquedaUsuario: histoConUsuario.getConsultasParcial()){			
+			System.out.println("Usuario: "+resultadoBusquedaUsuario.getUsuario());
+			
+			for(ResultadoBusquedaParcial resultadoBusquedaParcial: resultadoBusquedaUsuario.getResultados()){			
+				System.out.println(resultadoBusquedaParcial.getCriterioBusqueda()+"--"+resultadoBusquedaParcial.getCantidadResultados());
+			}
+		}
+		
+	}
+	
+	public void imprimirReporteTotal(){
+		
+		for(ResultadoBusquedaTotalUsuario resultadoBusquedaUsuario: histoConUsuario.getConsultasTotal()){			
+				System.out.println(resultadoBusquedaUsuario.getUsuario()+"--"+resultadoBusquedaUsuario.getCantidadResultados());
 		}
 		
 	}

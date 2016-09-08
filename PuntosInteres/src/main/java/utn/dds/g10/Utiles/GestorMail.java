@@ -22,19 +22,13 @@ public class GestorMail {
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
 	
-		Session session = Session.getInstance(props,
-		  new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		  });
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() { protected PasswordAuthentication getPasswordAuthentication() { return new PasswordAuthentication(username, password); } });
 	
 		try {
 	
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("dds.grupo10@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(destinatario)); 
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario)); 
 			message.setSubject(asunto); 
 			message.setText(cuerpo);
 	

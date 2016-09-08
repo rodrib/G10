@@ -32,6 +32,9 @@ public class HistorialConsultasUsuario {
 		resultadoParcial.setCriterioBusqueda(resultado.getCriterioBusqueda());
 		resultadoParcial.setCantidadResultados(resultado.getCantidadResultados());
 		
+		int usuarioEncontrado = 0;
+		int criterioEncontrado = 0;
+		
 		//Busca por usuario. Si ya existe, se busca por el criterio de busqueda
 		if (!consultasParcial.isEmpty()){
 		
@@ -39,27 +42,37 @@ public class HistorialConsultasUsuario {
 			ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado = consultaBusqueda.next();
 						
 			if  (resultadoUsuarioParcialEncontrado.getUsuario().equalsIgnoreCase(resultado.getUsuario())){
-				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioParcialEncontrado.getResultados().iterator(); consultaBusquedaParcial.hasNext();) {
-					ResultadoBusquedaParcial resultadoParcialEncontrado = consultaBusquedaParcial.next();
-					//Revisar esta condicion, cuando guardar un nuevo criterio
-					if (!resultadoParcialEncontrado.getCriterioBusqueda().equalsIgnoreCase(resultadoParcial.getCriterioBusqueda())){
-						resultadoUsuarioParcialEncontrado.getResultados().add(resultadoParcial);
-						
-						AgregarResultadoTotal(resultado);
-						
-					}
-					//Si el criterio de busqueda ya existe para ese usuario, no se agrega nada
-					//Tampoco se cambia Total
-				}
-			}else{//Si el usuario no existe se crea un resultado nuevo con ese usuario y la busqueda realizada
-				ResultadoBusquedaParcialUsuario resultadoUsuarioParcialNuevo = new ResultadoBusquedaParcialUsuario();
-				resultadoUsuarioParcialNuevo.setUsuario(resultado.getUsuario());
-				resultadoUsuarioParcialNuevo.agregarResultado(resultadoParcial);
-				consultasParcial.add(resultadoUsuarioParcialNuevo);
-				
-				//Se crea el usuario nuevo en Total
-				AgregarResultadoTotalNuevo(resultado);
+				usuarioEncontrado=1;
+				break;
 			}
+		}
+		
+		if (usuarioEncontrado){
+		
+			for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioParcialEncontrado.getResultados().iterator(); consultaBusquedaParcial.hasNext();) {
+				ResultadoBusquedaParcial resultadoParcialEncontrado = consultaBusquedaParcial.next();
+				//Revisar esta condicion, cuando guardar un nuevo criterio
+				if (resultadoParcialEncontrado.getCriterioBusqueda().equalsIgnoreCase(resultadoParcial.getCriterioBusqueda())){
+					criterioEncontrado=1;
+					break;
+				}
+			//Si el criterio de busqueda ya existe para ese usuario, no se agrega nada
+			//Tampoco se cambia Total
+			}
+			
+			if (!criterioEncontrado){
+				resultadoUsuarioParcialEncontrado.getResultados().add(resultadoParcial);
+				AgregarResultadoTotal(resultado);
+			}
+		
+		}else{//Si el usuario no existe se crea un resultado nuevo con ese usuario y la busqueda realizada
+			ResultadoBusquedaParcialUsuario resultadoUsuarioParcialNuevo = new ResultadoBusquedaParcialUsuario();
+			resultadoUsuarioParcialNuevo.setUsuario(resultado.getUsuario());
+			resultadoUsuarioParcialNuevo.agregarResultado(resultadoParcial);
+			consultasParcial.add(resultadoUsuarioParcialNuevo);
+				
+			//Se crea el usuario nuevo en Total
+			AgregarResultadoTotalNuevo(resultado);
 		}
 		
 		}else{

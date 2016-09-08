@@ -47,36 +47,29 @@ public class BusquedaDePuntosTest {
 	@Test
 	public void ExisteAlMenosUnBancoFrances() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Santander",usuario);
-//		LocalDate date;
-//		resultado.setFechaHora("2016-09-07");
+
 		ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
 		ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);
-		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
+//		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
 		
-		HistorialConsultasFecha histoFecha = new HistorialConsultasFecha();
-		
-		histoFecha.AgregarResultado(resultado2);		
-		histoFecha.AgregarResultado(resultado1);
-		
+		HistorialConsultasFecha histoFecha = new HistorialConsultasFecha();		
+				
 		Reportes reportes = new Reportes();
-		reportes.setHistoConFecha(histoFecha);
-		reportes.imprimirReporteCantBusquedas();
 		
-		
-//		Reportes reporte = new Reportes(historial) ;
-//		reporte.imprimirReportePorFecha();
+		reportes.setHistoConFecha(miGestor.getHistorialFecha());
+		reportes.imprimirReporteCantBusquedas();		
 		
 		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
 	}
 	
-	@Test
-	public void ExistenKioscos() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Kiosco",usuario);
-		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
-//		Reportes reporte = new Reportes(historial) ;
-//		reporte.imprimirReportePorFecha();
-		Assert.assertTrue("Existen kioscos", resultado.getPuntos().size() > 0);	
-	}
+//	@Test
+//	public void ExistenKioscos() throws Exception {
+//		ResultadoConsulta resultado = miGestor.BuscarPoi("Kiosco",usuario);
+//		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
+////		Reportes reporte = new Reportes(historial) ;
+////		reporte.imprimirReportePorFecha();
+//		Assert.assertTrue("Existen kioscos", resultado.getPuntos().size() > 0);	
+//	}
 	
 	@Test
 	public void BusquedaParadaColectivo() throws Exception {

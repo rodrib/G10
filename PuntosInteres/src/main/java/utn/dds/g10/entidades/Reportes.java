@@ -3,6 +3,8 @@ package utn.dds.g10.entidades;
 import utn.dds.g10.gestores.Buscador.HistorialConsultasFecha;
 import utn.dds.g10.gestores.Buscador.HistorialConsultasUsuario;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaFecha;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
 
 public class Reportes {
 
@@ -42,8 +44,16 @@ public class Reportes {
 			System.out.println(resultBusqueda.getFechaHora()+"--"+resultBusqueda.getCantidadBusquedas());
 		}
 		
-		
+	}	
 	
+	
+	public void imprimirReporteParcial(){
+		
+		for(ResultadoBusquedaParcialUsuario resultBusqueda: histoConUsuario.getConsultasParcial()){
+			System.out.println(histoConUsuario.getConsultasParcial()+"--");
+		}
+		
+	}
 //Esto de aca abajo borrarlo
 //	HistorialConsultas historialConsulta = new HistorialConsultas();	
 //	
@@ -60,7 +70,6 @@ public class Reportes {
 //		}
 //		
 		
-	}
 	
 	
 }

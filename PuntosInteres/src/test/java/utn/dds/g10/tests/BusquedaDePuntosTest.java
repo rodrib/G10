@@ -53,7 +53,6 @@ public class BusquedaDePuntosTest {
 		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
 		Reportes reporte = new Reportes(historial) ;
 		reporte.imprimirReportePorFecha();
-		
 		assertTrue("Existe al menos un banco Frances en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
 
 	}

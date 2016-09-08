@@ -41,9 +41,9 @@ public class HistorialConsultasUsuario {
 			if  (resultadoUsuarioParcialEncontrado.getUsuario().equalsIgnoreCase(resultado.getUsuario())){
 				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioParcialEncontrado.getResultados().iterator(); consultaBusquedaParcial.hasNext();) {
 					ResultadoBusquedaParcial resultadoParcialEncontrado = consultaBusquedaParcial.next();
+					//Revisar esta condicion, cuando guardar un nuevo criterio
 					if (!resultadoParcialEncontrado.getCriterioBusqueda().equalsIgnoreCase(resultadoParcial.getCriterioBusqueda())){
 						resultadoUsuarioParcialEncontrado.getResultados().add(resultadoParcial);
-						consultasParcial.add(resultadoUsuarioParcialEncontrado);
 						
 						AgregarResultadoTotal(resultado);
 						
@@ -81,7 +81,6 @@ public class HistorialConsultasUsuario {
 						
 			if  (resultadoUsuarioTotalEncontrado.getUsuario().equalsIgnoreCase(resultado.getUsuario())){
 				resultadoUsuarioTotalEncontrado.setCantidadResultados(resultadoUsuarioTotalEncontrado.getCantidadResultados()+resultado.getCantidadResultados());
-				consultasTotal.add(resultadoUsuarioTotalEncontrado);
 			}
 		}
 		}else{

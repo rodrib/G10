@@ -32,7 +32,6 @@ public class HistorialConsultasFecha {
 						
 			if  (fechaBusqueda.isEqual(resultadoFecha.getFechaHora())){
 				resultadoFechaEncontrado.setCantidadBusquedas(resultadoFechaEncontrado.getCantidadBusquedas()+1);
-				consultas.add(resultadoFechaEncontrado);
 			}
 			else{
 				resultadoFecha.setCantidadBusquedas(INICIAL);

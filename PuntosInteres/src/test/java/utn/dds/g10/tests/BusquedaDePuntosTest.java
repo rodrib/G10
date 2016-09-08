@@ -13,6 +13,7 @@ import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.Reportes;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.GestorPoi;
+import utn.dds.g10.gestores.Buscador.HistorialConsultasFecha;
 
 public class BusquedaDePuntosTest {
 
@@ -45,24 +46,35 @@ public class BusquedaDePuntosTest {
 
 	@Test
 	public void ExisteAlMenosUnBancoFrances() throws Exception {
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Banco Frances",usuario);
+		ResultadoConsulta resultado = miGestor.BuscarPoi("Santander",usuario);
 //		LocalDate date;
 //		resultado.setFechaHora("2016-09-07");
-		//ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
-		//ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);
+		ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
+		ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);
 		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
-		Reportes reporte = new Reportes(historial) ;
-		reporte.imprimirReportePorFecha();
-		assertTrue("Existe al menos un banco Frances en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
-
+		
+		HistorialConsultasFecha histoFecha = new HistorialConsultasFecha();
+		
+		histoFecha.AgregarResultado(resultado2);		
+		histoFecha.AgregarResultado(resultado1);
+		
+		Reportes reportes = new Reportes();
+		reportes.setHistoConFecha(histoFecha);
+		reportes.imprimirReporteCantBusquedas();
+		
+		
+//		Reportes reporte = new Reportes(historial) ;
+//		reporte.imprimirReportePorFecha();
+		
+		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
 	}
 	
 	@Test
 	public void ExistenKioscos() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Kiosco",usuario);
 		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
-		Reportes reporte = new Reportes(historial) ;
-		reporte.imprimirReportePorFecha();
+//		Reportes reporte = new Reportes(historial) ;
+//		reporte.imprimirReportePorFecha();
 		Assert.assertTrue("Existen kioscos", resultado.getPuntos().size() > 0);	
 	}
 	
@@ -70,8 +82,8 @@ public class BusquedaDePuntosTest {
 	public void BusquedaParadaColectivo() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("114",usuario);
 		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
-		Reportes reporte = new Reportes(historial) ;
-		reporte.imprimirReportePorFecha();
+//		Reportes reporte = new Reportes(historial) ;
+//		reporte.imprimirReportePorFecha();
 		Assert.assertTrue("Encontro la parada 114", resultado.getPuntos().size() > 0);		
 	}
 	
@@ -80,8 +92,8 @@ public class BusquedaDePuntosTest {
 	public void BuscarLocalLibreria() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Libreria",usuario);
 		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
-		Reportes reporte = new Reportes(historial) ;
-		reporte.imprimirReportePorFecha();
+//		Reportes reporte = new Reportes(historial) ;
+//		reporte.imprimirReportePorFecha();
 		Assert.assertTrue("Existe al menos un poi de tipo libreria", resultado.getPuntos().size() > 0);	
 	}
 	

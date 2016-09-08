@@ -50,15 +50,23 @@ public class BusquedaDePuntosTest {
 
 		ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
 		ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);
-//		HistorialConsultas historial = miGestor.listadoHistorialConsultas();
 		
-		HistorialConsultasFecha histoFecha = new HistorialConsultasFecha();		
-				
-		Reportes reportes = new Reportes();
+		HistorialConsultasFecha histoFecha = new HistorialConsultasFecha();				
+		Reportes reportes = new Reportes();	
+		
+		reportes.setHistoConUsuario(miGestor.getHistorialUsuario());
+		reportes.imprimirReporteParcial();
+		
+		reportes.setHistoConUsuario(miGestor.getHistorialUsuario());
+		reportes.imprimirReporteTotal();
 		
 		reportes.setHistoConFecha(miGestor.getHistorialFecha());
 		reportes.imprimirReporteCantBusquedas();		
 		
+		
+		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado1.getPuntos().size() > 0 );
+		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado2.getPuntos().size() > 0 );
+
 		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
 	}
 	

@@ -8,8 +8,8 @@ import org.json.JSONException;
 
 import utn.dds.g10.entidades.*;
 import utn.dds.g10.gestores.Buscador.HistorialConsultasFecha;
-import utn.dds.g10.gestores.Buscador.HistorialConsultasParcialUsuario;
-//import utn.dds.g10.gestores.Buscador.HistorialConsultasTotalUsuario;
+
+import utn.dds.g10.gestores.Buscador.HistorialConsultasUsuario;
 import utn.dds.g10.gestores.Buscador.HistoricoProxy;
 
 public class GestorPoi {
@@ -17,7 +17,7 @@ public class GestorPoi {
 	private HistorialConsultas historial;
 	private HistoricoProxy historicoProxy;
 	private HistorialConsultasFecha historialFecha;
-	private HistorialConsultasParcialUsuario historialParcialUsuario;
+	private HistorialConsultasUsuario historialUsuario;
 //	private HistorialConsultasTotalUsuario historialTotalUsuario;
 	ResultadoConsulta resultado;
 	
@@ -25,8 +25,7 @@ public class GestorPoi {
 		historicoProxy = new HistoricoProxy();
 		historial = new HistorialConsultas();
 		historialFecha = new HistorialConsultasFecha();
-		historialParcialUsuario = new HistorialConsultasParcialUsuario();
-//		historialTotalUsuario = new HistorialConsultasTotalUsuario();
+		historialUsuario = new HistorialConsultasUsuario();
 		resultado = new ResultadoConsulta();
 			
 	}
@@ -39,6 +38,7 @@ public class GestorPoi {
 		// Guardo la consulta en el Historial
 		 historial.AgregarResultado(resultado);
 		 historialFecha.AgregarResultado(resultado);
+		 historialUsuario.AgregarResultado(resultado);
 
 		return resultado;
 	}

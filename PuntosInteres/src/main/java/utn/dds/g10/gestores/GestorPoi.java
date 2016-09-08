@@ -18,7 +18,6 @@ public class GestorPoi {
 	private HistoricoProxy historicoProxy;
 	private HistorialConsultasFecha historialFecha;
 	private HistorialConsultasUsuario historialUsuario;
-//	private HistorialConsultasTotalUsuario historialTotalUsuario;
 	ResultadoConsulta resultado;
 	
 	public GestorPoi(){
@@ -40,6 +39,26 @@ public class GestorPoi {
 
 		return resultado;
 	}
+
+	public HistorialConsultasFecha getHistorialFecha() {
+		return historialFecha;
+	}
+
+
+	public void setHistorialFecha(HistorialConsultasFecha historialFecha) {
+		this.historialFecha = historialFecha;
+	}
+
+
+	public HistorialConsultasUsuario getHistorialUsuario() {
+		return historialUsuario;
+	}
+
+
+	public void setHistorialUsuario(HistorialConsultasUsuario historialUsuario) {
+		this.historialUsuario = historialUsuario;
+	}
+
 
 	public float CalcularDistanciaEntrePuntos(POI puntoUno, POI puntoDos) {
 		return utn.dds.g10.Utiles.Util.CalcularDistancia(

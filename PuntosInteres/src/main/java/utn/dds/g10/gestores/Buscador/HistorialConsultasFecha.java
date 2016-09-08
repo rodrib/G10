@@ -1,13 +1,14 @@
 package utn.dds.g10.gestores.Buscador;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import utn.dds.g10.entidades.ResultadoConsulta;
 
 public class HistorialConsultasFecha {
-	private List<ResultadoBusquedaFecha> consultas;
+	private List<ResultadoBusquedaFecha> consultas = new ArrayList<ResultadoBusquedaFecha>();
 	static final int INICIAL = 1;
 	
 	public List<ResultadoBusquedaFecha> getConsultas() {

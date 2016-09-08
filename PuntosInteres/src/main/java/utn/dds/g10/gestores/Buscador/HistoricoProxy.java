@@ -9,7 +9,7 @@ import utn.dds.g10.entidades.ResultadoConsulta;
 
 public class HistoricoProxy implements Buscador {
 	
-	Buscador timer;
+	private Buscador timer;
 	
 	public HistoricoProxy()
 	{

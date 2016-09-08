@@ -1,13 +1,14 @@
 package utn.dds.g10.gestores.Buscador;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import utn.dds.g10.entidades.ResultadoConsulta;
 
 public class HistorialConsultasUsuario {
-	private List<ResultadoBusquedaTotalUsuario> consultasTotal;
-	private List<ResultadoBusquedaParcialUsuario> consultasParcial;
+	private List<ResultadoBusquedaTotalUsuario> consultasTotal = new ArrayList<ResultadoBusquedaTotalUsuario>();
+	private List<ResultadoBusquedaParcialUsuario> consultasParcial = new ArrayList<ResultadoBusquedaParcialUsuario>();
 	
 	public List<ResultadoBusquedaTotalUsuario> getConsultasTotal() {
 		return consultasTotal;

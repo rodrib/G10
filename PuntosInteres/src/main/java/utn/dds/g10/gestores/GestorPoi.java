@@ -2,63 +2,45 @@ package utn.dds.g10.gestores;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.List;
 
 import org.json.JSONException;
 
-import utn.dds.g10.datos.Repositorio;
 import utn.dds.g10.entidades.*;
+import utn.dds.g10.gestores.Buscador.HistorialConsultasFecha;
+import utn.dds.g10.gestores.Buscador.HistorialConsultasParcialUsuario;
+//import utn.dds.g10.gestores.Buscador.HistorialConsultasTotalUsuario;
+import utn.dds.g10.gestores.Buscador.HistoricoProxy;
 
 public class GestorPoi {
 
-	HistorialConsultas historial = new HistorialConsultas();
-
-	public ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
-		
-		List<POI> listadoPoiTodos = Repositorio.getInstance().getDatos();
-
-		for (Iterator<POI> iterador = listadoPoiTodos.iterator(); iterador
-				.hasNext();) {
-			if (!CumpleCondicionBusqueda(iterador.next(), criterioBusqueda))
-				iterador.remove();
-		}
-
-		// Retorna el resultado de una consulta.
-		ResultadoConsulta resultado = new ResultadoConsulta();
-		resultado.setPuntos(listadoPoiTodos);
-		resultado.setFechaHora(LocalDate.now());
-
-		// Guardo la consulta en el Historial
-		// historial.AgregarResultado(resultado);
-
-		return resultado;
+	private HistorialConsultas historial;
+	private HistoricoProxy historicoProxy;
+	private HistorialConsultasFecha historialFecha;
+	private HistorialConsultasParcialUsuario historialParcialUsuario;
+//	private HistorialConsultasTotalUsuario historialTotalUsuario;
+	ResultadoConsulta resultado;
+	
+	public GestorPoi(){
+		historicoProxy = new HistoricoProxy();
+		historial = new HistorialConsultas();
+		historialFecha = new HistorialConsultasFecha();
+		historialParcialUsuario = new HistorialConsultasParcialUsuario();
+//		historialTotalUsuario = new HistorialConsultasTotalUsuario();
+		resultado = new ResultadoConsulta();
+			
 	}
 
-	private Boolean CumpleCondicionBusqueda(POI poi, String criterio) {
 
-		// Cumple condicion en el nombre
-		if (poi.getNombre().contains(criterio)) {
-			return true;
-		}
+	public ResultadoConsulta BuscarPoi(String criterioBusqueda, String usuario) throws MalformedURLException, JSONException, IOException {
+		
+		resultado = historicoProxy.BuscarPoi(criterioBusqueda);
+		resultado.setUsuario(usuario);
+		// Guardo la consulta en el Historial
+		 historial.AgregarResultado(resultado);
+		 historialFecha.AgregarResultado(resultado);
 
-		if (poi.getTipo().CumpleCondicionBusqueda(criterio)) {
-			return true;
-		}
-
-		// Busqueda en las palabras claves del poi
-
-		if (poi.getPalabrasClaves() != null && !poi.getPalabrasClaves().isEmpty()) {
-			for (String palabra : poi.getPalabrasClaves()) {
-				if (palabra.equalsIgnoreCase(criterio)) {
-					return true;
-				}
-			}
-		}
-
-		return false;
+		return resultado;
 	}
 
 	public float CalcularDistanciaEntrePuntos(POI puntoUno, POI puntoDos) {
@@ -76,6 +58,10 @@ public class GestorPoi {
 
 	public boolean EstaDisponible(POI poi, LocalDateTime fecha, String x) {
 		return poi.getTipo().estaDisponible(fecha, x);
+	}
+	
+	public HistorialConsultas listadoHistorialConsultas(){
+		return historial;
 	}
 }
 	

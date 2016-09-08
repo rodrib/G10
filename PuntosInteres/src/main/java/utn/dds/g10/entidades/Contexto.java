@@ -9,12 +9,17 @@ import utn.dds.g10.gestores.GestorPoi;
 
 public class Contexto {
 	
-	Locacion locacion;
-	GestorPoi gestorPoi;
+	private Locacion locacion;
+	private GestorPoi gestorPoi;
+	private String usuario;
+	
+	public Contexto(){
+		gestorPoi = new GestorPoi();
+	}
 
 	public ResultadoConsulta buscarPOI(String tag) throws MalformedURLException, JSONException, IOException {
-		gestorPoi = new GestorPoi();
-		ResultadoConsulta rc = gestorPoi.BuscarPoi(tag);
+		
+		ResultadoConsulta rc = gestorPoi.BuscarPoi(tag,usuario);
 		return rc;
 	}
 

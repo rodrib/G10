@@ -2,7 +2,7 @@ package utn.dds.g10.entidades;
 
 public class Reportes {
 
-	HistorialConsultas historialConsulta;	
+	HistorialConsultas historialConsulta = new HistorialConsultas();	
 	
 	public Reportes(HistorialConsultas historial){
 		historialConsulta = historial;

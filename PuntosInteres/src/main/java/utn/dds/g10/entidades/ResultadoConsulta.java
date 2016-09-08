@@ -1,6 +1,7 @@
 package utn.dds.g10.entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResultadoConsulta {
@@ -9,7 +10,7 @@ public class ResultadoConsulta {
 	private int tiempoConsulta;
 	private String criterioBusqueda;
 	private int cantidadResultados;
-	private List<POI> puntos;
+	private List<POI> puntos = new ArrayList<POI>();
 	private String usuario;
 
 	

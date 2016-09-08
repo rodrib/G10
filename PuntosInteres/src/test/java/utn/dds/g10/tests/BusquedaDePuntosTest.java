@@ -2,9 +2,7 @@ package utn.dds.g10.tests;
 
 import static org.junit.Assert.assertTrue;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 import org.junit.Assert;
 import org.junit.Before;

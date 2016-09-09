@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import utn.dds.g10.entidades.POI;
-import utn.dds.g10.entidades.Reportes;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.GestorPoi;
 
@@ -45,27 +44,6 @@ public class BusquedaDePuntosTest {
 	@Test
 	public void ExisteAlMenosUnBancoFrances() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Banco Frances",usuario);
-
-		ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
-		ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);
-		
-		//comentado porque no se usa.
-		//HistorialConsultasFecha histoFecha = new HistorialConsultasFecha();				
-		Reportes reportes = new Reportes();	
-		
-		reportes.setHistoConUsuario(miGestor.getHistorialUsuario());
-		reportes.imprimirReporteParcial();
-		
-		reportes.setHistoConUsuario(miGestor.getHistorialUsuario());
-		reportes.imprimirReporteTotal();
-		
-		reportes.setHistoConFecha(miGestor.getHistorialFecha());
-		reportes.imprimirReporteCantBusquedas();		
-		
-		
-		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado1.getPuntos().size() > 0 );
-		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado2.getPuntos().size() > 0 );
-
 		assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
 	}
 	
@@ -81,11 +59,6 @@ public class BusquedaDePuntosTest {
 	@Test
 	public void BusquedaParadaColectivo() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("114",usuario);
-		
-		//comentado porque no se usa
-		//HistorialConsultas historial = miGestor.listadoHistorialConsultas();
-//		Reportes reporte = new Reportes(historial) ;
-//		reporte.imprimirReportePorFecha();
 		Assert.assertTrue("Encontro la parada 114", resultado.getPuntos().size() > 0);		
 	}
 	
@@ -93,10 +66,6 @@ public class BusquedaDePuntosTest {
 	@Test
 	public void BuscarLocalLibreria() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Libreria",usuario);
-		//comentado porque no se usa
-		//HistorialConsultas historial = miGestor.listadoHistorialConsultas();
-//		Reportes reporte = new Reportes(historial) ;
-//		reporte.imprimirReportePorFecha();
 		Assert.assertTrue("Existe al menos un poi de tipo libreria", resultado.getPuntos().size() > 0);	
 	}
 	

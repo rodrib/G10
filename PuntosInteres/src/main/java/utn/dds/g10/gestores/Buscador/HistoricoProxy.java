@@ -37,7 +37,7 @@ public class HistoricoProxy implements Buscador {
 		if(segundos > timeout)
 		{
 			//Mandar mail admin.
-			//GestorMail.enviarMail(Configuraciones.obtenerMailAdministrador(), "Tiempo excedido", "La consulta realizada superó el tiempo máximo establecido");
+			GestorMail.enviarMail(Configuraciones.obtenerMailAdministrador(), "Tiempo excedido", "La consulta realizada superó el tiempo máximo establecido");
 		}
 		
 		//Aca se llama al guardar resultado de búsqueda con el tiempo que demoró en realizarla.

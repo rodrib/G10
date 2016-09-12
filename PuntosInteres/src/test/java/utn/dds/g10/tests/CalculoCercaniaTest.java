@@ -1,6 +1,7 @@
 package utn.dds.g10.tests;
 
 import org.junit.Assert;
+
 import utn.dds.g10.entidades.CGP;
 import utn.dds.g10.entidades.Coordenada;
 import utn.dds.g10.entidades.Kiosco;
@@ -10,7 +11,9 @@ import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.SucursalBanco;
+import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.GestorPoi;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,7 +41,7 @@ public class CalculoCercaniaTest {
 		this.localComercial = new LocalComercial();
 		
 		//Inicializo Gestor
-		this.miGestor = new GestorPoi();
+		this.miGestor = new GestorPoi(new Usuario());
 		
 		//Inicializo los POI
 		this.puntoUno = new POI();

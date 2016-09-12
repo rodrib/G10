@@ -18,6 +18,7 @@ import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
+import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.GestorPoi;
 
 public class CalculoDisponibilidadTest {
@@ -44,7 +45,7 @@ public class CalculoDisponibilidadTest {
 		this.puntoDos = new POI();
 		
 		//Inicializo Gestor
-		this.miGestor = new GestorPoi();
+		this.miGestor = new GestorPoi(new Usuario());
 		
 		//Inicializo CGP
 		this.cgp1 = new CGP();

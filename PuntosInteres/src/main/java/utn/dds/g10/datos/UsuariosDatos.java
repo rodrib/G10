@@ -49,9 +49,6 @@ public class UsuariosDatos {
 		RolAdministrador rolAdmin = new RolAdministrador();
 		RolTerminal rolTerminal = new RolTerminal();
 		
-		rolAdmin.setModulos(ObtenerModulosPorRol(RolEnum.ADMIN));
-		rolTerminal.setModulos(ObtenerModulosPorRol(RolEnum.TERMINAL));
-		
 		Usuario administrador = new Usuario();
 		administrador.setNombre("admin");
 		administrador.setRol(rolAdmin);

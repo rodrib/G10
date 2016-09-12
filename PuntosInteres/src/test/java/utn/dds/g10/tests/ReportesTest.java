@@ -10,6 +10,9 @@ import org.junit.Test;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.Reportes;
 import utn.dds.g10.entidades.ResultadoConsulta;
+import utn.dds.g10.entidades.administracion.RolAdministrador;
+import utn.dds.g10.entidades.administracion.RolTerminal;
+import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.GestorPoi;
 
 public class ReportesTest {
@@ -21,13 +24,19 @@ public class ReportesTest {
 	POI puntoDos;
 	String usuario;
 	
+	Usuario usuarioLogueado;
 	
 	GestorPoi miGestor;
 
 	private void InicializarTest() {
 
+		usuarioLogueado  = new Usuario();
+
+		RolTerminal terminal = new RolTerminal();
+		usuarioLogueado.setRol(terminal);
+		
 		//Inicializo Gestor
-		this.miGestor = new GestorPoi();
+		this.miGestor = new GestorPoi(usuarioLogueado);
 		
 		//Inicializo POI
 		this.puntoUno = new POI();
@@ -41,13 +50,12 @@ public class ReportesTest {
 		this.InicializarTest();
 	}
 	
-	
 	@Test
 	public void ImprimirReportes() throws Exception {
 		
-		ResultadoConsulta resultado = miGestor.BuscarPoi("Banco Frances",usuario);
-		ResultadoConsulta resultado1 = miGestor.BuscarPoi("Kiosco",usuario);
-		ResultadoConsulta resultado2 = miGestor.BuscarPoi("114",usuario);
+		miGestor.BuscarPoi("Banco Frances",usuario);
+		miGestor.BuscarPoi("Kiosco",usuario);
+		miGestor.BuscarPoi("114",usuario);
 		
 		Reportes reportes = new Reportes();	
 		
@@ -62,8 +70,7 @@ public class ReportesTest {
 				
 		assertTrue("Existen Reportes Por Fecha", miGestor.getHistorialFecha().getConsultas()!=null );
 		assertTrue("Existen Reportes Parcial", miGestor.getHistorialUsuario().getConsultasParcial()!=null );
-		assertTrue("Existen Reportes Total", miGestor.getHistorialUsuario().getConsultasTotal()==null );
-
+		assertTrue("Existen Reportes Total", miGestor.getHistorialUsuario().getConsultasTotal()!=null );
 	}
 	
 }

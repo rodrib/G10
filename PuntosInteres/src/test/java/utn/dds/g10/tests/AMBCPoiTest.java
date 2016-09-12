@@ -12,6 +12,8 @@ import utn.dds.g10.entidades.Locacion;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;
+import utn.dds.g10.entidades.administracion.RolAdministrador;
+import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.GestorPoi;
 
 public class AMBCPoiTest {
@@ -22,11 +24,20 @@ public class AMBCPoiTest {
 	POI puntoUno;
 	POI puntoDos;
 	
+	Usuario usuarioLogueado;
+	
 	
 	GestorPoi miGestor;
 
 	private void InicializarTest() {
-		this.miGestor = new GestorPoi();
+		
+		usuarioLogueado = new Usuario();
+		
+		RolAdministrador roladmin = new RolAdministrador();
+		
+		usuarioLogueado.setRol(roladmin);
+		
+		this.miGestor = new GestorPoi(usuarioLogueado);
 		this.puntoUno = new POI();
 		this.puntoDos = new POI();
 		

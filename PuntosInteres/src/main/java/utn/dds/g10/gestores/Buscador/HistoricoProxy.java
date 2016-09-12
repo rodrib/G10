@@ -8,42 +8,35 @@ import org.json.JSONException;
 import utn.dds.g10.Utiles.Configuraciones;
 import utn.dds.g10.Utiles.GestorMail;
 import utn.dds.g10.entidades.ResultadoConsulta;
+import utn.dds.g10.entidades.administracion.Usuario;
 
 
 public class HistoricoProxy implements Buscador {
 	
-	private Buscador timer;
+	private Timer timer;
+	private Usuario usuarioBusqueda;
 	
-	public HistoricoProxy()
+	public HistoricoProxy(Usuario usuario)
 	{
 		timer = new Timer();
+		usuarioBusqueda = usuario;
 	}
 
 	public ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
 		
-		//Tabla de cantidad de resultados por usuario (parcial)
-		//Tabla por todos los usuarios (total)
-		
 		ResultadoConsulta resultado = new ResultadoConsulta();
 		
-		((Timer)timer).getContador().Contar();
+		timer.getContador().Contar();
 		resultado = timer.BuscarPoi(criterioBusqueda);
-		((Timer)timer).getContador().Detener();
+		timer.getContador().Detener();
+
+		int segundos= timer.getContador().getSegundos();
+
+		//Según el rol activa o desactiva la auditoria.
+		this.usuarioBusqueda.getRol().AuditarTiempoConsulta(segundos);
 		
-		
-		int segundos= ((Timer)timer).getContador().getSegundos();
-		int timeout = Configuraciones.obtenerCantidadSegundosTimeOut();
-		
-		if(segundos > timeout)
-		{
-			//Mandar mail admin.
-			GestorMail.enviarMail(Configuraciones.obtenerMailAdministrador(), "Tiempo excedido", "La consulta realizada superó el tiempo máximo establecido");
-		}
-		
-		//Aca se llama al guardar resultado de búsqueda con el tiempo que demoró en realizarla.
-		resultado.setTiempoConsulta(segundos);
-		resultado.setCriterioBusqueda(criterioBusqueda);
-		resultado.setCantidadResultados();
+		//Según el rol activa o desactiva la auditoria del resultado de la búsqueda. 
+		this.usuarioBusqueda.getRol().AuditarResultadoConsulta(resultado, segundos, criterioBusqueda);
 		
 		return resultado;
 	}

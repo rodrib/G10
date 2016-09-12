@@ -1,16 +1,10 @@
 package utn.dds.g10.entidades.administracion;
 
-import java.util.*;;
+import utn.dds.g10.entidades.ResultadoConsulta;
 
-public abstract class Rol {
-
-	List<String> modulos;
-
-	public List<String> getModulos() {
-		return modulos;
-	}
-
-	public void setModulos(List<String> modulos) {
-		this.modulos = modulos;
-	}
+public interface  Rol {
+	
+	public void AuditarTiempoConsulta(int segundos);
+	public void AuditarResultadoConsulta(ResultadoConsulta resultado, int demoraConsulta, String Consulta);
+	
 }

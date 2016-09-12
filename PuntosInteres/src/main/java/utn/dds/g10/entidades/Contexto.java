@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 
 import org.json.JSONException;
 
+import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.GestorPoi;
 
 public class Contexto {
@@ -12,9 +13,10 @@ public class Contexto {
 	private Locacion locacion;
 	private GestorPoi gestorPoi;
 	private String usuario;
+	private Usuario usuarioLogueado;
 	
 	public Contexto(){
-		gestorPoi = new GestorPoi();
+		gestorPoi = new GestorPoi(usuarioLogueado);
 	}
 
 	public ResultadoConsulta buscarPOI(String tag) throws MalformedURLException, JSONException, IOException {

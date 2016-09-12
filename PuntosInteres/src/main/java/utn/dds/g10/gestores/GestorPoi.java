@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import org.json.JSONException;
 
 import utn.dds.g10.entidades.*;
+import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.Buscador.HistorialConsultasFecha;
-
 import utn.dds.g10.gestores.Buscador.HistorialConsultasUsuario;
 import utn.dds.g10.gestores.Buscador.HistoricoProxy;
 
@@ -20,8 +20,8 @@ public class GestorPoi {
 	private HistorialConsultasUsuario historialUsuario;
 	ResultadoConsulta resultado;
 	
-	public GestorPoi(){
-		historicoProxy = new HistoricoProxy();
+	public GestorPoi(Usuario usuario){
+		historicoProxy = new HistoricoProxy(usuario);
 		historial = new HistorialConsultas();
 		historialFecha = new HistorialConsultasFecha();
 		historialUsuario = new HistorialConsultasUsuario();		

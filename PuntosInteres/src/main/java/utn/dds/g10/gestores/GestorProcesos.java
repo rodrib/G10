@@ -9,8 +9,8 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 import utn.dds.g10.procesos.Proceso;
-import utn.dds.g10.procesos.ProcesoDos;
-import utn.dds.g10.procesos.ProcesoUno;
+import utn.dds.g10.procesos.ActualizadorLocales;
+import utn.dds.g10.procesos.BajaPois;
 
 public class GestorProcesos {
 
@@ -29,8 +29,8 @@ public class GestorProcesos {
 		this.procesos = new ArrayList<Proceso>();
 		
 		
-		this.procesos.add(new ProcesoUno());
-		this.procesos.add(new ProcesoDos());
+		this.procesos.add(new BajaPois());
+		this.procesos.add(new ActualizadorLocales());
 		
 		for (Proceso proceso : procesos) {
 			

@@ -6,14 +6,14 @@ import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-public class ProcesoDos implements Job, Proceso {
+public class ActualizadorLocales implements Job, Proceso {
 
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		System.out.println("Chau");
 	}
 
 	public JobDetail obtenerJobDetail() {
-		return JobBuilder.newJob(ProcesoDos.class).withIdentity("JobActulizacionLocalesDos", "grupo1").build();
+		return JobBuilder.newJob(ActualizadorLocales.class).withIdentity("JobActulizacionLocalesDos", "grupo1").build();
 	}
 
 }

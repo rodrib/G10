@@ -1,10 +1,31 @@
 package utn.dds.g10.entidades.administracion;
 
-import utn.dds.g10.entidades.ResultadoConsulta;
+import java.util.List;
 
-public interface  Rol {
+import utn.dds.g10.entidades.administracion.acciones.Accion;
+
+public abstract class Rol {
 	
-	public void AuditarTiempoConsulta(int segundos);
-	public void AuditarResultadoConsulta(ResultadoConsulta resultado, int demoraConsulta, String Consulta);
+	List<Accion> acciones;
 	
+	public List<Accion> getAcciones() {
+		return acciones;
+	}
+
+	public void setAcciones(List<Accion> acciones) {
+		this.acciones = acciones;
+	}
+	
+	public abstract void setAcciones();
+
+	public void ejecutarAccion(Accion accionAEjecutar)
+	{
+		for (Accion accion : this.acciones) {
+			if(accion.getClass() == accionAEjecutar.getClass())
+			{
+				accionAEjecutar.Ejecutar();
+			}
+		}
+	}
+
 }

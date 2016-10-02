@@ -1,25 +1,20 @@
 package utn.dds.g10.entidades.administracion;
 
-import utn.dds.g10.Utiles.Configuraciones;
-import utn.dds.g10.Utiles.GestorMail;
-import utn.dds.g10.entidades.ResultadoConsulta;
+import java.util.ArrayList;
 
-public class RolAdministrador implements Rol {
+import utn.dds.g10.entidades.administracion.acciones.Accion;
+import utn.dds.g10.entidades.administracion.acciones.AuditarResultadoConsulta;
 
-	public void AuditarTiempoConsulta(int segundos) {
-		int timeout = Configuraciones.obtenerCantidadSegundosTimeOut();
-		
-		if(segundos > timeout)
-		{
-			//Mandar mail admin.
-			GestorMail.enviarMail(Configuraciones.obtenerMailAdministrador(), "Tiempo excedido", "La consulta realizada superó el tiempo máximo establecido");
-		}
-	}
-
-	public void AuditarResultadoConsulta(ResultadoConsulta resultado,
-			int demoraConsulta, String Consulta) {
-		// TODO Auto-generated method stub
-		
-	}
+public class RolAdministrador extends Rol {
 	
+	public RolAdministrador()
+	{
+		this.setAcciones();
+	}
+
+	@Override
+	public void setAcciones() {
+		this.acciones  = new ArrayList<Accion>();
+		this.acciones.add(new AuditarResultadoConsulta());
+	}
 }

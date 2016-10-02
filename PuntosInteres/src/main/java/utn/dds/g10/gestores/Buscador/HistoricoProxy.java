@@ -9,6 +9,8 @@ import utn.dds.g10.Utiles.Configuraciones;
 import utn.dds.g10.Utiles.GestorMail;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.administracion.Usuario;
+import utn.dds.g10.entidades.administracion.acciones.AuditarResultadoConsulta;
+import utn.dds.g10.entidades.administracion.acciones.AuditarTiempoConsulta;
 
 
 public class HistoricoProxy implements Buscador {
@@ -29,16 +31,11 @@ public class HistoricoProxy implements Buscador {
 		timer.getContador().Contar();
 		resultado = timer.BuscarPoi(criterioBusqueda);
 		timer.getContador().Detener();
-
 		int segundos= timer.getContador().getSegundos();
-
-		//Según el rol activa o desactiva la auditoria.
-		this.usuarioBusqueda.getRol().AuditarTiempoConsulta(segundos);
 		
-		//Según el rol activa o desactiva la auditoria del resultado de la búsqueda. 
-		this.usuarioBusqueda.getRol().AuditarResultadoConsulta(resultado, segundos, criterioBusqueda);
+		this.usuarioBusqueda.getRol().ejecutarAccion(new AuditarTiempoConsulta(segundos));
+		this.usuarioBusqueda.getRol().ejecutarAccion(new AuditarResultadoConsulta(resultado, segundos, criterioBusqueda));
 		
 		return resultado;
 	}
-
 }

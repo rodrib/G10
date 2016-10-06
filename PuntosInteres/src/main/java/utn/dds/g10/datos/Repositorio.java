@@ -36,10 +36,22 @@ public class Repositorio {
 	}
 
 	public static boolean AgregarPOI(POI poi) {
+		System.out.println("Nombre de poi que agrega.............");
+		System.out.println(poi.getNombre());
 		return listadoPois.add(poi);
 	}
 	
 	public static boolean EliminarPOI(POI poi) {
 		return listadoPois.remove(poi);
+	}
+	
+	public static boolean ModificarPOI(POI poi) {		
+		int indice=listadoPois.indexOf(poi);
+		//No existe
+		if (indice==-1)
+			return false;
+		
+		listadoPois.set(indice,poi);
+		return true;
 	}
 }

@@ -1,5 +1,6 @@
 package utn.dds.g10.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class POI {
@@ -7,7 +8,7 @@ public class POI {
 	private Locacion locacion;
 	private String nombre;
 	private TipoPoi tipo;
-	private List<String> palabrasClaves;
+	private List<String> palabrasClaves = new ArrayList<String>();
 	
 	public List<String> getPalabrasClaves() {
 		return palabrasClaves;

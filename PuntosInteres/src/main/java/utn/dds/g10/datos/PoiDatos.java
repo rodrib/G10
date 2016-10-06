@@ -71,6 +71,9 @@ public class PoiDatos {
 		miPoi = new POI();
 		miPoi.setLocacion(new Locacion());
 		miPoi.setNombre("Kiosco MO");
+		List<String> ListaPalabrasClave = new ArrayList<String>();
+		ListaPalabrasClave.add("caramelos");
+		miPoi.setPalabrasClaves(ListaPalabrasClave);
 		miPoi.setTipo(new LocalComercial());
 		listadoPoi.add(miPoi);
 		

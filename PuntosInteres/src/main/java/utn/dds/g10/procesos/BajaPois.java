@@ -10,7 +10,7 @@ public class BajaPois implements Job, Proceso {
 	}
 
 	public JobDetail obtenerJobDetail() {
-		return JobBuilder.newJob(BajaPois.class).withIdentity("JobActulizacionLocales", "grupo1").build();
+		return JobBuilder.newJob(BajaPois.class).withIdentity("JobBajaPois", "grupo1").build();
 	}
 	
 }

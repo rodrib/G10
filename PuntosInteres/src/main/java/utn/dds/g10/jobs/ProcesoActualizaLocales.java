@@ -28,7 +28,7 @@ public class ProcesoActualizaLocales extends ProcesoPoi {
 		
 		try {
 			//Lee el archivo de texto plano
-			ListaContenido = LeerFichero.devuelveContenido("/home/dds/Escritorio/LocalComercial.txt");
+			ListaContenido = LeerFichero.devuelveContenido("/home/dds/git/G10/PuntosInteres/LocalComercial.txt");
 			
 			for (String linea : ListaContenido) {
 				String LocalComercialNombre = TokenLocalComercial.obtenerLocalComercial(linea);	

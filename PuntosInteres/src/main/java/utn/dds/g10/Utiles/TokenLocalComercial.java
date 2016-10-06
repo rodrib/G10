@@ -16,9 +16,9 @@ public class TokenLocalComercial {
         for (int i = 0; i < c.length;i++) {
             int code = Character.codePointAt(c, i);
             
-            if (code==894)
+            if (code==59)
             	tokenEncontrado=1;
-            if ((code!=894)&&(tokenEncontrado==1))
+            if ((code!=59)&&(tokenEncontrado==1))
             	p.append(c[i]);
         }
         String ContenidoPalabrasClave=p.toString(); 
@@ -39,7 +39,7 @@ public class TokenLocalComercial {
         for (int i = 0; i < c.length;i++) {
             int code = Character.codePointAt(c, i);
            
-            if (code!=894)
+            if (code!=59)
             	p.append(c[i]);
             else
             	break;

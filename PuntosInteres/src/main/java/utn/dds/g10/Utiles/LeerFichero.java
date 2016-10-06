@@ -19,5 +19,16 @@ public class LeerFichero {
         }
         b.close();
         return ListaContenido;
-    }   
+    }
+    public static String devuelveJSON(String archivo) throws FileNotFoundException, IOException {
+        String cadena;
+        String StringJSON="";
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        while((cadena = b.readLine())!=null) {
+        	StringJSON = StringJSON + cadena;
+        }
+        b.close();
+        return StringJSON;
+    } 
 }

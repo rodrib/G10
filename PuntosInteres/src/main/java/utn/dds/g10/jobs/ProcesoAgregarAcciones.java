@@ -1,5 +1,6 @@
 package utn.dds.g10.jobs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.quartz.JobExecutionContext;
@@ -27,7 +28,7 @@ public class ProcesoAgregarAcciones  extends ProcesoPoi {
 		this.accionesAdicionales = accionesAdicionales;
 	}
 
-	List<Accion> accionesAdicionales;
+	List<Accion> accionesAdicionales = new ArrayList<Accion>();
 	
 	public Usuario getUsuario() {
 		return usuario;

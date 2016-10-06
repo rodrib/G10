@@ -1,8 +1,16 @@
 package utn.dds.g10.jobs;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.List;
+
+import org.json.JSONException;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import utn.dds.g10.datos.Repositorio;
+import utn.dds.g10.entidades.POI;
+import utn.dds.g10.mappers.PoiJSON;
 import utn.dds.g10.model.ProcesoPoi;
 
 
@@ -16,8 +24,27 @@ public class ProcesoBajaPois  extends ProcesoPoi {
 	
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		System.out.println("Obteniendo Pois a dar de baja");
+		List<POI> listaPois = null;
+		
+		try {
+			listaPois = PoiJSON.obtenerPois("nombreArchivo");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Dando de baja Pois");
-
+		
+		for (POI poi : listaPois) {
+			
+			Repositorio.EliminarPOI(poi);
+		}
+		
 	}
 
 }

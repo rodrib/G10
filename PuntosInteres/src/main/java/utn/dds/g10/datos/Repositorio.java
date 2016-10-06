@@ -36,8 +36,6 @@ public class Repositorio {
 	}
 
 	public static boolean AgregarPOI(POI poi) {
-		System.out.println("Nombre de poi que agrega.............");
-		System.out.println(poi.getNombre());
 		return listadoPois.add(poi);
 	}
 	

@@ -68,9 +68,11 @@ public class AMBCPoiTest {
 	@Test
 	public void BajaPOI() throws Exception {
 		
+		Repositorio.AgregarPOI(puntoUno);
 		Repositorio.AgregarPOI(puntoDos);
 		int cantidadAntes = Repositorio.getInstance().getDatos().size();
 		
+		Repositorio.EliminarPOI(puntoUno);
 		Repositorio.EliminarPOI(puntoDos);
 		int cantidadDespues = Repositorio.getInstance().getDatos().size();
 		

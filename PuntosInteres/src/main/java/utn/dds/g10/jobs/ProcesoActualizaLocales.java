@@ -14,6 +14,9 @@ import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.Buscador.BuscadorLocalComercial;
+import utn.dds.g10.model.Cambios;
+import utn.dds.g10.model.ElementoCambio;
+import utn.dds.g10.model.HistorialCambios;
 import utn.dds.g10.model.ProcesoPoi;
 
 
@@ -28,11 +31,14 @@ public class ProcesoActualizaLocales extends ProcesoPoi {
 		List<String> ListaContenido;
 		
 		try {
+			Cambios cambios = new Cambios();
+			cambios.setProcesoEjecutado(context.getJobDetail().getKey().getName());
 			System.out.println("Obteniendo Locales comerciales a actualizar");
 			//Lee el archivo de texto plano
 			ListaContenido = LeerFichero.devuelveContenido("LocalComercial.txt");
 			System.out.println("Modificando Locales comerciales");
 			for (String linea : ListaContenido) {
+				ElementoCambio elem = new ElementoCambio();
 				String LocalComercialNombre = TokenLocalComercial.obtenerLocalComercial(linea);	
 				List<String> ListaPalabrasClave = TokenLocalComercial.obtenerPalabrasClave(linea);
 				BuscadorLocalComercial buscador = new BuscadorLocalComercial();
@@ -42,16 +48,26 @@ public class ProcesoActualizaLocales extends ProcesoPoi {
 					//Toma el primer Local de los Resultados
 					POI localComercialPOI = resultado.getPuntos().get(0);
 					localComercialPOI.setPalabrasClaves(ListaPalabrasClave);
-					Repositorio.ModificarPOI(localComercialPOI);
+					POI poiModificado = Repositorio.ModificarPOI(localComercialPOI);
+					elem.setCambio("modificacion");
+					elem.setPoi(poiModificado);
+					
 				}else{ //No existe, el Local se da de Alta
 					POI localComercialPOI = new POI();
 					localComercialPOI.setPalabrasClaves(ListaPalabrasClave);
 					localComercialPOI.setNombre(LocalComercialNombre);
 					LocalComercial local = new LocalComercial();
 					localComercialPOI.setTipo(local);
+					elem.setCambio("alta");
+					elem.setPoi(localComercialPOI);
+					
+					
 					Repositorio.AgregarPOI(localComercialPOI);
 				}
-			}	
+				//Se agrega el cambio
+				cambios.getListaPoi().add(elem);
+			}
+			HistorialCambios.agregarCambios(cambios);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

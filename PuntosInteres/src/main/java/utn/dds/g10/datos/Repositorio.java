@@ -46,33 +46,36 @@ public class Repositorio {
 	}
 
 	public static boolean AgregarPOI(POI poi) {
+		poi.setEstadoAlta(true);
 		return listadoPois.add(poi);
 	}
 	
-	public static boolean EliminarPOI(POI poi) {
+	public static POI EliminarPOI(POI poi) {
 		
 		
 		int indice=listadoPois.indexOf(poi);
-		//No existe
+		//No existe o ya fue borrado
 		if (indice==-1 || poi.getEstadoAlta()==false){
-			return false;
+			return null;
 		}else{
 			poi.setEstadoAlta(false);
 		}
 				
+		POI poiBorrado=listadoPois.get(indice);
 		listadoPois.set(indice,poi);
-		return true;
+		return poiBorrado;
 		
 //		return listadoPois.remove(poi);		
 	}
 	
-	public static boolean ModificarPOI(POI poi) {		
+	public static POI ModificarPOI(POI poi) {		
 		int indice=listadoPois.indexOf(poi);
 		//No existe
 		if (indice==-1)
-			return false;
+			return null;
 		
+		POI poiModificado=listadoPois.get(indice);
 		listadoPois.set(indice,poi);
-		return true;
+		return poiModificado;
 	}
 }

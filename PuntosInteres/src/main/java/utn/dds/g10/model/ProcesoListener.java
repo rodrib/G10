@@ -25,7 +25,7 @@ public abstract class ProcesoListener implements JobListener {
 	}
 
 	// Las subclases concretas que hereden de esta clase abstracta deben implementar este método
-	protected abstract void rollback();
+	protected abstract void rollback(JobExecutionContext context);
 
 	public void jobToBeExecuted(JobExecutionContext context) {
 		System.out.println("Antes de ejecutar el proceso: " + context.getJobDetail().getKey().getName());
@@ -36,6 +36,9 @@ public abstract class ProcesoListener implements JobListener {
 		resultado.setFechaHoraInicio(fechaHora);
 		resultado.setProcesoEjecutado(jobName);
 		listadoResultadoProcesos.add(resultado);
+		Cambios cambios = new Cambios();
+		cambios.setProcesoEjecutado(jobName);
+		HistorialCambios.agregarCambios(cambios);
 	}
 
 	public void jobExecutionVetoed(JobExecutionContext context) {
@@ -80,7 +83,7 @@ public abstract class ProcesoListener implements JobListener {
 			// deshacer la acción
 			// La implementación del método rollback queda delegada a la clase
 			// concreta que extiende esta clase
-			rollback();
+			rollback(context);
 		}
 		
 		listadoResultadoProcesos.add(indice, resultado);

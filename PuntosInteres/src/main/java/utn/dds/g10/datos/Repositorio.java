@@ -13,6 +13,8 @@ public class Repositorio {
 
 	private static Repositorio instance = null;
 	private static List<POI> listadoPois = null;;
+	private static List<POI> listadoPoisAuxiliar = null;
+
 
 	// Constructor privado para que no se pueda instanciar desde afuera.
 	private Repositorio() {
@@ -30,9 +32,16 @@ public class Repositorio {
 			IOException {
 		// Solo se instancia una vez
 		if (listadoPois == null) {
-			listadoPois = PoiDatos.ObtenerPoiTodos();
-		}
-		return listadoPois;
+			listadoPois = PoiDatos.ObtenerPoiTodos();			
+			return listadoPois;
+		}else{
+			for(POI poi : listadoPois){
+				if(poi.getEstadoAlta() == true){
+					listadoPoisAuxiliar.add(poi);
+				}
+			}
+			return listadoPoisAuxiliar;
+		}		
 	}
 
 	public static boolean AgregarPOI(POI poi) {
@@ -40,7 +49,20 @@ public class Repositorio {
 	}
 	
 	public static boolean EliminarPOI(POI poi) {
-		return listadoPois.remove(poi);
+		
+		
+		int indice=listadoPois.indexOf(poi);
+		//No existe
+		if (indice==-1 || poi.getEstadoAlta()==false){
+			return false;
+		}else{
+			poi.setEstadoAlta(false);
+		}
+				
+		listadoPois.set(indice,poi);
+		return true;
+		
+//		return listadoPois.remove(poi);		
 	}
 	
 	public static boolean ModificarPOI(POI poi) {		

@@ -31,13 +31,13 @@ public class ProcesoActualizaLocales extends ProcesoPoi {
 			System.out.println("Obteniendo Locales comerciales a actualizar");
 			//Lee el archivo de texto plano
 			ListaContenido = LeerFichero.devuelveContenido("LocalComercial.txt");
-			
+			System.out.println("Modificando Locales comerciales");
 			for (String linea : ListaContenido) {
 				String LocalComercialNombre = TokenLocalComercial.obtenerLocalComercial(linea);	
 				List<String> ListaPalabrasClave = TokenLocalComercial.obtenerPalabrasClave(linea);
 				BuscadorLocalComercial buscador = new BuscadorLocalComercial();
 				ResultadoConsulta resultado = buscador.BuscarLocalComercial(LocalComercialNombre);
-				System.out.println("Modificando Locales comerciales");
+				
 				if (resultado.getCantidadResultados()!=0){
 					//Toma el primer Local de los Resultados
 					POI localComercialPOI = resultado.getPuntos().get(0);

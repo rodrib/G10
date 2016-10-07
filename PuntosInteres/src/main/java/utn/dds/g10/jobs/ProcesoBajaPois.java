@@ -27,7 +27,7 @@ public class ProcesoBajaPois  extends ProcesoPoi {
 		List<POI> listaPois = null;
 		
 		try {
-			listaPois = PoiJSON.obtenerPois("nombreArchivo");
+			listaPois = PoiJSON.obtenerPois("BajaPois.txt");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

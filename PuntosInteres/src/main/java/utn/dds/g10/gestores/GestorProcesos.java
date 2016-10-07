@@ -27,7 +27,7 @@ public class GestorProcesos {
 		this.procesos = procesos;
 	}
 
-	public  void Ejecutar() throws Exception {
+	public void Ejecutar() throws Exception {
 		
 		this.procesos = new ArrayList<Proceso>();
 		
@@ -47,6 +47,5 @@ public class GestorProcesos {
 			scheduler.start();
 			scheduler.scheduleJob(jobDetail, trigger);	
 		}
-		
 	}
 }

@@ -9,7 +9,18 @@ public class POI {
 	private String nombre;
 	private TipoPoi tipo;
 	private List<String> palabrasClaves = new ArrayList<String>();
+	private boolean estadoAlta;
 	
+	public POI(){
+		estadoAlta=true;
+	}
+	
+	public boolean getEstadoAlta() {
+		return estadoAlta;
+	}
+	public void setEstadoAlta(boolean estadoAlta) {
+		this.estadoAlta = estadoAlta;
+	}
 	public List<String> getPalabrasClaves() {
 		return palabrasClaves;
 	}

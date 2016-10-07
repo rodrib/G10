@@ -15,9 +15,8 @@ import utn.dds.g10.jobs.ProcesoActualizaLocales;
 import utn.dds.g10.model.ProcesoListener;
 import utn.dds.g10.model.ProcesoPoi;
 
-
 public class Consola {
-
+	
 	public static void main(String[] args) throws SchedulerException, InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
 		ejecutaEjemploProcesosAnidadosConRollback();

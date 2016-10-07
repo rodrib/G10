@@ -36,16 +36,12 @@ public class BuscadorLocalComercial {
 		}
 
 	private  Boolean CumpleCondicionBusqueda(POI poi, String criterio) {
-		System.out.println(criterio);
-		System.out.println(poi.getNombre());
 		// Cumple condicion en el nombre
 		if (poi.getNombre().contains(criterio)) {
-			System.out.println("True igual nombre");
 			return true;
 		}
 
 		if (poi.getTipo().CumpleCondicionBusqueda(criterio)) {
-			System.out.println("True cumple condicion");
 			return true;
 		}
 

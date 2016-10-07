@@ -2,6 +2,7 @@ package utn.dds.g10.datos;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -13,7 +14,7 @@ public class Repositorio {
 
 	private static Repositorio instance = null;
 	private static List<POI> listadoPois = null;;
-	private static List<POI> listadoPoisAuxiliar = null;
+	private static List<POI> listadoPoisAuxiliar = new ArrayList<POI>();
 
 
 	// Constructor privado para que no se pueda instanciar desde afuera.

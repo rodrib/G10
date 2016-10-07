@@ -10,6 +10,7 @@ import org.quartz.JobExecutionException;
 import utn.dds.g10.Utiles.LeerFichero;
 import utn.dds.g10.Utiles.TokenLocalComercial;
 import utn.dds.g10.datos.Repositorio;
+import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.Buscador.BuscadorLocalComercial;
@@ -27,15 +28,16 @@ public class ProcesoActualizaLocales extends ProcesoPoi {
 		List<String> ListaContenido;
 		
 		try {
+			System.out.println("Obteniendo Locales comerciales a actualizar");
 			//Lee el archivo de texto plano
-			ListaContenido = LeerFichero.devuelveContenido("/home/dds/git/G10/PuntosInteres/LocalComercial.txt");
+			ListaContenido = LeerFichero.devuelveContenido("LocalComercial.txt");
 			
 			for (String linea : ListaContenido) {
 				String LocalComercialNombre = TokenLocalComercial.obtenerLocalComercial(linea);	
 				List<String> ListaPalabrasClave = TokenLocalComercial.obtenerPalabrasClave(linea);
 				BuscadorLocalComercial buscador = new BuscadorLocalComercial();
 				ResultadoConsulta resultado = buscador.BuscarLocalComercial(LocalComercialNombre);
-				
+				System.out.println("Modificando Locales comerciales");
 				if (resultado.getCantidadResultados()!=0){
 					//Toma el primer Local de los Resultados
 					POI localComercialPOI = resultado.getPuntos().get(0);
@@ -45,6 +47,8 @@ public class ProcesoActualizaLocales extends ProcesoPoi {
 					POI localComercialPOI = new POI();
 					localComercialPOI.setPalabrasClaves(ListaPalabrasClave);
 					localComercialPOI.setNombre(LocalComercialNombre);
+					LocalComercial local = new LocalComercial();
+					localComercialPOI.setTipo(local);
 					Repositorio.AgregarPOI(localComercialPOI);
 				}
 			}	

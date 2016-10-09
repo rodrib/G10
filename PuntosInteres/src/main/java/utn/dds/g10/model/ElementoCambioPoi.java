@@ -2,7 +2,7 @@ package utn.dds.g10.model;
 
 import utn.dds.g10.entidades.POI;
 
-public class ElementoCambio {
+public class ElementoCambioPoi {
 
 	private POI poi = new POI();
 	private String cambio;

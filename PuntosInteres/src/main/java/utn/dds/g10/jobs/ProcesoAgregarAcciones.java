@@ -6,21 +6,17 @@ import java.util.List;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import utn.dds.g10.datos.UsuariosDatos;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.entidades.administracion.acciones.Accion;
+import utn.dds.g10.model.CambiosAccion;
+import utn.dds.g10.model.ElementoCambioAccion;
+import utn.dds.g10.model.HistorialCambios;
 import utn.dds.g10.model.ProcesoPoi;
-
-
 
 public class ProcesoAgregarAcciones  extends ProcesoPoi {
 	
-	public ProcesoAgregarAcciones(Usuario us, List<Accion> acciones)
-	{
-		this.setAccionesAdicionales(acciones);
-		this.setUsuario(us);
-	}
-
-	public List<Accion> getAccionesAdicionales() {
+		public List<Accion> getAccionesAdicionales() {
 		return accionesAdicionales;
 	}
 
@@ -28,7 +24,7 @@ public class ProcesoAgregarAcciones  extends ProcesoPoi {
 		this.accionesAdicionales = accionesAdicionales;
 	}
 
-	List<Accion> accionesAdicionales = new ArrayList<Accion>();
+	List<Accion> accionesAdicionales = null;
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -45,22 +41,47 @@ public class ProcesoAgregarAcciones  extends ProcesoPoi {
 		setSiguienteProceso(null);
 	}
 	
-	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+	public void execute(JobExecutionContext context) throws JobExecutionException {
+		
+		accionesAdicionales = (ArrayList<Accion>) context.getJobDetail().getJobDataMap().get("listaAcciones");
+		this.usuario = (Usuario) context.getJobDetail().getJobDataMap().get("usuario");
+		
+		CambiosAccion cambios = new CambiosAccion();
+		cambios.setProcesoEjecutado(context.getJobDetail().getKey().getName());
+		cambios.setUsuario(this.usuario);
+		ArrayList<Accion> lista = (ArrayList<Accion>) this.usuario.getRol().getAcciones();
+		List<Accion> copiaLista = (ArrayList<Accion>)  lista.clone();
 		for (Accion accion : accionesAdicionales) {
-			for (Accion accionUsuario : this.usuario.getRol().getAcciones()) {
+			for (Accion accionUsuario : copiaLista) {
+				
+				ElementoCambioAccion elem = new ElementoCambioAccion();
 				if(accionUsuario.getClass() == accion.getClass())
 				{
+					
 					//Actualizo la accion.
 					this.usuario.getRol().getAcciones().remove(accionUsuario);
 					this.usuario.getRol().getAcciones().add(accion);
+					elem.setAccionAnterior(accionUsuario);
+					elem.setAccionActual(accion);
+					elem.setCambio("modificacion");
+					
 				}
 				else
 				{
 					//Si no existe la agrega.
 					this.usuario.getRol().getAcciones().add(accion);
+					elem.setAccionActual(accion);
+					elem.setCambio("alta");
+					
 				}
+				cambios.agregarListaAccion(elem);
 			}
 		}
+		
+		HistorialCambios.agregarCambiosAccion(cambios);
+		
+		
+//		int x = 1 / 0; // Borrar comentario para forzar una excepci�n
 
 	}
 

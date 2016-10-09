@@ -2,7 +2,7 @@ package utn.dds.g10.model;
 
 import java.util.Date;
 
-public class ResultadoProceso {
+public class ElementoResultadoProceso {
 
 	private Date fechaHoraInicio;
 	private Date fechaHoraFin;

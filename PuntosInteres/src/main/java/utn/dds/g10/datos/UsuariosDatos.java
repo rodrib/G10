@@ -10,7 +10,7 @@ import utn.dds.g10.entidades.administracion.Usuario;
 
 public class UsuariosDatos {
 	
-	private List<Usuario> usuarios; 
+	private static List<Usuario> usuarios; 
 	
 	private enum RolEnum {ADMIN, TERMINAL};
 	
@@ -19,7 +19,6 @@ public class UsuariosDatos {
 		usuarios = new ArrayList<Usuario>();
 		ObtenerTodosUsuarios();
 	}
-	
 	
 	///La password se debería comprobar en la base de datos.
 	public Usuario ObtenerUsuario(String username, String password) 

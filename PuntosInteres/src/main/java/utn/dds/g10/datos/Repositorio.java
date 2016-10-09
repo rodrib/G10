@@ -45,37 +45,82 @@ public class Repositorio {
 		}		
 	}
 
-	public static boolean AgregarPOI(POI poi) {
-		poi.setEstadoAlta(true);
+	public static boolean AgregarPOI(POI poi) throws MalformedURLException, JSONException, IOException {
+		
+		POI poiBuscado=null;
+		
+		if (listadoPois == null) {
+			listadoPois = PoiDatos.ObtenerPoiTodos();
+		}
+		
+		for (POI poiElem : listadoPois){
+			if (poiElem.getNombre().equalsIgnoreCase(poi.getNombre())){
+				poiBuscado=poiElem;
+				break;
+			}
+		}
+		
+		if (poiBuscado!=null)
+			if (poiBuscado.getEstadoAlta()==false){
+				listadoPois.remove(poiBuscado);
+				poiBuscado.setEstadoAlta(true);
+				return listadoPois.add(poiBuscado);
+			}
+		
 		return listadoPois.add(poi);
 	}
 	
-	public static POI EliminarPOI(POI poi) {
+	public static POI EliminarPOI(POI poi) throws MalformedURLException, JSONException, IOException {
+		
+		POI poiBuscado=null;
+		
+		if (listadoPois == null) {
+			listadoPois = PoiDatos.ObtenerPoiTodos();
+		}
+		
+		for (POI poiElem : listadoPois){
+			if (poiElem.getNombre().equalsIgnoreCase(poi.getNombre())){
+				poiBuscado=poiElem;
+				break;
+			}
+		}
 		
 		
-		int indice=listadoPois.indexOf(poi);
 		//No existe o ya fue borrado
-		if (indice==-1 || poi.getEstadoAlta()==false){
+		if (poiBuscado==null || poi.getEstadoAlta()==false){
 			return null;
 		}else{
-			poi.setEstadoAlta(false);
+			listadoPois.remove(poiBuscado);
+			poiBuscado.setEstadoAlta(false);
 		}
 				
-		POI poiBorrado=listadoPois.get(indice);
-		listadoPois.set(indice,poi);
-		return poiBorrado;
+		listadoPois.add(poiBuscado);
+		return poiBuscado;
 		
 //		return listadoPois.remove(poi);		
 	}
 	
-	public static POI ModificarPOI(POI poi) {		
-		int indice=listadoPois.indexOf(poi);
+	public static POI ModificarPOI(POI poi) throws MalformedURLException, JSONException, IOException {		
+		POI poiBuscado=null;
+		
+		if (listadoPois == null) {
+			listadoPois = PoiDatos.ObtenerPoiTodos();
+		}
+		
+		for (POI poiElem : listadoPois){
+			if (poiElem.getNombre().equalsIgnoreCase(poi.getNombre())){
+				poiBuscado=poiElem;
+				break;
+			}
+		}
+		
 		//No existe
-		if (indice==-1)
+		if (poiBuscado==null)
 			return null;
 		
-		POI poiModificado=listadoPois.get(indice);
-		listadoPois.set(indice,poi);
-		return poiModificado;
+  		listadoPois.remove(poiBuscado);
+  		listadoPois.add(poi);
+		
+		return poiBuscado;
 	}
 }

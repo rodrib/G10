@@ -41,21 +41,23 @@ public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURL
 
 private  Boolean CumpleCondicionBusqueda(POI poi, String criterio) {
 
-	// Cumple condicion en el nombre
-	if (poi.getNombre().contains(criterio)) {
-		return true;
-	}
+	if (poi.getEstadoAlta()==true){
+		// Cumple condicion en el nombre
+		if (poi.getNombre().contains(criterio)) {
+			return true;
+		}
 
-	if (poi.getTipo().CumpleCondicionBusqueda(criterio)) {
-		return true;
-	}
+		if (poi.getTipo().CumpleCondicionBusqueda(criterio)) {
+			return true;
+		}
+		
+		// Busqueda en las palabras claves del poi
 
-	// Busqueda en las palabras claves del poi
-
-	if (poi.getPalabrasClaves() != null && !poi.getPalabrasClaves().isEmpty()) {
-		for (String palabra : poi.getPalabrasClaves()) {
-			if (palabra.equalsIgnoreCase(criterio)) {
-				return true;
+		if (poi.getPalabrasClaves() != null && !poi.getPalabrasClaves().isEmpty()) {
+			for (String palabra : poi.getPalabrasClaves()) {
+				if (palabra.equalsIgnoreCase(criterio)) {
+					return true;
+				}
 			}
 		}
 	}

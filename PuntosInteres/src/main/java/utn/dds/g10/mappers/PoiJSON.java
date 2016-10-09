@@ -33,115 +33,46 @@ public class PoiJSON {
 			
 			//Convierto el JSON string en un un array de objetos JSON
 			JSONArray jsonArray = new JSONArray(jsonString);
-			JSONObject jsonObjeto = null;
+			JSONObject jsonObjeto = new JSONObject();
 			
 			//Realizo el mappeo.
 			for (int i = 0; i < jsonArray.length(); i++) {				
 				
-				if (jsonObjeto.has("banco")){
-						
-					//Json array para los servicios del banco
-					JSONArray jsonServiciosBancosArray = null;
+				jsonObjeto = (JSONObject) jsonArray.get(i);
+				
+				String tipoPoi = jsonObjeto.get("poi").toString();
+				
+				if (tipoPoi.equalsIgnoreCase("banco")){
 					
-					SucursalBanco miTipoPoiBanco = null;
-					POI miPoiBanco = null;
-					Locacion locacion = null;
-					
-					List<String> serviciosBanco = new ArrayList<String>();
-					jsonObjeto = (JSONObject) jsonArray.get(i);
-					
-					
-					miPoiBanco = new POI();
-					miTipoPoiBanco = new SucursalBanco();
-					
-					locacion = new Locacion();
-					locacion.setBarrio(jsonObjeto.get("sucursal").toString());
-					
-					miTipoPoiBanco.setNombreGerente(jsonObjeto.get("gerente").toString());
-					//Cargo los servicios
-					jsonServiciosBancosArray = new JSONArray(jsonObjeto.get("servicios").toString());				
-					for (int j = 0; j < jsonServiciosBancosArray.length(); j++) {
-						serviciosBanco.add(jsonServiciosBancosArray.get(j).toString());
-					}
-					miTipoPoiBanco.setServicios(serviciosBanco);
-					
-					miPoiBanco.setNombre(jsonObjeto.get("banco").toString());
+					SucursalBanco miTipoPoiBanco = new SucursalBanco();
+					POI miPoiBanco = new POI();
+					Locacion locacion = new Locacion();		
+
+					miPoiBanco.setNombre(jsonObjeto.get("nombre").toString());
 					miPoiBanco.setLocacion(locacion);
 					miPoiBanco.setTipo(miTipoPoiBanco);
 					
 					listaPois.add(miPoiBanco);
 				
-				}else if (jsonObjeto.has("comuna")){
+				}else if (tipoPoi.equalsIgnoreCase("comuna")){
 					
-					//Json array para los servicios del banco
-					JSONArray jsonServiciosCGPArray = null;
-					JSONArray jsonHorariosServiciosCGPArray = null;
-					JSONObject jsonObjetoServicioCGP = null;
-					JSONObject jsonObjetoHorario = null;
-					
-					CGP miTipoPoiCGP = null;
-					POI miPoiCGP = null;
-					Locacion locacion = null;
-					ServicioCGP servicio = new ServicioCGP();
-					List<ServicioCGP> serviciosBanco = new ArrayList<ServicioCGP>();
-					jsonObjeto = (JSONObject) jsonArray.get(i);				
-					miPoiCGP = new POI();
-					miTipoPoiCGP = new CGP();			
-					locacion = new Locacion();
-					locacion.setCodigoComuna(Integer.parseInt(jsonObjeto.get("comuna").toString()));
-					//Cargo las zonas
-					miTipoPoiCGP.setZonas(jsonObjeto.get("zonas").toString()); 
+					CGP miTipoPoiCGP = new CGP();
+					POI miPoiCGP = new POI();
+					Locacion locacion = new Locacion();	
 
-					//Cargo los servicios
-					jsonServiciosCGPArray = new JSONArray(jsonObjeto.get("servicios"));			
+					locacion.setCodigoComuna(Integer.parseInt(jsonObjeto.get("nombre").toString()));
 					
-					for (int j = 0; j < jsonServiciosCGPArray.length(); j++) {
-						ArrayList<Horarios> horarios = new ArrayList<Horarios>();
-						jsonObjetoServicioCGP = jsonServiciosCGPArray.getJSONObject(j);
-						servicio.setNombre(jsonObjetoServicioCGP.get("nombre").toString());
-						jsonHorariosServiciosCGPArray = new JSONArray(jsonObjetoServicioCGP.get("horarios"));
-						
-						//Cargo los horarios
-						for (int k = 0; k < jsonHorariosServiciosCGPArray.length(); k++) {
-							jsonObjetoHorario = jsonHorariosServiciosCGPArray.getJSONObject(k);	
-							Horarios horario = new Horarios();
-							horario.setDiaSemana(Integer.parseInt(jsonObjetoHorario.get("diaSemana").toString()));
-							horario.setHoraDesde(Integer.parseInt(jsonObjetoHorario.get("horaDesde").toString()));
-							horario.setMinutosDesde(Integer.parseInt(jsonObjetoHorario.get("minutosDesde").toString()));
-							horario.setHoraHasta(Integer.parseInt(jsonObjetoHorario.get("horaHasta").toString()));
-							horario.setMinutosHasta(Integer.parseInt(jsonObjetoHorario.get("minutosHasta").toString()));
-							horarios.add(horario);
-						}
-						servicio.setHorarios(horarios);
-						serviciosBanco.add(servicio);
-					}
-					miTipoPoiCGP.setDirector(jsonObjeto.getString("director"));
-					miTipoPoiCGP.setDomicilio(jsonObjeto.getString("domicilio"));
-					miTipoPoiCGP.setTelefono(jsonObjeto.getString("telefono"));
-					miPoiCGP.setNombre("CGP Comuna "+jsonObjeto.get("comuna").toString());
+					miPoiCGP.setNombre("CGP Comuna "+jsonObjeto.get("nombre").toString());
 					miPoiCGP.setLocacion(locacion);
 					miPoiCGP.setTipo(miTipoPoiCGP);
 					listaPois.add(miPoiCGP);	
-				}else if (jsonObjeto.has("local")){
+				}else if (tipoPoi.equalsIgnoreCase("local")){
 					
-					LocalComercial miTipoPoiLocal = null;
-					POI miPoiLocal = null;
-					Locacion locacion = null;
+					LocalComercial miTipoPoiLocal = new LocalComercial();
+					POI miPoiLocal = new POI();
+					Locacion locacion = new Locacion();									
 					
-					jsonObjeto = (JSONObject) jsonArray.get(i);								
-					miPoiLocal = new POI();
-					miTipoPoiLocal = new LocalComercial();	
-					locacion = new Locacion();
-					
-					if (jsonObjeto.get("tipo").toString().equalsIgnoreCase("kiosko")){					
-						RubroLocal kiosko = new Kiosco();	
-						miTipoPoiLocal.setRubro(kiosko);
-					}else if (jsonObjeto.get("tipo").toString().equalsIgnoreCase("libreria")){
-						RubroLocal libreria = new Libreria();	
-						miTipoPoiLocal.setRubro(libreria);					
-					}
-					
-					miPoiLocal.setNombre(jsonObjeto.get("local").toString());
+					miPoiLocal.setNombre(jsonObjeto.get("nombre").toString());
 					miPoiLocal.setLocacion(locacion);
 					miPoiLocal.setTipo(miTipoPoiLocal);
 					

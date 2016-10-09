@@ -14,9 +14,9 @@ import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 
-public class BuscadorLocalComercial {
+public class BuscadorSinReportes {
 	
-	public ResultadoConsulta BuscarLocalComercial(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
+	public ResultadoConsulta buscarSinReportes(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
 			
 			ArrayList<POI> listadoPoiTodos = (ArrayList<POI>)Repositorio.getInstance().getDatos();
 			
@@ -36,13 +36,16 @@ public class BuscadorLocalComercial {
 		}
 
 	private  Boolean CumpleCondicionBusqueda(POI poi, String criterio) {
-		// Cumple condicion en el nombre
-		if (poi.getNombre().contains(criterio)) {
-			return true;
-		}
+		
+		if (poi.getEstadoAlta()==true){
+			// Cumple condicion en el nombre
+			if (poi.getNombre().contains(criterio)) {
+				return true;
+			}
 
-		if (poi.getTipo().CumpleCondicionBusqueda(criterio)) {
-			return true;
+			if (poi.getTipo().CumpleCondicionBusqueda(criterio)) {
+				return true;
+			}
 		}
 
 		return false;

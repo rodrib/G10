@@ -1,9 +1,10 @@
 package utn.dds.g10.model;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Date;
-import java.util.List;
 
+import org.json.JSONException;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
@@ -16,29 +17,28 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.matchers.KeyMatcher;
 
-public abstract class ProcesoListener implements JobListener {
+import utn.dds.g10.Utiles.Configuraciones;
+import utn.dds.g10.Utiles.GestorMail;
 
-	private static List<ResultadoProceso> listadoResultadoProcesos = new ArrayList<ResultadoProceso>();
+public abstract class ProcesoListener implements JobListener {
+	
 	
 	public String getName() {
 		return getClass().getName();
 	}
 
 	// Las subclases concretas que hereden de esta clase abstracta deben implementar este método
-	protected abstract void rollback(JobExecutionContext context);
+	protected abstract void rollback(JobExecutionContext context) throws MalformedURLException, JSONException, IOException;
 
 	public void jobToBeExecuted(JobExecutionContext context) {
 		System.out.println("Antes de ejecutar el proceso: " + context.getJobDetail().getKey().getName());
 		String jobName = context.getJobDetail().getKey().getName();
-		ResultadoProceso resultado = new ResultadoProceso();
+		ElementoResultadoProceso resultado = new ElementoResultadoProceso();
 		Date fechaHora = new Date();
 		fechaHora.getTime();
 		resultado.setFechaHoraInicio(fechaHora);
 		resultado.setProcesoEjecutado(jobName);
-		listadoResultadoProcesos.add(resultado);
-		Cambios cambios = new Cambios();
-		cambios.setProcesoEjecutado(jobName);
-		HistorialCambios.agregarCambios(cambios);
+		ResultadoProcesos.getListadoResultadoProcesos().add(resultado);
 	}
 
 	public void jobExecutionVetoed(JobExecutionContext context) {
@@ -47,13 +47,13 @@ public abstract class ProcesoListener implements JobListener {
 	// Método invocado por Quartz luego de ejecutar el Job
 	public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
 		String jobName = context.getJobDetail().getKey().getName();
-		ResultadoProceso resultado = new ResultadoProceso();
+		ElementoResultadoProceso resultado = new ElementoResultadoProceso();
 		Date fechaHora = new Date();
 		fechaHora.getTime();
 		resultado.setFechaHoraFin(fechaHora);
 		resultado.setProcesoEjecutado(jobName);
 		int indice=0;
-		for (ResultadoProceso resultadoLista : listadoResultadoProcesos){
+		for (ElementoResultadoProceso resultadoLista : ResultadoProcesos.getListadoResultadoProcesos()){
 			if (resultadoLista.getProcesoEjecutado().equalsIgnoreCase(jobName)){
 				resultado.setFechaHoraInicio(resultadoLista.getFechaHoraInicio());
 				break;
@@ -66,13 +66,13 @@ public abstract class ProcesoListener implements JobListener {
 			System.out.println("Proceso : " + jobName + " ejecutado con normalidad");
 
 			resultado.setResultado("ok");
-			try {
-				// Se invoca el método que inicia la carga y ejecución del
-				// siguiente proceso
-				ejecutarProcesoAnidado(context);
-			} catch (SchedulerException e) {
-				System.out.println(e.getMessage());
-			}
+//			try {
+//				// Se invoca el método que inicia la carga y ejecución del
+//				// siguiente proceso
+//				ejecutarProcesoAnidado(context);
+//			} catch (SchedulerException e) {
+//				System.out.println(e.getMessage());
+//			}
 
 		} else {
 			System.out.println(
@@ -83,10 +83,23 @@ public abstract class ProcesoListener implements JobListener {
 			// deshacer la acción
 			// La implementación del método rollback queda delegada a la clase
 			// concreta que extiende esta clase
-			rollback(context);
+			try {
+				rollback(context);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//Se envia un correo con el error
+			GestorMail.enviarMail(Configuraciones.obtenerMailAdministrador(), "Error en proceso " + jobName, "La excepción lanzada fue: " + jobException);
 		}
 		
-		listadoResultadoProcesos.add(indice, resultado);
+		ResultadoProcesos.getListadoResultadoProcesos().add(indice, resultado);
 	}
 
 	public void ejecutarProcesoAnidado(JobExecutionContext context) throws SchedulerException {

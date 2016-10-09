@@ -1,1 +1,1 @@
-[{"banco":"ICBC"}{“comuna”:3}{“local”:”Kiosco SI”}]
+[{"poi":banco,"nombre":Banco ICBC},{"poi":comuna,"nombre":3},{"poi":local,"nombre":Kiosco SI}]

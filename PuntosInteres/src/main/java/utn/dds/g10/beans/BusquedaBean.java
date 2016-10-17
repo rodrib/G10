@@ -1,5 +1,6 @@
 package utn.dds.g10.beans;
 //import utn.dds.g10.entidades.*;
+import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.*;
 
@@ -102,8 +103,15 @@ public class BusquedaBean implements Serializable{
 	}
 	
 	public void searchAction() throws MalformedURLException, JSONException, IOException {
+		
+		
 		usuario = new Usuario();
+		RolAdministrador rolAdministrador = new RolAdministrador();
+		usuario.setRol(rolAdministrador);
+		
+		//Inicializo Gestor
 		gestorPoi = new GestorPoi(usuario);
+		
 		
 		for (Order criterioBusqueda:getOrderlist()){
 		gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), "usuario");

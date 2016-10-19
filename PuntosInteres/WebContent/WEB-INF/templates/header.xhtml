@@ -1,5 +1,17 @@
-<html>
-	<div class="navbar navbar-inverse">
-		<div class="navbar-brand">Puntos de Interes - App</div>
-	</div>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<style>
+.navbar .nav.pull-right {
+	float: right;
+	margin-right: 90px; /*set margin this way in your custom styesheet*/
+}
+</style>
+<div class="navbar navbar-inverse">
+	<div class="navbar-brand">Puntos de Interes - App</div>
+	<h:outputLabel value="#{loginBean.name}" class="navbar-brand nav pull-right">
+		<span class="glyphicon glyphicon-user pull-right"></span>
+	</h:outputLabel>
+</div>
 </html>

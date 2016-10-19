@@ -22,4 +22,12 @@
 			<to-view-id>/WEB-INF/​welcome.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>ABMAcciones.xhtml</display-name>
+		<from-view-id>/ABMAcciones.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>cancelar</from-outcome>
+			<to-view-id>/WEB-INF/​welcome.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

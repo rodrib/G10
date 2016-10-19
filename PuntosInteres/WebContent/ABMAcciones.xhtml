@@ -86,12 +86,14 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2 ">
-							<h:commandButton value="OK" style="width:60%"
+							<h:commandLink value="OK" style="width:60%"
 								action="#{acciones.agregarAccionesUsuario}"
-								class="btn btn-success btn-center	center-block"></h:commandButton>
+								class="btn btn-success btn-center	center-block">
+								<span class=" glyphicon glyphicon-ok-sign"></span>
+								</h:commandLink>
 						</div>
 						<div class="col-md-2">
-							<h:commandButton value="Cancelar" style="width:60%"
+							<h:commandButton value="Cancelar" style="width:60%" action="cancelar"
 								class="btn btn-primary center-block"></h:commandButton>
 						</div>
 						<div class="col-md-4"></div>

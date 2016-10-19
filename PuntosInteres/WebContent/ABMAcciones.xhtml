@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body>
+	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+		<div class="container">
+			<ui:define name="content">
+				<h:form>
+					<h1 class="text-center">Acciones ante la búsqueda</h1>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<h:selectOneMenu value="sdsd" label="asds" id="cboAcciones"
+								onchange="document.getElementById('j_idt11:hdnId').value = document.getElementById('j_idt11:cboAcciones').value;
+								var t = document.getElementById('j_idt11:cboAcciones');
+								var selectedText = t.options[t.selectedIndex].text;
+								document.getElementById('j_idt11:hdnNombre').value = selectedText;"
+								class="btn center-block" style="width:100%">
+								<f:selectItem itemValue="0" itemLabel="- Seleccione - " />
+								<f:selectItem itemValue="1" itemLabel="AuditarResultadoConsulta" />
+								<f:selectItem itemValue="2" itemLabel="AuditarTiempoConsulta" />
+							</h:selectOneMenu>
+						</div>
+						<div class="col-md-2">
+							<h:commandLink action="#{acciones.addAction}"
+								class="btn btn-primary center-block " style="width:60%">
+								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Agregar
+							</h:commandLink>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4 ">&nbsp;</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="container-fluid"
+								style="border: solid 1px black; border-radius: 10px;">
+								<div class="row-fluid"
+									style="background-color: #f0f0f0; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+								</div>
+								<h:dataTable value="#{acciones.orderList}" width="100%"
+									var="accion" cellpadding="10" cellspacing="10">
+									<f:facet name="header">
+
+										<div class="row-fluid"
+											style="background-color: #f0f0f0; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+											<div class="span3 text-center">Acciones</div>
+										</div>
+									</f:facet>
+									<h:column>
+										#{accion.id} 	
+									</h:column>
+									<h:column>
+										#{accion.nombre} 	
+									</h:column>
+									<h:column>
+										<div class="row-fluid"
+											style="background-color: #f0f0f0; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+											<div class="span3 text-center"></div>
+										</div>
+										<h:commandLink class="btn btn-danger center-block" action="#{acciones.deleteAction(accion)}">
+											<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Eliminar
+											</h:commandLink>
+									</h:column>
+								</h:dataTable>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4 ">&nbsp;</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2 ">
+							<h:commandButton value="OK" style="width:60%"
+								action="#{acciones.agregarAccionesUsuario}"
+								class="btn btn-success btn-center	center-block"></h:commandButton>
+						</div>
+						<div class="col-md-2">
+							<h:commandButton value="Cancelar" style="width:60%"
+								class="btn btn-primary center-block"></h:commandButton>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<h:inputHidden value="#{acciones.id}" id="hdnId"></h:inputHidden>
+						</div>
+						<div class="col-md-2">
+							<h:inputHidden value="#{acciones.nombre}" id="hdnNombre"></h:inputHidden>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+				</h:form>
+			</ui:define>
+		</div>
+	</ui:composition>
+</h:body>
+</html>
+

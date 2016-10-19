@@ -9,6 +9,11 @@
 		<managed-bean-class>utn.dds.g10.beans.loginBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>abmAccionesBean</managed-bean-name>
+		<managed-bean-class>utn.dds.g10.beans.abmAccionesBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>login.xhtml</display-name>
 		<from-view-id>/login.xhtml</from-view-id>
@@ -17,5 +22,4 @@
 			<to-view-id>/WEB-INF/​welcome.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
 </faces-config>

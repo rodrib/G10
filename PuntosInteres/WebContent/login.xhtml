@@ -1,27 +1,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<div class="container">
 		<ui:define name="content">
 			<h:form>
-				<h:panelGrid id="panel" columns="2"  cellpadding="3"  cellspacing="2">
-					<f:facet name="header">
-						<h:outputText value="LOGIN" />
-					</f:facet>
-					<h:outputText value="Name"></h:outputText>
-					<h:inputText value="#{loginBean.name}"
-						class="form-control input-sm"></h:inputText>
-					<h:outputText value="Password"></h:outputText> 
-					<h:inputSecret value="#{loginBean.password}"
-						class="form-control input-sm"></h:inputSecret>
-					<f:facet name="footer">
-						<h:panelGroup style="display:block;">
-							<h:commandButton value="Login" action="login"  class="btn btn-primary"></h:commandButton>
-						</h:panelGroup>
-					</f:facet>
-				</h:panelGrid>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4 ">
+						<h2 class="form-signin-heading">Login</h2>
+						<h:inputText value="#{loginBean.name}" type="text"
+							class="form-control" name="username"  p:placeholder="Ingrese Usuario"
+							required="true" autocomplete="true">
+						</h:inputText>
+						<h:inputSecret value="#{loginBean.password}" class="form-control"
+							name="password" p:placeholder="Ingrese contraseña" required="true"></h:inputSecret>
+						<h:commandButton value="Login" action="login"
+							class="btn btn-lg btn-primary btn-block"></h:commandButton>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
 			</h:form>
 		</ui:define>
 	</div>

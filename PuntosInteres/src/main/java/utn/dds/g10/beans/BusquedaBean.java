@@ -98,13 +98,13 @@ public class BusquedaBean implements Serializable{
 
 		}
 	//Fin agregado mio//
-	public String addAction() {
-
-		Order order = new Order(this.orderNo, this.productName,
-			this.price, this.qty);
-
-		orderList.add(order);
-		return null;
+	public void addAction() {
+		
+		if(getOrderNo()!=""){
+			Order order = new Order(this.orderNo, this.productName,
+					this.price, this.qty);
+			orderList.add(order);
+		}		
 	}
 	
 	public void searchAction() throws MalformedURLException, JSONException, IOException {

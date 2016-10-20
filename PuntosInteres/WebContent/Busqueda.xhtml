@@ -15,11 +15,11 @@
 							<h3>Criterio de Búsqueda</h3>
 							<div class="row">
 								<div class="col-md-12">
-									<h:inputText size="10" value="#{order.orderNo}" style="width:100%"
-										class="form-control" />
+									<h:inputText size="10" value="#{order.orderNo}"
+										style="width:100%" class="form-control" />
 								</div>
 							</div>
-							<br/>
+							<br />
 							<div class="row">
 								<div class="col-md-6 ">
 									<h:commandButton value="Agregar" action="#{order.addAction}"
@@ -31,7 +31,7 @@
 									</h:commandLink>
 								</div>
 							</div>
-							<br/>
+							<br />
 							<div style="width: 300px; height: 200px;">
 								<h:dataTable value="#{order.orderList}" var="o"
 									styleClass="order-table" headerClass="order-table-header"
@@ -40,6 +40,15 @@
 										<f:facet name="header">Lista de Búsqueda</f:facet>
 	    							#{o.orderNo}
 					    		</h:column>
+									<h:column>
+										<div class="row-fluid"
+											style="background-color: #f0f0f0; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+											<div class="span3 text-center"></div>
+										</div>
+										<h:commandLink class="btn btn-warning center-block"
+											action="resultado">Ver Detalle
+											</h:commandLink>
+									</h:column>
 								</h:dataTable>
 							</div>
 							<h:dataTable value="#{order.poiList}" var="s"
@@ -48,7 +57,7 @@
 								<h:column>
 									<f:facet name="header">Resultado Lista POI</f:facet>
     							#{s.nombre}
-    						</h:column>    						
+    						</h:column>
 							</h:dataTable>
 							<br></br>
 							<h:dataTable value="#{order.bancoList}" var="s"

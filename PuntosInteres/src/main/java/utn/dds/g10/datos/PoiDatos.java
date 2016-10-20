@@ -40,8 +40,18 @@ public class PoiDatos {
 		
 		///BANCOS
 		miPoi = new POI();
-		miPoi.setLocacion(new Locacion());
+		Locacion locacionn=new Locacion();
+		locacionn.setDireccion("Billinghurst 2143");
+		miPoi.setLocacion(locacionn);
 		miPoi.setNombre("Banco Frances");
+		miPoi.setTipo(new SucursalBanco());
+		listadoPoi.add(miPoi);
+		
+		miPoi = new POI();
+		Locacion locacionn2=new Locacion();
+		locacionn2.setDireccion("French 2143");
+		miPoi.setLocacion(locacionn2);
+		miPoi.setNombre("Banco ITAU");
 		miPoi.setTipo(new SucursalBanco());
 		listadoPoi.add(miPoi);
 		
@@ -52,25 +62,25 @@ public class PoiDatos {
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
-		miPoi.setLocacion(new Locacion());
-		miPoi.setNombre("Banco Frances");
-		miPoi.setTipo(new SucursalBanco());
-		listadoPoi.add(miPoi);
-		
-		miPoi = new POI();
-		miPoi.setLocacion(new Locacion());
+		Locacion locacionn3=new Locacion();
+		locacionn3.setDireccion("Aguero 4444");
+		miPoi.setLocacion(locacionn3);
 		miPoi.setNombre("Banco ICBC");
 		miPoi.setTipo(new SucursalBanco());
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
-		miPoi.setLocacion(new Locacion());
+		Locacion locacionn4=new Locacion();
+		locacionn4.setDireccion("Suipacha 666");
+		miPoi.setLocacion(locacionn4);
 		miPoi.setNombre("Banco HSBC");
 		miPoi.setTipo(new SucursalBanco());
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
-		miPoi.setLocacion(new Locacion());
+		Locacion locacionCGP= new Locacion();
+		locacionCGP.setDireccion("Avenida siempre viva");
+		miPoi.setLocacion(locacionCGP);
 		miPoi.setNombre("CGP Comuna 3");
 		CGP cgp = new CGP();
 		cgp.setZonas("zona1");
@@ -84,7 +94,9 @@ public class PoiDatos {
 		
 		////////KIOSCOS
 		miPoi = new POI();
-		miPoi.setLocacion(new Locacion());
+		Locacion locacionLocal = new Locacion();
+		locacionLocal.setDireccion("Ñire 555");
+		miPoi.setLocacion(locacionLocal);
 		miPoi.setNombre("Kiosco MO");
 		List<String> ListaPalabrasClave = new ArrayList<String>();
 		ListaPalabrasClave.add("caramelos");
@@ -93,7 +105,9 @@ public class PoiDatos {
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
-		miPoi.setLocacion(new Locacion());
+		Locacion locacionLocal2 = new Locacion();
+		locacionLocal2.setDireccion("santa fe 111");
+		miPoi.setLocacion(locacionLocal2);
 		miPoi.setNombre("Kiosco SI");
 		miPoi.setTipo(new LocalComercial());
 		listadoPoi.add(miPoi);

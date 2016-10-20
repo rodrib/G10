@@ -13,7 +13,38 @@
 
     	<h1>Busqueda</h1>
     	<h:form>
-    		<h:dataTable value="#{order.orderList}" var="o"
+    		
+    		<div style="width:300px; height:100px;">
+	    		<h3>Criterio de Búsqueda</h3>
+	    		<table>
+		    		<tr>
+		    			<td><h:inputText size="10" value="#{order.orderNo}" /></td>
+		    		</tr>	    		  		
+	    		</table>
+				<br></br>
+	    		<h:commandButton value="Agregar" action="#{order.addAction}" />
+	    		<h:commandButton value="Buscar" action="#{order.searchAction}" />
+			</div>
+			<br></br>
+    		<div style="width:300px; height:200px;">
+	    		<h:dataTable value="#{order.orderList}" var="o"
+	    			styleClass="order-table"
+	    			headerClass="order-table-header"
+	    			rowClasses="order-table-odd-row,order-table-even-row"
+	    		>
+	
+	    		<h:column>
+	
+	    			<f:facet name="header">Lista de Búsqueda</f:facet>
+	    			#{o.orderNo}
+	
+	    		</h:column>
+				
+	    		</h:dataTable>
+    		</div>
+			
+
+			<h:dataTable value="#{order.stringList}" var="s"
     			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
@@ -21,35 +52,13 @@
 
     		<h:column>
 
-    			<f:facet name="header">Nombre</f:facet>
-    			#{o.orderNo}
+    			<f:facet name="header">Resultado</f:facet>
+    			#{s.stringNombre}
 
     		</h:column>
 
-    		</h:dataTable>
-
-    		<div class="ads-in-post hide_if_width_less_800">
-<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- new 728x90 - After2ndH4 -->
-<ins class="adsbygoogle hide_if_width_less_800"
-     style="display:inline-block;width:728px;height:90px"
-></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div><h2>Ingrese Busqueda</h2>
-    		<table>
-    		<tr>
-    			<td>Nombre :</td>
-    			<td><h:inputText size="10" value="#{order.orderNo}" /></td>
-    		</tr>
-    				
-    		
-    		</table>
-
-    		<h:commandButton value="Agregar" action="#{order.addAction}" />
-    		<h:commandButton value="Buscar" action="#{order.searchAction}" />
-
+    		</h:dataTable>	
+			
     	</h:form>
     </h:body>
 </html>

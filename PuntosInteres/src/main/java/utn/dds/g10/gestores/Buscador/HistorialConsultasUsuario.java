@@ -26,6 +26,7 @@ public class HistorialConsultasUsuario {
 
 	public static ResultadoBusquedaParcialUsuario buscarUsuario(
 			String usuario) {
+		int encontrado=0;
 		ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado = new ResultadoBusquedaParcialUsuario();
 		// Busca por usuario. Si ya existe, se busca por el criterio de busqueda
 		if (!consultasParcial.isEmpty()) {
@@ -36,11 +37,15 @@ public class HistorialConsultasUsuario {
 
 				if (resultadoUsuarioParcialEncontrado.getUsuario()
 						.equalsIgnoreCase(usuario)) {
+					encontrado=1;
 					break;
 				}
 			}
 		}
-		return resultadoUsuarioParcialEncontrado;
+		if (encontrado!=0)
+			return resultadoUsuarioParcialEncontrado;
+		else
+			return null;
 	}
 	
 	public static ResultadoBusquedaParcialUsuario filtrarUsuarioFechaDesde(

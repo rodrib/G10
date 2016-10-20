@@ -24,5 +24,10 @@ public class ParadaColectivo extends TipoPoi {
 		//En este caso al no tener rubro, ni servicios, hacemos que siempre sea válido.
 		return false;
 	}
+	
+	@Override
+	public String tipoPOI() {
+		return "ParadaColectivo";
+	}
 
 }

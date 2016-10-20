@@ -45,5 +45,10 @@ public class LocalComercial extends TipoPoi {
 		// TODO Auto-generated method stub
 		return  (this.getRubro() != null && this.getRubro().CumpleCondicionBusqueda(condicion));
 	}
+
+	@Override
+	public String tipoPOI() {
+		return "LocalComercial";
+	}
 }
 

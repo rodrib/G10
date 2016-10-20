@@ -1,4 +1,5 @@
 package utn.dds.g10.beans;
+import utn.dds.g10.entidades.ResultadoConsulta;
 //import utn.dds.g10.entidades.*;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;
@@ -75,16 +76,8 @@ public class BusquedaBean implements Serializable{
 	private static final ArrayList<Order> orderList =
 		new ArrayList<Order>(Arrays.asList(
 
-		new Order("A0001", "Intel CPU",
-				new BigDecimal("700.00"), 1),
-		new Order("A0002", "Harddisk 10TB",
-				new BigDecimal("500.00"), 2),
-		new Order("A0003", "Dell Laptop",
-				new BigDecimal("11600.00"), 8),
-		new Order("A0004", "Samsung LCD",
-				new BigDecimal("5200.00"), 3),
-		new Order("A0005", "A4Tech Mouse",
-				new BigDecimal("100.00"), 10)
+		new Order("Banco Frances", "Banco Frances",
+				new BigDecimal("700.00"), 1)		
 	));
 
 	public ArrayList<Order> getOrderList() {
@@ -92,7 +85,16 @@ public class BusquedaBean implements Serializable{
 		return orderList;
 
 	}
+	//agregado mio//
+	private static final ArrayList<SegundaTabla> stringList =
+			new ArrayList<SegundaTabla>(Arrays.asList(new SegundaTabla("hola"),new SegundaTabla("como")));
 
+		public ArrayList<SegundaTabla> getStringList() {
+
+			return stringList;
+
+		}
+	//Fin agregado mio//
 	public String addAction() {
 
 		Order order = new Order(this.orderNo, this.productName,
@@ -111,10 +113,43 @@ public class BusquedaBean implements Serializable{
 		
 		//Inicializo Gestor
 		gestorPoi = new GestorPoi(usuario);
-		
-		
+		ResultadoConsulta resultado;
 		for (Order criterioBusqueda:getOrderlist()){
-		gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), "usuario");
+			
+			resultado = gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), "userTest");
+			
+			if (resultado.getCantidadResultados() != 0){
+				System.out.println(resultado.getCantidadResultados());
+				System.out.println(resultado.getPuntos().get(0).getNombre());			
+//					SegundaTabla st = new SegundaTabla(resultado.getPuntos().get(0).getNombre());
+//					if(!stringList.contains(st)){
+//						stringList.add(st);
+//					}
+					
+					for (int j = 0; j < (resultado.getCantidadResultados()); j++) {
+						SegundaTabla st = new SegundaTabla(resultado.getPuntos().get(j).getNombre());
+							int cantResultado= 0;
+							for (int m = 0; m < (stringList.size()); m++) {
+								if(stringList.get(m).getStringNombre().equals(st.getStringNombre())){
+									cantResultado =1;
+								}								
+							}
+							if(cantResultado==0){
+								stringList.add(st);
+							}
+//							for (Iterator<SegundaTabla> iterador = stringList.iterator(); iterador
+//									.hasNext();) {								
+//								SegundaTabla iter= iterador.next();
+//									
+//									if(!iter.getStringNombre().equals(st.getStringNombre()) ){
+//										stringList.add(st);
+//									}
+//							}
+						
+					}				
+					
+			}
+			
 		}
 	}
 
@@ -172,5 +207,27 @@ public class BusquedaBean implements Serializable{
 		}
 
 		//getter and setter methods
+	}
+	
+	public static class SegundaTabla{
+	
+		String stringNombre;
+
+		public String getStringNombre() {
+			return stringNombre;
+		}
+
+		public void setStringNombre(String stringNombre) {
+			this.stringNombre = stringNombre;
+		}
+
+		public SegundaTabla(String nombre){
+			
+			this.stringNombre=nombre;
+		
+		}
+	
+	
+	
 	}
 }

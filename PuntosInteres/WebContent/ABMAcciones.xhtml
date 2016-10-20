@@ -17,12 +17,12 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
-							<h:selectOneMenu value="sdsd" label="asds" id="cboAcciones"
-								onchange="document.getElementById('j_idt11:hdnId').value = document.getElementById('j_idt11:cboAcciones').value;
-								var t = document.getElementById('j_idt11:cboAcciones');
+							<h:selectOneMenu value="sdsd" binding="#{clientCboAcciones}"  label="asds" id="cboAcciones"
+								onchange="document.getElementById('#{clientHdnId.clientId}').value = document.getElementById('#{clientCboAcciones.clientId}').value;
+								var t = getElementById('#{clientCboAcciones.clientId}');
 								var selectedText = t.options[t.selectedIndex].text;
-								document.getElementById('j_idt11:hdnNombre').value = selectedText;"
-								class="btn center-block" style="width:100%">
+								document.getElementById('#{clientHdnNombre.clientId}').value = selectedText;"
+								class="btn center-block cboAccion" style="width:100%">
 								<f:selectItem itemValue="0" itemLabel="- Seleccione - " />
 								<f:selectItem itemValue="1" itemLabel="AuditarResultadoConsulta" />
 								<f:selectItem itemValue="2" itemLabel="AuditarTiempoConsulta" />
@@ -59,9 +59,6 @@
 										</div>
 									</f:facet>
 									<h:column>
-										#{accion.id} 	
-									</h:column>
-									<h:column>
 										#{accion.nombre} 	
 									</h:column>
 									<h:column>
@@ -69,7 +66,8 @@
 											style="background-color: #f0f0f0; border-top-left-radius: 10px; border-top-right-radius: 10px;">
 											<div class="span3 text-center"></div>
 										</div>
-										<h:commandLink class="btn btn-danger center-block" action="#{acciones.deleteAction(accion)}">
+										<h:commandLink class="btn btn-danger center-block"
+											action="#{acciones.deleteAction(accion)}">
 											<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Eliminar
 											</h:commandLink>
 									</h:column>
@@ -86,25 +84,25 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2 ">
-							<h:commandLink value="OK" style="width:60%"
+							<h:commandLink value="OK" style="width:60%" onclick="alert('Se agregaron las acciones al usuario correctamente!')"
 								action="#{acciones.agregarAccionesUsuario}"
 								class="btn btn-success btn-center	center-block">
 								<span class=" glyphicon glyphicon-ok-sign"></span>
-								</h:commandLink>
+							</h:commandLink>
 						</div>
 						<div class="col-md-2">
-							<h:commandButton value="Cancelar" style="width:60%" action="cancelar"
-								class="btn btn-primary center-block"></h:commandButton>
+							<h:commandButton value="Cancelar" style="width:60%"
+								action="cancelar" class="btn btn-primary center-block"></h:commandButton>
 						</div>
 						<div class="col-md-4"></div>
 					</div>
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
-							<h:inputHidden value="#{acciones.id}" id="hdnId"></h:inputHidden>
+							<h:inputHidden value="#{acciones.id}" binding="#{clientHdnId}" id="hdnId" class="hdnId"></h:inputHidden>
 						</div>
 						<div class="col-md-2">
-							<h:inputHidden value="#{acciones.nombre}" id="hdnNombre"></h:inputHidden>
+							<h:inputHidden value="#{acciones.nombre}" binding="#{clientHdnNombre}" id="hdnNombre" class="hdnNombre"></h:inputHidden>
 						</div>
 						<div class="col-md-4"></div>
 					</div>

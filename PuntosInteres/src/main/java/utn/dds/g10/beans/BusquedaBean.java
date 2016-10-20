@@ -151,8 +151,32 @@ public class BusquedaBean implements Serializable{
 			}
 			
 		}
+		
+		repartirPOIenListas(poiList);
+		
 	}
-
+	
+	public void repartirPOIenListas(ArrayList<POI> listaPois){
+		
+		
+	
+		for (POI poi: listaPois){
+			
+			String tipoPOI = poi.getTipo().tipoPOI();
+			
+				if(tipoPOI.equals("CGP")){
+					//Agrega a listaCGP
+				}else if(tipoPOI.equals("SucursalBanco")){
+					//Agrega a lista SucursalBanco
+					}else if(tipoPOI.equals("ParadaColectivo")){
+					 //agrega a lista paradaColectivo			
+				}else if(tipoPOI.equals("LocalComercial")){
+					//agrega a lista Local Comercial
+				}
+		}
+	
+	}
+	
 	public String deleteAction(Order order) {
 
 		orderList.remove(order);

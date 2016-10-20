@@ -45,7 +45,7 @@ public class HistorialConsultasUsuario {
 		if (encontrado!=0)
 			return resultadoUsuarioParcialEncontrado;
 		else
-			return null;
+			return new ResultadoBusquedaParcialUsuario();
 	}
 	
 	public static ResultadoBusquedaParcialUsuario filtrarUsuarioFechaDesde(

@@ -87,16 +87,6 @@ public class BusquedaBean implements Serializable{
 		return orderList;
 
 	}
-	//agregado mio//
-	private static final ArrayList<SegundaTabla> stringList =
-			new ArrayList<SegundaTabla>();
-
-		public ArrayList<SegundaTabla> getStringList() {
-
-			return stringList;
-
-		}
-	//Fin agregado mio//
 		
 	//agregado mio//
 	private static final ArrayList<POI> poiList =
@@ -107,7 +97,7 @@ public class BusquedaBean implements Serializable{
 			return poiList;
 
 		}
-		//Fin agregado mio//
+	//Fin agregado mio//
 	public String addAction() {
 
 		Order order = new Order(this.orderNo, this.productName,
@@ -138,13 +128,12 @@ public class BusquedaBean implements Serializable{
 					for (int j = 0; j < (resultado.getCantidadResultados()); j++) {
 						SegundaTabla st = new SegundaTabla(listadoPoi.get(j).getNombre());
 							int cantResultado= 0;
-							for (int m = 0; m < (stringList.size()); m++) {
-								if(stringList.get(m).getStringNombre().equals(st.getStringNombre())){
+							for (int m = 0; m < (poiList.size()); m++) {
+								if(poiList.get(m).getNombre().equals(st.getStringNombre())){
 									cantResultado =1;
 								}								
 							}
 							if(cantResultado==0){
-								stringList.add(st);
 								poiList.add(listadoPoi.get(j));								
 							}						
 					}					
@@ -158,23 +147,30 @@ public class BusquedaBean implements Serializable{
 	
 	public void repartirPOIenListas(ArrayList<POI> listaPois){
 		
-		
+		reiniciarListas();
 	
 		for (POI poi: listaPois){
 			
 			String tipoPOI = poi.getTipo().tipoPOI();
 			
 				if(tipoPOI.equals("CGP")){
-					//Agrega a listaCGP
+					cgpList.add(poi);
 				}else if(tipoPOI.equals("SucursalBanco")){
-					//Agrega a lista SucursalBanco
+					bancoList.add(poi);
 					}else if(tipoPOI.equals("ParadaColectivo")){
-					 //agrega a lista paradaColectivo			
+						paradaColectivoList.add(poi);
 				}else if(tipoPOI.equals("LocalComercial")){
-					//agrega a lista Local Comercial
+					localComercialList.add(poi);
 				}
 		}
 	
+	}
+	
+	public void reiniciarListas(){
+		cgpList.clear();
+		bancoList.clear();
+		paradaColectivoList.clear();
+		localComercialList.clear();
 	}
 	
 	public String deleteAction(Order order) {
@@ -249,9 +245,34 @@ public class BusquedaBean implements Serializable{
 			
 			this.stringNombre=nombre;
 		
-		}
-	
-	
-	
+		}	
 	}
+	
+	//agregado mio//
+		private static final ArrayList<POI> bancoList =
+				new ArrayList<POI>();
+
+		public ArrayList<POI> getBancoList() {
+			return bancoList;
+		}
+
+		private static final ArrayList<POI> cgpList =
+				new ArrayList<POI>();
+
+		public ArrayList<POI> getCgpList() {
+			return cgpList;
+		}
+
+		private static final ArrayList<POI> localComercialList =
+				new ArrayList<POI>();
+
+		public ArrayList<POI> getLocalComercialList() {
+			return localComercialList;
+		}
+		private static final ArrayList<POI> paradaColectivoList =
+				new ArrayList<POI>();
+
+		public ArrayList<POI> getParadaColectivoList() {
+			return paradaColectivoList;
+		}
 }

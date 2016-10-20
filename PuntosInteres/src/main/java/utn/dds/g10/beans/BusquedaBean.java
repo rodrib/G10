@@ -145,8 +145,7 @@ public class BusquedaBean implements Serializable{
 							}
 							if(cantResultado==0){
 								stringList.add(st);
-								poiList.add(listadoPoi.get(j));
-								
+								poiList.add(listadoPoi.get(j));								
 							}						
 					}					
 			}

@@ -68,6 +68,19 @@ public class HistorialBean implements Serializable{
 	}
 
 	public String agregaResultadoListaConsulta() {
+		
+		resultadoList.clear();
+		
+		ResultadoBusquedaParcialUsuario resultadoUsuarioPrueba = new ResultadoBusquedaParcialUsuario();
+		ResultadoBusquedaParcial resultadosParcialPrueba = new ResultadoBusquedaParcial();
+		resultadosParcialPrueba.setCriterioBusqueda("hola");
+		resultadosParcialPrueba.setCantidadResultados(1);
+		resultadosParcialPrueba.setFecha(LocalDateTime.now());
+		resultadoUsuarioPrueba.getResultados().add(resultadosParcialPrueba);
+		resultadoUsuarioPrueba.setUsuario("carlos");
+		HistorialConsultasUsuario.getConsultasParcial().add(resultadoUsuarioPrueba);
+		
+		
 		LocalDateTime fechaDesde=null;
 		LocalDateTime fechaHasta=null;
 		
@@ -83,7 +96,7 @@ public class HistorialBean implements Serializable{
 		ResultadoBusquedaParcialUsuario resultadoUsuarioFiltrado = new ResultadoBusquedaParcialUsuario();
 		//Con usuario
 		if (!this.usuario.equalsIgnoreCase("")) {
-			resultadoUsuario = HistorialConsultasUsuario.buscarUsuario(usuario);
+			resultadoUsuario = HistorialConsultasUsuario.buscarUsuario(this.usuario);
 			// Solo usuario
 			if (this.fechaDesde.equalsIgnoreCase("")&& this.fechaHasta.equalsIgnoreCase("")) {
 				soloUsuario=1;

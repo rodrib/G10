@@ -42,12 +42,44 @@
 					    		</h:column>
 								</h:dataTable>
 							</div>
-							<h:dataTable value="#{order.stringList}" var="s"
+							<h:dataTable value="#{order.poiList}" var="s"
 								styleClass="order-table" headerClass="order-table-header"
 								rowClasses="order-table-odd-row,order-table-even-row">
 								<h:column>
-									<f:facet name="header">Resultado</f:facet>
-    							#{s.stringNombre}
+									<f:facet name="header">Resultado Lista POI</f:facet>
+    							#{s.nombre}
+    						</h:column>
+							</h:dataTable>
+							<h:dataTable value="#{order.bancoList}" var="s"
+								styleClass="order-table" headerClass="order-table-header"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Resultado Poi Sucursal Banco</f:facet>
+    							#{s.estadoAlta}
+    						</h:column>
+							</h:dataTable>
+							<h:dataTable value="#{order.paradaColectivoList}" var="s"
+								styleClass="order-table" headerClass="order-table-header"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Resultado Poi Parada Colectivo</f:facet>
+    							#{s.nombre}
+    						</h:column>
+							</h:dataTable>
+							<h:dataTable value="#{order.cgpList}" var="s"
+								styleClass="order-table" headerClass="order-table-header"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Resultado Poi CGP</f:facet>
+    							#{s.estadoAlta}
+    						</h:column>
+							</h:dataTable>
+							<h:dataTable value="#{order.localComercialList}" var="s"
+								styleClass="order-table" headerClass="order-table-header"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Resultado Poi Local Comercial</f:facet>
+    							#{s.nombre}
     						</h:column>
 							</h:dataTable>
 						</div>

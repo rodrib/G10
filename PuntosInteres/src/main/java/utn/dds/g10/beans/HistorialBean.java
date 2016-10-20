@@ -75,10 +75,13 @@ public class HistorialBean implements Serializable{
 		ResultadoBusquedaParcial resultadosParcialPrueba = new ResultadoBusquedaParcial();
 		resultadosParcialPrueba.setCriterioBusqueda("hola");
 		resultadosParcialPrueba.setCantidadResultados(1);
-		resultadosParcialPrueba.setFecha(LocalDateTime.now());
+		resultadosParcialPrueba.setFecha(obtenerFecha("01/02/2015"));
 		resultadoUsuarioPrueba.getResultados().add(resultadosParcialPrueba);
 		resultadoUsuarioPrueba.setUsuario("carlos");
 		HistorialConsultasUsuario.getConsultasParcial().add(resultadoUsuarioPrueba);
+		
+		
+		
 		
 		
 		LocalDateTime fechaDesde=null;
@@ -161,7 +164,7 @@ public class HistorialBean implements Serializable{
 					.iterator(); consultaBusqueda.hasNext();) {
 				resultadoUsuarioParcialEncontrado = consultaBusqueda.next();	
 				ResultadoBusquedaParcial resultadoBusquedaParcialEncontrado = new ResultadoBusquedaParcial();
-				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioFiltrado.getResultados()
+				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioParcialEncontrado.getResultados()
 						.iterator(); consultaBusquedaParcial.hasNext();) {	
 					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
 					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuarioParcialEncontrado.getUsuario(), resultadoBusquedaParcialEncontrado.getFecha().toString(),

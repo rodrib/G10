@@ -1,4 +1,5 @@
 package utn.dds.g10.beans;
+import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 //import utn.dds.g10.entidades.*;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -87,7 +89,7 @@ public class BusquedaBean implements Serializable{
 	}
 	//agregado mio//
 	private static final ArrayList<SegundaTabla> stringList =
-			new ArrayList<SegundaTabla>(Arrays.asList(new SegundaTabla("hola"),new SegundaTabla("como")));
+			new ArrayList<SegundaTabla>();
 
 		public ArrayList<SegundaTabla> getStringList() {
 
@@ -95,6 +97,17 @@ public class BusquedaBean implements Serializable{
 
 		}
 	//Fin agregado mio//
+		
+	//agregado mio//
+	private static final ArrayList<POI> poiList =
+			new ArrayList<POI>();
+
+		public ArrayList<POI> getPoiList() {
+
+			return poiList;
+
+		}
+		//Fin agregado mio//
 	public String addAction() {
 
 		Order order = new Order(this.orderNo, this.productName,
@@ -117,17 +130,13 @@ public class BusquedaBean implements Serializable{
 		for (Order criterioBusqueda:getOrderlist()){
 			
 			resultado = gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), "userTest");
-			
+			List<POI> listadoPoi = resultado.getPuntos();
 			if (resultado.getCantidadResultados() != 0){
 				System.out.println(resultado.getCantidadResultados());
 				System.out.println(resultado.getPuntos().get(0).getNombre());			
-//					SegundaTabla st = new SegundaTabla(resultado.getPuntos().get(0).getNombre());
-//					if(!stringList.contains(st)){
-//						stringList.add(st);
-//					}
 					
 					for (int j = 0; j < (resultado.getCantidadResultados()); j++) {
-						SegundaTabla st = new SegundaTabla(resultado.getPuntos().get(j).getNombre());
+						SegundaTabla st = new SegundaTabla(listadoPoi.get(j).getNombre());
 							int cantResultado= 0;
 							for (int m = 0; m < (stringList.size()); m++) {
 								if(stringList.get(m).getStringNombre().equals(st.getStringNombre())){
@@ -136,18 +145,9 @@ public class BusquedaBean implements Serializable{
 							}
 							if(cantResultado==0){
 								stringList.add(st);
-							}
-//							for (Iterator<SegundaTabla> iterador = stringList.iterator(); iterador
-//									.hasNext();) {								
-//								SegundaTabla iter= iterador.next();
-//									
-//									if(!iter.getStringNombre().equals(st.getStringNombre()) ){
-//										stringList.add(st);
-//									}
-//							}
-						
-					}				
-					
+								poiList.add(listadoPoi.get(j));								
+							}						
+					}					
 			}
 			
 		}

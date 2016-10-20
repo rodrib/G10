@@ -58,7 +58,22 @@ public class abmAccionesBean implements Serializable {
 	}
 
 	public String addAction() {
-		orderList.add(new AccionBean(this.id, this.nombre));
+		
+		boolean existe = false;
+		for (AccionBean accionBean : orderList) {
+			if (accionBean.id == this.id) 
+			{
+				existe = true;
+				break;
+			}
+		}
+		
+		//Si no existe lo agrega.
+		if(!existe)
+		{
+			orderList.add(new AccionBean(this.id, this.nombre));
+		}
+
 		return null;
 	}
 

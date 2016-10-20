@@ -1,93 +1,134 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<h:outputStylesheet library="css" name="table-style.css" />
-</h:head>
-<h:body>
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<div class="container">
+		<ui:define name="content">
+			<h:form>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4 ">
+						<h:form>
 
-	<h1>Historial de busquedas realizadas</h1>
-	<h:form>
-
-		<h:panelGrid columns="4">
-			<h:outputLabel size="20" value="Usuario" />
-			<h:outputLabel size="20" value="Fecha" />
-		</h:panelGrid>
-
-		<h:panelGrid columns="4">
-
-			<h:inputText id="usuario" value="#{historial.usuario}" size="20"
-				required="false">
-			</h:inputText>
-
-			<h:inputText id="fecha_desde" value="#{historial.fechaDesde}"
-				size="20" required="false">
-			</h:inputText>
-
-			<h:inputText id="fecha_hasta" value="#{historial.fechaHasta}"
-				size="20" required="false">
-			</h:inputText>
-
-			<h:commandButton id="botonBuscar" value="Buscar"
-				action="#{historial.agregaResultadoListaConsulta}">
-			</h:commandButton>
+							<h:panelGrid columns="4">
+								<h:outputLabel size="20" value="Usuario" />
+								<h:outputLabel size="20" value="Fecha" />
+							</h:panelGrid>
+							<div class="row">
+								<div class="col-md-3"></div>
 
 
-		</h:panelGrid>
+								<div class="col-md-6">
+									<h:inputText id="usuario" value="#{historial.usuario}"
+										size="20" class="form-control" required="false"
+										p:placeholder="Ingrese Usuario">
+									</h:inputText>
+								</div>
 
-</h:form>
-<br></br>
-<hr></hr>
-<h:form>
-		<h:dataTable value="#{historial.resultadoList}" var="r"
-			styleClass="order-table" headerClass="order-table-header"
-			rowClasses="order-table-odd-row,order-table-even-row">
+								<div class="col-md-3"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
 
-			<h:column>
+								<div class="col-md-6">
+									<h:inputText id="fecha_desde" value="#{historial.fechaDesde}"
+										class="form-control" size="20" required="false"
+										p:placeholder="Fecha desde (dd/mm/aaaa)">
+									</h:inputText>
+								</div>
 
-				<f:facet name="header">Fecha</f:facet>
+								<div class="col-md-3"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
+
+								<div class="col-md-6">
+									<h:inputText id="fecha_hasta" value="#{historial.fechaHasta}"
+										class="form-control" size="20" required="false"
+										p:placeholder="Fecha hasta (dd/mm/aaaa)">
+									</h:inputText>
+								</div>
+
+								<div class="col-md-3"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
+
+								<div class="col-md-6">
+									<h:commandButton id="botonBuscar" value="Buscar"
+										class="btn btn-primary"
+										action="#{historial.agregaResultadoListaConsulta}">
+									</h:commandButton>
+								</div>
+
+								<div class="col-md-3"></div>
+							</div>
+
+
+
+
+
+
+
+
+
+
+
+						</h:form>
+						<br></br>
+						<hr></hr>
+						<h:dataTable value="#{historial.resultadoList}" var="r"
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+
+							<h:column>
+
+								<f:facet name="header">Fecha</f:facet>
     			#{r.fecha}
 
     		</h:column>
 
-			<h:column>
+							<h:column>
 
-				<f:facet name="header">Usuario</f:facet>
+								<f:facet name="header">Usuario</f:facet>
     			#{r.usuario}
 
     		</h:column>
 
-			<h:column>
+							<h:column>
 
-				<f:facet name="header">Parametros</f:facet>
+								<f:facet name="header">Parametros</f:facet>
     			#{r.parametros}
 
     		</h:column>
 
-			<h:column>
+							<h:column>
 
-				<f:facet name="header">POIs</f:facet>
+								<f:facet name="header">POIs</f:facet>
     			#{r.cantidadPois}
 
     		</h:column>
 
-		</h:dataTable>
+						</h:dataTable>
 
-		<div class="ads-in-post hide_if_width_less_800">
-			<script
-				src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- new 728x90 - After2ndH4 -->
-			<ins class="adsbygoogle hide_if_width_less_800"
-				style="display: inline-block; width: 728px; height: 90px"></ins>
-			<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
-		</div>
-
-	</h:form>
-</h:body>
+						<div class="ads-in-post hide_if_width_less_800">
+							<script
+								src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- new 728x90 - After2ndH4 -->
+							<ins class="adsbygoogle hide_if_width_less_800"
+								style="display: inline-block; width: 728px; height: 90px"></ins>
+							<script>
+								(adsbygoogle = window.adsbygoogle || [])
+										.push({});
+							</script>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+			</h:form>
+		</ui:define>
+	</div>
+</ui:composition>
 </html>

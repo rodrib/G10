@@ -69,20 +69,7 @@ public class HistorialBean implements Serializable{
 
 	public String agregaResultadoListaConsulta() {
 		
-		resultadoList.clear();
-		
-		ResultadoBusquedaParcialUsuario resultadoUsuarioPrueba = new ResultadoBusquedaParcialUsuario();
-		ResultadoBusquedaParcial resultadosParcialPrueba = new ResultadoBusquedaParcial();
-		resultadosParcialPrueba.setCriterioBusqueda("hola");
-		resultadosParcialPrueba.setCantidadResultados(1);
-		resultadosParcialPrueba.setFecha(obtenerFecha("01/02/2015"));
-		resultadoUsuarioPrueba.getResultados().add(resultadosParcialPrueba);
-		resultadoUsuarioPrueba.setUsuario("carlos");
-		HistorialConsultasUsuario.getConsultasParcial().add(resultadoUsuarioPrueba);
-		
-		
-		
-		
+		resultadoList.clear();		
 		
 		LocalDateTime fechaDesde=null;
 		LocalDateTime fechaHasta=null;

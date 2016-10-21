@@ -76,11 +76,7 @@ public class BusquedaBean implements Serializable{
 	//getter and setter methods
 
 	private static final ArrayList<Order> orderList =
-		new ArrayList<Order>(Arrays.asList(
-
-		new Order("Banco Frances", "Banco Frances",
-				new BigDecimal("700.00"), 1)		
-	));
+		new ArrayList<Order>();
 
 	public ArrayList<Order> getOrderList() {
 
@@ -107,7 +103,7 @@ public class BusquedaBean implements Serializable{
 		}		
 	}
 	
-	public void searchAction() throws MalformedURLException, JSONException, IOException {
+	public void searchAction(String nombreUsuario) throws MalformedURLException, JSONException, IOException {
 		
 		
 		usuario = new Usuario();
@@ -119,7 +115,7 @@ public class BusquedaBean implements Serializable{
 		ResultadoConsulta resultado;
 		for (Order criterioBusqueda:getOrderlist()){
 			
-			resultado = gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), "userTest");
+			resultado = gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), nombreUsuario);
 			List<POI> listadoPoi = resultado.getPuntos();
 			if (resultado.getCantidadResultados() != 0){
 				System.out.println(resultado.getCantidadResultados());

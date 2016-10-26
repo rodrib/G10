@@ -1,0 +1,3 @@
+Con respecto a las interfaces, en nuestro caso las hicimos Responsive por si en un futuro se pide la implementación de este sistema 
+en otra platoforma como puede ser en un celular, pero en realidad, por como está planteado en este momento, no haría falta que las 
+interfaces sean Responsive ya que siempre va a funcionar en terminales que tienen un tamaño de pantalla determinado. 

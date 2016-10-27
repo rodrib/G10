@@ -7,8 +7,6 @@ import java.util.Arrays;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import com.mysql.cj.fabric.Response;
-
 import utn.dds.g10.entidades.administracion.Rol;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;

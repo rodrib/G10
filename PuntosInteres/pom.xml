@@ -7,9 +7,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PuntosInteres Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
-
-
 	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -36,7 +33,6 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
@@ -118,6 +114,16 @@
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.2</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
@@ -135,8 +141,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>

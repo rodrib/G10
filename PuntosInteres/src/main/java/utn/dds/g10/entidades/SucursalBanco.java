@@ -70,4 +70,9 @@ public class SucursalBanco extends TipoPoi {
 		return false;
 	}
 
+	@Override
+	public String tipoPOI() {
+		return "SucursalBanco";
+	}
+
 }

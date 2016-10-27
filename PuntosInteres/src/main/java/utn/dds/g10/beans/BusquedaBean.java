@@ -1,4 +1,5 @@
 package utn.dds.g10.beans;
+import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 //import utn.dds.g10.entidades.*;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -74,37 +76,34 @@ public class BusquedaBean implements Serializable{
 	//getter and setter methods
 
 	private static final ArrayList<Order> orderList =
-		new ArrayList<Order>(Arrays.asList(
-
-		new Order("Banco Frances", "Banco Frances",
-				new BigDecimal("700.00"), 1)		
-	));
+		new ArrayList<Order>();
 
 	public ArrayList<Order> getOrderList() {
 
 		return orderList;
 
 	}
+		
 	//agregado mio//
-	private static final ArrayList<SegundaTabla> stringList =
-			new ArrayList<SegundaTabla>(Arrays.asList(new SegundaTabla("hola"),new SegundaTabla("como")));
+	private static final ArrayList<POI> poiList =
+			new ArrayList<POI>();
 
-		public ArrayList<SegundaTabla> getStringList() {
+		public ArrayList<POI> getPoiList() {
 
-			return stringList;
+			return poiList;
 
 		}
 	//Fin agregado mio//
-	public String addAction() {
-
-		Order order = new Order(this.orderNo, this.productName,
-			this.price, this.qty);
-
-		orderList.add(order);
-		return null;
+	public void addAction() {
+		
+		if(getOrderNo()!=""){
+			Order order = new Order(this.orderNo, this.productName,
+					this.price, this.qty);
+			orderList.add(order);
+		}		
 	}
 	
-	public void searchAction() throws MalformedURLException, JSONException, IOException {
+	public void searchAction(String nombreUsuario) throws MalformedURLException, JSONException, IOException {
 		
 		
 		usuario = new Usuario();
@@ -116,43 +115,60 @@ public class BusquedaBean implements Serializable{
 		ResultadoConsulta resultado;
 		for (Order criterioBusqueda:getOrderlist()){
 			
-			resultado = gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), "userTest");
-			
+			resultado = gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), nombreUsuario);
+			List<POI> listadoPoi = resultado.getPuntos();
 			if (resultado.getCantidadResultados() != 0){
 				System.out.println(resultado.getCantidadResultados());
 				System.out.println(resultado.getPuntos().get(0).getNombre());			
-//					SegundaTabla st = new SegundaTabla(resultado.getPuntos().get(0).getNombre());
-//					if(!stringList.contains(st)){
-//						stringList.add(st);
-//					}
 					
 					for (int j = 0; j < (resultado.getCantidadResultados()); j++) {
-						SegundaTabla st = new SegundaTabla(resultado.getPuntos().get(j).getNombre());
+						SegundaTabla st = new SegundaTabla(listadoPoi.get(j).getNombre());
 							int cantResultado= 0;
-							for (int m = 0; m < (stringList.size()); m++) {
-								if(stringList.get(m).getStringNombre().equals(st.getStringNombre())){
+							for (int m = 0; m < (poiList.size()); m++) {
+								if(poiList.get(m).getNombre().equals(st.getStringNombre())){
 									cantResultado =1;
 								}								
 							}
 							if(cantResultado==0){
-								stringList.add(st);
-							}
-//							for (Iterator<SegundaTabla> iterador = stringList.iterator(); iterador
-//									.hasNext();) {								
-//								SegundaTabla iter= iterador.next();
-//									
-//									if(!iter.getStringNombre().equals(st.getStringNombre()) ){
-//										stringList.add(st);
-//									}
-//							}
-						
-					}				
-					
+								poiList.add(listadoPoi.get(j));								
+							}						
+					}					
 			}
 			
 		}
+		
+		repartirPOIenListas(poiList);
+		
 	}
-
+	
+	public void repartirPOIenListas(ArrayList<POI> listaPois){
+		
+		reiniciarListas();
+	
+		for (POI poi: listaPois){
+			
+			String tipoPOI = poi.getTipo().tipoPOI();
+			
+				if(tipoPOI.equals("CGP")){
+					cgpList.add(poi);
+				}else if(tipoPOI.equals("SucursalBanco")){
+					bancoList.add(poi);
+					}else if(tipoPOI.equals("ParadaColectivo")){
+						paradaColectivoList.add(poi);
+				}else if(tipoPOI.equals("LocalComercial")){
+					localComercialList.add(poi);
+				}
+		}
+	
+	}
+	
+	public void reiniciarListas(){
+		cgpList.clear();
+		bancoList.clear();
+		paradaColectivoList.clear();
+		localComercialList.clear();
+	}
+	
 	public String deleteAction(Order order) {
 
 		orderList.remove(order);
@@ -225,9 +241,34 @@ public class BusquedaBean implements Serializable{
 			
 			this.stringNombre=nombre;
 		
-		}
-	
-	
-	
+		}	
 	}
+	
+	//agregado mio//
+		private static final ArrayList<POI> bancoList =
+				new ArrayList<POI>();
+
+		public ArrayList<POI> getBancoList() {
+			return bancoList;
+		}
+
+		private static final ArrayList<POI> cgpList =
+				new ArrayList<POI>();
+
+		public ArrayList<POI> getCgpList() {
+			return cgpList;
+		}
+
+		private static final ArrayList<POI> localComercialList =
+				new ArrayList<POI>();
+
+		public ArrayList<POI> getLocalComercialList() {
+			return localComercialList;
+		}
+		private static final ArrayList<POI> paradaColectivoList =
+				new ArrayList<POI>();
+
+		public ArrayList<POI> getParadaColectivoList() {
+			return paradaColectivoList;
+		}
 }

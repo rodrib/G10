@@ -1,0 +1,129 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<div class="container">
+		<ui:define name="content">
+			<h:form>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4 ">
+						<h:form>
+							<div class="row">
+								<div class="col-md-3"></div>
+
+
+								<div class="col-md-6">
+									<h:inputText id="usuario" value="#{historial.usuario}"
+										size="20" class="form-control" required="false"
+										p:placeholder="Ingrese Usuario">
+									</h:inputText>
+								</div>
+
+								<div class="col-md-3"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
+
+								<div class="col-md-6">
+									<h:inputText id="fecha_desde" value="#{historial.fechaDesde}"
+										class="form-control" size="20" required="false"
+										p:placeholder="Fecha desde (dd/mm/aaaa)">
+									</h:inputText>
+								</div>
+
+								<div class="col-md-3"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
+
+								<div class="col-md-6">
+									<h:inputText id="fecha_hasta" value="#{historial.fechaHasta}"
+										class="form-control" size="20" required="false"
+										p:placeholder="Fecha hasta (dd/mm/aaaa)">
+									</h:inputText>
+								</div>
+
+								<div class="col-md-3"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
+
+								<div class="col-md-6">
+									<h:commandButton id="botonBuscar" value="Buscar"
+										class="btn btn-primary"
+										action="#{historial.agregaResultadoListaConsulta}">
+									</h:commandButton>
+								</div>
+
+								<div class="col-md-3"></div>
+							</div>
+
+
+
+
+
+
+
+
+
+
+
+						</h:form>
+						<br></br>
+						<hr></hr>
+						<h:dataTable value="#{historial.resultadoList}" var="r"
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+
+							<h:column>
+
+								<f:facet name="header">Fecha</f:facet>
+    			#{r.fecha}
+
+    		</h:column>
+
+							<h:column>
+
+								<f:facet name="header">Usuario</f:facet>
+    			#{r.usuario}
+
+    		</h:column>
+
+							<h:column>
+
+								<f:facet name="header">Parametros</f:facet>
+    			#{r.parametros}
+
+    		</h:column>
+
+							<h:column>
+
+								<f:facet name="header">POIs</f:facet>
+    			#{r.cantidadPois}
+
+    		</h:column>
+
+						</h:dataTable>
+
+						<div class="ads-in-post hide_if_width_less_800">
+							<script
+								src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- new 728x90 - After2ndH4 -->
+							<ins class="adsbygoogle hide_if_width_less_800"
+								style="display: inline-block; width: 728px; height: 90px"></ins>
+							<script>
+								(adsbygoogle = window.adsbygoogle || [])
+										.push({});
+							</script>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+			</h:form>
+		</ui:define>
+	</div>
+</ui:composition>
+</html>

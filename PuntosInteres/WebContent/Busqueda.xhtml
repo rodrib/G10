@@ -15,23 +15,24 @@
 							<h3>Criterio de Búsqueda</h3>
 							<div class="row">
 								<div class="col-md-12">
-									<h:inputText size="10" value="#{order.orderNo}" style="width:100%"
-										class="form-control" />
+									<h:inputText size="10" value="#{order.orderNo}"
+										style="width:100%" class="form-control" />
 								</div>
 							</div>
-							<br/>
+							<br />
 							<div class="row">
 								<div class="col-md-6 ">
 									<h:commandButton value="Agregar" action="#{order.addAction}"
 										class="btn btn-success btn-block" />
 								</div>
 								<div class="col-md-6">
-									<h:commandLink action="#{order.searchAction}" value="Buscar"
+									<h:commandLink action="#{order.searchAction(loginBean.name)}" value="Buscar"
 										class="btn btn-primary btn-block">
 									</h:commandLink>
+									<h:inputHidden value="#{loginBean.name}" id="hiddenUsuario"></h:inputHidden>
 								</div>
 							</div>
-							<br/>
+							<br />
 							<div style="width: 300px; height: 200px;">
 								<h:dataTable value="#{order.orderList}" var="o"
 									styleClass="order-table" headerClass="order-table-header"
@@ -40,14 +41,60 @@
 										<f:facet name="header">Lista de Búsqueda</f:facet>
 	    							#{o.orderNo}
 					    		</h:column>
+									<h:column>
+										<div class="row-fluid"
+											style="background-color: #f0f0f0; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+											<div class="span3 text-center"></div>
+										</div>
+										<h:commandLink class="btn btn-warning center-block"
+											action="resultado">Ver Detalle
+											</h:commandLink>
+									</h:column>
 								</h:dataTable>
 							</div>
-							<h:dataTable value="#{order.stringList}" var="s"
+							<h:dataTable value="#{order.poiList}" var="s"
 								styleClass="order-table" headerClass="order-table-header"
 								rowClasses="order-table-odd-row,order-table-even-row">
 								<h:column>
-									<f:facet name="header">Resultado</f:facet>
-    							#{s.stringNombre}
+									<f:facet name="header">Resultado Lista POI</f:facet>
+    							#{s.nombre}
+    						</h:column>
+							</h:dataTable>
+							<br></br>
+							<h:dataTable value="#{order.bancoList}" var="s"
+								styleClass="order-table" headerClass="order-table-header"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Resultado Poi Sucursal Banco</f:facet>
+    							#{s.nombre}	, #{s.locacion.direccion}
+    							
+    						</h:column>
+							</h:dataTable>
+							<br></br>
+							<h:dataTable value="#{order.paradaColectivoList}" var="s"
+								styleClass="order-table" headerClass="order-table-header"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Resultado Poi Parada Colectivo</f:facet>
+    							#{s.nombre}
+    						</h:column>
+							</h:dataTable>
+							<br></br>
+							<h:dataTable value="#{order.cgpList}" var="s"
+								styleClass="order-table" headerClass="order-table-header"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Resultado Poi CGP</f:facet>
+    							#{s.nombre} , #{s.locacion.direccion}
+    						</h:column>
+							</h:dataTable>
+							<br></br>
+							<h:dataTable value="#{order.localComercialList}" var="s"
+								styleClass="order-table" headerClass="order-table-header"
+								rowClasses="order-table-odd-row,order-table-even-row">
+								<h:column>
+									<f:facet name="header">Resultado Poi Local Comercial</f:facet>
+    							#{s.nombre} , #{s.locacion.direccion}
     						</h:column>
 							</h:dataTable>
 						</div>

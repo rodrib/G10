@@ -118,6 +118,11 @@ public class CGP extends TipoPoi {
 		return false;
 	}
 
+	@Override
+	public String tipoPOI() {
+		return "CGP";
+	}
+
 	
 	
 }

@@ -10,5 +10,5 @@ public abstract class TipoPoi {
 	public abstract boolean estaCerca(Locacion miLocacion, Locacion otraLocacion);
 	public abstract boolean estaDisponible(LocalDateTime fecha, String x);
 	public abstract boolean CumpleCondicionBusqueda(String condicion);
-
+	public abstract String tipoPOI();
 }

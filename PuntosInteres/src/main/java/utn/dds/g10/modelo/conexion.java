@@ -13,7 +13,7 @@ public class conexion {
 		System.out.println("-------- Prueba de conexi�n JDBC a MySQL ------------");
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			// El Jar Connector/J debe ser parte del build path
 		} catch (ClassNotFoundException e) {
 			System.out.println("No se puede cargar el driver JDBC");

@@ -3,12 +3,14 @@ package utn.dds.g10.entidades;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "PRUEBA")
+@Access(value=AccessType.FIELD)
 public class PruebaPersistencia {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "id")
-	int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "emp_id")
+	private int id;
 	
 	public int getId() {
 		return id;
@@ -19,7 +21,7 @@ public class PruebaPersistencia {
 	}
 
 	@Column(name = "nombre")
-	String nombre;
+	private String nombre;
 	
 	public String getNombre() {
 		return nombre;
@@ -28,7 +30,4 @@ public class PruebaPersistencia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public PruebaPersistencia(){};
-
 }

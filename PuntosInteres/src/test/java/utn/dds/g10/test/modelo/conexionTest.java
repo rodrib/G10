@@ -1,19 +1,27 @@
 package utn.dds.g10.test.modelo;
-
-import static org.junit.Assert.assertTrue;
-
+import org.hibernate.Session;
 import org.junit.Test;
-
-import utn.dds.g10.entidades.ResultadoConsulta;
+import utn.dds.g10.entidades.PruebaPersistencia;
+import utn.dds.g10.modelo.DAO;
 import utn.dds.g10.modelo.conexion;
-
+	
 public class conexionTest {
 	
 	@Test
-	public void ExisteAlMenosUnBancoFrances() throws Exception {
-		//ResultadoConsulta resultado = miGestor.BuscarPoi("Banco Frances",usuario);
+	public void PruebaCOnJDBC() throws Exception {
 		conexion.main(null);
-		//assertTrue("Existe al menos un banco en la lista de Puntos de Interes", resultado.getPuntos().size() > 0 );
 	}
+	
+	@Test
+	public void PruebaConSessionFactory() throws Exception {
+		PruebaPersistencia prueba = new PruebaPersistencia();
+		
+		prueba.setId(1);
+		prueba.setNombre("pepito");
 
+		Session session = DAO.getSessionFactory().openSession();
+		long id = (Long)session.save(prueba);
+		System.out.println(" id="+id);
+		session.flush();
+	}
 }

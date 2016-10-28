@@ -10,7 +10,7 @@ public class conexion {
 
 	public static void main(String[] argv) throws SQLException {
 
-		System.out.println("-------- Prueba de conexión JDBC a MySQL ------------");
+		System.out.println("-------- Prueba de conexiï¿½n JDBC a MySQL ------------");
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -24,11 +24,11 @@ public class conexion {
 		Connection connection = null;
 
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "ddsistemas");
-			// Parámetros: ("string de conexión a la base", "usuario", "contraseña") autorizados para acceder a la base sys
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DDS", "root", "ddsistemas");
+			// Parï¿½metros: ("string de conexiï¿½n a la base", "usuario", "contraseï¿½a") autorizados para acceder a la base sys
 
 		} catch (SQLException e) {
-			System.out.println("Error de conexión, ver mensaje:");
+			System.out.println("Error de conexiï¿½n, ver mensaje:");
 			e.printStackTrace();
 			return;
 		}
@@ -38,7 +38,7 @@ public class conexion {
 
 			System.out.println("Creando consulta...");
 			Statement stmt = connection.createStatement();
-			String sql = "SELECT * FROM sys_config";
+			String sql = "SELECT * FROM miTablaPrueba";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			System.out.println("Registros de la columna VARIABLE de la tabla SYS_CONFIG:");
@@ -47,7 +47,7 @@ public class conexion {
 			}
 
 		} else {
-			System.out.println("Falló la conexión");
+			System.out.println("Fallï¿½ la conexiï¿½n");
 		}
 	}
 }

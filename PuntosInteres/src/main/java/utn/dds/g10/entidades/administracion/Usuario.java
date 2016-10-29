@@ -1,21 +1,39 @@
 package utn.dds.g10.entidades.administracion;
 
-import java.util.List;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import utn.dds.g10.entidades.administracion.acciones.Accion;
-
+@Entity
+@Table(name = "Usuarios")
+@Access(value = AccessType.FIELD)
 public class Usuario {
-	
-	private Rol rol;
-	private String nombre;
-	
-	public Rol getRol() {
-		return rol;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "usrID")
+	private int id;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setRol(Rol rol) {
-		this.rol = rol;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	@Column(name = "usrNombre")
+	private String nombre;
 
 	public String getNombre() {
 		return nombre;
@@ -23,6 +41,17 @@ public class Usuario {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}	
+	}
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Rol rol;
+
+	public Rol getRol() {
+		return rol;
+	}
+
 	
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 }

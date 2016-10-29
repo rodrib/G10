@@ -2,11 +2,19 @@ package utn.dds.g10.entidades.administracion;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+
 import utn.dds.g10.entidades.administracion.acciones.Accion;
 import utn.dds.g10.entidades.administracion.acciones.AuditarResultadoConsulta;
 
+@Entity
 public class RolAdministrador extends Rol {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public RolAdministrador()
 	{
 		this.setAcciones();

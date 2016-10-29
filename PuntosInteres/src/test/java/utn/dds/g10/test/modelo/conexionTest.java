@@ -7,6 +7,7 @@ import org.junit.Test;
 import utn.dds.g10.entidades.PruebaPersistencia;
 import utn.dds.g10.modelo.DAO;
 import utn.dds.g10.modelo.conexion;
+import utn.dds.g10.pruebaPersistencia.*;
 
 public class conexionTest {
 
@@ -29,5 +30,28 @@ public class conexionTest {
 		tx1.commit();
 		System.out.println("4. After committing save transaction");
 		System.out.println("*****");
+	}
+	
+	@Test
+	public void testHerencia() throws Exception{
+		
+		Normal normal = new Normal("normal", 21, "Empleado");
+	    Tecnologo tecnologo = new Tecnologo("tecnologo", 24, 4);
+	    Programador programador1 = new Programador("primer programador", 25, 4, "java", 4);
+	    Programador programador2 = new Programador("segundo programador", 25, 5, "java", 2);
+	    Tester tester = new Tester("tester", 18, 3, "JUnit");
+	    
+	    Session session = DAO.getSessionFactory().openSession();
+		Transaction tx1 = session.beginTransaction();
+		session.save(normal);
+		session.save(tecnologo);
+		session.save(programador1);
+		session.save(programador2);
+		session.save(tester);
+		tx1.commit();
+		session.disconnect();
+	    
+	    
+	    
 	}
 }

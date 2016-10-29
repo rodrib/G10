@@ -12,13 +12,7 @@ public class DAO {
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			//SessionFactory sessionFactory;
-			//Configuration cfg = new Configuration().addResource("hibernate.cfg.xml").configure();
-			//StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties());
-			//sessionFactory = cfg.buildSessionFactory(ssrb.build());
-
 			return new Configuration().addResource("hibernate.cfg.xml").configure().buildSessionFactory();
-
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);

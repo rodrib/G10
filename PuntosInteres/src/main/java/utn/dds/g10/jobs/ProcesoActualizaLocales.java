@@ -2,6 +2,7 @@ package utn.dds.g10.jobs;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.quartz.JobExecutionContext;
@@ -40,7 +41,7 @@ public class ProcesoActualizaLocales extends ProcesoPoi {
 			for (String linea : ListaContenido) {
 				ElementoCambioPoi elem = new ElementoCambioPoi();
 				String LocalComercialNombre = TokenLocalComercial.obtenerLocalComercial(linea);	
-				List<String> ListaPalabrasClave = TokenLocalComercial.obtenerPalabrasClave(linea);
+				ArrayList<String> ListaPalabrasClave = TokenLocalComercial.obtenerPalabrasClave(linea);
 				BuscadorSinReportes buscador = new BuscadorSinReportes();
 				ResultadoConsulta resultado = buscador.buscarSinReportes(LocalComercialNombre);
 				

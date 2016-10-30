@@ -95,10 +95,10 @@ public class PoiDatos {
 		////////KIOSCOS
 		miPoi = new POI();
 		Locacion locacionLocal = new Locacion();
-		locacionLocal.setDireccion("Ñire 555");
+		locacionLocal.setDireccion("ï¿½ire 555");
 		miPoi.setLocacion(locacionLocal);
 		miPoi.setNombre("Kiosco MO");
-		List<String> ListaPalabrasClave = new ArrayList<String>();
+		ArrayList<String> ListaPalabrasClave = new ArrayList<String>();
 		ListaPalabrasClave.add("caramelos");
 		miPoi.setPalabrasClaves(ListaPalabrasClave);
 		miPoi.setTipo(new LocalComercial());
@@ -144,7 +144,7 @@ public class PoiDatos {
 		localConDescuento.setNombre("24hs");
 		localConDescuento.setTipo(localKiosco);
 		
-		List<String> palabrasPoi = new LinkedList<String>();
+		ArrayList<String> palabrasPoi = new ArrayList<String>();
 		palabrasPoi.add("Viernes");
 		palabrasPoi.add("Descuentos");
 		localConDescuento.setPalabrasClaves(palabrasPoi);

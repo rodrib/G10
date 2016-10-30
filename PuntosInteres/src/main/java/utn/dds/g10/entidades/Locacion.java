@@ -1,17 +1,58 @@
 package utn.dds.g10.entidades;
 
-public class Locacion {
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+@Entity
+@Table(name = "Locacion")
+@Access(value = AccessType.FIELD)
+public class Locacion
+ {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "locacionID")
+	private int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	@Column(name = "barrio")
 	private String barrio;
+	@Column(name = "callePrincipal")
 	private String callePrincipal;
+	@Column(name = "codigoPostal")
 	private int codigoPostal;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Coordenada coordenada;
+	@Column(name = "departamento")
 	private char departamento;
+	@Column(name = "direccion")
 	private String direccion;
+	@Column(name = "entreCalles")
 	private String entreCalles;
+	@Column(name = "numero")
 	private int numero;
+	@Column(name = "pais")
 	private String pais;
+	@Column(name = "piso")
 	private int piso;
+	@Column(name = "provincia")
 	private String provincia;
+	@Column(name = "codigoComuna")
 	private int codigoComuna;
 
 	public String getBarrio() {

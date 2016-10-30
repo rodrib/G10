@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class TokenLocalComercial {
 	
-	public static List<String> obtenerPalabrasClave(String Contenido) {
-        List<String> ListaPalabrasClave = new ArrayList<String>();    
+	public static ArrayList<String> obtenerPalabrasClave(String Contenido) {
+		ArrayList<String> ListaPalabrasClave = new ArrayList<String>();    
         
         char[] c = Contenido.toCharArray();
         StringBuilder p = new StringBuilder();

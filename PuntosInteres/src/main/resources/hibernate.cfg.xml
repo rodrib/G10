@@ -20,6 +20,30 @@
 		<mapping class="utn.dds.g10.entidades.administracion.RolTerminal"></mapping>
 		<!-- Bloque - Administracion de usuarios - FIN -->
 
+		<!-- Bloque - Administracion de POI - INICIO -->
+		<mapping class="utn.dds.g10.entidades.administracion.POI"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.TipoPoi"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.Coordenada"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.Horarios"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.Locacion"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.CGP"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.ServicioCGP"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.LocalComercial"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.Kiosko"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.Libreria"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.RubroLocal"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.ParadaColectivo"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.SucursalBanco"></mapping>
+		<!-- Bloque - Administracion de POI - FIN -->
+		
+		<!-- Bloque - Administracion de Busquedas - INICIO -->
+		<mapping class="utn.dds.g10.entidades.administracion.HistorialConsultas"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.ResultadoConsulta"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.HistorialConsultasUsuario"></mapping>
+		<mapping class="utn.dds.g10.entidades.administracion.ResultadoBusquedaParcialUsuario"></mapping>
+		<!-- Bloque - Administracion de Busquedas - FIN -->
+
+
 		<!-- Bloque - PARA REALIZAR PRUEBAS - INICIO -->
 		<mapping class="utn.dds.g10.entidades.PruebaPersistencia"></mapping>
 

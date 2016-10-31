@@ -1,6 +1,6 @@
 package utn.dds.g10;
 
-public class Base {
+public class EntidadBase {
 	
 	int id;
 	String nombre;

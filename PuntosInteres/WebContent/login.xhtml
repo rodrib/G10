@@ -2,21 +2,28 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	  xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<div class="container">
 		<ui:define name="content">
 			<h:form>
+				<p:growl id="growl" showDetail="true" />
+				<p:commandButton value="Select Car" icon="ui-icon-extlink" >
+					<p:ajax event="dialogReturn" 
+						update="growl" />
+				</p:commandButton>
 				<div class="row">
 					<div class="col-md-4"></div>
 					<div class="col-md-4 ">
 						<h2 class="form-signin-heading">Login</h2>
 						<h:inputText value="#{loginBean.name}" type="text"
-							class="form-control" name="username"  p:placeholder="Ingrese Usuario"
-							required="true" autocomplete="true">
+							class="form-control" name="username"
+							p:placeholder="Ingrese Usuario" required="true"
+							autocomplete="true">
 						</h:inputText>
 						<h:inputSecret value="#{loginBean.password}" class="form-control"
-							name="password" p:placeholder="Ingrese contraseña" required="true"></h:inputSecret>
+							name="password" p:placeholder="Ingrese contraseña"
+							required="true"></h:inputSecret>
 						<h:commandButton value="Login" action="login"
 							class="btn btn-lg btn-primary btn-block"></h:commandButton>
 					</div>

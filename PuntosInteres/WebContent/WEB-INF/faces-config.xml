@@ -15,19 +15,19 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/login.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/WEB-INF/​welcome.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
 		<display-name>ABMAcciones.xhtml</display-name>
 		<from-view-id>/ABMAcciones.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>cancelar</from-outcome>
-			<to-view-id>/WEB-INF/​welcome.xhtml</to-view-id>
+			<to-view-id>/pantallaPrincipal.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/pantallaPrincipal.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -146,37 +145,8 @@ public class BusquedaBean implements Serializable{
 			
 		}
 		
-		repartirPOIenListas(poiList);
-		
 	}
 	
-	public void repartirPOIenListas(ArrayList<POI> listaPois){
-		
-		reiniciarListas();
-	
-		for (POI poi: listaPois){
-			
-			String tipoPOI = poi.getTipo().tipoPOI();
-			
-				if(tipoPOI.equals("CGP")){
-					cgpList.add(poi);
-				}else if(tipoPOI.equals("SucursalBanco")){
-					bancoList.add(poi);
-					}else if(tipoPOI.equals("ParadaColectivo")){
-						paradaColectivoList.add(poi);
-				}else if(tipoPOI.equals("LocalComercial")){
-					localComercialList.add(poi);
-				}
-		}
-	
-	}
-	
-	public void reiniciarListas(){
-		cgpList.clear();
-		bancoList.clear();
-		paradaColectivoList.clear();
-		localComercialList.clear();
-	}
 	
 	public String deleteAction(Order order) {
 
@@ -253,33 +223,6 @@ public class BusquedaBean implements Serializable{
 		}	
 	}
 	
-	//agregado mio//
-		private static final ArrayList<POI> bancoList =
-				new ArrayList<POI>();
-
-		public ArrayList<POI> getBancoList() {
-			return bancoList;
-		}
-
-		private static final ArrayList<POI> cgpList =
-				new ArrayList<POI>();
-
-		public ArrayList<POI> getCgpList() {
-			return cgpList;
-		}
-
-		private static final ArrayList<POI> localComercialList =
-				new ArrayList<POI>();
-
-		public ArrayList<POI> getLocalComercialList() {
-			return localComercialList;
-		}
-		private static final ArrayList<POI> paradaColectivoList =
-				new ArrayList<POI>();
-
-		public ArrayList<POI> getParadaColectivoList() {
-			return paradaColectivoList;
-		}
 		
 		public void probando(){
 			

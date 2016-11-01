@@ -25,6 +25,15 @@ public class BusquedaBean implements Serializable{
 	
 	Usuario usuario;
 	GestorPoi gestorPoi;
+	POI poiElegido;
+
+	public POI getPoiElegido() {
+		return poiElegido;
+	}
+
+	public void setPoiElegido(POI poiElegido) {
+		this.poiElegido = poiElegido;
+	}
 
 	public String getOrderNo() {
 		return orderNo;
@@ -270,5 +279,9 @@ public class BusquedaBean implements Serializable{
 
 		public ArrayList<POI> getParadaColectivoList() {
 			return paradaColectivoList;
+		}
+		
+		public void probando(){
+			
 		}
 }

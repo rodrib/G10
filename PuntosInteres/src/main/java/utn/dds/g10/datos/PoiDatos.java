@@ -41,24 +41,34 @@ public class PoiDatos {
 		///BANCOS
 		miPoi = new POI();
 		Locacion locacionn=new Locacion();
+		SucursalBanco sucBanco = new SucursalBanco();
+		sucBanco.setNombreGerente("Alexis Aostri");
 		locacionn.setDireccion("Billinghurst 2143");
+		locacionn.setBarrio("Recoleta");
 		miPoi.setLocacion(locacionn);
 		miPoi.setNombre("Banco Frances");
-		miPoi.setTipo(new SucursalBanco());
+		miPoi.setTipo(sucBanco);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
 		Locacion locacionn2=new Locacion();
+		SucursalBanco sucBanco2 = new SucursalBanco();
+		sucBanco.setNombreGerente("Lionel Messi");
 		locacionn2.setDireccion("French 2143");
+		locacionn2.setBarrio("Palermo");
 		miPoi.setLocacion(locacionn2);
 		miPoi.setNombre("Banco ITAU");
-		miPoi.setTipo(new SucursalBanco());
+		miPoi.setTipo(sucBanco2);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
+		SucursalBanco sucBanco3 = new SucursalBanco();
+		sucBanco.setNombreGerente("Mauricio Macri");
+		locacionn2.setDireccion("Las Heras 2143");
+		locacionn2.setBarrio("Belgrano");
 		miPoi.setLocacion(new Locacion());
 		miPoi.setNombre("Banco Frances");
-		miPoi.setTipo(new SucursalBanco());
+		miPoi.setTipo(sucBanco3);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
@@ -80,6 +90,7 @@ public class PoiDatos {
 		miPoi = new POI();
 		Locacion locacionCGP= new Locacion();
 		locacionCGP.setDireccion("Avenida siempre viva");
+		locacionCGP.setBarrio("Springfield");
 		miPoi.setLocacion(locacionCGP);
 		miPoi.setNombre("CGP Comuna 3");
 		CGP cgp = new CGP();
@@ -95,7 +106,7 @@ public class PoiDatos {
 		////////KIOSCOS
 		miPoi = new POI();
 		Locacion locacionLocal = new Locacion();
-		locacionLocal.setDireccion("�ire 555");
+		locacionLocal.setDireccion("Laguna 555");
 		miPoi.setLocacion(locacionLocal);
 		miPoi.setNombre("Kiosco MO");
 		ArrayList<String> ListaPalabrasClave = new ArrayList<String>();
@@ -114,7 +125,9 @@ public class PoiDatos {
 		
 		////////COLECTIVOS
 		miPoi = new POI();
-		miPoi.setLocacion(new Locacion());
+		Locacion locacionColectivo = new Locacion();
+		locacionColectivo.setCallePrincipal("Diagonal Norte");
+		miPoi.setLocacion(locacionColectivo);
 		miPoi.setNombre("Parada114");
 		miPoi.setTipo(new ParadaColectivo());
 		listadoPoi.add(miPoi);
@@ -140,7 +153,10 @@ public class PoiDatos {
 		localKiosco.setRubro(new Kiosco());
 		
 		POI localConDescuento = new POI();
-		localConDescuento.setLocacion(new Locacion());
+		Locacion locacion24 = new Locacion();
+		locacion24.setDireccion("Florida 99");
+		locacion24.setProvincia("CABA");
+		localConDescuento.setLocacion(locacion24);
 		localConDescuento.setNombre("24hs");
 		localConDescuento.setTipo(localKiosco);
 		

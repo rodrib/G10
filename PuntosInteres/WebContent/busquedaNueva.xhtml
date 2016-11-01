@@ -1,0 +1,132 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<div class="container">
+		<ui:define name="content">
+			<h:form id="form">
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4 ">
+						<h2 class="form-signin-heading">Búsqueda</h2>
+						<div style="width: 300px; height: 100px;">
+							<h3>Criterio de Búsqueda</h3>
+							<div class="row">
+								<div class="col-md-12">
+									<h:inputText size="10" value="#{order.orderNo}"
+										style="width:100%" class="form-control" />
+								</div>
+							</div>
+							<br />
+							<div class="row">
+								<div class="col-md-6 ">
+									<h:commandButton value="Agregar" action="#{order.addAction}"
+										class="btn btn-success btn-block" />
+								</div>
+								<div class="col-md-6">
+									<h:commandLink action="#{order.searchAction(loginBean.name)}" value="Buscar"
+										class="btn btn-primary btn-block">
+									</h:commandLink>
+									<h:inputHidden value="#{loginBean.name}" id="hiddenUsuario"></h:inputHidden>
+								</div>
+							</div>
+							<br/>
+							<p:dataTable id="listaCriterios" value="#{order.orderList}" var="o" scrollable="true" scrollHeight="70">
+						        <f:facet name="header">
+						            LISTA DE CRITERIOS
+						        </f:facet>
+						        <p:column headerText="Nombre">
+						            <h:outputText value="#{o.orderNo}" />
+						        </p:column>
+						    </p:dataTable>	
+						    <br></br>						
+							<p:dataTable id="listaResultados" value="#{order.poiList}" var="s" scrollable="true" scrollHeight="200">
+						        <f:facet name="header">
+						            RESULTADO
+						        </f:facet>
+						        <p:column headerText="Nombre">
+						            <h:outputText value="#{s.nombre}" />
+						        </p:column>
+						        <p:column headerText="Direccion">
+						            <h:outputText value="#{s.locacion.direccion}" />
+						        </p:column>				        
+						        <p:column style="text-align: center">
+						            <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+					                	<f:setPropertyActionListener value="#{s}" target="#{order.poiElegido}" />
+					            	</p:commandButton>
+						        </p:column>
+						    </p:dataTable>
+														
+							<p:dialog header="DETALLE POI" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+						        <p:outputPanel id="carDetail" style="text-align:center;">
+						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'SucursalBanco'}" >
+						                <f:facet name="header">
+											<h:graphicImage value="/banco.png" style="border:0" />
+						                </f:facet>
+						 		
+						 				<h:outputText value="TIPO POI" />
+						                <h:outputText value="SUCURSAL BANCO" />							 		
+										<h:outputText value="Direccion" />
+						                <h:outputText value="#{order.poiElegido.locacion.direccion}" />						                
+						                <h:outputText value="Zona" />
+						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />						                
+						                <h:outputText value="Nombre Gerente" />
+						                <h:outputText value="#{order.poiElegido.tipo.nombreGerente}" />
+						                
+						            </p:panelGrid>
+						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'CGP'}" >
+						                <f:facet name="header">
+											<h:graphicImage value="/cgp.png" style="border:0" />
+						                </f:facet>
+						 				<h:outputText value="TIPO POI" />
+						                <h:outputText value="CGP" />
+						                <h:outputText value="Direccion" />
+						                <h:outputText value="#{order.poiElegido.locacion.direccion}" />
+						                <h:outputText value="Zona" />
+						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />					 
+						            </p:panelGrid>
+						            
+						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'ParadaColectivo'}" >
+						                <f:facet name="header">
+											<h:graphicImage value="/colectivo.png" style="border:0" />
+						                </f:facet>
+						 
+						 				<h:outputText value="TIPO POI" />
+						                <h:outputText value="PARADA COLECTIVO" />
+						                <h:outputText value="Nombre" />
+						                <h:outputText value="#{order.poiElegido.nombre}" />						                
+						                <h:outputText value="Calle Principal" />
+						                <h:outputText value="#{order.poiElegido.locacion.callePrincipal}" />
+						                						 
+						            </p:panelGrid>
+						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'LocalComercial'}" >
+						                <f:facet name="header">
+											<h:graphicImage value="/localComercial.png" style="border:0" />
+						                </f:facet>
+						 				
+						 				<h:outputText value="TIPO POI" />
+						                <h:outputText value="LOCAL COMERCIAL" />
+						 				<h:outputText value="Direccion" />
+						                <h:outputText value="#{order.poiElegido.locacion.direccion}" />
+						                <h:outputText value="Nombre"/>
+						                <h:outputText value="#{order.poiElegido.nombre}" />	
+						                <h:outputText value="Provincia" />
+						                <h:outputText value="#{order.poiElegido.locacion.provincia}" />	
+						                				                					 
+						            </p:panelGrid>
+						        </p:outputPanel>
+						    </p:dialog>
+																				
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<br></br>
+			</h:form>
+		</ui:define>
+	</div>
+</ui:composition>
+</html>
+

@@ -2,8 +2,8 @@ package utn.dds.g10.entidades;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class SucursalBanco extends TipoPoi {
 	
@@ -11,7 +11,7 @@ public class SucursalBanco extends TipoPoi {
 	private static int HoraFin = 15;
 	
 	private String nombreGerente;
-	private List<String> servicios;
+	private ArrayList<String> servicios;
 
 	public String getNombreGerente() {
 		return nombreGerente;
@@ -21,11 +21,11 @@ public class SucursalBanco extends TipoPoi {
 		this.nombreGerente = nombreGerente;
 	}
 	
-	public List<String> getServicios() {
+	public ArrayList<String> getServicios() {
 		return servicios;
 	}
 
-	public void setServicios(List<String> servicios) {
+	public void setServicios(ArrayList<String> servicios) {
 		this.servicios = servicios;
 	}
 

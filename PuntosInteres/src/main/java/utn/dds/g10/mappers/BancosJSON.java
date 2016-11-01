@@ -45,7 +45,7 @@ public class BancosJSON {
 			POI miPoiBanco = null;
 			Locacion locacion = null;
 			
-			List<String> serviciosBanco = new ArrayList<String>();
+			ArrayList<String> serviciosBanco = new ArrayList<String>();
 
 			//Realizo el mappeo.
 			for (int i = 0; i < jsonBancosArray.length(); i++) {

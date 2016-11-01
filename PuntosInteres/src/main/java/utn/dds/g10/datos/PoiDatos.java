@@ -43,6 +43,10 @@ public class PoiDatos {
 		Locacion locacionn=new Locacion();
 		SucursalBanco sucBanco = new SucursalBanco();
 		sucBanco.setNombreGerente("Alexis Aostri");
+		ArrayList<String> listaServiciosBanco = new ArrayList<String>();
+		listaServiciosBanco.add("Comercio Exterior");
+		listaServiciosBanco.add("Cuentas Bancarias");		
+		sucBanco.setServicios(listaServiciosBanco);
 		locacionn.setDireccion("Billinghurst 2143");
 		locacionn.setBarrio("Recoleta");
 		miPoi.setLocacion(locacionn);
@@ -53,6 +57,10 @@ public class PoiDatos {
 		miPoi = new POI();
 		Locacion locacionn2=new Locacion();
 		SucursalBanco sucBanco2 = new SucursalBanco();
+		ArrayList<String> listaServiciosBanco2 = new ArrayList<String>();
+		listaServiciosBanco2.add("Comercio Exteriorr");
+		listaServiciosBanco2.add("Cuentas Bancariass");
+		sucBanco2.setServicios(listaServiciosBanco2);
 		sucBanco.setNombreGerente("Lionel Messi");
 		locacionn2.setDireccion("French 2143");
 		locacionn2.setBarrio("Palermo");
@@ -64,6 +72,10 @@ public class PoiDatos {
 		miPoi = new POI();
 		SucursalBanco sucBanco3 = new SucursalBanco();
 		sucBanco.setNombreGerente("Mauricio Macri");
+		ArrayList<String> listaServiciosBanco3 = new ArrayList<String>();
+		listaServiciosBanco3.add("Comercio Exteriorrrr");
+		listaServiciosBanco3.add("Cuentas Bancariasssss");		
+		sucBanco.setServicios(listaServiciosBanco3);
 		locacionn2.setDireccion("Las Heras 2143");
 		locacionn2.setBarrio("Belgrano");
 		miPoi.setLocacion(new Locacion());
@@ -97,8 +109,11 @@ public class PoiDatos {
 		cgp.setZonas("zona1");
 		ServicioCGP servicioCGP = new ServicioCGP();
 		servicioCGP.setNombre("tramite");
+		ServicioCGP servicioCGP2 = new ServicioCGP();
+		servicioCGP2.setNombre("tramiteee2");
 		ArrayList<ServicioCGP> listaServicios = new ArrayList<ServicioCGP>();
 		listaServicios.add(servicioCGP);
+		listaServicios.add(servicioCGP2);
 		cgp.setServicios(listaServicios);
 		miPoi.setTipo(cgp);
 		listadoPoi.add(miPoi);

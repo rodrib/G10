@@ -74,6 +74,11 @@
 						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />						                
 						                <h:outputText value="Nombre Gerente" />
 						                <h:outputText value="#{order.poiElegido.tipo.nombreGerente}" />
+						                <h:outputText value="Lista Servicios" />
+						                <ui:repeat var="item" varStatus="status" value="#{order.poiElegido.tipo.servicios}">											
+										<h:outputText value="Servicio:#{item}, " />									
+										</ui:repeat>
+						                
 						                
 						            </p:panelGrid>
 						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'CGP'}" >
@@ -85,7 +90,12 @@
 						                <h:outputText value="Direccion" />
 						                <h:outputText value="#{order.poiElegido.locacion.direccion}" />
 						                <h:outputText value="Zona" />
-						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />					 
+						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />						                
+						                <h:outputText value="Lista Servicios" />
+						                <ui:repeat var="item" varStatus="status" value="#{order.poiElegido.tipo.servicios}">											
+										<h:outputText value="Servicio:#{item.nombre}, " />									
+										</ui:repeat>
+						                				 
 						            </p:panelGrid>
 						            
 						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'ParadaColectivo'}" >

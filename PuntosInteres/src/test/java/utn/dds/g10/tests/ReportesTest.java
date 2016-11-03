@@ -10,7 +10,6 @@ import org.junit.Test;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.Reportes;
 import utn.dds.g10.entidades.ResultadoConsulta;
-import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.RolTerminal;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.GestorPoi;

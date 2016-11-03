@@ -1,9 +1,6 @@
 package utn.dds.g10.Utiles;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.regex.Pattern;
 
 public class TokenLocalComercial {
 	

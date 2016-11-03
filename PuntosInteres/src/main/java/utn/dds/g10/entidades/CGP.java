@@ -6,16 +6,12 @@ import java.util.Iterator;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.mysql.cj.jdbc.Blob;
-
 import utn.dds.g10.DAO.DaoBase;
 @Entity
 @Table(name = "CGP")

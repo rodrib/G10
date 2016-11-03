@@ -3,8 +3,6 @@ package utn.dds.g10.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import utn.dds.g10.entidades.POI;
-
 public class HistorialCambios {
 
 	private static List<CambiosPoi> listadoHistorialCambiosPoi = new ArrayList<CambiosPoi>();

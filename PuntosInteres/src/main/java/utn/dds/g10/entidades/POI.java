@@ -1,10 +1,6 @@
 package utn.dds.g10.entidades;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;

@@ -4,11 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONException;
-import org.junit.Assert;
 import org.junit.Test;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;

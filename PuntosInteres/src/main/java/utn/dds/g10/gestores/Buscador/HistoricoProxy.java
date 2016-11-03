@@ -5,8 +5,6 @@ import java.net.MalformedURLException;
 
 import org.json.JSONException;
 
-import utn.dds.g10.Utiles.Configuraciones;
-import utn.dds.g10.Utiles.GestorMail;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.entidades.administracion.acciones.AuditarResultadoConsulta;

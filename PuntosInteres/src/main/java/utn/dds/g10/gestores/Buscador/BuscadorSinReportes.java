@@ -2,15 +2,11 @@ package utn.dds.g10.gestores.Buscador;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import org.json.JSONException;
-
 import utn.dds.g10.datos.Repositorio;
-import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 

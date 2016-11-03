@@ -1,10 +1,7 @@
 package utn.dds.g10.modelo;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-
-import utn.dds.g10.entidades.PruebaPersistencia;
 
 public class DAO {
 

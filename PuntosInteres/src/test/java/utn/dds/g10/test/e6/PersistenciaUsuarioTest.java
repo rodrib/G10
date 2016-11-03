@@ -4,8 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +13,6 @@ import utn.dds.g10.DAO.UsuariosDao;
 import utn.dds.g10.entidades.administracion.Rol;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;
-import utn.dds.g10.modelo.DAO;
 
 public class PersistenciaUsuarioTest {
 

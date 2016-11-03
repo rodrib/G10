@@ -1,7 +1,5 @@
 package utn.dds.g10.tests.e4;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;

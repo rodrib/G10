@@ -3,7 +3,6 @@ package utn.dds.g10.datos;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONException;

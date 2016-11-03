@@ -11,14 +11,9 @@ import org.json.JSONObject;
 
 import utn.dds.g10.Utiles.LeerFichero;
 import utn.dds.g10.entidades.CGP;
-import utn.dds.g10.entidades.Horarios;
-import utn.dds.g10.entidades.Kiosco;
-import utn.dds.g10.entidades.Libreria;
 import utn.dds.g10.entidades.Locacion;
 import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
-import utn.dds.g10.entidades.RubroLocal;
-import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
 
 public class PoiJSON {

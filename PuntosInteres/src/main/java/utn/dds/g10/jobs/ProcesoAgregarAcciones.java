@@ -6,7 +6,6 @@ import java.util.List;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import utn.dds.g10.datos.UsuariosDatos;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.entidades.administracion.acciones.Accion;
 import utn.dds.g10.model.CambiosAccion;

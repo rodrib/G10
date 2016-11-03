@@ -1,25 +1,20 @@
 package utn.dds.g10.test.e6;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
-import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;
 
 import utn.dds.g10.DAO.DaoBase;
+import utn.dds.g10.entidades.CGP;
+import utn.dds.g10.entidades.Coordenada;
+import utn.dds.g10.entidades.Locacion;
 import utn.dds.g10.entidades.POI;
+import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.TipoPoi;
 
 public class PersistenciaPoiTest {
 	
-	POI poi;
+	POI poiBanco;
+	POI poiCGP;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -28,12 +23,24 @@ public class PersistenciaPoiTest {
 	
 	private void InicializarTest() {
 
-		poi = new POI();
+		poiBanco = new POI();
+		Coordenada coordenada = new Coordenada(1, 2);
+		Locacion locacion = new Locacion();
+		locacion.setCoordenada(coordenada);
+		poiBanco.setLocacion(locacion);
 		SucursalBanco banco = new SucursalBanco();
 		banco.getServicios().add("cheques");
-		poi.setNombre("Banco GGG");
-		poi.setTipo(banco);
+		poiBanco.setNombre("Banco GGG");
+		poiBanco.setTipo(banco);
 		
+		poiCGP = new POI();
+		CGP cgp = new CGP();
+		ServicioCGP servicioCGP = new ServicioCGP();
+		servicioCGP.setNombre("deudas");
+		poiCGP.setNombre("Comuna 45");
+		poiCGP.setTipo(cgp);
+		servicioCGP.setCgp(cgp);
+		cgp.getServicios().add(servicioCGP);
 		
 	}
 	
@@ -44,6 +51,57 @@ public class PersistenciaPoiTest {
 	public void modificarPoiTest()
 	{
 		
+		DaoBase.iniciar();
+		int id = DaoBase.crearEntidad(poiBanco);
+		POI poiObtenido = new POI();
+		poiObtenido = DaoBase.obtenerPOI(id);
+		
+//		TipoPoi tipo = new SucursalBanco();
+//		tipo = poiObtenido.getTipo();
+//
+//		SucursalBanco banco = new SucursalBanco();
+//		banco = (SucursalBanco) tipo.obtenerPOI(tipo.getIdTipoPoi());
+//		
+//		System.out.println("Servicio 1 "+banco.getServicios().get(0));
+		Coordenada coordenada = poiObtenido.getLocacion().getCoordenada();
+		System.out.println("Latitud "+coordenada.getLatitud()+" Longitud "+coordenada.getLongitud());
+		
+//		banco.getServicios().add("plazo fijo");
+		Coordenada coordenadaModificada = new Coordenada(2, 3);
+		Locacion locacion = new Locacion();
+		locacion.setCoordenada(coordenadaModificada);
+		poiObtenido.setLocacion(locacion);
+//		poiObtenido.setTipo(banco);
+		DaoBase.modificarEntidad(poiObtenido);
+		
+		DaoBase.iniciar();
+		
+		POI poiModificado = new POI();
+		poiModificado = DaoBase.obtenerPOI(id);
+		
+		System.out.println("Latitud Mod"+poiModificado.getLocacion().getCoordenada().getLatitud()+" Longitud Mod"+poiModificado.getLocacion().getCoordenada().getLongitud());
+		
+//		TipoPoi tipoModificado = new SucursalBanco();
+//		tipoModificado = (TipoPoi) poiModificado.getTipo();
+//
+//		TipoPoi bancoModificado = new SucursalBanco();
+//		bancoModificado = tipoModificado.obtenerPOI(tipoModificado.getIdTipoPoi());
+//		
+//		System.out.println("Servicio 2 "+((SucursalBanco) bancoModificado).getServicios().get(1));
+		
+//		DaoBase.iniciar();
+//		int idCGP = DaoBase.crearEntidad(poiCGP);
+//		POI poiCGPObtenido = new POI();
+//		poiCGPObtenido = DaoBase.obtenerPOI(idCGP);
+//		
+//		TipoPoi tipoCGP = new CGP();
+//		tipoCGP = poiObtenido.getTipo();
+//
+//		CGP cgp = new CGP();
+//		cgp = (CGP) tipoCGP.obtenerPOI(tipoCGP.getIdTipoPoi());
+//		
+//		System.out.println("Nombre CGP "+poiCGPObtenido.getNombre());
+//		System.out.println("Servicio CGP "+cgp.getServicios().get(0).getNombre());
 		
 	}
 	
@@ -51,45 +109,29 @@ public class PersistenciaPoiTest {
 //	recuperación, la respuesta deberá ser que no existe (null). 
 	// Crea poi con id, con un id de tipo poi -> id
 	@Test
-	public void crearEliminarPoiTest()
+	public void crearEliminarPoiTest() throws Exception
 	{
 		
 		DaoBase.iniciar();
-		int id = DaoBase.crearEntidad(poi);
-		ArrayList<POI> lista = new ArrayList<POI>();
-		lista = (ArrayList<POI>) DaoBase.obtenerPois();
+		int id = DaoBase.crearEntidad(poiBanco);
 		POI poiObtenido = new POI();
-		for (POI p : lista) {
-			if (p.getId()==id)
-				poiObtenido=p;
-		}
+		poiObtenido = DaoBase.obtenerPOI(id);
 		
-		System.out.println("Nombre del banco " + poiObtenido.getNombre());
 		TipoPoi tipo = new SucursalBanco();
-		tipo = (TipoPoi) poiObtenido.getTipo();
+		tipo = poiObtenido.getTipo();
 
-		System.out.println(tipo.getClass());
-
-		TipoPoi banco = new SucursalBanco();
-		banco = tipo.obtenerPOI(tipo.getIdTipoPoi());
+		SucursalBanco banco = new SucursalBanco();
+		banco = (SucursalBanco) tipo.obtenerPOI(tipo.getIdTipoPoi());
 		
-		System.out.println("Servicio "+((SucursalBanco) banco).getServicios().get(0));
+		System.out.println("Servicio 1 "+banco.getServicios().get(0));
 		
-//		EntityManager entityManager; 
-//		
-//		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-//		
-//		POI foo = new POI();
-//		foo.setId(1);
-//		foo.setNombre("the foo");
-//		int id2 = DaoBase.crearEntidad(foo);
-//		CriteriaBuilder qb = entityManager.getCriteriaBuilder();
-//		CriteriaQuery<POI> q = qb.createQuery(POI.class);
-//		Root<POI> root = q.from(POI.class);
-//		q.where(qb.equal(root.get("name"), "the foo"));
-//		entityManager.createQuery(q).getSingleResult();
+		DaoBase.eliminarPoi(poiObtenido);
 		
-		
+		POI poiEliminado = new POI();
+		poiEliminado = DaoBase.obtenerPOI(id);
+			
+		if (poiEliminado==null)
+			System.out.println("El banco fue eliminado");
 		
 	}
 	

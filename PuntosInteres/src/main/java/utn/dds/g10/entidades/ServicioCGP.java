@@ -50,7 +50,7 @@ public class ServicioCGP implements java.io.Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ServicioCGP")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idTipoPoi")
 	public ArrayList<Horarios> getHorarios() {
 		return horarios;
 	}

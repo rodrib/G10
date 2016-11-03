@@ -1,15 +1,18 @@
 package utn.dds.g10.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import utn.dds.g10.entidades.CGP;
+import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
+import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.administracion.Usuario;
-import utn.dds.g10.model.ProcesoListener;
 import utn.dds.g10.modelo.DAO;
 
 
@@ -65,25 +68,27 @@ public class DaoBase {
 		return entidad;
 	}
 	
-	public static Object obtenerPOI(int id) {
+	public static void eliminarPoi(POI entidadBorrada)
+	{
+		entidadBorrada.setEstadoAlta(false);
 		Session asession = DAO.getSessionFactory().openSession();
-		Object entidad = (POI) asession.get(POI.class, id);
-		asession.close();
-		return entidad;
-	}
-	
-	public static Object obtenerBanco(int id) {
-		Session asession = DAO.getSessionFactory().openSession();
-		Object entidad = (SucursalBanco) asession.get(SucursalBanco.class, id);
-		
-		asession.close();
-		return entidad;
-	}
-	
-	public ProcesoListener getProcesoListener() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		return (ProcesoListener) getClass().getClassLoader().loadClass(getClass().getName()+"Listener").newInstance();
+		asession .beginTransaction();
+		asession .update(entidadBorrada);
+		asession .getTransaction().commit();
+		asession .close();
 	}
 
+	
+	public static POI obtenerPOI(int id) {
+		ArrayList<POI> lista = new ArrayList<POI>();
+		lista = (ArrayList<POI>) DaoBase.obtenerPois();
+		for (POI p : lista) {
+			if (p.getId()==id &&p.getEstadoAlta()!=false)
+				return p;
+		}
+		return null;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static List<POI> obtenerPois() {
 		
@@ -103,16 +108,62 @@ public class DaoBase {
 	@SuppressWarnings("unchecked")
 	public static List<SucursalBanco> obtenerBancos() {
 		iniciar();
-		
-		@SuppressWarnings("deprecation")
-		List<SucursalBanco> bancos = (List<SucursalBanco>) session.createCriteria(SucursalBanco.class).list();
 
-	      //Si lo quito da pete ya que no lo carga en la sesion
-	      for(SucursalBanco b: bancos){
-	       Hibernate.initialize(b.getServicios());
-	      }
-	      return bancos;
-	     }
+		@SuppressWarnings("deprecation")
+		List<SucursalBanco> bancos = (List<SucursalBanco>) session
+				.createCriteria(SucursalBanco.class).list();
+
+		// Si lo quito da pete ya que no lo carga en la sesion
+		for (SucursalBanco b : bancos) {
+			Hibernate.initialize(b.getServicios());
+		}
+		return bancos;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<ParadaColectivo> obtenerParadas() {
+		iniciar();
+
+		@SuppressWarnings("deprecation")
+		List<ParadaColectivo> paradas = (List<ParadaColectivo>) session
+				.createCriteria(ParadaColectivo.class).list();
+
+		// Si lo quito da pete ya que no lo carga en la sesion
+		for (ParadaColectivo p : paradas) {
+			Hibernate.initialize(p);
+		}
+		return paradas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<LocalComercial> obtenerLocales() {
+		iniciar();
+
+		@SuppressWarnings("deprecation")
+		List<LocalComercial> locales = (List<LocalComercial>) session
+				.createCriteria(LocalComercial.class).list();
+
+		// Si lo quito da pete ya que no lo carga en la sesion
+		for (LocalComercial l : locales) {
+			Hibernate.initialize(l.getRubro());
+		}
+		return locales;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<CGP> obtenerCGPs() {
+		iniciar();
+
+		@SuppressWarnings("deprecation")
+		List<CGP> cgps = (List<CGP>) session
+				.createCriteria(CGP.class).list();
+
+		// Si lo quito da pete ya que no lo carga en la sesion
+		for (CGP cgp : cgps) {
+			Hibernate.initialize(cgp.getServicios());
+		}
+		return cgps;
+	}
 	
 	
 	public static void eliminarEntidad(Object entidadEliminar) throws Exception

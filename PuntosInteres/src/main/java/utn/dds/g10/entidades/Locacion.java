@@ -9,19 +9,25 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 @Entity
 @Table(name = "Locacion")
 @Access(value = AccessType.FIELD)
-public class Locacion
+public class Locacion implements java.io.Serializable
  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private int id;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "locacionID")
-	private int id;
-
 	public int getId() {
 		return id;
 	}
@@ -30,13 +36,24 @@ public class Locacion
 		this.id = id;
 	}
 	
+	private POI poi;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	public POI getPoi() {
+		return poi;
+	}
+
+	public void setPoi(POI poi) {
+		this.poi = poi;
+	}
+
 	@Column(name = "barrio")
 	private String barrio;
 	@Column(name = "callePrincipal")
 	private String callePrincipal;
 	@Column(name = "codigoPostal")
 	private int codigoPostal;
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Coordenada coordenada;
 	@Column(name = "departamento")
 	private char departamento;
@@ -79,6 +96,7 @@ public class Locacion
 		this.codigoPostal = codigoPostal;
 	}
 
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "Locacion", cascade = CascadeType.ALL)
 	public Coordenada getCoordenada() {
 		return coordenada;
 	}

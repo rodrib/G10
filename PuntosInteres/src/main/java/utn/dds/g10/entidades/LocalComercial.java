@@ -1,11 +1,14 @@
 package utn.dds.g10.entidades;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+
+import utn.dds.g10.DAO.DaoBase;
 @Entity
 public class LocalComercial extends TipoPoi {
 	/**
@@ -64,7 +67,14 @@ public class LocalComercial extends TipoPoi {
 
 	@Override
 	public TipoPoi obtenerPOI(int id) {
-		// TODO Auto-generated method stub
+		//buscar local -> buscar rubro
+		ArrayList<LocalComercial> listaLocales = new ArrayList<LocalComercial>();
+		listaLocales = (ArrayList<LocalComercial>) DaoBase.obtenerLocales();
+
+		for (LocalComercial l : listaLocales) {
+			if (l.getIdTipoPoi()==id)
+				return l;
+		}
 		return null;
 	}
 }

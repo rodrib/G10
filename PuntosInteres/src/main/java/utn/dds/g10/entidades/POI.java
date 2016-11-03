@@ -18,20 +18,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import utn.dds.g10.DAO.DaoBase;
+
 @Entity
 @Table(name = "POI")
-@Access(value = AccessType.FIELD)
 public class POI implements java.io.Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private int id;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PoiID")
-	private int id;
-
 	public int getId() {
 		return id;
 	}
@@ -39,8 +40,17 @@ public class POI implements java.io.Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	
+	public POI obtenerPOI(int id) {
+		ArrayList<POI> lista = new ArrayList<POI>();
+		lista = (ArrayList<POI>) DaoBase.obtenerPois();
+		for (POI p : lista) {
+			if (p.getId()==id)
+				return p;
+		}
+		return null;
+	}
+	
 	private Locacion locacion;
 	@Column(name = "nombre")
 	private String nombre;
@@ -73,6 +83,7 @@ public class POI implements java.io.Serializable{
 	public void setPalabrasClaves(ArrayList<String> palabrasClaves) {
 		this.palabrasClaves = palabrasClaves;
 	}
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "POI", cascade = CascadeType.ALL)
 	public Locacion getLocacion() {
 		return locacion;
 	}

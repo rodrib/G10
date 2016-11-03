@@ -2,23 +2,31 @@ package utn.dds.g10.entidades;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Coordenada")
-@Access(value = AccessType.FIELD)
-public class Coordenada {
+public class Coordenada implements java.io.Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private int id;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "coordenadaID")
-	private int id;
-
 	public int getId() {
 		return id;
 	}
@@ -30,6 +38,18 @@ public class Coordenada {
 	private float latitud;
 	@Column(name = "longitud")
 	private float longitud;
+	
+	private Locacion locacion;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	public Locacion getLocacion() {
+		return locacion;
+	}
+
+	public void setLocacion(Locacion locacion) {
+		this.locacion = locacion;
+	}
 
 	public Coordenada(float lat, float longi)
 	{

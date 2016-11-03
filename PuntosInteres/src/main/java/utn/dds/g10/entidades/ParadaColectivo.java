@@ -1,8 +1,11 @@
 package utn.dds.g10.entidades;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
+
+import utn.dds.g10.DAO.DaoBase;
 @Entity
 public class ParadaColectivo extends TipoPoi {
 
@@ -39,7 +42,13 @@ public class ParadaColectivo extends TipoPoi {
 
 	@Override
 	public TipoPoi obtenerPOI(int id) {
-		// TODO Auto-generated method stub
+		ArrayList<ParadaColectivo> listaParadas = new ArrayList<ParadaColectivo>();
+		listaParadas = (ArrayList<ParadaColectivo>) DaoBase.obtenerParadas();
+
+		for (ParadaColectivo p : listaParadas) {
+			if (p.getIdTipoPoi()==id)
+				return p;
+		}
 		return null;
 	}
 

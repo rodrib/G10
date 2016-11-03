@@ -6,14 +6,17 @@ import java.util.Iterator;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.mysql.cj.jdbc.Blob;
+
+import utn.dds.g10.DAO.DaoBase;
 @Entity
 @Table(name = "CGP")
 @Access(value=AccessType.FIELD)
@@ -73,10 +76,13 @@ public class CGP extends TipoPoi {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "CGP")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idTipoPoi")
+	@Lob
+	@Column(columnDefinition="blob")
 	public ArrayList<ServicioCGP> getServicios() {
 		return servicios;
 	}
+	
 
 	public void setServicios(ArrayList<ServicioCGP> servicios) {
 		this.servicios = servicios;
@@ -147,7 +153,13 @@ public class CGP extends TipoPoi {
 
 	@Override
 	public TipoPoi obtenerPOI(int id) {
-		// TODO Auto-generated method stub
+		ArrayList<CGP> listaCGPs = new ArrayList<CGP>();
+		listaCGPs = (ArrayList<CGP>) DaoBase.obtenerCGPs();
+
+		for (CGP cgp : listaCGPs) {
+			if (cgp.getIdTipoPoi()==id)
+				return cgp;
+		}
 		return null;
 	}
 

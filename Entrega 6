@@ -1,0 +1,3 @@
+Para conseguir una persistencia relacional, primeramente le agregamos a las distintas clases un atributo denomido ID que fue necesario
+para poder persistir esas clases. Por otro lado a las interfaces que teníamos las transformamos en clases abstractas para poder 
+persistirlas ya que las interfaces no son soportadas para dicha funcionalidad.  

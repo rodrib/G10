@@ -4,9 +4,44 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ServicioCGP {
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity
+public class ServicioCGP implements java.io.Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "servicioCGPID")
+	private int id;
+	@Column
 	private String nombre;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CGP", nullable = false)
+	private CGP cgp;
+	
+	
+	public CGP getCgp() {
+		return cgp;
+	}
+	public void setCgp(CGP cgp) {
+		this.cgp = cgp;
+	}
+	
+	
 	private ArrayList<Horarios> horarios = new ArrayList<Horarios>();
 	
 	public String getNombre() {
@@ -15,6 +50,7 @@ public class ServicioCGP {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ServicioCGP")
 	public ArrayList<Horarios> getHorarios() {
 		return horarios;
 	}

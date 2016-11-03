@@ -5,13 +5,35 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+
+import utn.dds.g10.DAO.DaoBase;
+
+@Entity
+@Table(name = "sucursalBanco")
+
 public class SucursalBanco extends TipoPoi {
-	
+
+	private static final long serialVersionUID = 1L;
+	@Column
 	private static int HoraInicio = 10;
+	@Column
 	private static int HoraFin = 15;
-	
+	@Column
 	private String nombreGerente;
-	private ArrayList<String> servicios;
+	
+
+	private ArrayList<String> servicios = new ArrayList<String>();
 
 	public String getNombreGerente() {
 		return nombreGerente;
@@ -20,7 +42,8 @@ public class SucursalBanco extends TipoPoi {
 	public void setNombreGerente(String nombreGerente) {
 		this.nombreGerente = nombreGerente;
 	}
-	
+	@ElementCollection
+	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="idTipoPoi"))
 	public ArrayList<String> getServicios() {
 		return servicios;
 	}
@@ -73,6 +96,18 @@ public class SucursalBanco extends TipoPoi {
 	@Override
 	public String tipoPOI() {
 		return "SucursalBanco";
+	}
+
+	@Override
+	public TipoPoi obtenerPOI(int id) {
+		ArrayList<SucursalBanco> listaBancos = new ArrayList<SucursalBanco>();
+		listaBancos = (ArrayList<SucursalBanco>) DaoBase.obtenerBancos();
+
+		for (SucursalBanco b : listaBancos) {
+			if (b.getIdTipoPoi()==id)
+				return b;
+		}
+		return null;
 	}
 
 }

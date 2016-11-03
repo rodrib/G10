@@ -2,7 +2,18 @@ package utn.dds.g10.entidades;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+@Entity
 public class LocalComercial extends TipoPoi {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private RubroLocal rubro;
 	//List<DayOfWeek> diasDisponible;	
 
@@ -49,6 +60,12 @@ public class LocalComercial extends TipoPoi {
 	@Override
 	public String tipoPOI() {
 		return "LocalComercial";
+	}
+
+	@Override
+	public TipoPoi obtenerPOI(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

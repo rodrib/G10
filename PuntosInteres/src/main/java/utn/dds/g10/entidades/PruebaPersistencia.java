@@ -35,6 +35,27 @@ public class PruebaPersistencia implements java.io.Serializable {
 		return listaElem;
 	}
 
+	ArrayList<String> listaText = new ArrayList<String>();
+	
+
+	public ArrayList<Elemento> getListaElem() {
+		return listaElem;
+	}
+
+	public void setListaElem(ArrayList<Elemento> listaElem) {
+		this.listaElem = listaElem;
+	}
+	@ElementCollection
+	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="emp_id"))
+	public ArrayList<String> getListaText() {
+		return listaText;
+	}
+
+	public void setListaText(ArrayList<String> listaText) {
+		this.listaText = listaText;
+	}
+
+
 	@Column(name = "nombre")
 	private String nombre;
 	

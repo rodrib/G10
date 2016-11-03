@@ -2,7 +2,14 @@ package utn.dds.g10.entidades;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+@Entity
 public class ParadaColectivo extends TipoPoi {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public float getDistanciaMaxima() {
@@ -28,6 +35,12 @@ public class ParadaColectivo extends TipoPoi {
 	@Override
 	public String tipoPOI() {
 		return "ParadaColectivo";
+	}
+
+	@Override
+	public TipoPoi obtenerPOI(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

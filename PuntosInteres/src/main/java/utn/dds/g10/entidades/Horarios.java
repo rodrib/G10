@@ -4,14 +4,21 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "Horarios")
 @Access(value = AccessType.FIELD)
-public class Horarios {
+public class Horarios implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "horariosID")
@@ -34,6 +41,10 @@ public class Horarios {
 	private int horaHasta;
 	@Column
 	private int minutosHasta;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "servicioCGPID", nullable = false)
+	private ServicioCGP servicioCGP;
 	
 	public int getDiaSemana() {
 		return diaSemana;

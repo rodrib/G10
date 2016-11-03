@@ -26,6 +26,7 @@ public class conexionTest {
 		prueba.setId(1);
 		prueba.setNombre("juancito");
 		prueba.getLista().add(elem);
+		prueba.getListaText().add("empanada");
 		
 		Session session = DAO.getSessionFactory().openSession();
 		Transaction tx1 = session.beginTransaction();
@@ -36,6 +37,7 @@ public class conexionTest {
 		pruebaObt = (PruebaPersistencia) session.get(PruebaPersistencia.class, 1);
 		Elemento elemObt = pruebaObt.getLista().get(0);
 		System.out.println("nom "+pruebaObt.getNombre()+" elem "+elemObt.getNumero());
+		System.out.println("text "+pruebaObt.getListaText().get(0));
 		System.out.println("*****");
 	}
 	

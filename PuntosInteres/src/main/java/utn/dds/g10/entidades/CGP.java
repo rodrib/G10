@@ -3,13 +3,35 @@ package utn.dds.g10.entidades;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name = "CGP")
+@Access(value=AccessType.FIELD)
 public class CGP extends TipoPoi {
 
+	
+	private static final long serialVersionUID = 1L;
+	@Column
 	private String comuna;
+	@Column
 	private String zonas;
+	@Column
 	private String director;
+	@Column
 	private String domicilio;
+	@Column
 	private String telefono;
+	
 	private ArrayList<ServicioCGP> servicios = new ArrayList<ServicioCGP>();	
 	
 	public String getComuna() {
@@ -51,7 +73,7 @@ public class CGP extends TipoPoi {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "CGP")
 	public ArrayList<ServicioCGP> getServicios() {
 		return servicios;
 	}
@@ -121,6 +143,12 @@ public class CGP extends TipoPoi {
 	@Override
 	public String tipoPOI() {
 		return "CGP";
+	}
+
+	@Override
+	public TipoPoi obtenerPOI(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

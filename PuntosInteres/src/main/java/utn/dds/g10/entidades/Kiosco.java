@@ -3,10 +3,21 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.DayOfWeek;
 
-public class Kiosco implements RubroLocal {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+@Entity
+public class Kiosco extends RubroLocal {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Column
 	private LocalTime HorarioInicio1 = LocalTime.of(10,0,0);
+	@Column
 	private LocalTime HorarioFin1 = LocalTime.of(13,0,0);
+	@Column
 	private LocalTime HorarioInicio2 = LocalTime.of(17,0,0);
+	@Column
 	private LocalTime HorarioFin2 = LocalTime.of(20,30,0);
 		
 	public float getDistanciaMaxima() {

@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 
-import utn.dds.g10.DAO.DaoBase;
+import utn.dds.g10.DAO.DaoRelacional;
 @Entity
 public class LocalComercial extends TipoPoi {
 	/**
@@ -69,7 +69,7 @@ public class LocalComercial extends TipoPoi {
 	public TipoPoi obtenerPOI(int id) {
 		//buscar local -> buscar rubro
 		ArrayList<LocalComercial> listaLocales = new ArrayList<LocalComercial>();
-		listaLocales = (ArrayList<LocalComercial>) DaoBase.obtenerLocales();
+		listaLocales = (ArrayList<LocalComercial>) DaoRelacional.obtenerLocales();
 
 		for (LocalComercial l : listaLocales) {
 			if (l.getIdTipoPoi()==id)

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.persistence.Entity;
 
-import utn.dds.g10.DAO.DaoBase;
+import utn.dds.g10.DAO.DaoRelacional;
 @Entity
 public class ParadaColectivo extends TipoPoi {
 
@@ -43,7 +43,7 @@ public class ParadaColectivo extends TipoPoi {
 	@Override
 	public TipoPoi obtenerPOI(int id) {
 		ArrayList<ParadaColectivo> listaParadas = new ArrayList<ParadaColectivo>();
-		listaParadas = (ArrayList<ParadaColectivo>) DaoBase.obtenerParadas();
+		listaParadas = (ArrayList<ParadaColectivo>) DaoRelacional.obtenerParadas();
 
 		for (ParadaColectivo p : listaParadas) {
 			if (p.getIdTipoPoi()==id)

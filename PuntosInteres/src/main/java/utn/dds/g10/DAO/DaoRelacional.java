@@ -11,12 +11,13 @@ import utn.dds.g10.entidades.CGP;
 import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
+import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.administracion.Usuario;
-import utn.dds.g10.modelo.DAO;
+import utn.dds.g10.modelo.ConexionDB;
 
 
-public class DaoBase {
+public class DaoRelacional implements Dao  {
 	static Session session;
 	static Transaction transaccion;
 
@@ -38,12 +39,14 @@ public class DaoBase {
 
 	public static void iniciar() {
 		if (session == null) {
-			setSession(DAO.getSessionFactory().openSession());
+			setSession(ConexionDB.getSessionFactory().openSession());
 		}
 	}
+	
 
-	public static int crearEntidad(Object entidad) {
-		Session session = DAO.getSessionFactory().openSession();
+	@Override
+	public  int crearEntidad(Object entidad) {
+		Session session = ConexionDB.getSessionFactory().openSession();
 		session.beginTransaction();
 		Integer i = (Integer) session.save(entidad);
 		System.out.println("Id de entidad creada:" + i);
@@ -54,24 +57,31 @@ public class DaoBase {
 	
 	public static void modificarEntidad(Object entidadModificada)
 	{
-		Session asession = DAO.getSessionFactory().openSession();
+		Session asession = ConexionDB.getSessionFactory().openSession();
 		asession .beginTransaction();
 		asession .update(entidadModificada);
 		asession .getTransaction().commit();
 		asession .close();
 	}
 
-	public static Object obtenerEntidadPorId(int idUsuario, Class<Usuario> clase) {
-		Session asession = DAO.getSessionFactory().openSession();
-		Object entidad = (Usuario) asession.get(clase, idUsuario);
+	public static Usuario obtenerEntidadPorId(int idUsuario, Class<Usuario> clase) {
+		Session asession = ConexionDB.getSessionFactory().openSession();
+		Usuario entidad = (Usuario) asession.get(clase, idUsuario);
 		asession.close();
 		return entidad;
 	}
 	
+//	public static ResultadoConsulta obtenerEntidadPorId(int idUsuario, Class<ResultadoConsulta> clase) {
+//		Session asession = DAO.getSessionFactory().openSession();
+//		Usuario entidad = (ResultadoConsulta) asession.get(clase, idUsuario);
+//		asession.close();
+//		return entidad;
+//	}
+	
 	public static void eliminarPoi(POI entidadBorrada)
 	{
 		entidadBorrada.setEstadoAlta(false);
-		Session asession = DAO.getSessionFactory().openSession();
+		Session asession = ConexionDB.getSessionFactory().openSession();
 		asession .beginTransaction();
 		asession .update(entidadBorrada);
 		asession .getTransaction().commit();
@@ -81,7 +91,7 @@ public class DaoBase {
 	
 	public static POI obtenerPOI(int id) {
 		ArrayList<POI> lista = new ArrayList<POI>();
-		lista = (ArrayList<POI>) DaoBase.obtenerPois();
+		lista = (ArrayList<POI>) DaoRelacional.obtenerPois();
 		for (POI p : lista) {
 			if (p.getId()==id &&p.getEstadoAlta()!=false)
 				return p;
@@ -169,7 +179,7 @@ public class DaoBase {
 	public static void eliminarEntidad(Object entidadEliminar) throws Exception
 	{
 		try {
-			Session asession = DAO.getSessionFactory().openSession();
+			Session asession = ConexionDB.getSessionFactory().openSession();
 			asession .beginTransaction();
 			asession .delete(entidadEliminar);
 			asession .getTransaction().commit();

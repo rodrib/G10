@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import utn.dds.g10.DAO.DaoBase;
+import utn.dds.g10.DAO.DaoRelacional;
 
 @Entity
 @Table(name = "POI")
@@ -39,7 +39,7 @@ public class POI implements java.io.Serializable{
 	
 	public POI obtenerPOI(int id) {
 		ArrayList<POI> lista = new ArrayList<POI>();
-		lista = (ArrayList<POI>) DaoBase.obtenerPois();
+		lista = (ArrayList<POI>) DaoRelacional.obtenerPois();
 		for (POI p : lista) {
 			if (p.getId()==id)
 				return p;

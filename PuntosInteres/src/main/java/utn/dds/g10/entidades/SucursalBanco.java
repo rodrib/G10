@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-import utn.dds.g10.DAO.DaoBase;
+import utn.dds.g10.DAO.DaoRelacional;
 
 @Entity
 @Table(name = "sucursalBanco")
@@ -96,7 +96,7 @@ public class SucursalBanco extends TipoPoi {
 	@Override
 	public TipoPoi obtenerPOI(int id) {
 		ArrayList<SucursalBanco> listaBancos = new ArrayList<SucursalBanco>();
-		listaBancos = (ArrayList<SucursalBanco>) DaoBase.obtenerBancos();
+		listaBancos = (ArrayList<SucursalBanco>) DaoRelacional.obtenerBancos();
 
 		for (SucursalBanco b : listaBancos) {
 			if (b.getIdTipoPoi()==id)

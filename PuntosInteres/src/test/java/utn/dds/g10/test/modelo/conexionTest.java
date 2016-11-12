@@ -1,16 +1,29 @@
 package utn.dds.g10.test.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.junit.Before;
 import org.junit.Test;
 
+import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.entidades.Elemento;
 import utn.dds.g10.entidades.PruebaPersistencia;
-import utn.dds.g10.modelo.DAO;
+import utn.dds.g10.modelo.ConexionDB;
 import utn.dds.g10.modelo.conexion;
 import utn.dds.g10.pruebaPersistencia.*;
 
 public class conexionTest {
+	
+	DaoRelacional repositorio;
+	
+	@Before
+	public void setUp()
+	{
+		repositorio = new DaoRelacional();
+	}
 
 	@Test
 	public void PruebaCOnJDBC() throws Exception {
@@ -28,7 +41,7 @@ public class conexionTest {
 		prueba.getLista().add(elem);
 		prueba.getListaText().add("empanada");
 		
-		Session session = DAO.getSessionFactory().openSession();
+		Session session = ConexionDB.getSessionFactory().openSession();
 		Transaction tx1 = session.beginTransaction();
 		session.save(prueba);
 		System.out.println("3. Before committing save transaction");
@@ -50,7 +63,7 @@ public class conexionTest {
 	    Programador programador2 = new Programador("segundo programador", 25, 5, "java", 2);
 	    Tester tester = new Tester("tester", 18, 3, "JUnit");
 	    
-	    Session session = DAO.getSessionFactory().openSession();
+	    Session session = ConexionDB.getSessionFactory().openSession();
 		Transaction tx1 = session.beginTransaction();
 		session.save(normal);
 		session.save(tecnologo);
@@ -62,5 +75,26 @@ public class conexionTest {
 	    
 	    
 	    
+	}
+	
+	@Test
+	public void altaConList() {
+		
+		Customer cus;
+		Order o = new Order();
+		o.setNumber("3");
+		
+		List<Order> lista = new ArrayList<Order>();
+		lista.add(o);
+		
+		cus = new Customer();
+		cus.setOrders(lista);
+
+		repositorio.crearEntidad(cus);
+		DaoRelacional.getSession().flush();
+		
+		o.setCustomer(cus);
+		repositorio.crearEntidad(o);
+		
 	}
 }

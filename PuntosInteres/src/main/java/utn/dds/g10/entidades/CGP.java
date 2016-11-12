@@ -12,7 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import utn.dds.g10.DAO.DaoBase;
+import utn.dds.g10.DAO.DaoRelacional;
 @Entity
 @Table(name = "CGP")
 @Access(value=AccessType.FIELD)
@@ -150,7 +150,7 @@ public class CGP extends TipoPoi {
 	@Override
 	public TipoPoi obtenerPOI(int id) {
 		ArrayList<CGP> listaCGPs = new ArrayList<CGP>();
-		listaCGPs = (ArrayList<CGP>) DaoBase.obtenerCGPs();
+		listaCGPs = (ArrayList<CGP>) DaoRelacional.obtenerCGPs();
 
 		for (CGP cgp : listaCGPs) {
 			if (cgp.getIdTipoPoi()==id)

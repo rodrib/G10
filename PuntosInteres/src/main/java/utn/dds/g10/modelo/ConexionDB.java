@@ -3,7 +3,7 @@ package utn.dds.g10.modelo;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DAO {
+public class ConexionDB {
 
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 

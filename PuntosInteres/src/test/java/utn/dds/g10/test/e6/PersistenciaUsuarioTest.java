@@ -8,11 +8,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import utn.dds.g10.DAO.DaoBase;
+import utn.dds.g10.DAO.Dao;
+import utn.dds.g10.DAO.DaoMongo;
+import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.DAO.UsuariosDao;
 import utn.dds.g10.entidades.administracion.Rol;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;
+import utn.dds.g10.pruebaPersistencia.Order;
 
 public class PersistenciaUsuarioTest {
 
@@ -20,10 +23,14 @@ public class PersistenciaUsuarioTest {
 	Usuario usuarioModificacion;
 	Usuario usuarioConsulta;
 	Usuario usuarioEliminar;
+	
+	Dao repositorio;
 
 	@Before
 	public void setUp() throws Exception {
 		this.InicializarTest();
+		//repositorio = new DaoRelacional();
+		repositorio = new DaoMongo();
 	}
 
 	private String obtenerHoraString() {
@@ -56,7 +63,14 @@ public class PersistenciaUsuarioTest {
 
 	@Test
 	public void altaUsuario() {
-		DaoBase.crearEntidad(usuarioAlta);
+		repositorio.crearEntidad(usuarioAlta);
+	}
+	
+	@Test
+	public void altaCliente() {
+		Order o = new Order();
+		o.setNumber("5");
+		repositorio.crearEntidad(o);
 	}
 
 	@Test
@@ -67,35 +81,35 @@ public class PersistenciaUsuarioTest {
 
 	@Test
 	public void modificarUsuario() {
-		DaoBase.modificarEntidad(usuarioModificacion);
+		DaoRelacional.modificarEntidad(usuarioModificacion);
 	}
 
 	@Test
 	public void elminarUsuario() throws Exception {
-		DaoBase.eliminarEntidad(usuarioEliminar);
+		DaoRelacional.eliminarEntidad(usuarioEliminar);
 	}
 
 	@Test
 	public void ObtenerYModificarUsuario() throws Exception {
 		usuarioConsulta = UsuariosDao.obtenerUsuarioPorId(10);
 		usuarioConsulta.setNombre("obtener y modi ");
-		DaoBase.modificarEntidad(usuarioConsulta);
+		DaoRelacional.modificarEntidad(usuarioConsulta);
 	}
 
 	@Test
 	public void testEntrega6Usuario() throws Exception {
 		// Dar de alta y persistir usuario
-		int idUsuarioCreado = DaoBase.crearEntidad(usuarioAlta);
+		int idUsuarioCreado = repositorio.crearEntidad(usuarioAlta);
 
 		// Recuperación de usuario
-		Usuario usuarioCreado = (Usuario) DaoBase.obtenerEntidadPorId(idUsuarioCreado, Usuario.class);
+		Usuario usuarioCreado = (Usuario) DaoRelacional.obtenerEntidadPorId(idUsuarioCreado, Usuario.class);
 
 		// Modificación de Usuario y persistir modificación
 		usuarioCreado.setNombre("nombre modificado: " + obtenerHoraString());
-		DaoBase.modificarEntidad(usuarioCreado);
+		DaoRelacional.modificarEntidad(usuarioCreado);
 
 		// Recupero usuario luego de modifiación
-		Usuario usuarioLuegoDeModificacion = (Usuario) DaoBase.obtenerEntidadPorId(idUsuarioCreado, Usuario.class);
+		Usuario usuarioLuegoDeModificacion = (Usuario) DaoRelacional.obtenerEntidadPorId(idUsuarioCreado, Usuario.class);
 		
 		//Comparo el nombre del usuario antes y despues.
 		

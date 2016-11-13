@@ -51,5 +51,11 @@ public class ParadaColectivo extends TipoPoi {
 		}
 		return null;
 	}
+	
+	private ArrayList<String> servicios = new ArrayList<String>();
+
+	public ArrayList<String> getServicios() {
+		return servicios;
+	}
 
 }

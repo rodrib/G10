@@ -51,7 +51,10 @@
 						        </p:column>
 						        <p:column headerText="Direccion">
 						            <h:outputText value="#{s.locacion.direccion}" />
-						        </p:column>				        
+						        </p:column>	
+						        <p:column headerText="Tipo POI">
+						            <h:outputText value="#{s.tipo.tipoPOI()}" />
+						        </p:column>			        
 						        <p:column style="text-align: center">
 						            <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
 					                	<f:setPropertyActionListener value="#{s}" target="#{order.poiElegido}" />
@@ -61,43 +64,7 @@
 														
 							<p:dialog header="DETALLE POI" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 						        <p:outputPanel id="carDetail" style="text-align:center;">
-						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'SucursalBanco'}" >
-						                <f:facet name="header">
-											<h:graphicImage value="/banco.png" style="border:0" />
-						                </f:facet>
-						 		
-						 				<h:outputText value="TIPO POI" />
-						                <h:outputText value="SUCURSAL BANCO" />							 		
-										<h:outputText value="Direccion" />
-						                <h:outputText value="#{order.poiElegido.locacion.direccion}" />						                
-						                <h:outputText value="Zona" />
-						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />						                
-						                <h:outputText value="Nombre Gerente" />
-						                <h:outputText value="#{order.poiElegido.tipo.nombreGerente}" />
-						                <h:outputText value="Lista Servicios" />
-						                <ui:repeat var="item" varStatus="status" value="#{order.poiElegido.tipo.servicios}">											
-										<h:outputText value="Servicio:#{item}, " />									
-										</ui:repeat>
-						                
-						                
-						            </p:panelGrid>
-						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'CGP'}" >
-						                <f:facet name="header">
-											<h:graphicImage value="/cgp.png" style="border:0" />
-						                </f:facet>
-						 				<h:outputText value="TIPO POI" />
-						                <h:outputText value="CGP" />
-						                <h:outputText value="Direccion" />
-						                <h:outputText value="#{order.poiElegido.locacion.direccion}" />
-						                <h:outputText value="Zona" />
-						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />						                
-						                <h:outputText value="Lista Servicios" />
-						                <ui:repeat var="item" varStatus="status" value="#{order.poiElegido.tipo.servicios}">											
-										<h:outputText value="Servicio:#{item.nombre}, " />									
-										</ui:repeat>
-						                				 
-						            </p:panelGrid>
-						            
+						            						            
 						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'ParadaColectivo'}" >
 						                <f:facet name="header">
 											<h:graphicImage value="/colectivo.png" style="border:0" />
@@ -125,6 +92,41 @@
 						                <h:outputText value="Provincia" />
 						                <h:outputText value="#{order.poiElegido.locacion.provincia}" />	
 						                				                					 
+						            </p:panelGrid>
+						            
+						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'SucursalBanco'}" >
+						                <f:facet name="header">
+											<h:graphicImage value="/banco.png" style="border:0" />
+						                </f:facet>
+						 		
+						 				<h:outputText value="TIPO POI" />
+						                <h:outputText value="SUCURSAL BANCO" />							 		
+										<h:outputText value="Direccion" />
+						                <h:outputText value="#{order.poiElegido.locacion.direccion}" />						                
+						                <h:outputText value="Zona" />
+						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />						                
+						                <h:outputText value="Nombre Gerente" />
+						                <h:outputText value="#{order.poiElegido.tipo.nombreGerente}" />
+						                <h:outputText value="Lista Servicios" />
+										<ui:repeat var="item" varStatus="status" value="#{order.poiElegido.tipo.servicios}">											
+										<h:outputText value="Servicio:#{item}, " />									
+										</ui:repeat>			
+						                
+						            </p:panelGrid>
+						            <p:panelGrid  columns="2" rendered="#{order.poiElegido.tipo.tipoPOI() == 'CGP'}" >
+						                <f:facet name="header">
+											<h:graphicImage value="/cgp.png" style="border:0" />
+						                </f:facet>
+						 				<h:outputText value="TIPO POI" />
+						                <h:outputText value="CGP" />
+						                <h:outputText value="Direccion" />
+						                <h:outputText value="#{order.poiElegido.locacion.direccion}" />
+						                <h:outputText value="Zona" />
+						                <h:outputText value="#{order.poiElegido.locacion.barrio}" />						                
+						                <h:outputText value="Lista Servicios" />
+										<ui:repeat var="item" varStatus="status" value="#{order.poiElegido.tipo.servicios}">											
+											<h:outputText value="Servicio:#{item.nombre}, " />									
+										</ui:repeat>						                				 
 						            </p:panelGrid>
 						        </p:outputPanel>
 						    </p:dialog>

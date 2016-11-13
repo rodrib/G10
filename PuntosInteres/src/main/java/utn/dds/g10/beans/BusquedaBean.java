@@ -8,7 +8,6 @@ import utn.dds.g10.gestores.*;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +17,14 @@ import javax.faces.bean.SessionScoped;
 
 import org.json.JSONException;
 
-@ManagedBean(name="order")
+@ManagedBean(name="busqueda")
 @SessionScoped
 public class BusquedaBean implements Serializable{
 	
 	Usuario usuario;
 	GestorPoi gestorPoi;
 	POI poiElegido;
+	String criterioBusqueda;
 
 	public POI getPoiElegido() {
 		return poiElegido;
@@ -34,85 +34,45 @@ public class BusquedaBean implements Serializable{
 		this.poiElegido = poiElegido;
 	}
 
-	public String getOrderNo() {
-		return orderNo;
+	public String getCriterioBusqueda() {
+		return criterioBusqueda;
 	}
 
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public int getQty() {
-		return qty;
-	}
-
-	public void setQty(int qty) {
-		this.qty = qty;
+	public void setCriterioBusqueda(String criterioBusqueda) {
+		this.criterioBusqueda = criterioBusqueda;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public static ArrayList<Order> getOrderlist() {
-		return orderList;
+	public static ArrayList<String> getCriterioslist() {
+		return criteriosList;
 	}
 
 	private static final long serialVersionUID = 1L;
 
-	String orderNo;
-	String productName;
-	BigDecimal price;
-	int qty;
+	private static final ArrayList<String> criteriosList =
+		new ArrayList<String>();
 
-	//getter and setter methods
-
-	private static final ArrayList<Order> orderList =
-		new ArrayList<Order>();
-
-	public ArrayList<Order> getOrderList() {
-
-		return orderList;
-
+	public ArrayList<String> getCriteriosList() {
+		return criteriosList;
 	}
 		
-	//agregado mio//
 	private static final ArrayList<POI> poiList =
 			new ArrayList<POI>();
 
-		public ArrayList<POI> getPoiList() {
+	public ArrayList<POI> getPoiList() {
+		return poiList;
+	}
 
-			return poiList;
-
-		}
-	//Fin agregado mio//
 	public void addAction() {
-		
-		if(getOrderNo()!=""){
-			Order order = new Order(this.orderNo, this.productName,
-					this.price, this.qty);
-			orderList.add(order);
-		}		
+		if(getCriterioBusqueda()!=""){
+			criteriosList.add(criterioBusqueda);
+		}
 	}
 	
 	public void searchAction(String nombreUsuario) throws MalformedURLException, JSONException, IOException {
-		
 		
 		usuario = new Usuario();
 		RolAdministrador rolAdministrador = new RolAdministrador();
@@ -121,9 +81,9 @@ public class BusquedaBean implements Serializable{
 		//Inicializo Gestor
 		gestorPoi = new GestorPoi(usuario);
 		ResultadoConsulta resultado;
-		for (Order criterioBusqueda:getOrderlist()){
+		for (String criterioBusqueda:getCriterioslist()){
 			
-			resultado = gestorPoi.BuscarPoi(criterioBusqueda.getOrderNo(), nombreUsuario);
+			resultado = gestorPoi.BuscarPoi(criterioBusqueda, nombreUsuario);
 			List<POI> listadoPoi = resultado.getPuntos();
 			if (resultado.getCantidadResultados() != 0){
 				System.out.println(resultado.getCantidadResultados());
@@ -147,63 +107,7 @@ public class BusquedaBean implements Serializable{
 		
 	}
 	
-	
-	public String deleteAction(Order order) {
-
-		orderList.remove(order);
-		return null;
-	}
-
-	public static class Order{
-
-		public String getOrderNo() {
-			return orderNo;
-		}
-
-		public void setOrderNo(String orderNo) {
-			this.orderNo = orderNo;
-		}
-
-		public String getProductName() {
-			return productName;
-		}
-
-		public void setProductName(String productName) {
-			this.productName = productName;
-		}
-
-		public BigDecimal getPrice() {
-			return price;
-		}
-
-		public void setPrice(BigDecimal price) {
-			this.price = price;
-		}
-
-		public int getQty() {
-			return qty;
-		}
-
-		public void setQty(int qty) {
-			this.qty = qty;
-		}
-
-		String orderNo;
-		String productName;
-		BigDecimal price;
-		int qty;
-
-		public Order(String orderNo, String productName,
-				BigDecimal price, int qty) {
-			this.orderNo = orderNo;
-			this.productName = productName;
-			this.price = price;
-			this.qty = qty;
-		}
-
-		//getter and setter methods
-	}
-	
+		
 	public static class SegundaTabla{
 	
 		String stringNombre;
@@ -222,9 +126,4 @@ public class BusquedaBean implements Serializable{
 		
 		}	
 	}
-	
-		
-		public void probando(){
-			
-		}
 }

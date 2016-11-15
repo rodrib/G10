@@ -16,8 +16,7 @@ import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.modelo.ConexionDB;
 
-
-public class DaoRelacional implements Dao  {
+public class DaoRelacional implements Dao {
 	static Session session;
 	static Transaction transaccion;
 
@@ -42,10 +41,9 @@ public class DaoRelacional implements Dao  {
 			setSession(ConexionDB.getSessionFactory().openSession());
 		}
 	}
-	
 
 	@Override
-	public  int crearEntidad(Object entidad) {
+	public int crearEntidad(Object entidad) {
 		Session session = ConexionDB.getSessionFactory().openSession();
 		session.beginTransaction();
 		Integer i = (Integer) session.save(entidad);
@@ -54,66 +52,65 @@ public class DaoRelacional implements Dao  {
 		session.close();
 		return i;
 	}
-	
-	public static void modificarEntidad(Object entidadModificada)
-	{
+
+	@Override
+	public void modificarEntidad(Object entidadModificada) {
 		Session asession = ConexionDB.getSessionFactory().openSession();
-		asession .beginTransaction();
-		asession .update(entidadModificada);
-		asession .getTransaction().commit();
-		asession .close();
+		asession.beginTransaction();
+		asession.update(entidadModificada);
+		asession.getTransaction().commit();
+		asession.close();
 	}
 
-	public static Usuario obtenerEntidadPorId(int idUsuario, Class<Usuario> clase) {
+	public static Usuario obtenerEntidadPorId(int idUsuario,
+			Class<Usuario> clase) {
 		Session asession = ConexionDB.getSessionFactory().openSession();
 		Usuario entidad = (Usuario) asession.get(clase, idUsuario);
 		asession.close();
 		return entidad;
 	}
-	
-//	public static ResultadoConsulta obtenerEntidadPorId(int idUsuario, Class<ResultadoConsulta> clase) {
-//		Session asession = DAO.getSessionFactory().openSession();
-//		Usuario entidad = (ResultadoConsulta) asession.get(clase, idUsuario);
-//		asession.close();
-//		return entidad;
-//	}
-	
-	public static void eliminarPoi(POI entidadBorrada)
-	{
+
+	// public static ResultadoConsulta obtenerEntidadPorId(int idUsuario,
+	// Class<ResultadoConsulta> clase) {
+	// Session asession = DAO.getSessionFactory().openSession();
+	// Usuario entidad = (ResultadoConsulta) asession.get(clase, idUsuario);
+	// asession.close();
+	// return entidad;
+	// }
+
+	public static void eliminarPoi(POI entidadBorrada) {
 		entidadBorrada.setEstadoAlta(false);
 		Session asession = ConexionDB.getSessionFactory().openSession();
-		asession .beginTransaction();
-		asession .update(entidadBorrada);
-		asession .getTransaction().commit();
-		asession .close();
+		asession.beginTransaction();
+		asession.update(entidadBorrada);
+		asession.getTransaction().commit();
+		asession.close();
 	}
 
-	
 	public static POI obtenerPOI(int id) {
 		ArrayList<POI> lista = new ArrayList<POI>();
 		lista = (ArrayList<POI>) DaoRelacional.obtenerPois();
 		for (POI p : lista) {
-			if (p.getId()==id &&p.getEstadoAlta()!=false)
+			if (p.getId() == id && p.getEstadoAlta() != false)
 				return p;
 		}
 		return null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static List<POI> obtenerPois() {
-		
+
 		iniciar();
-		
-		
+
 		@SuppressWarnings("deprecation")
 		List<POI> pois = (List<POI>) session.createCriteria(POI.class).list();
 
-	      //Si lo quito da pete ya que no lo carga en la sesion
-	      for(POI p: pois){
-	       Hibernate.initialize(p.getTipo());
-	      }
-	      return pois;
-	     }
+		// Si lo quito da pete ya que no lo carga en la sesion
+		for (POI p : pois) {
+			Hibernate.initialize(p.getTipo());
+		}
+		return pois;
+	}
 
 	@SuppressWarnings("unchecked")
 	public static List<SucursalBanco> obtenerBancos() {
@@ -129,7 +126,7 @@ public class DaoRelacional implements Dao  {
 		}
 		return bancos;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static List<ParadaColectivo> obtenerParadas() {
 		iniciar();
@@ -144,7 +141,7 @@ public class DaoRelacional implements Dao  {
 		}
 		return paradas;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static List<LocalComercial> obtenerLocales() {
 		iniciar();
@@ -159,14 +156,13 @@ public class DaoRelacional implements Dao  {
 		}
 		return locales;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static List<CGP> obtenerCGPs() {
 		iniciar();
 
 		@SuppressWarnings("deprecation")
-		List<CGP> cgps = (List<CGP>) session
-				.createCriteria(CGP.class).list();
+		List<CGP> cgps = (List<CGP>) session.createCriteria(CGP.class).list();
 
 		// Si lo quito da pete ya que no lo carga en la sesion
 		for (CGP cgp : cgps) {
@@ -174,19 +170,20 @@ public class DaoRelacional implements Dao  {
 		}
 		return cgps;
 	}
-	
-	
-	public static void eliminarEntidad(Object entidadEliminar) throws Exception
-	{
+
+	@Override
+	public void eliminarEntidad(Object entidadEliminar) throws Exception {
 		try {
 			Session asession = ConexionDB.getSessionFactory().openSession();
-			asession .beginTransaction();
-			asession .delete(entidadEliminar);
-			asession .getTransaction().commit();
-			asession .close();
-			
+			asession.beginTransaction();
+			asession.delete(entidadEliminar);
+			asession.getTransaction().commit();
+			asession.close();
+
 		} catch (Exception e) {
-			throw new Exception("Ocurrió un error al intentar eliminar la entidad: " + e.getMessage());
+			throw new Exception(
+					"Ocurrió un error al intentar eliminar la entidad: "
+							+ e.getMessage());
 		}
 	}
 }

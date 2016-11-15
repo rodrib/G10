@@ -1,20 +1,23 @@
-package utn.dds.g10.test.e6;
+package utn.dds.g10.test.e7;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.mongodb.BasicDBObject;
+
 import utn.dds.g10.DAO.Dao;
+import utn.dds.g10.DAO.DaoMongo;
 import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.DAO.UsuariosDao;
 import utn.dds.g10.entidades.administracion.Rol;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;
-import utn.dds.g10.pruebaPersistencia.Order;
 
 public class PersistenciaUsuarioTest {
 
@@ -23,14 +26,14 @@ public class PersistenciaUsuarioTest {
 	Usuario usuarioConsulta;
 	Usuario usuarioEliminar;
 	
-	Dao repositorio;
+	DaoMongo repositorio;
 	public static int id = 13;
 
 	@Before
 	public void setUp() throws Exception {
 		this.InicializarTest();
-		repositorio = new DaoRelacional();
-		//repositorio = new DaoMongo();
+		//repositorio = new DaoRelacional();
+		repositorio = new DaoMongo();
 	}
 
 	private String obtenerHoraString() {
@@ -40,8 +43,6 @@ public class PersistenciaUsuarioTest {
 	}
 
 	private void InicializarTest() {
-		Date date = new Date();
-		DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
 
 		// alta
 		usuarioAlta = new Usuario();
@@ -81,14 +82,14 @@ public class PersistenciaUsuarioTest {
 
 	@Test
 	public void modificarUsuario() {
-		repositorio.modificarEntidad(usuarioModificacion);
+	//	repositorio.modificarEntidad(usuarioModificacion);
 	}
 
 	@Test
 	public void ObtenerYModificarUsuario() throws Exception {
 		usuarioConsulta = UsuariosDao.obtenerUsuarioPorId(id);
 		usuarioConsulta.setNombre("obtener y modi ");
-		repositorio.modificarEntidad(usuarioConsulta);
+		//repositorio.modificarEntidad(usuarioConsulta);
 	}
 	
 	@Test
@@ -97,19 +98,19 @@ public class PersistenciaUsuarioTest {
 	}
 
 	@Test
-	public void testEntrega6Usuario() throws Exception {
+	public void testEntrega7Usuario() throws Exception {
 		// Dar de alta y persistir usuario
-		int idUsuarioCreado = repositorio.crearEntidad(usuarioAlta);
+		ObjectId idUsuarioCreado = repositorio.crearEntidad(usuarioAlta);
 
 		// Recuperación de usuario
-		Usuario usuarioCreado = (Usuario) DaoRelacional.obtenerEntidadPorId(idUsuarioCreado, Usuario.class);
+		Usuario usuarioCreado = (Usuario) repositorio.obtenerEntidadPorId(idUsuarioCreado);
 
 		// Modificación de Usuario y persistir modificación
 		usuarioCreado.setNombre("nombre modificado: " + obtenerHoraString());
-		repositorio.modificarEntidad(usuarioCreado);
+		repositorio.modificarEntidad(usuarioCreado, idUsuarioCreado);
 
 		// Recupero usuario luego de modifiación
-		Usuario usuarioLuegoDeModificacion = (Usuario) DaoRelacional.obtenerEntidadPorId(idUsuarioCreado, Usuario.class);
+		Usuario usuarioLuegoDeModificacion = (Usuario) repositorio.obtenerEntidadPorId(idUsuarioCreado);
 		
 		//Comparo el nombre del usuario antes y despues.
 		

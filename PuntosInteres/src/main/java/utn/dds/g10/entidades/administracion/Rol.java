@@ -26,6 +26,16 @@ public abstract class Rol implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private	int idRol;
 	
+	private String nombre;
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public int getIdRol() {
 		return idRol;
 	}
@@ -33,6 +43,8 @@ public abstract class Rol implements Serializable {
 	public void setIdRol(int idRol) {
 		this.idRol = idRol;
 	}
+	
+	
 
 	@Transient
 	List<Accion> acciones;

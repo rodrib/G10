@@ -90,10 +90,10 @@ public class BusquedaBean implements Serializable{
 				System.out.println(resultado.getPuntos().get(0).getNombre());			
 					
 					for (int j = 0; j < (resultado.getCantidadResultados()); j++) {
-						SegundaTabla st = new SegundaTabla(listadoPoi.get(j).getNombre());
+						int idPOI = listadoPoi.get(j).getId();
 							int cantResultado= 0;
 							for (int m = 0; m < (poiList.size()); m++) {
-								if(poiList.get(m).getNombre().equals(st.getStringNombre())){
+								if(poiList.get(m).getId()==(idPOI)){
 									cantResultado =1;
 								}								
 							}
@@ -105,25 +105,5 @@ public class BusquedaBean implements Serializable{
 			
 		}
 		
-	}
-	
-		
-	public static class SegundaTabla{
-	
-		String stringNombre;
-
-		public String getStringNombre() {
-			return stringNombre;
-		}
-
-		public void setStringNombre(String stringNombre) {
-			this.stringNombre = stringNombre;
-		}
-
-		public SegundaTabla(String nombre){
-			
-			this.stringNombre=nombre;
-		
-		}	
 	}
 }

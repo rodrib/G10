@@ -10,10 +10,10 @@ package utn.dds.g10.tests;
  	@Test
  	public void testEnviarMail()  {
  		
- 	
- 		GestorMail.enviarMail("bautista.rod@gmail.com", "prueba", "Hola mundo");
+ 		String respuesta;
+ 		respuesta = GestorMail.enviarMail("bautista.rod@gmail.com", "prueba", "Hola mundo");
  		
- 		Assert.assertTrue(1 == 1);
+ 		Assert.assertTrue(respuesta=="Mail enviado correctamente");
  	}
  }
 	

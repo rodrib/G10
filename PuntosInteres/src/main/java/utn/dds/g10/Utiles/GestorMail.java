@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 public class GestorMail {
 	
-	static public void enviarMail(String destinatario, String asunto, String cuerpo){
+	static public String enviarMail(String destinatario, String asunto, String cuerpo){
 		final String username = "rbautista@est.frba.utn.edu.ar";
 		final String password = "Lola2013";
 	
@@ -39,9 +39,11 @@ public class GestorMail {
 			message.setText(cuerpo);
 	
 			Transport.send(message);
+			return "Mail enviado correctamente";
 	
 		} catch (MessagingException e) {
 			System.out.println("Hubo un error de autorizacion");
+			return "Mail no enviado correctamente";
 		}
 	}
 }

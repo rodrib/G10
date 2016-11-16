@@ -16,6 +16,9 @@
 		<!-- Bloque - prueba persistencia con List<> - INICIO -->
 		<mapping class="utn.dds.g10.pruebaPersistencia.Customer"></mapping>
 		<mapping class="utn.dds.g10.pruebaPersistencia.Order"></mapping>
+		
+		<mapping class="utn.dds.g10.pruebaPersistencia.Department"></mapping>
+		<mapping class="utn.dds.g10.pruebaPersistencia.Employee"></mapping>
 		<!-- Bloque - prueba persistencia con List<> - FIN -->
 		
 

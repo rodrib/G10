@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,29 +73,39 @@ public class conexionTest {
 		session.save(tester);
 		tx1.commit();
 		session.disconnect();
-	    
-	    
-	    
 	}
 	
 	@Test
-	public void altaConList() {
-		
-		Customer cus;
-		Order o = new Order();
-		o.setNumber("3");
-		
-		List<Order> lista = new ArrayList<Order>();
-		lista.add(o);
-		
-		cus = new Customer();
-		cus.setOrders(lista);
+	public void testPersistenciaList()
+	{
+		SessionFactory sf = ConexionDB.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
 
-		repositorio.crearEntidad(cus);
-		DaoRelacional.getSession().flush();
+		//El departamento es el padre
+		Department department = new Department();
+		department.setDepartmentName("Ventas");
+		session.save(department); // Se guarda primero el Padre
 		
-		o.setCustomer(cus);
-		repositorio.crearEntidad(o);
+		Employee emp1 = new Employee("José", "Argento", "111");
+		Employee emp2 = new Employee("Dardo", "Fuseneco", "222");
 		
+		//Listado de empleados de un departamento
+		List<Employee> listaEmployees = new ArrayList<Employee>();
+		listaEmployees.add(emp1);
+		listaEmployees.add(emp2);
+
+		//A cada hijo le asigno el mismo padre.
+		for (Employee employee : listaEmployees) {
+			employee.setDepartment(department);
+		}
+
+		//Grabo cada hijo. Uno por uno.
+		for (Employee employee : listaEmployees) {
+			session.save(employee);
+		}
+		
+		session.getTransaction().commit();
+		session.close();
 	}
 }

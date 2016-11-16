@@ -11,7 +11,7 @@ public class Customer {
    private Integer id;
 
    @OneToMany(mappedBy="customer")
-   @OrderBy("number")
+   @OrderColumn(name = "orders_index")
    public List<Order> getOrders() { return orders; }
    public void setOrders(List<Order> orders) { this.orders = orders; }
    private List<Order> orders;

@@ -67,8 +67,17 @@ public class BusquedaBean implements Serializable{
 	}
 
 	public void addAction() {
+		boolean existe=false;
+
 		if(getCriterioBusqueda()!=""){
-			criteriosList.add(criterioBusqueda);
+			for (String criterio:criteriosList){				
+				if(criterio.equals(criterioBusqueda)){
+					existe=true;
+				}				
+			}
+			if(!existe)	{
+				criteriosList.add(criterioBusqueda);
+			}
 		}
 	}
 	

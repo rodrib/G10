@@ -5,7 +5,7 @@ import utn.dds.g10.entidades.POI;
 
 public class PoiDao extends DaoRelacional {
 
-	public static POI obtenerDeparmentPorId(Long id) throws Exception {
+	public static POI obtenerPoiPorId(Long id) throws Exception {
 		try {
 			POI objDB = (POI)DaoRelacional.obtenerPoiPorId(id, POI.class);
 			return objDB;

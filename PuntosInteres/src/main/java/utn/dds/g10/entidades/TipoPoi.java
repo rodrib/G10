@@ -19,13 +19,13 @@ public abstract class TipoPoi implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private	int idTipoPoi;
+    private	Long idTipoPoi;
 	
-	public int getIdTipoPoi() {
+	public Long getIdTipoPoi() {
 		return idTipoPoi;
 	}
 
-	public void setIdTipoPoi(int idTipoPoi) {
+	public void setIdTipoPoi(Long idTipoPoi) {
 		this.idTipoPoi = idTipoPoi;
 	}
 	@Column

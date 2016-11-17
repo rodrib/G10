@@ -9,39 +9,44 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-@Entity
-@Table(name = "Locacion")
+import javax.persistence.Transient;
 
-@Access(value = AccessType.FIELD)
+import utn.dds.g10.entidades.administracion.RolAdministrador;
+import utn.dds.g10.entidades.administracion.RolTerminal;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
+@Entity
 public class Locacion implements java.io.Serializable
  {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "locacionID")
-	private int id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
+//	@OneToOne
+//    @JoinColumn(name = "locacion")
+	 @OneToOne(mappedBy = "locacion")
 	private POI poi;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="PoiID")
 	public POI getPoi() {
 		return poi;
 	}
@@ -56,6 +61,9 @@ public class Locacion implements java.io.Serializable
 	private String callePrincipal;
 	@Column(name = "codigoPostal")
 	private int codigoPostal;
+	
+	@OneToOne
+    @JoinColumn(name = "id_coordenada")
 	private Coordenada coordenada;
 	@Column(name = "departamento")
 	private char departamento;
@@ -98,7 +106,7 @@ public class Locacion implements java.io.Serializable
 		this.codigoPostal = codigoPostal;
 	}
 
-	@OneToOne(mappedBy="locacion",fetch = FetchType.EAGER)
+	//@OneToOne(mappedBy="locacion",fetch = FetchType.EAGER)
 	public Coordenada getCoordenada() {
 		return coordenada;
 	}

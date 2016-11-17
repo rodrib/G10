@@ -19,7 +19,7 @@ import javax.persistence.Transient;
 import utn.dds.g10.DAO.DaoRelacional;
 
 @Entity
-@Table(name = "POI")
+@Table(name = "poi")
 public class POI implements java.io.Serializable{
 	
 	/**
@@ -27,10 +27,10 @@ public class POI implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PoiID")
+	private Long id;
+	
 	public Long getId() {
 		return id;
 	}
@@ -49,13 +49,21 @@ public class POI implements java.io.Serializable{
 		return null;
 	}
 	
-	private Locacion locacion;
+	 //@OneToOne(mappedBy = "poi")
+	 @OneToOne
+    @JoinColumn(name = "id_locacion")
+ 	private Locacion locacion;
+	
 	@Column(name = "nombre")
 	private String nombre;
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	
+	//@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Transient
 	private TipoPoi tipo;
+	
 	@Transient
 	private ArrayList<String> palabrasClaves = new ArrayList<String>();
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -79,10 +87,12 @@ public class POI implements java.io.Serializable{
 	public ArrayList<String> getPalabrasClaves() {
 		return palabrasClaves;
 	}
+	
 	public void setPalabrasClaves(ArrayList<String> palabrasClaves) {
 		this.palabrasClaves = palabrasClaves;
 	}
-	@OneToOne(mappedBy="poi",fetch = FetchType.EAGER)
+	
+	//@OneToOne(mappedBy="poi",fetch = FetchType.EAGER)
 	public Locacion getLocacion() {
 		return locacion;
 	}

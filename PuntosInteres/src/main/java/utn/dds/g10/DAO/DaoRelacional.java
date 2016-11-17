@@ -87,15 +87,14 @@ public class DaoRelacional implements Dao {
 		return entidad;
 	}
 	
-	public static long crearPOI(Object entidad) {
+	public static long crearEntidadIdLong(Object entidad) {
 		Session session = ConexionDB.getSessionFactory().openSession();
 		session.beginTransaction();
 		Long n = (Long) session.save(entidad);
 		System.out.println("Id de entidad creada:" + n);
 		session.getTransaction().commit();
 		session.close();
-		Long i = (Long) n;
-		return i;
+		return n;
 	}
 
 	// public static ResultadoConsulta obtenerEntidadPorId(int idUsuario,

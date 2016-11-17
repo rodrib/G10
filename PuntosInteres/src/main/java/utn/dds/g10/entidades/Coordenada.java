@@ -12,7 +12,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Coordenada")
+@Table(name = "coordenada")
 public class Coordenada implements java.io.Serializable{
 
 	/**
@@ -20,15 +20,15 @@ public class Coordenada implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int id;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "coordenadaID")
-	public int getId() {
+	private Long id;
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	@Column(name = "latitud")
@@ -36,10 +36,11 @@ public class Coordenada implements java.io.Serializable{
 	@Column(name = "longitud")
 	private float longitud;
 	
+	@OneToOne(mappedBy = "coordenada")
 	private Locacion locacion;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="locacionID")
+//	@OneToOne(fetch = FetchType.EAGER)
+//	@PrimaryKeyJoinColumn
 	public Locacion getLocacion() {
 		return locacion;
 	}

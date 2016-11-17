@@ -2,7 +2,6 @@ package utn.dds.g10.entidades;
 
 import java.util.ArrayList;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -15,12 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Transient;
 
 import utn.dds.g10.DAO.DaoRelacional;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
 @Entity
 @Table(name = "POI")
 public class POI implements java.io.Serializable{
@@ -30,15 +27,15 @@ public class POI implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	private Long id;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PoiID")
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -55,9 +52,9 @@ public class POI implements java.io.Serializable{
 	private Locacion locacion;
 	@Column(name = "nombre")
 	private String nombre;
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private TipoPoi tipo;
-
+	@Transient
 	private ArrayList<String> palabrasClaves = new ArrayList<String>();
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -76,15 +73,16 @@ public class POI implements java.io.Serializable{
 	public void setEstadoAlta(boolean estadoAlta) {
 		this.estadoAlta = estadoAlta;
 	}
-	@ElementCollection
-	@CollectionTable(name="palabrasClaves", joinColumns=@JoinColumn(name="PoiID"))
+//	@ElementCollection
+//	@CollectionTable(name="palabrasClave", joinColumns=@JoinColumn(name="PoiID"))
+//	@Column(name="palabrasClave")
 	public ArrayList<String> getPalabrasClaves() {
 		return palabrasClaves;
 	}
 	public void setPalabrasClaves(ArrayList<String> palabrasClaves) {
 		this.palabrasClaves = palabrasClaves;
 	}
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "POI", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy="poi",fetch = FetchType.EAGER)
 	public Locacion getLocacion() {
 		return locacion;
 	}

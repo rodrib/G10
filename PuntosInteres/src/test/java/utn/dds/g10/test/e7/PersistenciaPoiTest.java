@@ -39,7 +39,7 @@ public class PersistenciaPoiTest {
 		
 		poitest = new POI();
 		poitest.setNombre("Banco Nacion Test");
-		poitest.setId(1);
+		poitest.setId(1L);
 		
 		Locacion locaciontest = new Locacion();
 		locaciontest.setBarrio("las lomitas");

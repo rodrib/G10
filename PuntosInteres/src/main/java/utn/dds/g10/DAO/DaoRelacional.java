@@ -15,6 +15,7 @@ import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.modelo.ConexionDB;
+import utn.dds.g10.pruebaPersistencia.Department;
 
 public class DaoRelacional implements Dao {
 	static Session session;
@@ -68,6 +69,33 @@ public class DaoRelacional implements Dao {
 		Usuario entidad = (Usuario) asession.get(clase, idUsuario);
 		asession.close();
 		return entidad;
+	}
+	
+	public static Department obtenerDeparmentPorId(Long idUsuario,
+			Class<Department> clase) {
+		Session asession = ConexionDB.getSessionFactory().openSession();
+		Department entidad = (Department) asession.get(clase, idUsuario);
+		asession.close();
+		return entidad;
+	}
+	
+	public static POI obtenerPoiPorId(Long id,
+			Class<POI> clase) {
+		Session asession = ConexionDB.getSessionFactory().openSession();
+		POI entidad = (POI) asession.get(clase, id);
+		asession.close();
+		return entidad;
+	}
+	
+	public static long crearPOI(Object entidad) {
+		Session session = ConexionDB.getSessionFactory().openSession();
+		session.beginTransaction();
+		Long n = (Long) session.save(entidad);
+		System.out.println("Id de entidad creada:" + n);
+		session.getTransaction().commit();
+		session.close();
+		Long i = (Long) n;
+		return i;
 	}
 
 	// public static ResultadoConsulta obtenerEntidadPorId(int idUsuario,

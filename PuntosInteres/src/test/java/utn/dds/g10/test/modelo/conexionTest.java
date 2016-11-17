@@ -10,8 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import utn.dds.g10.DAO.DaoRelacional;
+import utn.dds.g10.DAO.DepartamentDao;
 import utn.dds.g10.entidades.Elemento;
 import utn.dds.g10.entidades.PruebaPersistencia;
+import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.modelo.ConexionDB;
 import utn.dds.g10.modelo.conexion;
 import utn.dds.g10.pruebaPersistencia.*;
@@ -106,6 +108,12 @@ public class conexionTest {
 		}
 		
 		session.getTransaction().commit();
+		
 		session.close();
+		
+		Department departmentObt = (Department) DepartamentDao.obtenerDeparmentPorId(10L, Department.class);
+		Employee elemObt = departmentObt.getEmployees().get(0);
+		System.out.println(" elem "+elemObt.getFirstname());
+		
 	}
 }

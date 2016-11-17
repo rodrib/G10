@@ -41,7 +41,7 @@ public class Department {
 	@Column(name="DEPT_NAME")
 	private String departmentName;
 	
-	@OneToMany(mappedBy="department")
+	@OneToMany(mappedBy="department",fetch = FetchType.EAGER)
 	private List<Employee> employees;
 
 	// Getter and Setter methods

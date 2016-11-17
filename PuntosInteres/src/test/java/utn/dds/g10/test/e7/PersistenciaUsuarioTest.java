@@ -2,6 +2,7 @@ package utn.dds.g10.test.e7;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.bson.types.ObjectId;
@@ -18,6 +19,8 @@ import utn.dds.g10.DAO.UsuariosDao;
 import utn.dds.g10.entidades.administracion.Rol;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;
+import utn.dds.g10.entidades.administracion.acciones.Accion;
+import utn.dds.g10.entidades.administracion.acciones.AuditarResultadoConsulta;
 
 public class PersistenciaUsuarioTest {
 
@@ -47,8 +50,13 @@ public class PersistenciaUsuarioTest {
 		// alta
 		usuarioAlta = new Usuario();
 		usuarioAlta.setNombre("Usuario Alta " + obtenerHoraString());
-
+		
+		AuditarResultadoConsulta accion1 = new AuditarResultadoConsulta();
+		ArrayList<Accion> listaAcciones =  new ArrayList<Accion>();
+		listaAcciones.add(accion1);
+		
 		Rol rolUsuarioPersistible = new RolAdministrador();
+		rolUsuarioPersistible.setAcciones(listaAcciones);
 		usuarioAlta.setRol(rolUsuarioPersistible);
 
 		// modificacion
@@ -103,14 +111,14 @@ public class PersistenciaUsuarioTest {
 		ObjectId idUsuarioCreado = repositorio.crearEntidad(usuarioAlta);
 
 		// Recuperación de usuario
-		Usuario usuarioCreado = (Usuario) repositorio.obtenerEntidadPorId(idUsuarioCreado);
+		Usuario usuarioCreado = (Usuario) repositorio.obtenerEntidadPorId(idUsuarioCreado,Usuario.class );
 
 		// Modificación de Usuario y persistir modificación
 		usuarioCreado.setNombre("nombre modificado: " + obtenerHoraString());
 		repositorio.modificarEntidad(usuarioCreado, idUsuarioCreado);
 
 		// Recupero usuario luego de modifiación
-		Usuario usuarioLuegoDeModificacion = (Usuario) repositorio.obtenerEntidadPorId(idUsuarioCreado);
+		Usuario usuarioLuegoDeModificacion = (Usuario) repositorio.obtenerEntidadPorId(idUsuarioCreado, Usuario.class);
 		
 		//Comparo el nombre del usuario antes y despues.
 		

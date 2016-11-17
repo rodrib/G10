@@ -51,7 +51,7 @@ public class PoiDatos {
 		miPoi.setLocacion(locacionn);
 		miPoi.setNombre("Banco Frances");
 		miPoi.setTipo(sucBanco);
-		miPoi.setId(1);
+		miPoi.setId(1L);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
@@ -67,7 +67,7 @@ public class PoiDatos {
 		miPoi.setLocacion(locacionn2);
 		miPoi.setNombre("Banco ITAU");
 		miPoi.setTipo(sucBanco2);
-		miPoi.setId(2);
+		miPoi.setId(2L);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
@@ -82,7 +82,7 @@ public class PoiDatos {
 		miPoi.setLocacion(new Locacion());
 		miPoi.setNombre("Banco Frances");
 		miPoi.setTipo(sucBanco3);
-		miPoi.setId(3);
+		miPoi.setId(3L);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
@@ -91,7 +91,7 @@ public class PoiDatos {
 		miPoi.setLocacion(locacionn3);
 		miPoi.setNombre("Banco ICBC");
 		miPoi.setTipo(new SucursalBanco());
-		miPoi.setId(4);
+		miPoi.setId(4L);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
@@ -100,7 +100,7 @@ public class PoiDatos {
 		miPoi.setLocacion(locacionn4);
 		miPoi.setNombre("Banco HSBC");
 		miPoi.setTipo(new SucursalBanco());
-		miPoi.setId(5);
+		miPoi.setId(5L);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
@@ -120,7 +120,7 @@ public class PoiDatos {
 		listaServicios.add(servicioCGP2);
 		cgp.setServicios(listaServicios);
 		miPoi.setTipo(cgp);
-		miPoi.setId(6);
+		miPoi.setId(6L);
 		listadoPoi.add(miPoi);
 		
 		////////KIOSCOS
@@ -133,7 +133,7 @@ public class PoiDatos {
 		ListaPalabrasClave.add("caramelos");
 		miPoi.setPalabrasClaves(ListaPalabrasClave);
 		miPoi.setTipo(new LocalComercial());
-		miPoi.setId(7);
+		miPoi.setId(7L);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
@@ -142,7 +142,7 @@ public class PoiDatos {
 		miPoi.setLocacion(locacionLocal2);
 		miPoi.setNombre("Kiosco SI");
 		miPoi.setTipo(new LocalComercial());
-		miPoi.setId(8);
+		miPoi.setId(8L);
 		listadoPoi.add(miPoi);
 		
 		////////COLECTIVOS
@@ -152,14 +152,14 @@ public class PoiDatos {
 		miPoi.setLocacion(locacionColectivo);
 		miPoi.setNombre("Parada114");
 		miPoi.setTipo(new ParadaColectivo());
-		miPoi.setId(9);
+		miPoi.setId(9L);
 		listadoPoi.add(miPoi);
 		
 		miPoi = new POI();
 		miPoi.setLocacion(new Locacion());
 		miPoi.setNombre("Parada25");
 		miPoi.setTipo(new ParadaColectivo());
-		miPoi.setId(10);
+		miPoi.setId(10L);
 		listadoPoi.add(miPoi);		
 		
 		LocalComercial localLibreria = new LocalComercial();
@@ -169,7 +169,7 @@ public class PoiDatos {
 		libreria.setLocacion(new Locacion());
 		libreria.setNombre("lapices");
 		libreria.setTipo(localLibreria);
-		libreria.setId(11);
+		libreria.setId(11L);
 		listadoPoi.add(libreria);
 		
 		
@@ -183,7 +183,7 @@ public class PoiDatos {
 		localConDescuento.setLocacion(locacion24);
 		localConDescuento.setNombre("24hs");
 		localConDescuento.setTipo(localKiosco);
-		localConDescuento.setId(12);
+		localConDescuento.setId(12L);
 		
 		ArrayList<String> palabrasPoi = new ArrayList<String>();
 		palabrasPoi.add("Viernes");

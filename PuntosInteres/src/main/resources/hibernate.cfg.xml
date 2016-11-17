@@ -11,7 +11,7 @@
 		<property name="connection.pool_size">15</property>
 		<property name="hibernate.dialect"> org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create</property>
 		
 		<!-- Bloque - prueba persistencia con List<> - INICIO -->
 		<mapping class="utn.dds.g10.pruebaPersistencia.Customer"></mapping>
@@ -30,19 +30,19 @@
 		<!-- Bloque - Administracion de usuarios - FIN -->
 
 		<!-- Bloque - Administracion de POI - INICIO -->
-<!-- 		<mapping class="utn.dds.g10.entidades.POI"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.TipoPoi"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.Coordenada"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.Horarios"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.Locacion"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.CGP"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.ServicioCGP"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.LocalComercial"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.Kiosco"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.Libreria"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.RubroLocal"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.ParadaColectivo"></mapping> -->
-<!-- 		<mapping class="utn.dds.g10.entidades.SucursalBanco"></mapping> -->
+		<mapping class="utn.dds.g10.entidades.POI"></mapping>
+		<mapping class="utn.dds.g10.entidades.TipoPoi"></mapping>
+		<mapping class="utn.dds.g10.entidades.Coordenada"></mapping>
+		<mapping class="utn.dds.g10.entidades.Horarios"></mapping>
+		<mapping class="utn.dds.g10.entidades.Locacion"></mapping>
+		<mapping class="utn.dds.g10.entidades.CGP"></mapping>
+		<mapping class="utn.dds.g10.entidades.ServicioCGP"></mapping>
+		<mapping class="utn.dds.g10.entidades.LocalComercial"></mapping>
+		<mapping class="utn.dds.g10.entidades.Kiosco"></mapping>
+		<mapping class="utn.dds.g10.entidades.Libreria"></mapping>
+		<mapping class="utn.dds.g10.entidades.RubroLocal"></mapping>
+		<mapping class="utn.dds.g10.entidades.ParadaColectivo"></mapping>
+		<mapping class="utn.dds.g10.entidades.SucursalBanco"></mapping>
 		<!-- Bloque - Administracion de POI - FIN -->
 
 		<!-- Bloque - Administracion de Busquedas - INICIO -->

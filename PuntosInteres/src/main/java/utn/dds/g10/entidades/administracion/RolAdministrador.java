@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import utn.dds.g10.entidades.administracion.acciones.Accion;
 import utn.dds.g10.entidades.administracion.acciones.AuditarResultadoConsulta;
-
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Entity
 public class RolAdministrador extends Rol {
 	
@@ -18,6 +20,7 @@ public class RolAdministrador extends Rol {
 	public RolAdministrador()
 	{
 		this.setAcciones();
+		this.setNombre(this.getClass().getSimpleName());
 	}
 
 	@Override

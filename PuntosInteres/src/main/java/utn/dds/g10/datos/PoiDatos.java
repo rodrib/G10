@@ -61,7 +61,7 @@ public class PoiDatos {
 		listaServiciosBanco2.add("Comercio Exteriorr");
 		listaServiciosBanco2.add("Cuentas Bancariass");
 		sucBanco2.setServicios(listaServiciosBanco2);
-		sucBanco.setNombreGerente("Lionel Messi");
+		sucBanco2.setNombreGerente("Lionel Messi");
 		locacionn2.setDireccion("French 2143");
 		locacionn2.setBarrio("Palermo");
 		miPoi.setLocacion(locacionn2);
@@ -72,11 +72,11 @@ public class PoiDatos {
 		
 		miPoi = new POI();
 		SucursalBanco sucBanco3 = new SucursalBanco();
-		sucBanco.setNombreGerente("Mauricio Macri");
+		sucBanco3.setNombreGerente("Mauricio Macri");
 		ArrayList<String> listaServiciosBanco3 = new ArrayList<String>();
 		listaServiciosBanco3.add("Comercio Exteriorrrr");
 		listaServiciosBanco3.add("Cuentas Bancariasssss");		
-		sucBanco.setServicios(listaServiciosBanco3);
+		sucBanco3.setServicios(listaServiciosBanco3);
 		locacionn2.setDireccion("Las Heras 2143");
 		locacionn2.setBarrio("Belgrano");
 		miPoi.setLocacion(new Locacion());

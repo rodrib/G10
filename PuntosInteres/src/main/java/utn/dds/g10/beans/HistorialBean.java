@@ -9,6 +9,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import utn.dds.g10.entidades.POI;
 import utn.dds.g10.gestores.Buscador.HistorialConsultasUsuario;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
@@ -21,6 +22,14 @@ public class HistorialBean implements Serializable{
 
 	private String fechaDesde="";
 	private String fechaHasta="";
+	List<POI> listaPOIDetalle; 
+	
+	public List<POI> getListaPOIDetalle() {
+		return listaPOIDetalle;
+	}
+	public void setListaPOIDetalle(List<POI> listaPOIDetalle) {
+		this.listaPOIDetalle = listaPOIDetalle;
+	}
 	public String getFechaDesde() {
 		return fechaDesde;
 	}
@@ -112,7 +121,7 @@ public class HistorialBean implements Serializable{
 					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
 
 					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), resultadoBusquedaParcialEncontrado.getFecha().toString(),
-							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados()); 
+							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
 					resultadoList.add(elemLista);
 				}						
 			}else{
@@ -123,7 +132,7 @@ public class HistorialBean implements Serializable{
 					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
 
 					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), resultadoBusquedaParcialEncontrado.getFecha().toString(),
-							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados()); 
+							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
 					resultadoList.add(elemLista);
 				}	
 			}
@@ -155,7 +164,7 @@ public class HistorialBean implements Serializable{
 						.iterator(); consultaBusquedaParcial.hasNext();) {	
 					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
 					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuarioParcialEncontrado.getUsuario(), resultadoBusquedaParcialEncontrado.getFecha().toString(),
-					resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados()); 
+					resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
 					resultadoList.add(elemLista);
 				}
 			}		
@@ -193,6 +202,15 @@ public class HistorialBean implements Serializable{
 		private String usuario;
 		private String parametros;
 		private int cantidadPois;
+		private List<POI> listaPOIs;
+//		ArrayList<resultadoHistorial> resultadoList;
+		
+		public List<POI> getListaPOIs() {
+			return listaPOIs;
+		}
+		public void setListaPOIs(List<POI> listaPOIs) {
+			this.listaPOIs = listaPOIs;
+		}
 		public String getFecha() {
 			return fecha;
 		}
@@ -219,11 +237,12 @@ public class HistorialBean implements Serializable{
 		}
 		
 		public resultadoHistorial(String usuario, String fecha,
-				String parametros, int cantidadPois) {
+				String parametros, int cantidadPois,List<POI> listaPOIs) {
 			this.usuario = usuario;
 			this.fecha = fecha;
 			this.parametros = parametros;
 			this.cantidadPois = cantidadPois;
+			this.listaPOIs =listaPOIs;
 		}
 		
 	}

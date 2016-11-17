@@ -194,6 +194,7 @@ public class HistorialConsultasUsuario {
 		resultadoParcial.setCantidadResultados(resultado
 				.getCantidadResultados());
 		resultadoParcial.setFecha(LocalDateTime.now());
+		resultadoParcial.setListaPOISbusquedaParcial(resultado.getPuntos());
 		ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado = new ResultadoBusquedaParcialUsuario();
 
 		int usuarioEncontrado = 0;

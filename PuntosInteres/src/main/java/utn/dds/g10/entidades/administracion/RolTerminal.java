@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import utn.dds.g10.entidades.administracion.acciones.Accion;
 import utn.dds.g10.entidades.administracion.acciones.AuditarTiempoConsulta;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Entity
 public class RolTerminal extends Rol {
 
@@ -17,6 +20,7 @@ public class RolTerminal extends Rol {
 
 	public RolTerminal() {
 		this.setAcciones();
+		this.setNombre(this.getClass().getSimpleName());
 	}
 	
 	@Override

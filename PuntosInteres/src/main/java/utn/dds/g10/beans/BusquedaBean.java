@@ -67,8 +67,17 @@ public class BusquedaBean implements Serializable{
 	}
 
 	public void addAction() {
+		boolean existe=false;
+
 		if(getCriterioBusqueda()!=""){
-			criteriosList.add(criterioBusqueda);
+			for (String criterio:criteriosList){				
+				if(criterio.equals(criterioBusqueda)){
+					existe=true;
+				}				
+			}
+			if(!existe)	{
+				criteriosList.add(criterioBusqueda);
+			}
 		}
 	}
 	
@@ -90,7 +99,7 @@ public class BusquedaBean implements Serializable{
 				System.out.println(resultado.getPuntos().get(0).getNombre());			
 					
 					for (int j = 0; j < (resultado.getCantidadResultados()); j++) {
-						int idPOI = listadoPoi.get(j).getId();
+						Long idPOI = listadoPoi.get(j).getId();
 							int cantResultado= 0;
 							for (int m = 0; m < (poiList.size()); m++) {
 								if(poiList.get(m).getId()==(idPOI)){

@@ -6,11 +6,10 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<div class="container">
 		<ui:define name="content">
-			<h:form>
+			<h:form id="form">
 				<div class="row">
 					<div class="col-md-4"></div>
 					<div class="col-md-4 ">
-						<h:form>
 							<div class="row">
 								<div class="col-md-3"></div>
 
@@ -60,18 +59,6 @@
 
 								<div class="col-md-3"></div>
 							</div>
-
-
-
-
-
-
-
-
-
-
-
-						</h:form>
 						<br></br>
 						<hr></hr>
 						
@@ -91,19 +78,28 @@
 						        <p:column headerText="POIs">
 						            <h:outputText value="#{r.cantidadPois}" />
 						        </p:column>
+								<p:column style="text-align: center">
+						            <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+					                	<f:setPropertyActionListener value="#{r.listaPOIs}" target="#{historial.listaPOIDetalle}" />
+					            	</p:commandButton>
+						        </p:column>
 						    </p:dataTable>
 						
-						<div class="ads-in-post hide_if_width_less_800">
-							<script
-								src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<!-- new 728x90 - After2ndH4 -->
-							<ins class="adsbygoogle hide_if_width_less_800"
-								style="display: inline-block; width: 728px; height: 90px"></ins>
-							<script>
-								(adsbygoogle = window.adsbygoogle || [])
-										.push({});
-							</script>
-						</div>
+							<p:dialog header="DETALLE POI" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+						        <p:outputPanel id="carDetail" style="text-align:center;">						            						            
+						            <p:panelGrid  columns="2" >
+						                <f:facet name="header">
+											<h:graphicImage value="/poisEncontrados.png" style="border:0" />
+						                </f:facet>
+						 
+						 				<h:outputText value="POIs encontrados" />
+										<ui:repeat var="item" varStatus="status" value="#{historial.listaPOIDetalle}">											
+											<h:outputText value="-#{item.nombre}-" />									
+										</ui:repeat>						                
+						                						 
+						            </p:panelGrid>
+						       	</p:outputPanel>						         						           
+						    </p:dialog>						
 					</div>
 					<div class="col-md-4"></div>
 				</div>

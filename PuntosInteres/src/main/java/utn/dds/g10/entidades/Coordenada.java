@@ -46,6 +46,8 @@ public class Coordenada implements java.io.Serializable{
 	public void setLocacion(Locacion locacion) {
 		this.locacion = locacion;
 	}
+	
+	public Coordenada(){};
 
 	public Coordenada(float lat, float longi)
 	{

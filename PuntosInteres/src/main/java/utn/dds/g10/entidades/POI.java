@@ -1,6 +1,8 @@
 package utn.dds.g10.entidades;
 
 import java.util.ArrayList;
+
+
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -14,8 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import utn.dds.g10.DAO.DaoRelacional;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Entity
 @Table(name = "POI")
 public class POI implements java.io.Serializable{

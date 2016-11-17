@@ -22,7 +22,7 @@ public class HistorialBean implements Serializable{
 
 	private String fechaDesde="";
 	private String fechaHasta="";
-	List<POI> listaPOIDetalle; 
+	private List<POI> listaPOIDetalle; 
 	
 	public List<POI> getListaPOIDetalle() {
 		return listaPOIDetalle;
@@ -120,6 +120,9 @@ public class HistorialBean implements Serializable{
 					
 					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
 
+				List<POI> poisFiltrados = (filtrarRepetidos(resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()));
+				resultadoBusquedaParcialEncontrado.setCantidadResultados(poisFiltrados.size());
+					
 					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), resultadoBusquedaParcialEncontrado.getFecha().toString(),
 							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
 					resultadoList.add(elemLista);
@@ -172,6 +175,33 @@ public class HistorialBean implements Serializable{
 	return null;	
 	}
 	
+public List<POI> filtrarRepetidos(List<POI> listaPois){
+		
+		listaPOIsAuxiliar.clear();
+		
+		for (int j = 0; j < (listaPois.size()); j++) {
+			Long idPOI = listaPois.get(j).getId();
+				int cantResultado= 0;
+				for (int m = 0; m < (listaPOIsAuxiliar.size()); m++) {
+					if(listaPOIsAuxiliar.get(m).getId()==(idPOI)){
+						cantResultado =1;
+					}								
+				}
+				if(cantResultado==0){
+					listaPOIsAuxiliar.add(listaPois.get(j));								
+				}						
+		}		
+		
+		return listaPOIsAuxiliar;		
+	}
+	
+	private static final List<POI> listaPOIsAuxiliar =
+	new ArrayList<POI>();
+	
+	public List<POI> getPoiList() {
+	return listaPOIsAuxiliar;
+	}
+
 	public static LocalDateTime obtenerFecha(String fechaString) {   
         int contador = 0;
         int dia=0,mes=0,anio=0;

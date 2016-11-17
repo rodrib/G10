@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 
 public class HistorialConsultasUsuario {
@@ -194,7 +195,13 @@ public class HistorialConsultasUsuario {
 		resultadoParcial.setCantidadResultados(resultado
 				.getCantidadResultados());
 		resultadoParcial.setFecha(LocalDateTime.now());
+		
+//		List<POI> resultadoPOIS = 		
+//		resultadoParcial.setListaPOISbusquedaParcial(filtrarRepetidos(resultadoPOIS));
+		
 		resultadoParcial.setListaPOISbusquedaParcial(resultado.getPuntos());
+
+		
 		ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado = new ResultadoBusquedaParcialUsuario();
 
 		int usuarioEncontrado = 0;
@@ -260,7 +267,34 @@ public class HistorialConsultasUsuario {
 		}
 
 	}
+	
+	private static final List<POI> listaPOIsAuxiliar =
+			new ArrayList<POI>();
 
+	public List<POI> getPoiList() {
+		return listaPOIsAuxiliar;
+	}
+	
+	public List<POI> filtrarRepetidos(List<POI> listaPois){
+		
+		listaPOIsAuxiliar.clear();
+		
+		for (int j = 0; j < (listaPois.size()); j++) {
+			Long idPOI = listaPois.get(j).getId();
+				int cantResultado= 0;
+				for (int m = 0; m < (listaPOIsAuxiliar.size()); m++) {
+					if(listaPOIsAuxiliar.get(m).getId()==(idPOI)){
+						cantResultado =1;
+					}								
+				}
+				if(cantResultado==0){
+					listaPOIsAuxiliar.add(listaPois.get(j));								
+				}						
+		}		
+		
+		return listaPOIsAuxiliar;		
+	}
+	
 	public void AgregarResultadoTotal(ResultadoConsulta resultado) {
 		// Se recorre buscando el usuario
 

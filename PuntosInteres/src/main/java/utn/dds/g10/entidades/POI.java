@@ -16,8 +16,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import utn.dds.g10.DAO.DaoRelacional;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Entity
 @Table(name = "poi")
 public class POI implements java.io.Serializable{

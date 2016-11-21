@@ -57,6 +57,12 @@ public class PersistenciaPoiTest {
 	}
 	
 	@Test
+	public void testGuardarYEliminarPoi()
+	{
+		repositorio.crearEntidad(poitest);
+	}
+	
+	@Test
 	public void testGetJsonFromDbPorId() throws JsonParseException, JsonMappingException, IOException
 	{
 		ObjectId id = repositorio.crearEntidad(poitest);

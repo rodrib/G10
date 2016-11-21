@@ -1,6 +1,7 @@
 package utn.dds.g10.entidades;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Entity
 @Access(value = AccessType.FIELD)
 public class ResultadoConsulta {
@@ -30,6 +33,7 @@ public class ResultadoConsulta {
 		this.rsId = rsId;
 	}
 
+	@JsonIgnoreProperties()
 	@Column(name = "fecha_hora")
 	private LocalDate fechaHora;
 	

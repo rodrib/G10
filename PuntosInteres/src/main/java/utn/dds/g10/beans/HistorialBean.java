@@ -1,8 +1,11 @@
 package utn.dds.g10.beans;
 
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,12 +17,42 @@ import utn.dds.g10.gestores.Buscador.HistorialConsultasUsuario;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
 
+enum tipoCargaFecha {soloDesde, soloHasta, ambasCargadas, ninguna};
+
 @ManagedBean(name="historial")
 @SessionScoped
 public class HistorialBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	public String convertStringToDate(Date indate)
+	{
+	   String dateString = null;
+	   SimpleDateFormat sdfr = new SimpleDateFormat("dd/MM/yyyy");
+	   try{
+		dateString = sdfr.format( indate );
+	   }catch (Exception ex ){
+		System.out.println(ex);
+	   }
+	   return dateString;
+	}
 
+	public Date getFechaDesdeDate() {
+		return fechaDesdeDate;
+	}
+	public void setFechaDesdeDate(Date fechaDesdeDate) {
+		this.fechaDesdeDate = fechaDesdeDate;
+	}
+	public Date getFechaHastaDate() {
+		return fechaHastaDate;
+	}
+	public void setFechaHastaDate(Date fechaHastaDate) {
+		this.fechaHastaDate = fechaHastaDate;
+	}
+
+	private Date fechaDesdeDate;
+	private Date fechaHastaDate;
+	
 	private String fechaDesde="";
 	private String fechaHasta="";
 	private List<POI> listaPOIDetalle; 
@@ -75,6 +108,12 @@ public class HistorialBean implements Serializable{
 		return resultadoList;
 
 	}
+	
+	
+	private boolean tieneValorCargado(String fecha)
+	{
+		return (fecha != null && fecha != null);
+	}
 
 	public String agregaResultadoListaConsulta() {
 		
@@ -82,35 +121,68 @@ public class HistorialBean implements Serializable{
 		
 		LocalDateTime fechaDesde=null;
 		LocalDateTime fechaHasta=null;
+		this.fechaDesde = convertStringToDate(this.fechaDesdeDate);
+		this.fechaHasta = convertStringToDate(this.fechaHastaDate);
 		
-		if (!this.fechaDesde.equalsIgnoreCase("")){
+		if (this.fechaDesde != null && this.fechaDesde != ""){
 			fechaDesde = obtenerFecha(this.fechaDesde);
 		}
-		if (!this.fechaHasta.equalsIgnoreCase("")){
+		
+		if (this.fechaHasta != null && this.fechaHasta != ""){
 			fechaHasta = obtenerFecha(this.fechaHasta);
 		}
 		
 		int soloUsuario=0;
 		ResultadoBusquedaParcialUsuario resultadoUsuario = new ResultadoBusquedaParcialUsuario();
 		ResultadoBusquedaParcialUsuario resultadoUsuarioFiltrado = new ResultadoBusquedaParcialUsuario();
+		
+		boolean tieneValorFechaDesde = tieneValorCargado(this.fechaDesde);
+		boolean tieneValorFechaHasta = tieneValorCargado(this.fechaHasta);
+		
+	
+				
 		//Con usuario
-		if (!this.usuario.equalsIgnoreCase("")) {
+		if (this.usuario != null && !this.usuario.equalsIgnoreCase("")) {
+			
+			tipoCargaFecha tipo = tipoCargaFecha.ninguna;
+			
+			if(!tieneValorFechaDesde && ! tieneValorFechaHasta)
+			{
+				tipo = tipoCargaFecha.ninguna;
+			}
+			
+			if(tieneValorFechaDesde && ! tieneValorFechaHasta)
+			{
+				tipo = tipoCargaFecha.soloDesde;
+			}
+			
+			if(!tieneValorFechaDesde && tieneValorFechaHasta)
+			{
+				tipo = tipoCargaFecha.soloHasta;
+			}
+			
+			if(tieneValorFechaDesde &&  tieneValorFechaHasta)
+			{
+				tipo = tipoCargaFecha.ambasCargadas;
+			}
+			
 			resultadoUsuario = HistorialConsultasUsuario.buscarUsuario(this.usuario);
-			// Solo usuario
-			if (this.fechaDesde.equalsIgnoreCase("")&& this.fechaHasta.equalsIgnoreCase("")) {
+			
+			switch (tipo) {
+			case ninguna:
 				soloUsuario=1;
-			}
-			// Usuario y fecha Desde
-			else if (!this.fechaDesde.equalsIgnoreCase("")&&this.fechaHasta.equalsIgnoreCase("")){
+				break;
+			case soloDesde:
 				resultadoUsuarioFiltrado = HistorialConsultasUsuario.filtrarUsuarioFechaDesde(fechaDesde, resultadoUsuario);
-			}
-			// Usuario y fecha Hasta
-			else if (this.fechaDesde.equalsIgnoreCase("")&&!this.fechaHasta.equalsIgnoreCase("")){
+				break;
+			case soloHasta:
 				resultadoUsuarioFiltrado = HistorialConsultasUsuario.filtrarUsuarioFechaHasta(fechaHasta, resultadoUsuario);
-			}
-			// Usuario, fechaDesde y fechaHasta
-			else if (!this.fechaDesde.equalsIgnoreCase("")&&!this.fechaHasta.equalsIgnoreCase("")){
+				break;
+			case ambasCargadas:
 				resultadoUsuarioFiltrado = HistorialConsultasUsuario.filtrarUsuarioFechaDesdeHasta(fechaDesde,fechaHasta, resultadoUsuario);
+				break;
+			default:
+				break;
 			}
 			
 			if (soloUsuario==1){			

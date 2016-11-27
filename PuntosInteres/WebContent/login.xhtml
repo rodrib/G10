@@ -2,7 +2,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:p="http://primefaces.org/ui">
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<div class="container">
 		<ui:define name="content">
@@ -14,11 +15,11 @@
 						<h2 class="form-signin-heading">Login</h2>
 						<h:inputText value="#{loginBean.name}" type="text"
 							class="form-control" name="username"
-							p:placeholder="Ingrese Usuario" required="true"
+							a:placeholder="Ingrese Usuario" required="true"
 							autocomplete="true">
 						</h:inputText>
 						<h:inputSecret value="#{loginBean.password}" class="form-control"
-							name="password" p:placeholder="Ingrese contraseña"
+							name="password" a:placeholder="Ingrese contraseña"
 							required="true"></h:inputSecret>
 						<h:commandButton value="Login" action="login"
 							class="btn btn-lg btn-primary btn-block">

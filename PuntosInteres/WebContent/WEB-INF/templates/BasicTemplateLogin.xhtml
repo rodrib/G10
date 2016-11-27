@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=divice-width, initial-scale=1" />
+	<meta http-equiv="X-UA-Conpatible" content="IE-edge"></meta>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<title><ui:insert name="title">Puntos de Interes- App</ui:insert></title>
+</h:head>
+<body>
+	<div id="header">
+		<ui:insert name="header">
+			<ui:include src="/WEB-INF/templates/headerLogin.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+			<ui:include src="/WEB-INF/templates/footer.xhtml" />
+		</ui:insert>
+	</div>
+</body>
+</html>

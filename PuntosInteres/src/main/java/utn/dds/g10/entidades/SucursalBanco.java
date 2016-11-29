@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,6 +22,7 @@ import utn.dds.g10.DAO.DaoRelacional;
 
 @Entity
 @Table(name = "sucursalBanco")
+//@AttributeOverride(column = @Column, name = "poi")
 public class SucursalBanco extends TipoPoi {
 
 	private static final long serialVersionUID = 1L;

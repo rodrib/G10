@@ -60,8 +60,8 @@ public class PersistenciaPoiTest {
 	}
 	
 	
-//	Obtener   un   POI,   modificar   sus   coordenadas   geogrÃ¡ficas,   persistirlo,   recuperarlo   y  
-//	verificar que las coordenadas sean las ingresadas en la Ãºltima modificaciÃ³n. 
+//	Obtener   un   POI,   modificar   sus   coordenadas   geográficas,   persistirlo,   recuperarlo   y  
+//	verificar que las coordenadas sean las ingresadas en la última modificación. 
 	@Test
 	public void modificarPoiTest()
 	{
@@ -139,7 +139,7 @@ public class PersistenciaPoiTest {
 	}
 	
 //	Crear   un   nuevo   PoI,   persistirlo,   recuperarlo,   eliminarlo   y   al   solicitar   nuevamente   su  
-//	recuperaciÃ³n, la respuesta deberÃ¡ ser que no existe (null). 
+//	recuperación, la respuesta deberá ser que no existe (null). 
 	// Crea poi con id, con un id de tipo poi -> id
 	@Test
 	public void crearEliminarPoiTest() throws Exception
@@ -224,5 +224,39 @@ public class PersistenciaPoiTest {
 		System.out.println("Nombre CGP: "+poiObtenido.getNombre());
 		
 	}
+	
+	@Test
+	public void crearModificarCoordenada() throws Exception
+	{
+		
+		Coordenada coodenadaNueva = new Coordenada(55,77);
+		
+		poiBanco.setNombre("Banco Nacion");
+		SucursalBanco banco = new SucursalBanco();
+		poiBanco.setTipo(banco);
+		
+		locaciontest.setEntreCalles("Entre calles");
+		locaciontest.setPoi(poiBanco);
+		
+		poiBanco.setLocacion(locaciontest);
+		coordenadatest.setLocacion(locaciontest);
+		
+		DaoRelacional.crearEntidadIdLong(coordenadatest);
+		DaoRelacional.crearEntidadIdLong(coodenadaNueva);
+		
+		DaoRelacional.crearEntidadIdLong(locaciontest);
+		Long id = DaoRelacional.crearEntidadIdLong(poiBanco);	
+	
+		POI poiObtenido = new POI();
+		poiObtenido = (POI)PoiDao.obtenerPoiPorId(id, POI.class);
+		
+		coodenadaNueva.setLocacion(poiObtenido.getLocacion());
+		poiObtenido.getLocacion().setCoordenada(coodenadaNueva);
+		
+		repositorio.modificarEntidad(poiObtenido.getLocacion());
+		
+		//DaoRelacional.eliminarPoi(poiObtenido);
+	}
+
 
 }

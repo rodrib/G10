@@ -19,18 +19,20 @@ public class Horarios implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "horariosID")
-	private int id;
-
-	public int getId() {
+	private Long id;
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
 	@Column
 	private int diaSemana;
 	@Column
@@ -42,8 +44,8 @@ public class Horarios implements java.io.Serializable{
 	@Column
 	private int minutosHasta;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "servicioCGPID", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "horarios", nullable = false)
 	private ServicioCGP servicioCGP;
 	
 	public int getDiaSemana() {

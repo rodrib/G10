@@ -1,6 +1,7 @@
 package utn.dds.g10.entidades;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -41,16 +42,7 @@ public class POI implements java.io.Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public POI obtenerPOI(int id) {
-		ArrayList<POI> lista = new ArrayList<POI>();
-		lista = (ArrayList<POI>) DaoRelacional.obtenerPois();
-		for (POI p : lista) {
-			if (p.getId()==id)
-				return p;
-		}
-		return null;
-	}
+
 	
 	 //@OneToOne(mappedBy = "poi")
 	 @OneToOne
@@ -60,12 +52,13 @@ public class POI implements java.io.Serializable{
 	@Column(name = "nombre")
 	private String nombre;
 	
-	//@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Transient
+	@OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_tipo")
 	private TipoPoi tipo;
 	
-	@Transient
-	private ArrayList<String> palabrasClaves = new ArrayList<String>();
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="id"))
+	private List<String> palabrasClaves = new ArrayList<String>();
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -87,11 +80,11 @@ public class POI implements java.io.Serializable{
 //	@ElementCollection
 //	@CollectionTable(name="palabrasClave", joinColumns=@JoinColumn(name="PoiID"))
 //	@Column(name="palabrasClave")
-	public ArrayList<String> getPalabrasClaves() {
+	public List<String> getPalabrasClaves() {
 		return palabrasClaves;
 	}
 	
-	public void setPalabrasClaves(ArrayList<String> palabrasClaves) {
+	public void setPalabrasClaves(List<String> palabrasClaves) {
 		this.palabrasClaves = palabrasClaves;
 	}
 	

@@ -8,8 +8,11 @@ import utn.dds.g10.DAO.DepartamentDao;
 import utn.dds.g10.DAO.PoiDao;
 import utn.dds.g10.entidades.CGP;
 import utn.dds.g10.entidades.Coordenada;
+import utn.dds.g10.entidades.Libreria;
 import utn.dds.g10.entidades.Locacion;
+import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
+import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.TipoPoi;
@@ -69,19 +72,18 @@ public class PersistenciaPoiTest {
 		locacion.setCoordenada(coordenada);
 		poiBanco.setLocacion(locacion);
 		poiBanco.setNombre("Banco GGG");
+		poiBanco.getPalabrasClaves().add("suc principal");
 		SucursalBanco banco = new SucursalBanco();
 		banco.getServicios().add("cheques");
+		banco.setNombreGerente("Carlos");
 		poiBanco.setTipo(banco);
 		DaoRelacional.crearEntidadIdLong(banco);
 		
-		Long id = DaoRelacional.crearEntidadIdLong(poiBanco);
-		
-		DaoRelacional.crearEntidadIdLong(locacion);
-		
 		coordenada.setLocacion(locacion);
-				
-		DaoRelacional.crearEntidadIdLong(coordenada);
 		
+		DaoRelacional.crearEntidadIdLong(coordenada);
+		DaoRelacional.crearEntidadIdLong(locacion);
+		Long id = DaoRelacional.crearEntidadIdLong(poiBanco);
 			
 		POI poiObtenido = new POI();
 		poiObtenido = (POI) PoiDao.obtenerPoiPorId(id, POI.class);
@@ -94,20 +96,24 @@ public class PersistenciaPoiTest {
 //		
 //		System.out.println("Servicio 1 "+banco.getServicios().get(0));
 		System.out.println("Latitud Mod"+poiObtenido.getLocacion().getCoordenada().getLatitud()+" Longitud Mod"+poiObtenido.getLocacion().getCoordenada().getLongitud());
-		
-//		banco.getServicios().add("plazo fijo");
+
 		Coordenada coordenadaModificada = new Coordenada(2, 3);
-		Locacion locacionModificada = new Locacion();
 		locacion.setCoordenada(coordenadaModificada);
-		poiObtenido.setLocacion(locacionModificada);
+		poiObtenido.setLocacion(locacion);
+//		banco.getServicios().add("plazo fijo");
+		
 //		poiObtenido.setTipo(banco);
+		
+		DaoRelacional.crearEntidadIdLong(coordenadaModificada);
+		repositorio.modificarEntidad(locacion);
 		repositorio.modificarEntidad(poiObtenido);
 		
 		POI poiModificado = new POI();
 		poiModificado = (POI) PoiDao.obtenerPoiPorId(id, POI.class);
-		
+		SucursalBanco bancoPoi = (SucursalBanco)poiModificado.getTipo();
 		System.out.println("Latitud Mod"+poiModificado.getLocacion().getCoordenada().getLatitud()+" Longitud Mod"+poiModificado.getLocacion().getCoordenada().getLongitud());
-		
+		System.out.println("Clave "+poiModificado.getPalabrasClaves().get(0));
+		System.out.println("Gerente "+bancoPoi.getNombreGerente());
 //		TipoPoi tipoModificado = new SucursalBanco();
 //		tipoModificado = (TipoPoi) poiModificado.getTipo();
 //
@@ -152,12 +158,70 @@ public class PersistenciaPoiTest {
 		
 		DaoRelacional.crearEntidadIdLong(coordenadatest);	
 		DaoRelacional.crearEntidadIdLong(locaciontest);	
+		DaoRelacional.crearEntidadIdLong(banco);		
 		Long id = DaoRelacional.crearEntidadIdLong(poiBanco);	
 	
 		
 		POI poiObtenido = new POI();
 		poiObtenido = (POI) PoiDao.obtenerPoiPorId(id, POI.class);
 		DaoRelacional.eliminarPoi(poiObtenido);
+
+
+	}
+	
+	@Test
+	public void crearParadaTest() throws Exception
+	{
+		ParadaColectivo parada = new ParadaColectivo();
+		POI poiParada = new POI();
+		poiParada.setTipo(parada);
+		poiParada.setNombre("Parada 103");
+		DaoRelacional.crearEntidadIdLong(parada);	
+		Long id = DaoRelacional.crearEntidadIdLong(poiParada);	
+	
+		POI poiObtenido = new POI();
+		poiObtenido = (POI) PoiDao.obtenerPoiPorId(id, POI.class);
+		System.out.println("Nombre Parada: "+poiObtenido.getNombre());
+		
+	}
+	
+	@Test
+	public void crearLibreriaTest() throws Exception
+	{
+		Libreria libreria = new Libreria();
+		LocalComercial local = new LocalComercial();
+		POI poiLibreria = new POI();
+		local.setRubro(libreria);
+		poiLibreria.setTipo(local);
+		poiLibreria.setNombre("Libreria Colores");
+		DaoRelacional.crearEntidadIdLong(libreria);	
+		DaoRelacional.crearEntidadIdLong(local);	
+		Long id = DaoRelacional.crearEntidadIdLong(poiLibreria);	
+	
+		POI poiObtenido = new POI();
+		poiObtenido = (POI) PoiDao.obtenerPoiPorId(id, POI.class);
+		System.out.println("Nombre Libreria: "+poiObtenido.getNombre());
+		
+	}
+	
+	@Test
+	public void crearCGPTest() throws Exception
+	{
+		CGP cgp = new CGP();
+		ServicioCGP servicio = new ServicioCGP();
+		POI poiCGP = new POI();
+		servicio.setNombre("ABL");
+		servicio.setCgp(cgp);
+		cgp.getServicios().add(servicio);
+		poiCGP.setTipo(cgp);
+		poiCGP.setNombre("CGP Comuna 7");
+		DaoRelacional.crearEntidadIdLong(servicio);	
+		DaoRelacional.crearEntidadIdLong(cgp);	
+		Long id = DaoRelacional.crearEntidadIdLong(poiCGP);	
+	
+		POI poiObtenido = new POI();
+		poiObtenido = (POI) PoiDao.obtenerPoiPorId(id, POI.class);
+		System.out.println("Nombre CGP: "+poiObtenido.getNombre());
 		
 	}
 	

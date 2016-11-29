@@ -3,21 +3,38 @@ package utn.dds.g10.entidades;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import utn.dds.g10.DAO.DaoRelacional;
 @Entity
 @Table(name = "CGP")
 @Access(value=AccessType.FIELD)
 public class CGP extends TipoPoi {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	private static final long serialVersionUID = 1L;
 	@Column
@@ -31,7 +48,8 @@ public class CGP extends TipoPoi {
 	@Column
 	private String telefono;
 	
-	private ArrayList<ServicioCGP> servicios = new ArrayList<ServicioCGP>();	
+	@OneToMany(mappedBy = "cgp")
+	private List<ServicioCGP> servicios = new ArrayList<ServicioCGP>();	
 	
 	public String getComuna() {
 		return comuna;
@@ -72,15 +90,12 @@ public class CGP extends TipoPoi {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idTipoPoi")
-	@Lob
-	@Column(columnDefinition="blob")
-	public ArrayList<ServicioCGP> getServicios() {
+	public List<ServicioCGP> getServicios() {
 		return servicios;
 	}
 	
 
-	public void setServicios(ArrayList<ServicioCGP> servicios) {
+	public void setServicios(List<ServicioCGP> servicios) {
 		this.servicios = servicios;
 	}
 
@@ -149,13 +164,13 @@ public class CGP extends TipoPoi {
 
 	@Override
 	public TipoPoi obtenerPOI(int id) {
-		ArrayList<CGP> listaCGPs = new ArrayList<CGP>();
-		listaCGPs = (ArrayList<CGP>) DaoRelacional.obtenerCGPs();
-
-		for (CGP cgp : listaCGPs) {
-			if (cgp.getIdTipoPoi()==id)
-				return cgp;
-		}
+//		ArrayList<CGP> listaCGPs = new ArrayList<CGP>();
+//		listaCGPs = (ArrayList<CGP>) DaoRelacional.obtenerCGPs();
+//
+//		for (CGP cgp : listaCGPs) {
+//			if (cgp.getIdTipoPoi()==id)
+//				return cgp;
+//		}
 		return null;
 	}
 

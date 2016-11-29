@@ -3,7 +3,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,22 +15,28 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class ServicioCGP implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "servicioCGPID")
-	private int id;
-	@Column
-	private String nombre;
+	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CGP", nullable = false)
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "cgp_id", nullable = false)
 	private CGP cgp;
-	
 	
 	public CGP getCgp() {
 		return cgp;
@@ -37,8 +45,11 @@ public class ServicioCGP implements java.io.Serializable{
 		this.cgp = cgp;
 	}
 	
-	
-	private ArrayList<Horarios> horarios = new ArrayList<Horarios>();
+	@Column
+	private String nombre;
+	@OneToMany
+	@JoinColumn(name = "id_horarios")
+	private List<Horarios> horarios = new ArrayList<Horarios>();
 	
 	public String getNombre() {
 		return nombre;
@@ -46,11 +57,11 @@ public class ServicioCGP implements java.io.Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idTipoPoi")
-	public ArrayList<Horarios> getHorarios() {
+
+	public List<Horarios> getHorarios() {
 		return horarios;
 	}
-	public void setHorarios(ArrayList<Horarios> horarios) {
+	public void setHorarios(List<Horarios> horarios) {
 		this.horarios = horarios;
 	}
 

@@ -5,11 +5,27 @@ import java.time.DayOfWeek;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 @Entity
 public class Kiosco extends RubroLocal {
 	/**
 	 * 
 	 */
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	private static final long serialVersionUID = 1L;
 	@Column
 	private LocalTime HorarioInicio1 = LocalTime.of(10,0,0);

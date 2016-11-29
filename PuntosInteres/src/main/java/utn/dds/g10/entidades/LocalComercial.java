@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import utn.dds.g10.DAO.DaoRelacional;
@@ -16,7 +17,8 @@ public class LocalComercial extends TipoPoi {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_rubro")
 	private RubroLocal rubro;
 	//List<DayOfWeek> diasDisponible;	
 
@@ -68,20 +70,14 @@ public class LocalComercial extends TipoPoi {
 	@Override
 	public TipoPoi obtenerPOI(int id) {
 		//buscar local -> buscar rubro
-		ArrayList<LocalComercial> listaLocales = new ArrayList<LocalComercial>();
-		listaLocales = (ArrayList<LocalComercial>) DaoRelacional.obtenerLocales();
-
-		for (LocalComercial l : listaLocales) {
-			if (l.getIdTipoPoi()==id)
-				return l;
-		}
+//		ArrayList<LocalComercial> listaLocales = new ArrayList<LocalComercial>();
+//		listaLocales = (ArrayList<LocalComercial>) DaoRelacional.obtenerLocales();
+//
+//		for (LocalComercial l : listaLocales) {
+//			if (l.getIdTipoPoi()==id)
+//				return l;
+//		}
 		return null;
-	}
-	
-	private ArrayList<String> servicios = new ArrayList<String>();
-
-	public ArrayList<String> getServicios() {
-		return servicios;
 	}	
 
 }

@@ -4,11 +4,17 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
@@ -16,10 +22,23 @@ import utn.dds.g10.DAO.DaoRelacional;
 
 @Entity
 @Table(name = "sucursalBanco")
-
+//@AttributeOverride(column = @Column, name = "poi")
 public class SucursalBanco extends TipoPoi {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	@Column
 	private static int HoraInicio = 10;
 	@Column
@@ -27,8 +46,9 @@ public class SucursalBanco extends TipoPoi {
 	@Column
 	private String nombreGerente;
 	
-
-	private ArrayList<String> servicios = new ArrayList<String>();
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="id"))
+	private List<String> servicios = new ArrayList<String>();
 
 	public String getNombreGerente() {
 		return nombreGerente;
@@ -37,13 +57,12 @@ public class SucursalBanco extends TipoPoi {
 	public void setNombreGerente(String nombreGerente) {
 		this.nombreGerente = nombreGerente;
 	}
-	@ElementCollection
-	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="idTipoPoi"))
-	public ArrayList<String> getServicios() {
+
+	public List<String> getServicios() {
 		return servicios;
 	}
 
-	public void setServicios(ArrayList<String> servicios) {
+	public void setServicios(List<String> servicios) {
 		this.servicios = servicios;
 	}
 
@@ -95,13 +114,13 @@ public class SucursalBanco extends TipoPoi {
 
 	@Override
 	public TipoPoi obtenerPOI(int id) {
-		ArrayList<SucursalBanco> listaBancos = new ArrayList<SucursalBanco>();
-		listaBancos = (ArrayList<SucursalBanco>) DaoRelacional.obtenerBancos();
-
-		for (SucursalBanco b : listaBancos) {
-			if (b.getIdTipoPoi()==id)
-				return b;
-		}
+//		ArrayList<SucursalBanco> listaBancos = new ArrayList<SucursalBanco>();
+//		listaBancos = (ArrayList<SucursalBanco>) DaoRelacional.obtenerBancos();
+//
+//		for (SucursalBanco b : listaBancos) {
+//			if (b.getIdTipoPoi()==id)
+//				return b;
+//		}
 		return null;
 	}
 

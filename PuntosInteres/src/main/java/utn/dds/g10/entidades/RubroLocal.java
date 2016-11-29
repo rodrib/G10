@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class  RubroLocal implements Serializable  {
@@ -19,14 +20,25 @@ public abstract class  RubroLocal implements Serializable  {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private	int idRubro;
-
-	public int getIdRubro() {
-		return idRubro;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	public Long getId() {
+		return id;
 	}
-	public void setIdRubro(int idRubro) {
-		this.idRubro = idRubro;
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	@OneToOne(mappedBy = "rubro")
+	private LocalComercial local;
+	
+	public LocalComercial getLocal() {
+		return local;
+	}
+	public void setLocal(LocalComercial local) {
+		this.local = local;
 	}
 	@Column
 	public abstract float getDistanciaMaxima();

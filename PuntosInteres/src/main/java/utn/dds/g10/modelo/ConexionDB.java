@@ -11,7 +11,7 @@ public class ConexionDB {
 		try {
 			return new Configuration().addResource("hibernate.cfg.xml").configure().buildSessionFactory();
 		} catch (Throwable ex) {
-			System.err.println("Initial SessionFactory creation failed." + ex);
+			System.err.println("Error al intentarse conectar a la base de datos: " + ex.getMessage());
 			throw new ExceptionInInitializerError(ex);
 		}
 	}

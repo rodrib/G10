@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity; 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +15,7 @@ import javax.persistence.OneToOne;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class  RubroLocal implements Serializable  {
-	public abstract String tipoRubro();
-
+	
 	/**
 	 * 
 	 */
@@ -46,4 +46,5 @@ public abstract class  RubroLocal implements Serializable  {
 	public abstract boolean EsDiaDisponible(LocalDateTime fecha);
 	public abstract boolean EsHorarioDisponible(LocalDateTime fecha);
 	public abstract boolean CumpleCondicionBusqueda(String condicion);
+	public abstract String tipoRubro();
 }

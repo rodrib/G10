@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.time.DayOfWeek;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -56,9 +57,9 @@ public class Kiosco extends RubroLocal {
 		//El nobre de la clase es el nombre del rubro. 
 		return (this.getClass().getName().contains(condicion));
 	}
-	
+
 	@Override
-	 public String tipoRubro() {
-	 		return "Kiosco";
+	public String tipoRubro() {
+		return "Kiosco";
 	}
 }

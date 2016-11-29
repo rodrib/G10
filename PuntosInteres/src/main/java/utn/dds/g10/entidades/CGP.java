@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -150,9 +152,9 @@ public class CGP extends TipoPoi {
 			}		
 		}
 		
-		if ((this.getZonas().indexOf(condicion)!=(-1))){			
-			return true;				
-		}
+//		if ((this.getZonas().indexOf(condicion)!=(-1))){			
+//			return true;				
+//		}
 		
 		return false;
 	}

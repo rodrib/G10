@@ -224,39 +224,5 @@ public class PersistenciaPoiTest {
 		System.out.println("Nombre CGP: "+poiObtenido.getNombre());
 		
 	}
-	
-	@Test
-	public void crearModificarCoordenada() throws Exception
-	{
-		
-		Coordenada coodenadaNueva = new Coordenada(55,77);
-		
-		poiBanco.setNombre("Banco Nacion");
-		SucursalBanco banco = new SucursalBanco();
-		poiBanco.setTipo(banco);
-		
-		locaciontest.setEntreCalles("Entre calles");
-		locaciontest.setPoi(poiBanco);
-		
-		poiBanco.setLocacion(locaciontest);
-		coordenadatest.setLocacion(locaciontest);
-		
-		DaoRelacional.crearEntidadIdLong(coordenadatest);
-		DaoRelacional.crearEntidadIdLong(coodenadaNueva);
-		
-		DaoRelacional.crearEntidadIdLong(locaciontest);
-		Long id = DaoRelacional.crearEntidadIdLong(poiBanco);	
-	
-		POI poiObtenido = new POI();
-		poiObtenido = (POI)PoiDao.obtenerPoiPorId(id, POI.class);
-		
-		coodenadaNueva.setLocacion(poiObtenido.getLocacion());
-		poiObtenido.getLocacion().setCoordenada(coodenadaNueva);
-		
-		repositorio.modificarEntidad(poiObtenido.getLocacion());
-		
-		//DaoRelacional.eliminarPoi(poiObtenido);
-	}
-
 
 }

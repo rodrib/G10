@@ -3,6 +3,8 @@ package utn.dds.g10.entidades;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -66,5 +68,12 @@ public class ParadaColectivo extends TipoPoi {
 //		}
 		return null;
 	}
+	
+	private ArrayList<String> servicios = new ArrayList<String>();
+	
+	public ArrayList<String> getServicios() {
+		return servicios;
+ 	}	
+
 
 }

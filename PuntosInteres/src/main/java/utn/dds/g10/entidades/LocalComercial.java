@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -78,7 +80,13 @@ public class LocalComercial extends TipoPoi {
 //				return l;
 //		}
 		return null;
-	}	
+	}
+	
+	private ArrayList<String> servicios = new ArrayList<String>();
+	
+		public ArrayList<String> getServicios() {
+			return servicios;
+	 	}	
 
 }
 

@@ -46,7 +46,7 @@ public class ResultadoConsulta {
 	@Column
 	private int cantidadResultados;
 	
-	@Transient
+	@OneToMany(mappedBy = "poi")
 	private List<POI> puntos = new ArrayList<POI>();
 	
 	@Transient

@@ -50,8 +50,8 @@ public class HistorialBean implements Serializable{
 		this.fechaHastaDate = fechaHastaDate;
 	}
 
-	private Date fechaDesdeDate;
-	private Date fechaHastaDate;
+	private Date fechaDesdeDate=null;
+	private Date fechaHastaDate=null;
 	
 	private String fechaDesde="";
 	private String fechaHasta="";
@@ -121,15 +121,13 @@ public class HistorialBean implements Serializable{
 		
 		LocalDateTime fechaDesde=null;
 		LocalDateTime fechaHasta=null;
-		this.fechaDesde = convertStringToDate(this.fechaDesdeDate);
-		this.fechaHasta = convertStringToDate(this.fechaHastaDate);
 		
-		if (this.fechaDesde != null && this.fechaDesde != ""){
-			fechaDesde = obtenerFecha(this.fechaDesde);
+		if (this.fechaDesdeDate != null){
+			this.fechaDesde = convertStringToDate(this.fechaDesdeDate);
 		}
 		
-		if (this.fechaHasta != null && this.fechaHasta != ""){
-			fechaHasta = obtenerFecha(this.fechaHasta);
+		if (this.fechaHastaDate != null){
+			this.fechaHasta = convertStringToDate(this.fechaHastaDate);
 		}
 		
 		int soloUsuario=0;
@@ -211,6 +209,9 @@ public class HistorialBean implements Serializable{
 					resultadoList.add(elemLista);
 				}	
 			}
+		
+		if (this.fechaDesde.equalsIgnoreCase("")&&this.fechaHasta.equalsIgnoreCase(""))
+			return null;
 		
 		//Sin Usuario
 		}else{

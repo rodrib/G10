@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -60,6 +61,11 @@ public class Libreria extends RubroLocal {
 	public boolean CumpleCondicionBusqueda(String condicion) {
 		// El nobre de la clase es el nombre del rubro.
 		return (this.getClass().getName().contains(condicion));
+	}
+
+	@Override
+	public String tipoRubro() {
+		return "Libreria";
 	}
 
 }

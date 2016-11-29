@@ -37,6 +37,9 @@ public class GestorPoi {
 		 historialFecha.AgregarResultado(resultado);
 		 historialUsuario.AgregarResultado(resultado);
 
+		 //Persistir resultado
+		 
+		 
 		return resultado;
 	}
 

@@ -14,6 +14,7 @@ import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.administracion.Usuario;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
 import utn.dds.g10.modelo.ConexionDB;
 import utn.dds.g10.pruebaPersistencia.Department;
 
@@ -132,11 +133,24 @@ public class DaoRelacional implements Dao {
 		@SuppressWarnings("deprecation")
 		List<POI> pois = (List<POI>) session.createCriteria(POI.class).list();
 
-		// Si lo quito da pete ya que no lo carga en la sesion
 		for (POI p : pois) {
 			Hibernate.initialize(p.getTipo());
 		}
 		return pois;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<ResultadoBusquedaParcialUsuario> obtenerResultados() {
+
+		iniciar();
+
+		@SuppressWarnings("deprecation")
+		List<ResultadoBusquedaParcialUsuario> resultados = (List<ResultadoBusquedaParcialUsuario>) session.createCriteria(ResultadoBusquedaParcialUsuario.class).list();
+
+		for (ResultadoBusquedaParcialUsuario r : resultados) {
+			Hibernate.initialize(r.getResultados());
+		}
+		return resultados;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -147,7 +161,6 @@ public class DaoRelacional implements Dao {
 		List<SucursalBanco> bancos = (List<SucursalBanco>) session
 				.createCriteria(SucursalBanco.class).list();
 
-		// Si lo quito da pete ya que no lo carga en la sesion
 		for (SucursalBanco b : bancos) {
 			Hibernate.initialize(b.getServicios());
 		}
@@ -162,7 +175,6 @@ public class DaoRelacional implements Dao {
 		List<ParadaColectivo> paradas = (List<ParadaColectivo>) session
 				.createCriteria(ParadaColectivo.class).list();
 
-		// Si lo quito da pete ya que no lo carga en la sesion
 		for (ParadaColectivo p : paradas) {
 			Hibernate.initialize(p);
 		}
@@ -177,7 +189,6 @@ public class DaoRelacional implements Dao {
 		List<LocalComercial> locales = (List<LocalComercial>) session
 				.createCriteria(LocalComercial.class).list();
 
-		// Si lo quito da pete ya que no lo carga en la sesion
 		for (LocalComercial l : locales) {
 			Hibernate.initialize(l.getRubro());
 		}
@@ -191,7 +202,6 @@ public class DaoRelacional implements Dao {
 		@SuppressWarnings("deprecation")
 		List<CGP> cgps = (List<CGP>) session.createCriteria(CGP.class).list();
 
-		// Si lo quito da pete ya que no lo carga en la sesion
 		for (CGP cgp : cgps) {
 			Hibernate.initialize(cgp.getServicios());
 		}

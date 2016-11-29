@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -20,6 +21,8 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import utn.dds.g10.DAO.DaoRelacional;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @Entity
@@ -59,7 +62,19 @@ public class POI implements java.io.Serializable{
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="id"))
 	private List<String> palabrasClaves = new ArrayList<String>();
+		
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "resultado_id", nullable = false)
+	private ResultadoBusquedaParcial resultado;
 	
+	public ResultadoBusquedaParcial getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(ResultadoBusquedaParcial resultado) {
+		this.resultado = resultado;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

@@ -16,6 +16,7 @@ import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.TipoPoi;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
 import utn.dds.g10.pruebaPersistencia.Department;
 
 public class PersistenciaPoiTest {
@@ -60,8 +61,8 @@ public class PersistenciaPoiTest {
 	}
 	
 	
-//	Obtener   un   POI,   modificar   sus   coordenadas   geográficas,   persistirlo,   recuperarlo   y  
-//	verificar que las coordenadas sean las ingresadas en la última modificación. 
+//	Obtener   un   POI,   modificar   sus   coordenadas   geogrÃ¡ficas,   persistirlo,   recuperarlo   y  
+//	verificar que las coordenadas sean las ingresadas en la Ãºltima modificaciÃ³n. 
 	@Test
 	public void modificarPoiTest()
 	{
@@ -80,7 +81,9 @@ public class PersistenciaPoiTest {
 		DaoRelacional.crearEntidadIdLong(banco);
 		
 		coordenada.setLocacion(locacion);
-		
+		ResultadoBusquedaParcial resultado=new ResultadoBusquedaParcial();
+		poiBanco.setResultado(resultado);
+		DaoRelacional.crearEntidadIdLong(resultado);
 		DaoRelacional.crearEntidadIdLong(coordenada);
 		DaoRelacional.crearEntidadIdLong(locacion);
 		Long id = DaoRelacional.crearEntidadIdLong(poiBanco);
@@ -139,7 +142,7 @@ public class PersistenciaPoiTest {
 	}
 	
 //	Crear   un   nuevo   PoI,   persistirlo,   recuperarlo,   eliminarlo   y   al   solicitar   nuevamente   su  
-//	recuperación, la respuesta deberá ser que no existe (null). 
+//	recuperaciÃ³n, la respuesta deberÃ¡ ser que no existe (null). 
 	// Crea poi con id, con un id de tipo poi -> id
 	@Test
 	public void crearEliminarPoiTest() throws Exception
@@ -155,7 +158,9 @@ public class PersistenciaPoiTest {
 		poiBanco.setLocacion(locaciontest);
 		
 		coordenadatest.setLocacion(locaciontest);
-		
+		ResultadoBusquedaParcial resultado=new ResultadoBusquedaParcial();
+		poiBanco.setResultado(resultado);
+		DaoRelacional.crearEntidadIdLong(resultado);
 		DaoRelacional.crearEntidadIdLong(coordenadatest);	
 		DaoRelacional.crearEntidadIdLong(locaciontest);	
 		DaoRelacional.crearEntidadIdLong(banco);		
@@ -176,6 +181,9 @@ public class PersistenciaPoiTest {
 		POI poiParada = new POI();
 		poiParada.setTipo(parada);
 		poiParada.setNombre("Parada 103");
+		ResultadoBusquedaParcial resultado=new ResultadoBusquedaParcial();
+		poiParada.setResultado(resultado);
+		DaoRelacional.crearEntidadIdLong(resultado);
 		DaoRelacional.crearEntidadIdLong(parada);	
 		Long id = DaoRelacional.crearEntidadIdLong(poiParada);	
 	
@@ -194,6 +202,9 @@ public class PersistenciaPoiTest {
 		local.setRubro(libreria);
 		poiLibreria.setTipo(local);
 		poiLibreria.setNombre("Libreria Colores");
+		ResultadoBusquedaParcial resultado=new ResultadoBusquedaParcial();
+		poiLibreria.setResultado(resultado);
+		DaoRelacional.crearEntidadIdLong(resultado);
 		DaoRelacional.crearEntidadIdLong(libreria);	
 		DaoRelacional.crearEntidadIdLong(local);	
 		Long id = DaoRelacional.crearEntidadIdLong(poiLibreria);	
@@ -215,6 +226,9 @@ public class PersistenciaPoiTest {
 		cgp.getServicios().add(servicio);
 		poiCGP.setTipo(cgp);
 		poiCGP.setNombre("CGP Comuna 7");
+		ResultadoBusquedaParcial resultado=new ResultadoBusquedaParcial();
+		poiCGP.setResultado(resultado);
+		DaoRelacional.crearEntidadIdLong(resultado);
 		DaoRelacional.crearEntidadIdLong(servicio);	
 		DaoRelacional.crearEntidadIdLong(cgp);	
 		Long id = DaoRelacional.crearEntidadIdLong(poiCGP);	

@@ -48,7 +48,7 @@ public class ParadaColectivo extends TipoPoi {
 
 	@Override
 	public boolean CumpleCondicionBusqueda(String condicion) {
-		//En este caso al no tener rubro, ni servicios, hacemos que siempre sea v·lido.
+		//En este caso al no tener rubro, ni servicios, hacemos que siempre sea v√°lido.
 		return false;
 	}
 	

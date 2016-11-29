@@ -38,7 +38,7 @@ public class ResultadoBusquedaParcial implements Serializable {
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "resultados_id", nullable = false)
+	@JoinColumn(name = "resultados_id", nullable = true)
 	private ResultadoBusquedaParcialUsuario resultado;
 	
 	@Column
@@ -48,7 +48,7 @@ public class ResultadoBusquedaParcial implements Serializable {
 	@Column
 	private LocalDateTime fecha;
 	
-	@OneToMany(mappedBy = "id")
+	@OneToMany(mappedBy = "resultado")
 	private List<POI> listaPOISbusquedaParcial;
 	
 	public List<POI> getListaPOISbusquedaParcial() {

@@ -89,3 +89,4 @@ public class LocalComercial extends TipoPoi {
 	 	}	
 
 }
+

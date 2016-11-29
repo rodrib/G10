@@ -1,5 +1,7 @@
 package utn.dds.g10.beans;
 
+import utn.dds.g10.datos.Repositorio;
+
 public class loginBean {
 	
 	private String name;
@@ -15,6 +17,12 @@ public class loginBean {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+	public void login_action()
+	{
+		//this.name
 	}
 
 	

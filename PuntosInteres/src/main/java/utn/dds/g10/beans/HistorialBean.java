@@ -4,6 +4,7 @@ package utn.dds.g10.beans;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -110,9 +111,9 @@ public class HistorialBean implements Serializable{
 	}
 	
 	
-	private boolean tieneValorCargado(String fecha)
+	private boolean tieneValorCargado(LocalDateTime fecha)
 	{
-		return (fecha != null && fecha != null);
+		return (fecha != null);
 	}
 
 	public String agregaResultadoListaConsulta() {
@@ -124,21 +125,22 @@ public class HistorialBean implements Serializable{
 		
 		if (this.fechaDesdeDate != null){
 			this.fechaDesde = convertStringToDate(this.fechaDesdeDate);
+			fechaDesde = LocalDateTime.ofInstant(this.fechaDesdeDate.toInstant(), ZoneId.systemDefault());
+			
 		}
 		
 		if (this.fechaHastaDate != null){
 			this.fechaHasta = convertStringToDate(this.fechaHastaDate);
+			fechaHasta = LocalDateTime.ofInstant(this.fechaHastaDate.toInstant(), ZoneId.systemDefault());
 		}
 		
 		int soloUsuario=0;
 		ResultadoBusquedaParcialUsuario resultadoUsuario = new ResultadoBusquedaParcialUsuario();
 		ResultadoBusquedaParcialUsuario resultadoUsuarioFiltrado = new ResultadoBusquedaParcialUsuario();
 		
-		boolean tieneValorFechaDesde = tieneValorCargado(this.fechaDesde);
-		boolean tieneValorFechaHasta = tieneValorCargado(this.fechaHasta);
+		boolean tieneValorFechaDesde = tieneValorCargado(fechaDesde);
+		boolean tieneValorFechaHasta = tieneValorCargado(fechaHasta);
 		
-	
-				
 		//Con usuario
 		if (this.usuario != null && !this.usuario.equalsIgnoreCase("")) {
 			

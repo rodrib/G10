@@ -311,20 +311,9 @@ public class HistorialConsultasUsuario {
 					
 					//Buscar en la lista consultasParcial y agregarlo al listado
 					
-					for (Iterator<ResultadoBusquedaParcialUsuario> consultaBusqueda = consultasParcial
-							.iterator(); consultaBusqueda.hasNext();) {
-						resultadoUsuarioParcialEncontrado = consultaBusqueda.next();
-
-						if (resultadoUsuarioParcialEncontrado.getUsuario()
-								.equalsIgnoreCase(resultado.getUsuario())) {
-							usuarioEncontrado = 1;
-							break;
-						}
-					}
-					
 					resultadoParcial.setResultado(resultadoUsuarioParcialEncontrado);
 					//Se agrega resultado nuevo en la base
-					DaoRelacional.crearEntidadIdLong(resultadoParcial);	
+					DaoRelacional.mergeEntidad(resultadoParcial);	
 					resultadoUsuarioParcialEncontrado.getResultados().add(resultadoParcial);
 					
 					int i = buscarUsuarioIndice(resultadoUsuarioParcialEncontrado);

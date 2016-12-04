@@ -147,7 +147,7 @@ public class CGP extends TipoPoi {
 		for (Iterator<ServicioCGP> serviciosBusqueda = this.servicios.iterator(); serviciosBusqueda.hasNext();) {
 			String nombreServicio =serviciosBusqueda.next().getNombre();
 						
-			if  (nombreServicio.indexOf(condicion)!=(-1)){
+			if  (nombreServicio.contains(condicion)){
 				return true;				
 			}		
 		}

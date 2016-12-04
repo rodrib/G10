@@ -37,10 +37,9 @@ public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURL
 			POI poiObtenido = new POI();
 			poiObtenido = iterador.next();
 			
-			System.out.println("Nombre POI: "+poiObtenido.getNombre());
 			obtenerPOI(poiObtenido);
 			
-			if (CumpleCondicionBusqueda(poiObtenido, criterioBusqueda))
+			if (CumpleCondicionBusqueda(poiObtenido, criterioBusqueda)&&poiObtenido.getEstadoAlta()==true)
 				listadoPoi.add(poiObtenido);
 		}
 
@@ -112,7 +111,7 @@ private  Boolean CumpleCondicionBusqueda(POI poi, String criterio) {
 
 		if (poi.getPalabrasClaves() != null && !poi.getPalabrasClaves().isEmpty()) {
 			for (String palabra : poi.getPalabrasClaves()) {
-				if (palabra.equalsIgnoreCase(criterio)) {
+				if (palabra.contains(criterio)) {
 					return true;
 				}
 			}

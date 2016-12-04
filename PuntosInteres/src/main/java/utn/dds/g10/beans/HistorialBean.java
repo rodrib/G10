@@ -115,6 +115,14 @@ public class HistorialBean implements Serializable{
 	{
 		return (fecha != null);
 	}
+	
+	private String fechaToString(ResultadoBusquedaParcial resultadoBusquedaParcialEncontrado){
+	
+		String cadena = new String();
+		cadena = resultadoBusquedaParcialEncontrado.getFecha().getDayOfWeek().getValue()+"/"+resultadoBusquedaParcialEncontrado.getFecha().getMonthValue()+"/"+resultadoBusquedaParcialEncontrado.getFecha().getYear()+" "+resultadoBusquedaParcialEncontrado.getFecha().getHour()+":"+resultadoBusquedaParcialEncontrado.getFecha().getMinute()+":"+resultadoBusquedaParcialEncontrado.getFecha().getSecond();
+		return cadena;
+	
+	}
 
 	public String agregaResultadoListaConsulta() {
 		
@@ -195,7 +203,7 @@ public class HistorialBean implements Serializable{
 				List<POI> poisFiltrados = (filtrarRepetidos(resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()));
 				resultadoBusquedaParcialEncontrado.setCantidadResultados(poisFiltrados.size());
 					
-					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), resultadoBusquedaParcialEncontrado.getFecha().toString(),
+					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), fechaToString(resultadoBusquedaParcialEncontrado),
 							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
 					resultadoList.add(elemLista);
 				}						
@@ -206,14 +214,11 @@ public class HistorialBean implements Serializable{
 					
 					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
 
-					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), resultadoBusquedaParcialEncontrado.getFecha().toString(),
+					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), fechaToString(resultadoBusquedaParcialEncontrado),
 							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
 					resultadoList.add(elemLista);
 				}	
 			}
-		
-		if (this.fechaDesde.equalsIgnoreCase("")&&this.fechaHasta.equalsIgnoreCase(""))
-			return null;
 		
 		//Sin Usuario
 		}else{

@@ -16,6 +16,7 @@ import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.administracion.Usuario;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
 import utn.dds.g10.modelo.ConexionDB;
 import utn.dds.g10.pruebaPersistencia.Department;
@@ -191,6 +192,11 @@ public class DaoRelacional implements Dao {
 
 		for (ResultadoBusquedaParcialUsuario r : resultados) {
 			Hibernate.initialize(r.getResultados());
+			List<ResultadoBusquedaParcial> resultadosParcial = new ArrayList<ResultadoBusquedaParcial>();
+			resultadosParcial=r.getResultados();
+			for (ResultadoBusquedaParcial rPar : resultadosParcial) {
+				Hibernate.initialize(rPar.getListaPOISbusquedaParcial());
+			}		
 		}
 		session.close();
 		return resultados;

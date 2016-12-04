@@ -47,10 +47,6 @@
 		<!-- Bloque - Administracion de Busquedas - FIN -->
 
 
-<mapping class="utn.dds.g10.pruebaPersistencia.Department"></mapping>
-<mapping class="utn.dds.g10.pruebaPersistencia.Employee"></mapping>
-<mapping class="utn.dds.g10.pruebaPersistencia.Category"></mapping>
-<mapping class="utn.dds.g10.pruebaPersistencia.Stock"></mapping>
 
 
 	</session-factory>

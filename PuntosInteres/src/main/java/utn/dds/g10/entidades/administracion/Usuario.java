@@ -42,6 +42,17 @@ public class Usuario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	@Column(name = "usrPassword")
+	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Rol rol;

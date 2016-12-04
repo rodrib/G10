@@ -45,7 +45,8 @@ public class PersistenciaUsuarioTest {
 
 		// alta
 		usuarioAlta = new Usuario();
-		usuarioAlta.setNombre("Usuario Alta " + obtenerHoraString());
+		usuarioAlta.setNombre("admin");
+		usuarioAlta.setPassword("admin");
 
 		Rol rolUsuarioPersistible = new RolAdministrador();
 		usuarioAlta.setRol(rolUsuarioPersistible);
@@ -53,8 +54,7 @@ public class PersistenciaUsuarioTest {
 		// modificacion
 		usuarioModificacion = new Usuario();
 		usuarioModificacion.setId(id);
-		usuarioModificacion.setNombre("Nombre modificado "
-				+ obtenerHoraString());
+		usuarioModificacion.setNombre("Nombre modificado " + obtenerHoraString());
 
 		// Eliminar
 		usuarioEliminar = new Usuario();

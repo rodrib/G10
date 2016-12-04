@@ -3,9 +3,11 @@ package utn.dds.g10.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import utn.dds.g10.entidades.CGP;
 import utn.dds.g10.entidades.LocalComercial;
@@ -70,6 +72,28 @@ public class DaoRelacional implements Dao {
 		Usuario entidad = (Usuario) asession.get(clase, idUsuario);
 		asession.close();
 		return entidad;
+	}
+	
+	public static Usuario obtenerUsuariosPorNombre(String nombre, Class<Usuario> clase) {
+		Session asession = ConexionDB.getSessionFactory().openSession();
+		//Usuario entidad = (Usuario) asession.get(clase, idUsuario);
+		//asession.close();
+		
+		Criteria criteria = asession.createCriteria(Usuario.class);
+
+		criteria.add(Restrictions.eq("nombre", nombre));
+		
+		//Obtiene el primero
+		List<Usuario> usuarios = criteria.list();
+		
+		if(usuarios.size() > 0)
+		{
+			return (Usuario)criteria.list().get(0);	
+		}
+		else	
+		{
+			return new Usuario();
+		}
 	}
 	
 	public static Department obtenerDeparmentPorId(Long idUsuario,

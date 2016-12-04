@@ -2,28 +2,39 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <ui:composition template="/WEB-INF/templates/BasicTemplateLogin.xhtml">
 	<div class="container">
 		<ui:define name="content">
 			<h:form>
-				<p:growl id="growl" showDetail="true" />				
+				<p:growl id="growl" showDetail="true" />
 				<div class="row">
 					<div class="col-md-4"></div>
 					<div class="col-md-4 ">
 						<h2 class="form-signin-heading">Login</h2>
-						<h:inputText value="#{loginBean.name}" type="text"
+						<h:inputText id="txtUsername" value="#{loginBean.name}"
+							requiredMessage="El campo usuario es un campo obligatorio."
+							type="text" label="El campo usuario es requerido"
 							class="form-control" name="username"
 							a:placeholder="Ingrese Usuario" required="true"
-							autocomplete="true">
+							autocomplete="false">
+							<f:validator validatorId="utn.dds.g10.validadores.ValidadorLogin" />
+							<f:attribute name="atrPassword" value="#{txtPassword}" />
 						</h:inputText>
-						<h:inputSecret value="#{loginBean.password}" class="form-control"
+						<h:inputSecret id="txtPassword" value="#{loginBean.password}"
+							binding="#{txtPassword}"
+							requiredMessage="El campo password es un campo obligatorio."
+							class="form-control" label="El campo password es requerido"
 							name="password" a:placeholder="Ingrese contraseña"
-							required="true"></h:inputSecret>
+							required="true">
+						</h:inputSecret>
 						<h:commandButton value="Login" action="login"
 							class="btn btn-lg btn-primary btn-block">
 						</h:commandButton>
+						<h:message id="m3" for="txtUsername" style="color:red" />
+						<br></br>
+						<h:message id="m5" for="txtPassword" style="color:red" />
 					</div>
 					<div class="col-md-4"></div>
 				</div>

@@ -56,6 +56,14 @@ public class DaoRelacional implements Dao {
 		session.close();
 		return i;
 	}
+	
+	public static void mergeEntidad(Object entidad) {
+		Session session = ConexionDB.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.merge(entidad);
+		session.getTransaction().commit();
+		session.close();
+	}
 
 	@Override
 	public void modificarEntidad(Object entidadModificada) {
@@ -152,28 +160,33 @@ public class DaoRelacional implements Dao {
 	@SuppressWarnings("unchecked")
 	public static List<POI> obtenerPois() {
 
-		iniciar();
+		Session session = ConexionDB.getSessionFactory().openSession();
+		session.beginTransaction();
 
 		@SuppressWarnings("deprecation")
 		List<POI> pois = (List<POI>) session.createCriteria(POI.class).list();
 
-		for (POI p : pois) {
-			Hibernate.initialize(p.getTipo());
-		}
+//		for (POI p : pois) {
+//			Hibernate.initialize(p.getTipo());
+//		}
+		session.close();
 		return pois;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static List<ResultadoBusquedaParcialUsuario> obtenerResultados() {
 
-		iniciar();
+		Session session = ConexionDB.getSessionFactory().openSession();
+		session.beginTransaction();
 
 		@SuppressWarnings("deprecation")
-		List<ResultadoBusquedaParcialUsuario> resultados = (List<ResultadoBusquedaParcialUsuario>) session.createCriteria(ResultadoBusquedaParcialUsuario.class).list();
-
-		for (ResultadoBusquedaParcialUsuario r : resultados) {
-			Hibernate.initialize(r.getResultados());
-		}
+		List<ResultadoBusquedaParcialUsuario> resultados = new ArrayList<ResultadoBusquedaParcialUsuario>();
+		resultados = (List<ResultadoBusquedaParcialUsuario>) session.createCriteria(ResultadoBusquedaParcialUsuario.class).list();
+//
+//		for (ResultadoBusquedaParcialUsuario r : resultados) {
+//			Hibernate.initialize(r.getResultados());
+//		}
+		session.close();
 		return resultados;
 	}
 

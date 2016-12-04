@@ -104,7 +104,6 @@ public class POI implements java.io.Serializable{
 		this.palabrasClaves = palabrasClaves;
 	}
 	
-	//@OneToOne(mappedBy="poi",fetch = FetchType.EAGER)
 	public Locacion getLocacion() {
 		return locacion;
 	}

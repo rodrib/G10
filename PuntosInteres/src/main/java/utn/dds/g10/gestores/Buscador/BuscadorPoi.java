@@ -37,7 +37,7 @@ public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURL
 			poiObtenido = iterador.next();
 			
 			System.out.println("Nombre POI: "+poiObtenido.getNombre());
-			obtenerPOI(poiObtenido);	
+			obtenerPOI(poiObtenido);
 			
 			if (CumpleCondicionBusqueda(poiObtenido, criterioBusqueda))
 				listadoPoi.add(poiObtenido);

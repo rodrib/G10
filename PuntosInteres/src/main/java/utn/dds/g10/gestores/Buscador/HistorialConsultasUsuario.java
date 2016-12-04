@@ -8,17 +8,50 @@ import java.util.List;
 import utn.dds.g10.DAO.Dao;
 import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.entidades.CGP;
+import utn.dds.g10.entidades.Kiosco;
+import utn.dds.g10.entidades.Libreria;
+import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
+import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.ServicioCGP;
+import utn.dds.g10.entidades.SucursalBanco;
 
 public class HistorialConsultasUsuario {
 	private static List<ResultadoBusquedaTotalUsuario> consultasTotal = new ArrayList<ResultadoBusquedaTotalUsuario>();
 	
-	
-	//Obtener listado de la base de datos
 	private static List<ResultadoBusquedaParcialUsuario> consultasParcial = new ArrayList<ResultadoBusquedaParcialUsuario>();
 	
+	public HistorialConsultasUsuario(){
+		
+		//Obtiene el listado de la base de datos
+		List<ResultadoBusquedaParcialUsuario> consultasParcialInicial = new ArrayList<ResultadoBusquedaParcialUsuario>();
+		
+		consultasParcialInicial = DaoRelacional.obtenerResultados();
+		
+		//Inicializa el listado
+		for (Iterator<ResultadoBusquedaParcialUsuario> iterador = consultasParcialInicial.iterator(); iterador
+				.hasNext();) {
+			
+			ResultadoBusquedaParcialUsuario resultadoObtenido = new ResultadoBusquedaParcialUsuario();
+			resultadoObtenido = iterador.next();
+			
+			obtenerResultado(resultadoObtenido);
+			
+			consultasParcial.add(resultadoObtenido);
+		}		
+
+	}
+	
+	
+	private ResultadoBusquedaParcialUsuario obtenerResultado(ResultadoBusquedaParcialUsuario resultado){
+		ResultadoBusquedaParcialUsuario resultadoReconstruido = new ResultadoBusquedaParcialUsuario();
+		resultadoReconstruido.setId(resultado.getId());
+		resultadoReconstruido.setUsuario(resultado.getUsuario());
+		resultadoReconstruido.setResultados(resultado.getResultados());
+
+		return resultadoReconstruido;
+	}
 	
 	public static List<ResultadoBusquedaTotalUsuario> getConsultasTotal() {
 		return consultasTotal;
@@ -56,6 +89,25 @@ public class HistorialConsultasUsuario {
 		else
 			return new ResultadoBusquedaParcialUsuario();
 	}
+	
+	public static int buscarUsuarioIndice(
+			ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado) {
+		
+		// Busca por usuario. Si ya existe, se busca por el criterio de busqueda
+
+		int i;
+			for (i=0;i<consultasParcial.size(); i++ ) {
+				ResultadoBusquedaParcialUsuario elemResul = consultasParcial.get(i);
+
+				if (resultadoUsuarioParcialEncontrado.getUsuario()
+						.equalsIgnoreCase(elemResul.getUsuario())) {
+					break;
+				}
+			}
+		
+		return i;
+	}
+	
 	
 	public static ResultadoBusquedaParcialUsuario filtrarUsuarioFechaDesde(
 			LocalDateTime fechaDesde,ResultadoBusquedaParcialUsuario resultado) {
@@ -166,6 +218,9 @@ public class HistorialConsultasUsuario {
 	
 	public static List<ResultadoBusquedaParcialUsuario> buscarFechaDesdeHasta(
 			LocalDateTime fechaDesde,LocalDateTime fechaHasta) {
+		
+		Dao repositorio = new DaoRelacional();
+		
 		List<ResultadoBusquedaParcialUsuario> listaResultado = new ArrayList<ResultadoBusquedaParcialUsuario>();
 		ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado = new ResultadoBusquedaParcialUsuario();
 
@@ -199,8 +254,6 @@ public class HistorialConsultasUsuario {
 
 	public void AgregarResultado(ResultadoConsulta resultado) {
 		
-		Dao repositorio = new DaoRelacional();
-		
 		ResultadoBusquedaParcial resultadoParcial = new ResultadoBusquedaParcial();
 		resultadoParcial.setCriterioBusqueda(resultado.getCriterioBusqueda());
 		resultadoParcial.setCantidadResultados(resultado
@@ -220,13 +273,9 @@ public class HistorialConsultasUsuario {
 
 		// Busca por usuario. Si ya existe, se busca por el criterio de busqueda
 		
-			
-			//Traer resultados de la base
-			List<ResultadoBusquedaParcialUsuario> listaResultadosParcialTotal = new ArrayList<ResultadoBusquedaParcialUsuario>();
-			listaResultadosParcialTotal = DaoRelacional.obtenerResultados();
 		
-		if (!listaResultadosParcialTotal.isEmpty()) {
-			for (Iterator<ResultadoBusquedaParcialUsuario> consultaBusqueda = listaResultadosParcialTotal
+		if (!consultasParcial.isEmpty()) {
+			for (Iterator<ResultadoBusquedaParcialUsuario> consultaBusqueda = consultasParcial
 					.iterator(); consultaBusqueda.hasNext();) {
 				resultadoUsuarioParcialEncontrado = consultaBusqueda.next();
 
@@ -260,9 +309,30 @@ public class HistorialConsultasUsuario {
 					resultadoUsuarioParcialEncontrado.getResultados().add(
 							resultadoParcial);
 					
+					//Buscar en la lista consultasParcial y agregarlo al listado
+					
+					for (Iterator<ResultadoBusquedaParcialUsuario> consultaBusqueda = consultasParcial
+							.iterator(); consultaBusqueda.hasNext();) {
+						resultadoUsuarioParcialEncontrado = consultaBusqueda.next();
+
+						if (resultadoUsuarioParcialEncontrado.getUsuario()
+								.equalsIgnoreCase(resultado.getUsuario())) {
+							usuarioEncontrado = 1;
+							break;
+						}
+					}
+					
+					resultadoParcial.setResultado(resultadoUsuarioParcialEncontrado);
 					//Se agrega resultado nuevo en la base
 					DaoRelacional.crearEntidadIdLong(resultadoParcial);	
-					repositorio.modificarEntidad(resultadoUsuarioParcialEncontrado);	
+					resultadoUsuarioParcialEncontrado.getResultados().add(resultadoParcial);
+					
+					int i = buscarUsuarioIndice(resultadoUsuarioParcialEncontrado);
+					
+					consultasParcial.remove(i);
+					consultasParcial.add(resultadoUsuarioParcialEncontrado);
+					
+					//repositorio.modificarEntidad(resultadoUsuarioParcialEncontrado);	
 					
 					AgregarResultadoTotal(resultado);
 				}
@@ -271,12 +341,18 @@ public class HistorialConsultasUsuario {
 					// ese usuario y la busqueda realizada
 				ResultadoBusquedaParcialUsuario resultadoUsuarioParcialNuevo = new ResultadoBusquedaParcialUsuario();
 				resultadoUsuarioParcialNuevo.setUsuario(resultado.getUsuario());
+				
+//				List<ResultadoBusquedaParcial> resultados = new ArrayList<ResultadoBusquedaParcial>();
+//				resultados.add(resultadoParcial);
+//				
+//				resultadoUsuarioParcialNuevo.setResultados(resultados);					
+							
 				resultadoUsuarioParcialNuevo.agregarResultado(resultadoParcial);
+				resultadoParcial.setResultado(resultadoUsuarioParcialNuevo);
 				consultasParcial.add(resultadoUsuarioParcialNuevo);
 				
 				//Se agrega resultado nuevo en la base
 				DaoRelacional.crearEntidadIdLong(resultadoParcial);	
-				DaoRelacional.crearEntidadIdLong(resultadoUsuarioParcialNuevo);	
 
 				// Se crea el usuario nuevo en Total
 				AgregarResultadoTotalNuevo(resultado);
@@ -286,11 +362,11 @@ public class HistorialConsultasUsuario {
 			ResultadoBusquedaParcialUsuario resultadoUsuarioParcialNuevo = new ResultadoBusquedaParcialUsuario();
 			resultadoUsuarioParcialNuevo.setUsuario(resultado.getUsuario());
 			resultadoUsuarioParcialNuevo.agregarResultado(resultadoParcial);
+			resultadoParcial.setResultado(resultadoUsuarioParcialNuevo);
 			consultasParcial.add(resultadoUsuarioParcialNuevo);			
 			
 			//Se agrega resultado nuevo en la base
 			DaoRelacional.crearEntidadIdLong(resultadoParcial);	
-			DaoRelacional.crearEntidadIdLong(resultadoUsuarioParcialNuevo);	
 			
 			AgregarResultadoTotalNuevo(resultado);
 

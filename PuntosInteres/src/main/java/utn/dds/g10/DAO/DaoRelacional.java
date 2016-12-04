@@ -166,9 +166,15 @@ public class DaoRelacional implements Dao {
 		@SuppressWarnings("deprecation")
 		List<POI> pois = (List<POI>) session.createCriteria(POI.class).list();
 
-//		for (POI p : pois) {
-//			Hibernate.initialize(p.getTipo());
-//		}
+		for (POI p : pois) {
+			Hibernate.initialize(p.getTipo());
+			
+			if (p.getTipo().tipoPOI().equalsIgnoreCase("CGP")){
+				CGP cgp = (CGP)p.getTipo();
+				Hibernate.initialize(cgp.getServicios());
+				p.setTipo(cgp);
+			}
+		}
 		session.close();
 		return pois;
 	}
@@ -182,10 +188,10 @@ public class DaoRelacional implements Dao {
 		@SuppressWarnings("deprecation")
 		List<ResultadoBusquedaParcialUsuario> resultados = new ArrayList<ResultadoBusquedaParcialUsuario>();
 		resultados = (List<ResultadoBusquedaParcialUsuario>) session.createCriteria(ResultadoBusquedaParcialUsuario.class).list();
-//
-//		for (ResultadoBusquedaParcialUsuario r : resultados) {
-//			Hibernate.initialize(r.getResultados());
-//		}
+
+		for (ResultadoBusquedaParcialUsuario r : resultados) {
+			Hibernate.initialize(r.getResultados());
+		}
 		session.close();
 		return resultados;
 	}

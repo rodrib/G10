@@ -19,6 +19,7 @@ import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;
+import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
 
 
@@ -62,6 +63,11 @@ private POI obtenerPOI(POI poi){
 	if (poi.getTipo().tipoPOI().equalsIgnoreCase("CGP")){
 		CGP cgp = new CGP();
 		cgp=(CGP)poi.getTipo();
+		
+		List<ServicioCGP> servicios = new ArrayList<ServicioCGP>();
+		servicios = cgp.getServicios();
+		cgp.setServicios(servicios);
+		
 		poiReconstruido.setTipo(cgp);
 	}else if (poi.getTipo().tipoPOI().equalsIgnoreCase("SucursalBanco")){
 		SucursalBanco banco = new SucursalBanco();

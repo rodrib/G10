@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
+import utn.dds.g10.pruebaPersistencia.Stock;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @Entity
@@ -47,7 +49,6 @@ public class POI implements java.io.Serializable{
 	}
 
 	
-	 //@OneToOne(mappedBy = "poi")
 	 @OneToOne
     @JoinColumn(name = "id_locacion")
  	private Locacion locacion;
@@ -63,17 +64,17 @@ public class POI implements java.io.Serializable{
 	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="id"))
 	private List<String> palabrasClaves = new ArrayList<String>();
 		
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "resultado_id", nullable = false)
-//	private ResultadoBusquedaParcial resultado;
-//	
-//	public ResultadoBusquedaParcial getResultado() {
-//		return resultado;
-//	}
-//
-//	public void setResultado(ResultadoBusquedaParcial resultado) {
-//		this.resultado = resultado;
-//	}
+	@ManyToMany(mappedBy = "pois")
+	private List<ResultadoBusquedaParcial> resultados = new ArrayList<ResultadoBusquedaParcial>(0);
+	
+	
+	public List<ResultadoBusquedaParcial> getResultados() {
+		return this.resultados;
+	}
+
+	public void setResultados(List<ResultadoBusquedaParcial> stocks) {
+		this.resultados = stocks;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

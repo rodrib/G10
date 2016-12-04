@@ -40,7 +40,7 @@
 		<!-- <mapping class="utn.dds.g10.entidades.administracion.HistorialConsultas"></mapping> -->
 <!-- 		<mapping class="utn.dds.g10.entidades.ResultadoConsulta"></mapping> -->
 <mapping class="utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial"></mapping>
-		<!-- 		<mapping class="utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario"></mapping> -->
+				<mapping class="utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario"></mapping>
 		
 		<!-- <mapping class="utn.dds.g10.entidades.administracion.HistorialConsultasUsuario"></mapping> -->
 		<!-- <mapping class="utn.dds.g10.entidades.administracion.ResultadoBusquedaParcialUsuario"></mapping> -->
@@ -49,6 +49,8 @@
 
 <mapping class="utn.dds.g10.pruebaPersistencia.Department"></mapping>
 <mapping class="utn.dds.g10.pruebaPersistencia.Employee"></mapping>
+<mapping class="utn.dds.g10.pruebaPersistencia.Category"></mapping>
+<mapping class="utn.dds.g10.pruebaPersistencia.Stock"></mapping>
 
 
 	</session-factory>

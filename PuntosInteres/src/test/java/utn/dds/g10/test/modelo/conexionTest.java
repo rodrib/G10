@@ -1,7 +1,9 @@
 package utn.dds.g10.test.modelo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,6 +34,36 @@ public class conexionTest {
 	public void PruebaCOnJDBC() throws Exception {
 		conexion.main(null);
 	}
+	
+	@Test
+
+
+	public void PruebaManyToMany() {
+
+	        System.out.println("Hibernate many to many (Annotation)");
+	        SessionFactory sf = ConexionDB.getSessionFactory();
+			Session session = sf.openSession();
+			session.beginTransaction();
+
+		Stock stock = new Stock();
+	        stock.setStockCode("7052");
+	        stock.setStockName("PADINI");
+
+	        Category category1 = new Category("CONSUMER", "CONSUMER COMPANY");
+	        Category category2 = new Category("INVESTMENT", "INVESTMENT COMPANY");
+
+	        List<Category> categories = new ArrayList<Category>();
+	        categories.add(category1);
+	        categories.add(category2);
+
+	        stock.setCategories(categories);
+
+	        session.save(stock);
+
+		session.getTransaction().commit();
+		System.out.println("Done");
+	}
+	
 	
 	@Test
 	public void PruebaConSessionFactory() throws Exception {

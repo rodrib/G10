@@ -89,6 +89,12 @@ public class conexionTest {
 		department.setDepartmentName("Ventas");
 		session.save(department); // Se guarda primero el Padre
 		
+		Department department2 = new Department();
+		department2.setDepartmentName("Compras");
+		session.save(department2); // Se guarda primero el Padre
+		
+		
+		
 		Employee emp1 = new Employee("José", "Argento", "111");
 		Employee emp2 = new Employee("Dardo", "Fuseneco", "222");
 		
@@ -107,13 +113,26 @@ public class conexionTest {
 			session.save(employee);
 		}
 		
+		//A cada hijo le asigno el mismo padre.
+		for (Employee employee : listaEmployees) {
+			employee.setDepartment(department2);
+		}
+
+		//Grabo cada hijo. Uno por uno.
+		for (Employee employee : listaEmployees) {
+			session.save(employee);
+		}
+				
+				
+				
+		
 		session.getTransaction().commit();
 		
 		session.close();
 		
-		Department departmentObt = (Department) DepartamentDao.obtenerDeparmentPorId(10L, Department.class);
-		Employee elemObt = departmentObt.getEmployees().get(0);
-		System.out.println(" elem "+elemObt.getFirstname());
+		//Department departmentObt = (Department) DepartamentDao.obtenerDeparmentPorId(10L, Department.class);
+	//	Employee elemObt = departmentObt.getEmployees().get(0);
+		//System.out.println(" elem "+elemObt.getFirstname());
 		
 	}
 }

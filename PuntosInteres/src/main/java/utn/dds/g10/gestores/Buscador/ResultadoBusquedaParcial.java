@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import utn.dds.g10.entidades.POI;
 @Entity
@@ -37,8 +38,9 @@ public class ResultadoBusquedaParcial implements Serializable {
 		this.id = id;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "resultados_id", nullable = true)
+	@Transient
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "resultados_id", nullable = true)
 	private ResultadoBusquedaParcialUsuario resultado;
 	
 	@Column
@@ -48,7 +50,8 @@ public class ResultadoBusquedaParcial implements Serializable {
 	@Column
 	private LocalDateTime fecha;
 	
-	@OneToMany(mappedBy = "resultado")
+	@Transient
+//	@OneToMany(mappedBy = "resultado")
 	private List<POI> listaPOISbusquedaParcial;
 	
 	public List<POI> getListaPOISbusquedaParcial() {

@@ -63,17 +63,17 @@ public class POI implements java.io.Serializable{
 	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="id"))
 	private List<String> palabrasClaves = new ArrayList<String>();
 		
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "resultado_id", nullable = false)
-	private ResultadoBusquedaParcial resultado;
-	
-	public ResultadoBusquedaParcial getResultado() {
-		return resultado;
-	}
-
-	public void setResultado(ResultadoBusquedaParcial resultado) {
-		this.resultado = resultado;
-	}
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "resultado_id", nullable = false)
+//	private ResultadoBusquedaParcial resultado;
+//	
+//	public ResultadoBusquedaParcial getResultado() {
+//		return resultado;
+//	}
+//
+//	public void setResultado(ResultadoBusquedaParcial resultado) {
+//		this.resultado = resultado;
+//	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

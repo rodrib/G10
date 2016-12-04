@@ -1,5 +1,7 @@
 package utn.dds.g10.gestores.Buscador;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,8 @@ import javax.persistence.OneToMany;
 public class ResultadoBusquedaParcialUsuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "RESULTADOPARCIALUSUARIO_ID")
 	private Long id;
 	
 	public Long getId() {
@@ -28,7 +31,7 @@ public class ResultadoBusquedaParcialUsuario {
 	@Column
 	private String usuario;
 	
-	@OneToMany(mappedBy = "id")
+	@OneToMany(mappedBy = "resultado")
 	private List<ResultadoBusquedaParcial> resultados = new ArrayList<ResultadoBusquedaParcial>();
 	public String getUsuario() {
 		return usuario;

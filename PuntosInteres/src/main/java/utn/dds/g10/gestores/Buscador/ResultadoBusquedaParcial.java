@@ -1,5 +1,7 @@
 package utn.dds.g10.gestores.Buscador;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -27,7 +31,8 @@ public class ResultadoBusquedaParcial implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "RESULTADOPARCIAL_ID")
 	private Long id;
 	
 	public Long getId() {
@@ -38,11 +43,18 @@ public class ResultadoBusquedaParcial implements Serializable {
 		this.id = id;
 	}
 	
-	@Transient
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "resultados_id", nullable = true)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "RESULTADOPARCIALUSUARIO_ID", nullable = false)
 	private ResultadoBusquedaParcialUsuario resultado;
 	
+	public ResultadoBusquedaParcialUsuario getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(ResultadoBusquedaParcialUsuario resultado) {
+		this.resultado = resultado;
+	}
+
 	@Column
 	private String criterioBusqueda;
 	@Column
@@ -50,15 +62,18 @@ public class ResultadoBusquedaParcial implements Serializable {
 	@Column
 	private LocalDateTime fecha;
 	
-	@Transient
-//	@OneToMany(mappedBy = "resultado")
-	private List<POI> listaPOISbusquedaParcial;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "resultado_poi", joinColumns = {
+			@JoinColumn(name = "RESULTADOPARCIAL_ID", nullable = true) },
+			inverseJoinColumns = { @JoinColumn(name = "id",
+					nullable = true) })
+	private List<POI> pois;
 	
 	public List<POI> getListaPOISbusquedaParcial() {
-		return listaPOISbusquedaParcial;
+		return pois;
 	}
-	public void setListaPOISbusquedaParcial(List<POI> listaPOISbusquedaParcial) {
-		this.listaPOISbusquedaParcial = listaPOISbusquedaParcial;
+	public void setListaPOISbusquedaParcial(List<POI> pois) {
+		this.pois = pois;
 	}
 	public LocalDateTime getFecha() {
 		return fecha;

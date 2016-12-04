@@ -1,6 +1,8 @@
 package utn.dds.g10.test.e6;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,10 @@ import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.TipoPoi;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaFecha;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
+import utn.dds.g10.pruebaPersistencia.Category;
 import utn.dds.g10.pruebaPersistencia.Department;
+import utn.dds.g10.pruebaPersistencia.Stock;
 
 public class PersistenciaPoiTest {
 	
@@ -238,14 +243,11 @@ public class PersistenciaPoiTest {
 		
 		poiCGP.setTipo(cgp);
 		poiCGP.setNombre("CGP Comuna 7");
-		
-		//ResultadoBusquedaParcial resultado=new ResultadoBusquedaParcial();
-		//poiCGP.setResultado(resultado);
-		//DaoRelacional.crearEntidadIdLong(resultado);
+
 		
 		DaoRelacional.crearEntidadIdLong(servicio);	
-		//DaoRelacional.crearEntidadIdLong(cgp);
 		Long id = DaoRelacional.crearEntidadIdLong(poiCGP);	
+				
 	
 		ResultadoBusquedaParcial miResultado = new ResultadoBusquedaParcial();
 		
@@ -253,7 +255,34 @@ public class PersistenciaPoiTest {
 		miResultado.setFecha(LocalDateTime.now());
 		miResultado.setCantidadResultados(3);
 		
+		ResultadoBusquedaParcialUsuario miResultadoUsuario = new ResultadoBusquedaParcialUsuario();
+		miResultadoUsuario.setUsuario("Guille");
+		
+		List<ResultadoBusquedaParcial> resultados = new ArrayList<ResultadoBusquedaParcial>();
+		
+		POI poi1=new POI();
+		poi1.setNombre("POI1");
+		SucursalBanco sucursal1 = new SucursalBanco();
+		SucursalBanco sucursal2 = new SucursalBanco();
+		poi1.setTipo(sucursal1);
+		POI poi2=new POI();
+		poi2.setNombre("POI2");
+		poi2.setTipo(sucursal2);
+		
+		DaoRelacional.crearEntidadIdLong(sucursal1);
+		DaoRelacional.crearEntidadIdLong(sucursal2);
+		
+		List<POI> pois = new ArrayList<POI>();
+		pois.add(poi1);
+		pois.add(poi2);
+		
+		miResultado.setListaPOISbusquedaParcial(pois);
+		miResultado.setResultado(miResultadoUsuario);
+		
+		miResultadoUsuario.setResultados(resultados);
+		
 		Long id_res = DaoRelacional.crearEntidadIdLong(miResultado);
+		//DaoRelacional.crearEntidadIdLong(miResultadoUsuario);
 		////POI poiObtenido = new POI();
 		//poiObtenido = (POI) PoiDao.obtenerPoiPorId(id, POI.class);
 		///System.out.println("Nombre CGP: "+poiObtenido.getNombre());

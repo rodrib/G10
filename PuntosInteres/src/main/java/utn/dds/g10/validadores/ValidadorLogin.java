@@ -29,8 +29,15 @@ public class ValidadorLogin implements Validator {
 		UIInput uiInputConfirmPassword = (UIInput) component.getAttributes().get("atrPassword");
 	    String pass = uiInputConfirmPassword.getSubmittedValue().toString();
 			  
-			  
-		Usuario usuario = DaoRelacional.obtenerUsuariosPorNombre(usuarioIngresado, Usuario.class);
+	    Usuario usuario = new Usuario();
+	    try {
+	    	usuario = DaoRelacional.obtenerUsuariosPorNombre(usuarioIngresado, Usuario.class);		
+		} catch (Exception e) {
+			FacesMessage msg = new FacesMessage("Error de conexión.", "Ocurrió un error al intentar conectarse a la base de datos.");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			throw new ValidatorException(msg);	
+		}
+		
 		
 		if(!usuarioIngresado.equals(usuario.getNombre()) || !pass.equals(usuario.getPassword()))
 		{

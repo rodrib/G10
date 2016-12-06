@@ -10,9 +10,8 @@ public class ConexionDB {
 	private static SessionFactory buildSessionFactory() {
 		try {
 			return new Configuration().addResource("hibernate.cfg.xml").configure().buildSessionFactory();
-		} catch (Throwable ex) {
-			System.err.println("Error al intentarse conectar a la base de datos: " + ex.getMessage());
-			throw new ExceptionInInitializerError(ex);
+		} catch (Exception ex) {
+			return null; // NO se pudo conectar a la base.
 		}
 	}
 

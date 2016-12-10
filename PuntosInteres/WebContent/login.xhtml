@@ -13,7 +13,7 @@
 					<div class="col-md-4"></div>
 					<div class="col-md-4 ">
 						<h2 class="form-signin-heading">Login</h2>
-						<h:inputText id="txtUsername" value="#{loginBean.name}"
+						<h:inputText id="txtUsername" value="#{loggin.name}"
 							requiredMessage="El campo usuario es un campo obligatorio."
 							type="text" label="El campo usuario es requerido"
 							class="form-control" name="username"
@@ -22,7 +22,7 @@
 							<f:validator validatorId="utn.dds.g10.validadores.ValidadorLogin" />
 							<f:attribute name="atrPassword" value="#{txtPassword}" />
 						</h:inputText>
-						<h:inputSecret id="txtPassword" value="#{loginBean.password}"
+						<h:inputSecret id="txtPassword" value="#{loggin.password}"
 							binding="#{txtPassword}"
 							requiredMessage="El campo password es un campo obligatorio."
 							class="form-control" label="El campo password es requerido"

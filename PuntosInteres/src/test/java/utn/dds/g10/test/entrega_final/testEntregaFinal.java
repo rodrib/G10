@@ -20,9 +20,14 @@ import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.administracion.Rol;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
+import utn.dds.g10.entidades.administracion.RolTerminal;
 import utn.dds.g10.entidades.administracion.Usuario;
 
 public class testEntregaFinal {
+	
+	int ROL_ADMIN = 1;
+	int ROL_TERMINAL = 2;
+	
 	Usuario usuarioAlta;
 	Dao repositorio;
 	POI poiBanco;
@@ -37,12 +42,6 @@ public class testEntregaFinal {
 	}
 
 	private void InicializarTest() {
-		usuarioAlta = new Usuario();
-		usuarioAlta.setNombre("admin");
-		usuarioAlta.setPassword("admin");
-
-		Rol rolUsuarioPersistible = new RolAdministrador();
-		usuarioAlta.setRol(rolUsuarioPersistible);
 
 		poiBanco = new POI();
 		poiCGP = new POI();
@@ -64,11 +63,51 @@ public class testEntregaFinal {
 
 		locaciontest.setCoordenada(coordenadatest);
 	}
+	
+	private void crearRoles()
+	{
+		RolAdministrador rolAdmin = new RolAdministrador();
+		RolTerminal rolTerminal = new RolTerminal();
+		
+		rolAdmin.setNombre("Administrador");
+		rolTerminal.setNombre("Terminal Medrano");
+		
+		DaoRelacional daoRel = new DaoRelacional();
+		daoRel.crearEntidad(rolAdmin);
+		daoRel.crearEntidad(rolTerminal);
+	}
+	
+	private void crearUsuarios()
+	{
+		RolAdministrador rolAdmin = new RolAdministrador();
+		RolTerminal rolTerminal = new RolTerminal();
+		
+		rolAdmin.setIdRol(ROL_ADMIN);
+		rolTerminal.setIdRol(ROL_TERMINAL);
+		
+		Usuario usuarioAdmin = new Usuario();
+		Usuario usuarioTerminal = new Usuario();
+		
+		usuarioAdmin.setRol(rolAdmin);
+		usuarioTerminal.setRol(rolTerminal);
+		
+		usuarioAdmin.setNombre("admin");
+		usuarioAdmin.setPassword("admin");
+		
+		usuarioTerminal.setNombre("user");
+		usuarioTerminal.setPassword("user");
+		
+		DaoRelacional daoRel = new DaoRelacional();
+		daoRel.crearEntidad(usuarioAdmin);
+		daoRel.crearEntidad(usuarioTerminal);
+	}
 
 	@Test
 	public void cargaInicialDatosTest() {
-		repositorio.crearEntidad(usuarioAlta);
-
+		
+		crearRoles();
+		crearUsuarios();
+		
 		Coordenada coordenada = new Coordenada(1, 2);
 
 		Locacion locacion = new Locacion();

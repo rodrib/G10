@@ -8,7 +8,7 @@
 		<property name="hibernate.connection.url"> jdbc:mysql://localhost:3306/DDS</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="connection.password">ddsistemas</property>
-		<property name="connection.pool_size">100</property>
+		<property name="connection.pool_size">15</property>
 		<property name="hibernate.dialect"> org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>

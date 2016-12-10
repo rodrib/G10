@@ -3,7 +3,6 @@ package utn.dds.g10.test.e6;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,7 +11,6 @@ import org.junit.Test;
 import utn.dds.g10.DAO.Dao;
 import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.DAO.UsuariosDao;
-import utn.dds.g10.entidades.Menu;
 import utn.dds.g10.entidades.administracion.Rol;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;
@@ -47,8 +45,8 @@ public class PersistenciaUsuarioTest {
 
 		// alta
 		usuarioAlta = new Usuario();
-		usuarioAlta.setNombre("pepito");
-		usuarioAlta.setPassword("pepito");
+		usuarioAlta.setNombre("admin");
+		usuarioAlta.setPassword("admin");
 
 		Rol rolUsuarioPersistible = new RolAdministrador();
 		usuarioAlta.setRol(rolUsuarioPersistible);
@@ -117,27 +115,5 @@ public class PersistenciaUsuarioTest {
 		
 		Boolean esModificado = (usuarioCreado.getNombre() != usuarioLuegoDeModificacion.getNombre());
 		Assert.assertTrue("El nombre del usuario antes y depués de la modificación es igual.", esModificado);
-	}
-	
-	
-	@Test
-	public void testRolesUsuario() throws Exception {
-
-		Usuario userAdmin = new Usuario();
-		
-		userAdmin.setNombre("AdminTest");
-		userAdmin.setPassword("12341234");
-		Rol miRol = new RolAdministrador();
-		miRol.setIdRol(1);
-		userAdmin.setRol(miRol);
-		
-		int idUsuarioCreado = repositorio.crearEntidad(userAdmin);
-		
-		Usuario usuarioCreado = (Usuario)DaoRelacional.obtenerUsuariosPorNombre(userAdmin.getNombre(), Usuario.class);
-
-		Rol usuarioRol = usuarioCreado.getRol();
-		
-		List<Menu> menues = usuarioRol.getMenues();		
-		int a;
 	}
 }

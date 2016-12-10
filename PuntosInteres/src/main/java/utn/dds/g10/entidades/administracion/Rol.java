@@ -3,14 +3,12 @@ package utn.dds.g10.entidades.administracion;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,30 +27,20 @@ property = "nombre")
 @Type(value = RolTerminal.class)
 })
 @Entity
-@Table(name="ROL")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Rol implements Serializable {
 	
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private	int idRol;
 	
-	@Column
 	private String nombre;
 	
-	@Transient
-	private List<utn.dds.g10.entidades.Menu> menues;
-	
-	//public abstract List<utn.dds.g10.entidades.Menu> getListadoMenues();
-
-
-	public abstract List<utn.dds.g10.entidades.Menu> getMenues();
-
-	public void setMenues(List<utn.dds.g10.entidades.Menu> menues) {
-		this.menues = menues;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -69,6 +57,8 @@ public abstract class Rol implements Serializable {
 		this.idRol = idRol;
 	}
 	
+	
+
 	@Transient
 	List<Accion> acciones;
 	
@@ -93,4 +83,3 @@ public abstract class Rol implements Serializable {
 	}
 
 }
-	

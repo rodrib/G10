@@ -8,34 +8,14 @@
 	margin-right: 90px; /*set margin this way in your custom styesheet*/
 }
 </style>
-
-<div class="navbar-header ">
-	<button type="button" class="navbar-toggle" data-toggle="collapse"
-		data-target=".navbar-collapse">
-		<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
-		<span class="icon-bar"></span> <span class="icon-bar"></span>
-	</button>
-	<a class="navbar-brand" rel="home" href="#">Puntos Interes</a>
+<div class="navbar navbar-inverse">
+	<div class="navbar-brand">Puntos de Interes - App</div>
+	<h:outputLabel value="#{loginBean.name}"
+		class="navbar-brand nav pull-right">
+		<span class="glyphicon glyphicon-user pull-right"></span>
+	</h:outputLabel>
 </div>
-
-<div class="collapse navbar-collapse navbar-inverse">
-
-	<ul class="nav navbar-nav pull-rigth">
-		<li><a href="#"> - #{menuBean.usuarioLogin.rol.nombre}</a></li>
-		<li><a href="#"></a></li>
-	</ul>
-
-	<div class="col-sm-3 col-md-3 pull-right">
-		<div class="navbar-brand">#{loginbean.name}</div>
-		<div class="navbar-brand">
-			<h:form>
-				<p>
-					<h:commandLink value="logout" action="#{menuBean.logout}" />
-				</p>
-			</h:form>
-		</div>
-	</div>
-	
+<div class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -47,10 +27,12 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<ui:repeat value="#{menuBean.usuarioLogin.rol.menues}" var="menu"
-					varStatus="loop">
-					<li><a class="navbar-brand" href="#{menu.link}">#{menu.nombre}</a></li>
-				</ui:repeat>
+				<li><a class="navbar-brand"
+					href="/PuntosInteres/faces/ABMAcciones.xhtml">Acciones</a></li>
+				<li><a class="navbar-brand"
+					href="/PuntosInteres/faces/busquedaNueva.xhtml">Búsqueda</a></li>
+				<li><a class="navbar-brand"
+					href="/PuntosInteres/faces/historial.xhtml">Historial</a></li>
 			</ul>
 		</div>
 	</div>

@@ -11,6 +11,8 @@ import javax.faces.validator.ValidatorException;
 import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.entidades.administracion.Usuario;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @FacesValidator("utn.dds.g10.validadores.ValidadorLogin")
@@ -34,7 +36,8 @@ public class ValidadorLogin implements Validator {
 			FacesMessage msg = new FacesMessage("Error de conexión.", "Ocurrió un error al intentar conectarse a la base de datos.");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);	
-		}		
+		}
+		
 		
 		if(!usuarioIngresado.equals(usuario.getNombre()) || !pass.equals(usuario.getPassword()))
 		{
@@ -42,6 +45,5 @@ public class ValidadorLogin implements Validator {
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);	
 		}
-		
 	}
 }

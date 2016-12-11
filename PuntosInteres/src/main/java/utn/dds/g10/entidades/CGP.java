@@ -22,7 +22,7 @@ import javax.persistence.Table;
 
 import utn.dds.g10.DAO.DaoRelacional;
 @Entity
-@Table(name = "CGP")
+@Table(name = "TipoPoi_CGP")
 @Access(value=AccessType.FIELD)
 public class CGP extends TipoPoi {
 

@@ -10,9 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import utn.dds.g10.DAO.DaoRelacional;
 @Entity
+@Table(name = "TipoPoi_LocalComercial")
 public class LocalComercial extends TipoPoi {
 	/**
 	 * 

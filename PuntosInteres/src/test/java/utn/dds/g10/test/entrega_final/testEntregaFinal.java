@@ -11,22 +11,33 @@ import utn.dds.g10.DAO.Dao;
 import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.entidades.CGP;
 import utn.dds.g10.entidades.Coordenada;
+import utn.dds.g10.entidades.Kiosco;
 import utn.dds.g10.entidades.Libreria;
 import utn.dds.g10.entidades.Locacion;
 import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ParadaColectivo;
+import utn.dds.g10.entidades.RubroLocal;
 import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
+import utn.dds.g10.entidades.TipoPoi;
 import utn.dds.g10.entidades.administracion.Rol;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.RolTerminal;
 import utn.dds.g10.entidades.administracion.Usuario;
 
 public class testEntregaFinal {
-	
+
 	int ROL_ADMIN = 1;
 	int ROL_TERMINAL = 2;
+
+	int RUBRO_LIBRERIA = 1;
+	int RUBRO_KIOSCO = 2;
+
+	long LOCAL_COMERCIAL_LIBRERIA = 1;
+	long LOCAL_COMERCIAL_PELUQUERIA= 2;
+	long LOCAL_COMERCIAL_RESTO = 3;
+	long LOCAL_COMERCIAL_FERRETERIA = 4;
 	
 	Usuario usuarioAlta;
 	Dao repositorio;
@@ -63,40 +74,38 @@ public class testEntregaFinal {
 
 		locaciontest.setCoordenada(coordenadatest);
 	}
-	
-	private void crearRoles()
-	{
+
+	private void crearRoles() {
 		RolAdministrador rolAdmin = new RolAdministrador();
 		RolTerminal rolTerminal = new RolTerminal();
-		
+
 		rolAdmin.setNombre("Administrador");
 		rolTerminal.setNombre("Terminal Medrano");
-		
+
 		DaoRelacional daoRel = new DaoRelacional();
 		daoRel.crearEntidad(rolAdmin);
 		daoRel.crearEntidad(rolTerminal);
 	}
-	
-	private void crearUsuarios()
-	{
+
+	private void crearUsuarios() {
 		RolAdministrador rolAdmin = new RolAdministrador();
 		RolTerminal rolTerminal = new RolTerminal();
-		
+
 		rolAdmin.setIdRol(ROL_ADMIN);
 		rolTerminal.setIdRol(ROL_TERMINAL);
-		
+
 		Usuario usuarioAdmin = new Usuario();
 		Usuario usuarioTerminal = new Usuario();
-		
+
 		usuarioAdmin.setRol(rolAdmin);
 		usuarioTerminal.setRol(rolTerminal);
-		
+
 		usuarioAdmin.setNombre("admin");
 		usuarioAdmin.setPassword("admin");
-		
+
 		usuarioTerminal.setNombre("user");
 		usuarioTerminal.setPassword("user");
-		
+
 		DaoRelacional daoRel = new DaoRelacional();
 		daoRel.crearEntidad(usuarioAdmin);
 		daoRel.crearEntidad(usuarioTerminal);
@@ -104,78 +113,69 @@ public class testEntregaFinal {
 
 	@Test
 	public void cargaInicialDatosTest() {
-		
 		crearRoles();
 		crearUsuarios();
+		crearTiposPoi();
+		crearPOIS();
+	}
+
+	private void crearTiposPoi() {
+		Libreria libreriaRubro = new Libreria();
+		libreriaRubro.setId(DaoRelacional.crearEntidadIdLong(libreriaRubro));
+
+		LocalComercial localLibreria = new LocalComercial();
+		localLibreria.setRubro(libreriaRubro);
+		LOCAL_COMERCIAL_LIBRERIA = DaoRelacional.crearEntidadIdLong(localLibreria);
+
+		LocalComercial localPeluqueria = new LocalComercial();
+		localPeluqueria.setRubro(libreriaRubro); // ojo libreria
+		LOCAL_COMERCIAL_PELUQUERIA = DaoRelacional.crearEntidadIdLong(localPeluqueria); 
+
+		LocalComercial localRetaurante = new LocalComercial();
+		localRetaurante.setRubro(libreriaRubro); // ojo libreria
+		LOCAL_COMERCIAL_RESTO = DaoRelacional.crearEntidadIdLong(localRetaurante); 
+
+		LocalComercial localFerreteria = new LocalComercial();
+		localFerreteria.setRubro(libreriaRubro); // ojo libreria
+		LOCAL_COMERCIAL_FERRETERIA = DaoRelacional.crearEntidadIdLong(localFerreteria); 		
+	}
+
+	private void crearPOIS() {
 		
-		Coordenada coordenada = new Coordenada(1, 2);
+		POI LibreriaTijeras = new POI();
+		POI PeluqueriaTijeras = new POI();
+		POI RestoPapaFrita = new POI();
+		POI FerreteriaMiPapa = new POI();
+		POI RestoSantander = new POI();
 
-		Locacion locacion = new Locacion();
-		locacion.setCoordenada(coordenada);
-		poiBanco.setLocacion(locacion);
-		poiBanco.setNombre("Banco Rio");
-		poiBanco.getPalabrasClaves().add("suc principal");
-		SucursalBanco banco = new SucursalBanco();
-		banco.getServicios().add("cheques");
-		banco.setNombreGerente("Carlos");
-		poiBanco.setTipo(banco);
-		DaoRelacional.crearEntidadIdLong(banco);
+		LibreriaTijeras.setNombre("Libreria Tijeras");
+		PeluqueriaTijeras.setNombre("Peluqueria Tijeras");
+		RestoPapaFrita.setNombre("Restaurante Papa frita");
+		FerreteriaMiPapa.setNombre("Ferreteria Mi Papa");
+		RestoSantander.setNombre("Restaurante Santander");
+		
+		LocalComercial localLibreriaTijeras = new LocalComercial();
+		localLibreriaTijeras.setId(LOCAL_COMERCIAL_LIBRERIA);
+		LocalComercial localPeluqueriaTijeras = new LocalComercial();
+		localPeluqueriaTijeras.setId(LOCAL_COMERCIAL_PELUQUERIA);
+		LocalComercial localRestoPapaFrita = new LocalComercial();
+		localRestoPapaFrita.setId(LOCAL_COMERCIAL_RESTO);
+		LocalComercial localFerreteriaMiPapa = new LocalComercial();
+		localFerreteriaMiPapa.setId(LOCAL_COMERCIAL_FERRETERIA);
+		LocalComercial localRestoSantander = new LocalComercial();
+		localRestoSantander.setId(LOCAL_COMERCIAL_RESTO);
+		
+		LibreriaTijeras.setTipo(localLibreriaTijeras);
+		PeluqueriaTijeras.setTipo(localPeluqueriaTijeras);
+		RestoPapaFrita.setTipo(localRestoPapaFrita);
+		FerreteriaMiPapa.setTipo(localFerreteriaMiPapa);
+		RestoSantander.setTipo(localRestoSantander);
 
-		coordenada.setLocacion(locacion);
-		DaoRelacional.crearEntidadIdLong(coordenada);
-		DaoRelacional.crearEntidadIdLong(locacion);
-		Long id = DaoRelacional.crearEntidadIdLong(poiBanco);
-
-		poiBanco.setNombre("Banco Frances");
-		SucursalBanco bancoFrances = new SucursalBanco();
-		bancoFrances.getServicios().add("cheques");
-		poiBanco.setTipo(bancoFrances);
-
-		locaciontest.setEntreCalles("Entre calles");
-		locaciontest.setPoi(poiBanco);
-		poiBanco.setLocacion(locaciontest);
-
-		coordenadatest.setLocacion(locaciontest);
-		DaoRelacional.crearEntidadIdLong(coordenadatest);
-		DaoRelacional.crearEntidadIdLong(locaciontest);
-		DaoRelacional.crearEntidadIdLong(bancoFrances);
-		DaoRelacional.crearEntidadIdLong(poiBanco);
-
-		ParadaColectivo parada = new ParadaColectivo();
-		POI poiParada = new POI();
-		poiParada.setTipo(parada);
-		poiParada.setNombre("Parada 10");
-		DaoRelacional.crearEntidadIdLong(parada);
-		DaoRelacional.crearEntidadIdLong(poiParada);
-
-		Libreria libreria = new Libreria();
-		LocalComercial local = new LocalComercial();
-		POI poiLibreria = new POI();
-		local.setRubro(libreria);
-		poiLibreria.setTipo(local);
-		poiLibreria.setNombre("Libreria Lapiz");
-		DaoRelacional.crearEntidadIdLong(libreria);
-		DaoRelacional.crearEntidadIdLong(local);
-		DaoRelacional.crearEntidadIdLong(poiLibreria);
-
-		CGP cgp = new CGP();
-		cgp.setComuna("Comuna 9");
-		cgp.setDirector("Ramon");
-		cgp.setDomicilio("Rivadavia 4500");
-		cgp.setZonas("Caballito");
-
-		ServicioCGP servicio = new ServicioCGP();
-
-		POI poiCGP = new POI();
-		servicio.setNombre("ABL");
-		servicio.setCgp(cgp);
-		cgp.getServicios().add(servicio);
-
-		poiCGP.setTipo(cgp);
-		poiCGP.setNombre("CGP Comuna 9");
-
-		DaoRelacional.crearEntidadIdLong(servicio);
-		DaoRelacional.crearEntidadIdLong(poiCGP);
+		DaoRelacional.crearEntidadIdLong(LibreriaTijeras);
+		DaoRelacional.crearEntidadIdLong(PeluqueriaTijeras);
+		DaoRelacional.crearEntidadIdLong(RestoPapaFrita);
+		DaoRelacional.crearEntidadIdLong(FerreteriaMiPapa);
+		DaoRelacional.crearEntidadIdLong(RestoSantander);
 	}
 
 }

@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import utn.dds.g10.DAO.DaoRelacional;
 
 @Entity
-@Table(name = "sucursalBanco")
+@Table(name = "TipoPoi_SucursalBanco")
 public class SucursalBanco extends TipoPoi {
 
 	private static final long serialVersionUID = 1L;

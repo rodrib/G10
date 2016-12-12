@@ -1,6 +1,7 @@
 package utn.dds.g10.test.e7;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -20,6 +21,7 @@ import utn.dds.g10.DAO.DaoMongo;
 import utn.dds.g10.entidades.Coordenada;
 import utn.dds.g10.entidades.Locacion;
 import utn.dds.g10.entidades.POI;
+import utn.dds.g10.entidades.SucursalBanco;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.entidadesFactory.DocumentFactory;
 import utn.dds.g10.mappers.BsonUsuario;
@@ -41,12 +43,14 @@ public class PersistenciaPoiTest {
 		poitest.setNombre("Banco Nacion Test");
 		poitest.setId(1L);
 		
+		poitest.setTipo(new SucursalBanco());
 		Locacion locaciontest = new Locacion();
 		locaciontest.setBarrio("las lomitas");
 		locaciontest.setCallePrincipal("Almirante Brown");
 		locaciontest.setCodigoPostal(1832);
 		locaciontest.setCoordenada(new Coordenada(12, 20));
 		locaciontest.setPais("Argentina");
+		
 		poitest.setLocacion(locaciontest);
 	}
 
@@ -60,6 +64,17 @@ public class PersistenciaPoiTest {
 	public void testGuardarYEliminarPoi()
 	{
 		repositorio.crearEntidad(poitest);
+	}
+	
+	@Test
+	public void testObtenerEntidadPorNombre() throws JsonParseException, JsonMappingException, IOException
+	{
+		List<POI> poisExt = repositorio.obtenerPoisPorNombre("Santander");
+		
+		int a;
+		a = 3;
+		
+		int b = a;
 	}
 	
 	@Test

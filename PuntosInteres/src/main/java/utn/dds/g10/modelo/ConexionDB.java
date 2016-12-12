@@ -9,7 +9,11 @@ public class ConexionDB {
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			return new Configuration().addResource("hibernate.cfg.xml").configure().buildSessionFactory();
+			
+			Configuration config = new Configuration().addResource("hibernate.cfg.xml").configure();
+			SessionFactory sess = config.buildSessionFactory();
+			return sess;
+			
 		} catch (Exception ex) {
 			return null; // NO se pudo conectar a la base.
 		}

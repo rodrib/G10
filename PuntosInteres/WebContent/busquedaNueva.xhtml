@@ -22,15 +22,20 @@
 							</div>
 							<br />
 							<div class="row">
-								<div class="col-md-6 ">
+								<div class="col-md-4 ">
 									<h:commandButton value="Agregar" action="#{busqueda.addAction}"
 										class="btn btn-success btn-block" />
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<h:commandLink action="#{busqueda.searchAction(navbarbean.usuarioLogueado.nombre)}" value="Buscar"
 										class="btn btn-primary btn-block">
 									</h:commandLink>
 									<h:inputHidden value="#{navbarbean.usuarioLogueado.nombre}" id="hiddenUsuario"></h:inputHidden>
+								</div>
+								<div class="col-md-4">
+									<h:commandLink action="#{busqueda.Limpiar}" value="Limpiar"
+										class="btn btn-warning btn-block">
+									</h:commandLink>
 								</div>
 							</div>
 							<br/>

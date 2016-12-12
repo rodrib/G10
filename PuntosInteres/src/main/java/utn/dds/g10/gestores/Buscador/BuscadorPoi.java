@@ -9,6 +9,10 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
+import utn.dds.g10.DAO.DaoMongo;
 import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.datos.Repositorio;
 import utn.dds.g10.entidades.CGP;
@@ -21,6 +25,7 @@ import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.ServicioCGP;
 import utn.dds.g10.entidades.SucursalBanco;
+import utn.dds.g10.mappers.BancosJSON;
 
 
 public class BuscadorPoi implements Buscador {
@@ -30,6 +35,7 @@ HistorialConsultas historial = new HistorialConsultas();
 public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
 		
 		List<POI> listadoPoiInicial=  (ArrayList<POI>) DaoRelacional.obtenerPois();
+		
 		List<POI> listadoPoi =  new ArrayList<POI>();
 		for (Iterator<POI> iterador = listadoPoiInicial.iterator(); iterador
 				.hasNext();) {
@@ -45,11 +51,48 @@ public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURL
 
 		// Retorna el resultado de una consulta.
 		ResultadoConsulta resultado = new ResultadoConsulta();
+		
+		List<POI> externos =  BuscarEnMongoYRest(criterioBusqueda);
+		listadoPoi.addAll(externos);
+		
 		resultado.setPuntos(listadoPoi);
 		resultado.setFechaHora(LocalDate.now());
 
 		return resultado;
 	}
+
+private List<POI> BuscarEnMongoYRest(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
+	
+	List<POI>  poisExternos = buscarEnMongo(criterioBusqueda);
+	
+	boolean existeEnMongo = poisExternos.size() > 0;
+	
+	if(!existeEnMongo)
+	{
+		poisExternos  = BancosJSON.obtenerBancos(criterioBusqueda, null);
+		
+		for (POI poi : poisExternos) {
+			guardarEnMongo(poi);
+		}
+	}
+	
+	return poisExternos;
+}
+
+private List<POI> buscarEnMongo(String criterioBusqueda) throws JsonParseException, JsonMappingException, IOException {
+	List<POI> poisMongo = new ArrayList<POI>();
+	
+	DaoMongo repositorio = new DaoMongo();
+	poisMongo = repositorio.obtenerPoisPorNombre("Santander");
+	
+	return poisMongo;
+	
+}
+
+private void guardarEnMongo(POI poi) {
+	DaoMongo repositorio = new DaoMongo();
+	repositorio.crearEntidad(poi);
+}
 
 private POI obtenerPOI(POI poi){
 	POI poiReconstruido = new POI();

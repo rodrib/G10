@@ -2,8 +2,11 @@ package utn.dds.g10.tests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
+import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +16,7 @@ import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.entidades.administracion.RolAdministrador;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.gestores.GestorPoi;
+import utn.dds.g10.mappers.BancosJSON;
 
 public class BusquedaDePuntosTest {
 
@@ -75,6 +79,14 @@ public class BusquedaDePuntosTest {
 	public void BuscarLocalLibreria() throws Exception {
 		ResultadoConsulta resultado = miGestor.BuscarPoi("Libreria",usuario);
 		Assert.assertTrue("Existe al menos un poi de tipo libreria", resultado.getPuntos().size() > 0);	
+	}
+	
+	@Test 
+	public void testBnacosExternos() throws MalformedURLException, JSONException, IOException
+	{
+		List<POI> bancosExternos =  BancosJSON.obtenerBancos();
+		
+		int a;
 	}
 	
 //	@Test

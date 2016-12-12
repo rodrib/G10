@@ -7,9 +7,10 @@ import java.util.Properties;
 public class Configuraciones {
 	
 	private  static String  nombreConfig = "web.config";
+	private  static String  nombreConfigRelativo = "/src/web.config";
 	private static String claveMailAdmin = "mailadmin";
-	private static String claveUrlBancos = "bancos";
-	private static String claveUrlCGP = "bancos";
+	private static String claveUrlBancos = "url_bancos";
+	private static String claveUrlCGP = "url_cgp";
 	private static String claveSegundosTimeOut = "segundostimeout";
 	
 	public static String obtenerMailAdministrador() {

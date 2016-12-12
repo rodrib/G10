@@ -11,24 +11,57 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import utn.dds.g10.Utiles.Configuraciones;
 import utn.dds.g10.entidades.*;
 
 public class BancosJSON {
+	
+	enum tipoBusqueda {soloNombre, soloServicio, ambos, ninguno};
 
 	public static List<POI> obtenerBancos(String nombreBanco, String servicioBanco) throws MalformedURLException, IOException, JSONException {
 		List<POI> listaBancosPois = new ArrayList<POI>();
 
-		String urlGenerica = "http://localhost:8080/Consultas/banco";
+		//String urlGenerica = Configuraciones.obtenerUrlBancos();
+		String urlGenerica = "http://localhost:8081/Consultas/banco";
 		String urlString = "";
 		
-		if((nombreBanco == null || nombreBanco == "") && (servicioBanco == null || servicioBanco == "") )
+		tipoBusqueda tipoBusque = tipoBusqueda.ninguno;
+		if((nombreBanco == null || nombreBanco == "") && (servicioBanco == null || servicioBanco == ""))
 		{
-			urlString = urlGenerica;
+			tipoBusque = tipoBusqueda.ninguno;
 		}
-		else
+		
+		if((nombreBanco != null && nombreBanco != "") && (servicioBanco == null || servicioBanco == ""))
 		{
+			tipoBusque = tipoBusqueda.soloNombre;
+		}
+		
+		if((nombreBanco == null || nombreBanco == "") && (servicioBanco != null && servicioBanco != ""))
+		{
+			tipoBusque = tipoBusqueda.soloServicio;
+		}
+		
+		if((nombreBanco != null && nombreBanco != "") && (servicioBanco != null && servicioBanco != ""))
+		{
+			tipoBusque = tipoBusqueda.ambos;
+		}
+		
+		switch (tipoBusque) {
+		case ninguno:
+			urlString = urlGenerica;
+			break;
+		case ambos:
 			urlString = urlGenerica + "?banco=" + nombreBanco + "&servicio=" + servicioBanco;	
-		}		
+			break;
+		case soloNombre:
+			urlString = urlGenerica + "?banco=" + nombreBanco;	
+			break;
+		case soloServicio:
+			urlString = urlGenerica + "?servicio=" + servicioBanco;	
+			break;
+		default:
+			break;
+		}	
 
 		try {
 			//Obtengo el JSON string.

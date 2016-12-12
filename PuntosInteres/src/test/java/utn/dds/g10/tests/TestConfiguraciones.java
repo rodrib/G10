@@ -14,6 +14,14 @@ public class TestConfiguraciones {
 		Assert.assertEquals(miMail, mailAdmin);
 	}
 	
+
+	@Test
+	public void testGetURlbancos()   {
+		String urlBancosConfig = Configuraciones.obtenerUrlBancos();
+		String urlBancos = "http://localhost:8081/Consultas/banco";
+		Assert.assertEquals(urlBancosConfig, urlBancos);
+	}
+	
 	@Test
 	public void testGetTimeOutCincoSegundos()   {
 		Assert.assertEquals(Configuraciones.obtenerCantidadSegundosTimeOut(), 5);	

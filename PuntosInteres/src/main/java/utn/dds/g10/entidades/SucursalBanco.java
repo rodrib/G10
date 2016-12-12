@@ -30,7 +30,7 @@ public class SucursalBanco extends TipoPoi {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private transient Long id;
 	
 	public Long getId() {
 		return id;

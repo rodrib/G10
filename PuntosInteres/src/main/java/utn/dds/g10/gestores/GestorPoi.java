@@ -19,27 +19,25 @@ public class GestorPoi {
 	private HistorialConsultasFecha historialFecha;
 	private HistorialConsultasUsuario historialUsuario;
 	ResultadoConsulta resultado;
-	
-	public GestorPoi(Usuario usuario){
+
+	public GestorPoi(Usuario usuario) {
 		historicoProxy = new HistoricoProxy(usuario);
 		historial = new HistorialConsultas();
 		historialFecha = new HistorialConsultasFecha();
-		historialUsuario = new HistorialConsultasUsuario();		
+		historialUsuario = new HistorialConsultasUsuario();
 	}
 
-
-	public ResultadoConsulta BuscarPoi(String criterioBusqueda, String usuario) throws MalformedURLException, JSONException, IOException {
+	public ResultadoConsulta BuscarPoi(String criterioBusqueda, String usuario)
+			throws MalformedURLException, JSONException, IOException {
 		resultado = new ResultadoConsulta();
 		resultado = historicoProxy.BuscarPoi(criterioBusqueda);
 		resultado.setUsuario(usuario);
+		
 		// Guardo la consulta en el Historial
-		 historial.AgregarResultado(resultado);
-		 historialFecha.AgregarResultado(resultado);
-		 historialUsuario.AgregarResultado(resultado);
-
-		 //Persistir resultado
-		 
-		 
+		historial.AgregarResultado(resultado);
+		historialFecha.AgregarResultado(resultado);
+		historialUsuario.AgregarResultado(resultado);
+		
 		return resultado;
 	}
 
@@ -47,21 +45,17 @@ public class GestorPoi {
 		return historialFecha;
 	}
 
-
 	public void setHistorialFecha(HistorialConsultasFecha historialFecha) {
 		this.historialFecha = historialFecha;
 	}
-
 
 	public HistorialConsultasUsuario getHistorialUsuario() {
 		return historialUsuario;
 	}
 
-
 	public void setHistorialUsuario(HistorialConsultasUsuario historialUsuario) {
 		this.historialUsuario = historialUsuario;
 	}
-
 
 	public float CalcularDistanciaEntrePuntos(POI puntoUno, POI puntoDos) {
 		return utn.dds.g10.Utiles.Util.CalcularDistancia(
@@ -79,11 +73,8 @@ public class GestorPoi {
 	public boolean EstaDisponible(POI poi, LocalDateTime fecha, String x) {
 		return poi.getTipo().estaDisponible(fecha, x);
 	}
-	
-	public HistorialConsultas listadoHistorialConsultas(){
+
+	public HistorialConsultas listadoHistorialConsultas() {
 		return historial;
 	}
 }
-	
-	
-

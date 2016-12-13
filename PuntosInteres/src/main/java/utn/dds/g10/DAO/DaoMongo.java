@@ -20,6 +20,7 @@ import com.mongodb.client.MongoDatabase;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.administracion.Usuario;
 import utn.dds.g10.entidadesFactory.*;
+import utn.dds.g10.mappers.BancosJSON;
 import utn.dds.g10.mappers.BsonUsuario;
 import utn.dds.g10.modelo.ConexionMongoDB;
 
@@ -75,15 +76,16 @@ public class DaoMongo {
 	public List<POI> obtenerPoisPorNombre(String nombre)
 			throws JsonParseException, JsonMappingException, IOException {
 		List<POI> poisEncontrados = new ArrayList<POI>();
+		
 		BasicDBObject whereQuery = new BasicDBObject();
-		whereQuery.put("nombre", nombre);
+		whereQuery.put("nombre",  java.util.regex.Pattern.compile(nombre));
+		
 		MongoDatabase db = ConexionMongoDB.getMongoDataBase();
-		FindIterable<Document> tDocumentList = db
-				.getCollection("ddscollection").find(whereQuery);
+		FindIterable<Document> tDocumentList = db.getCollection("ddscollection").find(whereQuery);
 
-		for (Document document : tDocumentList) {
-			ObjectMapper mapper = new ObjectMapper();
-			poisEncontrados.add(mapper.readValue(document.toJson(), POI.class));
+		for (Document document : tDocumentList)
+		{
+			poisEncontrados.add(BancosJSON.getPoiBancoFromJsonMongo(document.toJson()));
 		}
 
 		return poisEncontrados;

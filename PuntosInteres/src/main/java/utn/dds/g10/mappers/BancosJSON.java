@@ -22,7 +22,7 @@ public class BancosJSON {
 		List<POI> listaBancosPois = new ArrayList<POI>();
 
 		//String urlGenerica = Configuraciones.obtenerUrlBancos();
-		String urlGenerica = "http://localhost:8081/Consultas/banco";
+		String urlGenerica = "http://trimatek.org/Consultas/banco";
 		String urlString = "";
 		
 		tipoBusqueda tipoBusque = tipoBusqueda.ninguno;
@@ -117,5 +117,41 @@ public class BancosJSON {
 	public static List<POI> obtenerBancos() throws MalformedURLException, IOException, JSONException
 	{
 		return obtenerBancos(null,null);
+	}
+	
+	public static POI getPoiBancoFromJsonMongo(String jsonBancoString)
+	{
+		POI poibanco = new POI();
+		SucursalBanco sucursal = new SucursalBanco();
+		Locacion locacionBanco = new Locacion();
+		List<String> serviciosBanco = new ArrayList<String>();
+		
+		JSONObject jsonObjetoBanco = new JSONObject(jsonBancoString);
+		JSONObject jsonLocacion = jsonObjetoBanco.getJSONObject("locacion");
+		JSONArray  jsonPalabrasClaves = jsonObjetoBanco.getJSONArray("palabrasClaves");
+		JSONArray jsonresultados = jsonObjetoBanco.getJSONArray("resultados");
+		JSONObject jsontipo = jsonObjetoBanco.getJSONObject("tipo");
+		
+		JSONArray jsonSericios = jsontipo.getJSONArray("servicios");
+		
+		for (int j = 0; j < jsonSericios.length(); j++) {
+			serviciosBanco.add(jsonSericios.get(j).toString());
+		}
+		
+		locacionBanco.setBarrio(jsonLocacion.get("barrio").toString());
+		locacionBanco.setCodigoComuna(Integer.parseInt(jsonLocacion.get("codigoComuna").toString()));
+		locacionBanco.setCodigoPostal(Integer.parseInt(jsonLocacion.get("codigoPostal").toString()));
+		locacionBanco.setNumero(Integer.parseInt(jsonLocacion.get("numero").toString()));		
+		
+		sucursal.setNombreGerente(jsontipo.get("nombreGerente").toString());
+		sucursal.setServicios(serviciosBanco);
+		
+		poibanco.setNombre(jsonObjetoBanco.get("nombre").toString());
+		poibanco.setEstadoAlta(true);
+		poibanco.setTipo(sucursal);
+		poibanco.setLocacion(locacionBanco);
+		
+		
+		return poibanco;
 	}
 }

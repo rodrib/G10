@@ -1,5 +1,6 @@
 package utn.dds.g10.beans;
 
+import utn.dds.g10.DAO.DaoRelacional;
 import utn.dds.g10.entidades.POI;
 import utn.dds.g10.entidades.ResultadoConsulta;
 //import utn.dds.g10.entidades.*;
@@ -12,11 +13,14 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import org.json.JSONException;
 
@@ -65,15 +69,15 @@ public class BusquedaBean implements Serializable {
 		return criteriosList;
 	}
 
-	private static final long serialVersionUID = 1L;
+	private static  long serialVersionUID = 1L;
 
-	private static final ArrayList<String> criteriosList = new ArrayList<String>();
+	private static  ArrayList<String> criteriosList = new ArrayList<String>();
 
 	public ArrayList<String> getCriteriosList() {
 		return criteriosList;
 	}
 
-	private static final ArrayList<POI> poiList = new ArrayList<POI>();
+	private static  ArrayList<POI> poiList = new ArrayList<POI>();
 
 	public ArrayList<POI> getPoiList() {
 		return poiList;
@@ -95,25 +99,21 @@ public class BusquedaBean implements Serializable {
 	}
 
 	public void Limpiar() {
-		// criteriosList = new ArrayList<String>();
-		// poiList = new ArrayList<POI>();
+		criteriosList = new ArrayList<String>();
+		poiList = new ArrayList<POI>();
 	}
 
 	public void searchAction(String nombreUsuario)
 			throws MalformedURLException, JSONException, IOException {
 
-		//usuario = this.navigationBar.getUsuarioLogueado();
-
-		//Esto esta mal, debe tomar el del usuario logueado.
-		usuario = new Usuario();
-		RolAdministrador rolAdministrador = new RolAdministrador();
-		usuario.setRol(rolAdministrador);
-		//Quitar en cuanto se pueda.
-		
-		gestorPoi = new GestorPoi(usuario);
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		String username_log = (String)sessionMap.get("nombre_usuario");
+		Usuario usLogueado = DaoRelacional.obtenerUsuariosPorNombre(username_log, Usuario.class);		
+		gestorPoi = new GestorPoi(usLogueado);
 		
 		for (String criterioBusqueda : getCriterioslist()) {
-			resultado = gestorPoi.BuscarPoi(criterioBusqueda, nombreUsuario);
+			resultado = gestorPoi.BuscarPoi(criterioBusqueda, username_log);
 			List<POI> listadoPoi = resultado.getPuntos();
 			
 			if (resultado.getCantidadResultados() != 0) {

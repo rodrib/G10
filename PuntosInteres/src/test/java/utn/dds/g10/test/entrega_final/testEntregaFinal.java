@@ -30,9 +30,9 @@ public class testEntregaFinal {
 
 	int ROL_ADMIN = 1;
 	int ROL_TERMINAL = 2;
-
-	int RUBRO_LIBRERIA = 1;
-	int RUBRO_KIOSCO = 2;
+	
+	long RUBRO_LIBRERIA = 1;
+	long RUBRO_KIOSCO = 2;
 
 	long LOCAL_COMERCIAL_LIBRERIA = 1;
 	long LOCAL_COMERCIAL_PELUQUERIA= 2;
@@ -115,32 +115,32 @@ public class testEntregaFinal {
 	public void cargaInicialDatosTest() {
 		crearRoles();
 		crearUsuarios();
-		crearTiposPoi();
 		crearPOIS();
 	}
 
-	private void crearTiposPoi() {
+	private void crearPOIS() {
+		
 		Libreria libreriaRubro = new Libreria();
-		libreriaRubro.setId(DaoRelacional.crearEntidadIdLong(libreriaRubro));
+		DaoRelacional.crearEntidadIdLong(libreriaRubro);
+		
+		Libreria nuevaLib = new Libreria();
+		nuevaLib.setId(RUBRO_LIBRERIA);
 
 		LocalComercial localLibreria = new LocalComercial();
-		localLibreria.setRubro(libreriaRubro);
+		localLibreria.setRubro(nuevaLib);
 		LOCAL_COMERCIAL_LIBRERIA = DaoRelacional.crearEntidadIdLong(localLibreria);
 
 		LocalComercial localPeluqueria = new LocalComercial();
-		localPeluqueria.setRubro(libreriaRubro); // ojo libreria
+		localPeluqueria.setRubro(nuevaLib); // ojo libreria
 		LOCAL_COMERCIAL_PELUQUERIA = DaoRelacional.crearEntidadIdLong(localPeluqueria); 
 
 		LocalComercial localRetaurante = new LocalComercial();
-		localRetaurante.setRubro(libreriaRubro); // ojo libreria
+		localRetaurante.setRubro(nuevaLib); // ojo libreria
 		LOCAL_COMERCIAL_RESTO = DaoRelacional.crearEntidadIdLong(localRetaurante); 
 
 		LocalComercial localFerreteria = new LocalComercial();
-		localFerreteria.setRubro(libreriaRubro); // ojo libreria
-		LOCAL_COMERCIAL_FERRETERIA = DaoRelacional.crearEntidadIdLong(localFerreteria); 		
-	}
-
-	private void crearPOIS() {
+		localFerreteria.setRubro(nuevaLib); // ojo libreria
+		LOCAL_COMERCIAL_FERRETERIA = DaoRelacional.crearEntidadIdLong(localFerreteria);
 		
 		POI LibreriaTijeras = new POI();
 		POI PeluqueriaTijeras = new POI();
@@ -154,22 +154,11 @@ public class testEntregaFinal {
 		FerreteriaMiPapa.setNombre("Ferreteria Mi Papa");
 		RestoSantander.setNombre("Restaurante Santander");
 		
-		LocalComercial localLibreriaTijeras = new LocalComercial();
-		localLibreriaTijeras.setId(LOCAL_COMERCIAL_LIBRERIA);
-		LocalComercial localPeluqueriaTijeras = new LocalComercial();
-		localPeluqueriaTijeras.setId(LOCAL_COMERCIAL_PELUQUERIA);
-		LocalComercial localRestoPapaFrita = new LocalComercial();
-		localRestoPapaFrita.setId(LOCAL_COMERCIAL_RESTO);
-		LocalComercial localFerreteriaMiPapa = new LocalComercial();
-		localFerreteriaMiPapa.setId(LOCAL_COMERCIAL_FERRETERIA);
-		LocalComercial localRestoSantander = new LocalComercial();
-		localRestoSantander.setId(LOCAL_COMERCIAL_RESTO);
-		
-		LibreriaTijeras.setTipo(localLibreriaTijeras);
-		PeluqueriaTijeras.setTipo(localPeluqueriaTijeras);
-		RestoPapaFrita.setTipo(localRestoPapaFrita);
-		FerreteriaMiPapa.setTipo(localFerreteriaMiPapa);
-		RestoSantander.setTipo(localRestoSantander);
+		LibreriaTijeras.setTipo(localLibreria);
+		PeluqueriaTijeras.setTipo(localPeluqueria);
+		RestoPapaFrita.setTipo(localRetaurante);
+		FerreteriaMiPapa.setTipo(localFerreteria);
+		RestoSantander.setTipo(localRetaurante);
 
 		DaoRelacional.crearEntidadIdLong(LibreriaTijeras);
 		DaoRelacional.crearEntidadIdLong(PeluqueriaTijeras);

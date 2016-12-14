@@ -54,14 +54,13 @@ public class Usuario {
 		this.password = password;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Rol rol;
 
 	public Rol getRol() {
 		return rol;
 	}
 
-	
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}

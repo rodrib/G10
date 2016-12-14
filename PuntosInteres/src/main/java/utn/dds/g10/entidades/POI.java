@@ -49,14 +49,14 @@ public class POI implements java.io.Serializable{
 	}
 
 	
-	 @OneToOne
+	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL )
     @JoinColumn(name = "id_locacion")
  	private Locacion locacion;
 	
 	@Column(name = "nombre")
 	private String nombre;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL )
     @JoinColumn(name = "id_tipo")
 	private TipoPoi tipo;
 	
@@ -64,7 +64,7 @@ public class POI implements java.io.Serializable{
 	@CollectionTable(name="texto", joinColumns=@JoinColumn(name="id"))
 	private List<String> palabrasClaves = new ArrayList<String>();
 		
-	@ManyToMany(mappedBy = "pois")
+	@ManyToMany(mappedBy = "pois", cascade=CascadeType.ALL )
 	private List<ResultadoBusquedaParcial> resultados = new ArrayList<ResultadoBusquedaParcial>(0);
 	
 	

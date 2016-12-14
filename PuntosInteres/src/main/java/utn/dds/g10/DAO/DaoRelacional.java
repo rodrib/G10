@@ -85,24 +85,14 @@ public class DaoRelacional implements Dao {
 	
 	public static Usuario obtenerUsuariosPorNombre(String nombre, Class<Usuario> clase) {
 		Session asession = ConexionDB.getSessionFactory().openSession();
-		//Usuario entidad = (Usuario) asession.get(clase, idUsuario);
-		//asession.close();
-		
 		Criteria criteria = asession.createCriteria(Usuario.class);
-
 		criteria.add(Restrictions.eq("nombre", nombre));
+		Usuario user = (Usuario)criteria.list().get(0);
+		String nombreRol = user.getRol().getNombre();
+		System.out.print("Nombre del rol: " + nombreRol);
+		asession.close();
 		
-		//Obtiene el primero
-		List<Usuario> usuarios = criteria.list();
-		
-		if(usuarios.size() > 0)
-		{
-			return (Usuario)criteria.list().get(0);	
-		}
-		else	
-		{
-			return new Usuario();
-		}
+		return user;
 	}
 	
 	public static Department obtenerDeparmentPorId(Long idUsuario,

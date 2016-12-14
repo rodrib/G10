@@ -21,7 +21,7 @@ public class LocalComercial extends TipoPoi {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)	
     @JoinColumn(name = "id_rubro")
 	private RubroLocal rubro;
 	//List<DayOfWeek> diasDisponible;	

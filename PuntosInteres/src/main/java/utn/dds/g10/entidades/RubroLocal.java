@@ -15,7 +15,6 @@ import javax.persistence.OneToOne;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class  RubroLocal implements Serializable  {
-	
 	/**
 	 * 
 	 */
@@ -41,7 +40,7 @@ public abstract class  RubroLocal implements Serializable  {
 	public void setLocal(LocalComercial local) {
 		this.local = local;
 	}
-	@Column
+	
 	public abstract float getDistanciaMaxima();
 	public abstract boolean EsDiaDisponible(LocalDateTime fecha);
 	public abstract boolean EsHorarioDisponible(LocalDateTime fecha);

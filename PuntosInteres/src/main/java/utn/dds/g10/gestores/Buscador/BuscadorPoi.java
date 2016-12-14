@@ -83,7 +83,7 @@ private List<POI> buscarEnMongo(String criterioBusqueda) throws JsonParseExcepti
 	List<POI> poisMongo = new ArrayList<POI>();
 	
 	DaoMongo repositorio = new DaoMongo();
-	poisMongo = repositorio.obtenerPoisPorNombre("Santander");
+	poisMongo = repositorio.obtenerPoisPorNombre(criterioBusqueda);
 	
 	return poisMongo;
 	

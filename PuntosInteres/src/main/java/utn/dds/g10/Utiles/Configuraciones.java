@@ -14,7 +14,7 @@ public class Configuraciones {
 	private static String claveSegundosTimeOut = "segundostimeout";
 	
 	public static String obtenerMailAdministrador() {
-		return obtenerConfiguracionPorClave(claveMailAdmin);
+		return "guille86598@gmail.com";//obtenerConfiguracionPorClave(claveMailAdmin);
 	}
 	
 	public static String obtenerUrlBancos() {
@@ -26,7 +26,7 @@ public class Configuraciones {
 	}
 	
 	public static int obtenerCantidadSegundosTimeOut() {
-		return obtenerConfiguracionTipoEntero(claveSegundosTimeOut);
+		return 10;//obtenerConfiguracionTipoEntero(claveSegundosTimeOut);
 	}
 	
 	private static int obtenerConfiguracionTipoEntero(String clave)

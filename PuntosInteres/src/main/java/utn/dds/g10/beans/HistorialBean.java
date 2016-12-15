@@ -267,17 +267,21 @@ public class HistorialBean implements Serializable{
 		resultadoPOISsinfiltrar = resultadoList;
 	
 		for (int j = 0; j < (resultadoList.size()); j++) {
-			String fecha = resultadoPOISsinfiltrar.get(j).getFecha();
-			String nombre = resultadoPOISsinfiltrar.get(j).getParametros();
+			String fecha = resultadoList.get(j).getFecha();
+			String nombre = resultadoList.get(j).getParametros();
 			
 			int cantResultado = 0;
+			if (!resultadoPOISfiltrado.isEmpty())
 			for (int m = 0; m < (resultadoPOISfiltrado.size()); m++) {
-				if (resultadoPOISfiltrado.get(m).getParametros().equals(nombre) && resultadoPOISfiltrado.get(m).getFecha().equals(fecha)) {
-					cantResultado = 1;
+				if(resultadoPOISfiltrado.get(m).getParametros()!=null && resultadoPOISfiltrado.get(m).getFecha()!=null){
+					if (resultadoPOISfiltrado.get(m).getParametros().equals(nombre) &&resultadoPOISfiltrado.get(m).getFecha().equals(fecha)) {
+						cantResultado = 1;
+					}
 				}
 			}
+			
 			if (cantResultado == 0) {
-				resultadoPOISfiltrado.add(resultadoPOISsinfiltrar.get(j));
+				resultadoPOISfiltrado.add(resultadoList.get(j));
 			}
 			
 		}

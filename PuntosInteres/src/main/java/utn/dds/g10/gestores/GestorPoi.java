@@ -51,6 +51,8 @@ public class GestorPoi {
 		List<POI> resultadoPOISfiltrado = new ArrayList<POI>();
 		resultadoPOISsinfiltrar = resultado.getPuntos();
 	
+		resultado.setCantidadResultados() ;
+		
 		for (int j = 0; j < (resultado.getCantidadResultados()); j++) {
 			
 			Long idPOI = resultadoPOISsinfiltrar.get(j).getId();

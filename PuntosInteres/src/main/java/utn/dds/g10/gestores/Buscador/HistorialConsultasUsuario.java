@@ -24,6 +24,8 @@ public class HistorialConsultasUsuario {
 	
 	public HistorialConsultasUsuario(){
 		
+		if (consultasParcial.isEmpty()) {
+		
 		//Obtiene el listado de la base de datos
 		List<ResultadoBusquedaParcialUsuario> consultasParcialInicial = new ArrayList<ResultadoBusquedaParcialUsuario>();
 		
@@ -39,7 +41,9 @@ public class HistorialConsultasUsuario {
 			obtenerResultado(resultadoObtenido);
 			
 			consultasParcial.add(resultadoObtenido);
-		}		
+		}
+		
+		}
 
 	}
 	
@@ -259,15 +263,18 @@ public class HistorialConsultasUsuario {
 		resultadoParcial.setCantidadResultados(resultado.getCantidadResultados());
 		resultadoParcial.setFecha(LocalDateTime.now());
 		
-//		List<POI> resultadoPOIS = 		
-//		resultadoParcial.setListaPOISbusquedaParcial(filtrarRepetidos(resultadoPOIS));
+//		List<POI> resultadoPOISsinfiltrar = new ArrayList<POI>();
+//		resultadoPOISsinfiltrar=resultado.getPuntos();
 		
+//		List<POI> resultadoPOIS = 		
+//		resultadoParcial.setListaPOISbusquedaParcial();
+		
+		//resultadoParcial.setListaPOISbusquedaParcial(filtrarRepetidos(resultadoPOISsinfiltrar));
 		resultadoParcial.setListaPOISbusquedaParcial(resultado.getPuntos());
-
 		ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado = new ResultadoBusquedaParcialUsuario();
 
 		int usuarioEncontrado = 0;
-		int criterioEncontrado = 0;
+		//int criterioEncontrado = 0;
 
 		// Busca por usuario. Si ya existe, se busca por el criterio de busqueda
 		
@@ -286,24 +293,24 @@ public class HistorialConsultasUsuario {
 
 			if (usuarioEncontrado == 1) {
 
-				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioParcialEncontrado
-						.getResultados().iterator(); consultaBusquedaParcial
-						.hasNext();) {
-					ResultadoBusquedaParcial resultadoParcialEncontrado = consultaBusquedaParcial
-							.next();
-					// Revisar esta condicion, cuando guardar un nuevo criterio
-					if (resultadoParcialEncontrado.getCriterioBusqueda()
-							.equalsIgnoreCase(
-									resultadoParcial.getCriterioBusqueda())) {
-						criterioEncontrado = 1;
-						break;
-					}
-					// Si el criterio de busqueda ya existe para ese usuario, no
-					// se agrega nada
-					// Tampoco se cambia Total
-				}
+//				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioParcialEncontrado
+//						.getResultados().iterator(); consultaBusquedaParcial
+//						.hasNext();) {
+//					ResultadoBusquedaParcial resultadoParcialEncontrado = consultaBusquedaParcial
+//							.next();
+//					// Revisar esta condicion, cuando guardar un nuevo criterio
+//					if (resultadoParcialEncontrado.getCriterioBusqueda()
+//							.equalsIgnoreCase(
+//									resultadoParcial.getCriterioBusqueda())) {
+//						criterioEncontrado = 1;
+//						break;
+//					}
+//					// Si el criterio de busqueda ya existe para ese usuario, no
+//					// se agrega nada
+//					// Tampoco se cambia Total
+//				}
 
-				if (criterioEncontrado == 0) {
+//				if (criterioEncontrado == 0) {
 					resultadoUsuarioParcialEncontrado.getResultados().add(
 							resultadoParcial);
 					
@@ -322,7 +329,7 @@ public class HistorialConsultasUsuario {
 					//repositorio.modificarEntidad(resultadoUsuarioParcialEncontrado);	
 					
 					AgregarResultadoTotal(resultado);
-				}
+//				}
 
 			} else {// Si el usuario no existe se crea un resultado nuevo con
 					// ese usuario y la busqueda realizada

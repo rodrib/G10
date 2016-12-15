@@ -3,6 +3,8 @@ package utn.dds.g10.gestores;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONException;
 
@@ -33,12 +35,41 @@ public class GestorPoi {
 		resultado = historicoProxy.BuscarPoi(criterioBusqueda);
 		resultado.setUsuario(usuario);
 		
+		filtrarResultado(resultado);
+		
 		// Guardo la consulta en el Historial
 		historial.AgregarResultado(resultado);
 		historialFecha.AgregarResultado(resultado);
 		historialUsuario.AgregarResultado(resultado);
 		
 		return resultado;
+	}
+	
+	public void filtrarResultado(ResultadoConsulta resultado){
+	
+		List<POI> resultadoPOISsinfiltrar = new ArrayList<POI>();
+		List<POI> resultadoPOISfiltrado = new ArrayList<POI>();
+		resultadoPOISsinfiltrar = resultado.getPuntos();
+	
+		for (int j = 0; j < (resultado.getCantidadResultados()); j++) {
+			
+			Long idPOI = resultadoPOISsinfiltrar.get(j).getId();
+			int cantResultado = 0;
+			for (int m = 0; m < (resultadoPOISfiltrado.size()); m++) {
+				if (resultadoPOISfiltrado.get(m).getId() == (idPOI)) {
+					cantResultado = 1;
+				}
+			}
+			if (cantResultado == 0) {
+				resultadoPOISfiltrado.add(resultadoPOISsinfiltrar.get(j));
+			}
+			
+		}
+		
+		
+		resultado.setPuntos(resultadoPOISfiltrado);
+		resultado.setCantidadResultados(resultadoPOISfiltrado.size());
+		
 	}
 
 	public HistorialConsultasFecha getHistorialFecha() {

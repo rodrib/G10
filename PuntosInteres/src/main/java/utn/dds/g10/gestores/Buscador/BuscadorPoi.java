@@ -53,7 +53,33 @@ public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURL
 		ResultadoConsulta resultado = new ResultadoConsulta();
 		
 		List<POI> externos =  BuscarEnMongoYRest(criterioBusqueda);
-		listadoPoi.addAll(externos);
+		
+		int esIgual = 0;
+		
+		for (Iterator<POI> iterador = externos.iterator(); iterador
+				.hasNext();) {
+			POI poiObtenido = new POI();
+			poiObtenido = iterador.next();
+			
+			for (Iterator<POI> iteradorDB = listadoPoi.iterator(); iterador
+					.hasNext();) {
+		
+				POI poiObtenidoDB = new POI();
+				poiObtenidoDB = iteradorDB.next();	
+				
+				if (poiObtenido.getNombre().equals(poiObtenidoDB.getNombre())){
+					esIgual=1;
+					break;
+				}
+			}
+			
+			if (esIgual==0)
+				listadoPoi.add(poiObtenido);
+			
+			esIgual = 0;
+		}
+		
+		//listadoPoi.addAll(externos);
 		
 		resultado.setPuntos(listadoPoi);
 		resultado.setFechaHora(LocalDate.now());

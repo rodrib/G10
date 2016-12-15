@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import utn.dds.g10.entidades.POI;
+import utn.dds.g10.entidades.ResultadoConsulta;
 import utn.dds.g10.gestores.Buscador.HistorialConsultasUsuario;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
 import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
@@ -201,6 +202,7 @@ public class HistorialBean implements Serializable{
 					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
 
 				List<POI> poisFiltrados = (filtrarRepetidos(resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()));
+				
 				resultadoBusquedaParcialEncontrado.setCantidadResultados(poisFiltrados.size());
 					
 					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), fechaToString(resultadoBusquedaParcialEncontrado),
@@ -251,9 +253,40 @@ public class HistorialBean implements Serializable{
 					resultadoList.add(elemLista);
 				}
 			}		
-		}		
+		}
+		
+		filtrarResultado();
+		
 	return null;	
 	}
+	
+	public void filtrarResultado(){
+		
+		ArrayList<resultadoHistorial> resultadoPOISsinfiltrar = new ArrayList<resultadoHistorial>();
+		ArrayList<resultadoHistorial> resultadoPOISfiltrado = new ArrayList<resultadoHistorial>();
+		resultadoPOISsinfiltrar = resultadoList;
+	
+		for (int j = 0; j < (resultadoList.size()); j++) {
+			String fecha = resultadoPOISsinfiltrar.get(j).getFecha();
+			String nombre = resultadoPOISsinfiltrar.get(j).getParametros();
+			
+			int cantResultado = 0;
+			for (int m = 0; m < (resultadoPOISfiltrado.size()); m++) {
+				if (resultadoPOISfiltrado.get(m).getParametros().equals(nombre) && resultadoPOISfiltrado.get(m).getFecha().equals(fecha)) {
+					cantResultado = 1;
+				}
+			}
+			if (cantResultado == 0) {
+				resultadoPOISfiltrado.add(resultadoPOISsinfiltrar.get(j));
+			}
+			
+		}
+		resultadoList.clear();
+		
+		resultadoList.addAll(resultadoPOISfiltrado);
+		
+	}
+	
 	
 public List<POI> filtrarRepetidos(List<POI> listaPois){
 		

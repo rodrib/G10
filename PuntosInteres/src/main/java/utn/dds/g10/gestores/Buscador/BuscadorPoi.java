@@ -1,194 +1,396 @@
-package utn.dds.g10.gestores.Buscador;
+package utn.dds.g10.beans;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.time.LocalDate;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.json.JSONException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
-import utn.dds.g10.DAO.DaoMongo;
-import utn.dds.g10.DAO.DaoRelacional;
-import utn.dds.g10.datos.Repositorio;
-import utn.dds.g10.entidades.CGP;
-import utn.dds.g10.entidades.HistorialConsultas;
-import utn.dds.g10.entidades.Kiosco;
-import utn.dds.g10.entidades.Libreria;
-import utn.dds.g10.entidades.LocalComercial;
 import utn.dds.g10.entidades.POI;
-import utn.dds.g10.entidades.ParadaColectivo;
 import utn.dds.g10.entidades.ResultadoConsulta;
-import utn.dds.g10.entidades.ServicioCGP;
-import utn.dds.g10.entidades.SucursalBanco;
-import utn.dds.g10.mappers.BancosJSON;
+import utn.dds.g10.gestores.Buscador.HistorialConsultasUsuario;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcial;
+import utn.dds.g10.gestores.Buscador.ResultadoBusquedaParcialUsuario;
 
+enum tipoCargaFecha {soloDesde, soloHasta, ambasCargadas, ninguna};
 
-public class BuscadorPoi implements Buscador {
-	
-HistorialConsultas historial = new HistorialConsultas();
-	
-public  ResultadoConsulta BuscarPoi(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
-		
-		List<POI> listadoPoiInicial=  (ArrayList<POI>) DaoRelacional.obtenerPois();
-		
-		List<POI> listadoPoi =  new ArrayList<POI>();
-		for (Iterator<POI> iterador = listadoPoiInicial.iterator(); iterador
-				.hasNext();) {
-			
-			POI poiObtenido = new POI();
-			poiObtenido = iterador.next();
-			
-			obtenerPOI(poiObtenido);
-			
-			if (CumpleCondicionBusqueda(poiObtenido, criterioBusqueda)&&poiObtenido.getEstadoAlta()==true)
-				listadoPoi.add(poiObtenido);
-		}
+@ManagedBean(name="historial")
+@SessionScoped
+public class HistorialBean implements Serializable{
 
-		// Retorna el resultado de una consulta.
-		ResultadoConsulta resultado = new ResultadoConsulta();
-		
-		List<POI> externos =  BuscarEnMongoYRest(criterioBusqueda);
-		
-		int esIgual = 0;
-		
-//		for (Iterator<POI> iterador = externos.iterator(); iterador
-//				.hasNext();) {
-//			POI poiObtenido = new POI();
-//			poiObtenido = iterador.next();
-//			
-//			for (Iterator<POI> iteradorDB = listadoPoi.iterator(); iterador
-//					.hasNext();) {
-//		
-//				POI poiObtenidoDB = new POI();
-//				poiObtenidoDB = iteradorDB.next();	
-//				
-//				if (poiObtenido.getNombre().equals(poiObtenidoDB.getNombre())){
-//					esIgual=1;
-//					break;
-//				}
-//			}
-//			
-//			if (esIgual==0)
-//				listadoPoi.add(poiObtenido);
-//			
-//			esIgual = 0;
-//		}
-		
-		listadoPoi.addAll(externos) ;
-		
-		resultado.setPuntos(listadoPoi);
-		resultado.setFechaHora(LocalDate.now());
-
-		return resultado;
-	}
-
-private List<POI> BuscarEnMongoYRest(String criterioBusqueda) throws MalformedURLException, JSONException, IOException {
+	private static final long serialVersionUID = 1L;
 	
-	List<POI>  poisExternos = buscarEnMongo(criterioBusqueda);
-	
-	boolean existeEnMongo = poisExternos.size() > 0;
-	
-	if(!existeEnMongo)
+	public String convertStringToDate(Date indate)
 	{
-		poisExternos  = BancosJSON.obtenerBancos(criterioBusqueda, null);
-		
-		for (POI poi : poisExternos) {
-			guardarEnMongo(poi);
-		}
+	   String dateString = null;
+	   SimpleDateFormat sdfr = new SimpleDateFormat("dd/MM/yyyy");
+	   try{
+		dateString = sdfr.format( indate );
+	   }catch (Exception ex ){
+		System.out.println(ex);
+	   }
+	   return dateString;
+	}
+
+	public Date getFechaDesdeDate() {
+		return fechaDesdeDate;
+	}
+	public void setFechaDesdeDate(Date fechaDesdeDate) {
+		this.fechaDesdeDate = fechaDesdeDate;
+	}
+	public Date getFechaHastaDate() {
+		return fechaHastaDate;
+	}
+	public void setFechaHastaDate(Date fechaHastaDate) {
+		this.fechaHastaDate = fechaHastaDate;
+	}
+
+	private Date fechaDesdeDate=null;
+	private Date fechaHastaDate=null;
+	
+	private String fechaDesde="";
+	private String fechaHasta="";
+	private List<POI> listaPOIDetalle; 
+	
+	public List<POI> getListaPOIDetalle() {
+		return listaPOIDetalle;
+	}
+	public void setListaPOIDetalle(List<POI> listaPOIDetalle) {
+		this.listaPOIDetalle = listaPOIDetalle;
+	}
+	public String getFechaDesde() {
+		return fechaDesde;
+	}
+	public void setFechaDesde(String fechaDesde) {
+		this.fechaDesde = fechaDesde;
+	}
+	public String getFechaHasta() {
+		return fechaHasta;
+	}
+	public void setFechaHasta(String fechaHasta) {
+		this.fechaHasta = fechaHasta;
+	}
+
+	private String usuario="";
+	private String parametros;
+	private int cantidadPois;
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+	public String getParametros() {
+		return parametros;
+	}
+	public void setParametros(String parametros) {
+		this.parametros = parametros;
+	}
+	public int getCantidadPois() {
+		return cantidadPois;
+	}
+	public void setCantidadPois(int cantidadPois) {
+		this.cantidadPois = cantidadPois;
+	}
+
+	//getter and setter methods
+
+	private static final ArrayList<resultadoHistorial> resultadoList =
+		new ArrayList<resultadoHistorial>();
+
+	public ArrayList<resultadoHistorial> getresultadoList() {
+
+		return resultadoList;
+
 	}
 	
-	return poisExternos;
-}
+	
+	private boolean tieneValorCargado(LocalDateTime fecha)
+	{
+		return (fecha != null);
+	}
+	
+	private String fechaToString(ResultadoBusquedaParcial resultadoBusquedaParcialEncontrado){
+	
+		String cadena = new String();
+		cadena = resultadoBusquedaParcialEncontrado.getFecha().getDayOfWeek().getValue()+"/"+resultadoBusquedaParcialEncontrado.getFecha().getMonthValue()+"/"+resultadoBusquedaParcialEncontrado.getFecha().getYear()+" "+resultadoBusquedaParcialEncontrado.getFecha().getHour()+":"+resultadoBusquedaParcialEncontrado.getFecha().getMinute()+":"+resultadoBusquedaParcialEncontrado.getFecha().getSecond();
+		return cadena;
+	
+	}
 
-private List<POI> buscarEnMongo(String criterioBusqueda) throws JsonParseException, JsonMappingException, IOException {
-	List<POI> poisMongo = new ArrayList<POI>();
-	
-	DaoMongo repositorio = new DaoMongo();
-	poisMongo = repositorio.obtenerPoisPorNombre(criterioBusqueda);
-	
-	return poisMongo;
-	
-}
-
-private void guardarEnMongo(POI poi) {
-	DaoMongo repositorio = new DaoMongo();
-	repositorio.crearEntidad(poi);
-}
-
-private POI obtenerPOI(POI poi){
-	POI poiReconstruido = new POI();
-	poiReconstruido.setEstadoAlta(poi.getEstadoAlta());
-	poiReconstruido.setId(poi.getId());
-	poiReconstruido.setLocacion(poi.getLocacion());
-	poiReconstruido.setNombre(poi.getNombre());
-	poiReconstruido.setPalabrasClaves(poi.getPalabrasClaves());
-	
-	if (poi.getTipo().tipoPOI().equalsIgnoreCase("CGP")){
-		CGP cgp = new CGP();
-		cgp=(CGP)poi.getTipo();
+	public String agregaResultadoListaConsulta() {
 		
-		List<ServicioCGP> servicios = new ArrayList<ServicioCGP>();
-		servicios = cgp.getServicios();
-		cgp.setServicios(servicios);
+		resultadoList.clear();		
 		
-		poiReconstruido.setTipo(cgp);
-	}else if (poi.getTipo().tipoPOI().equalsIgnoreCase("SucursalBanco")){
-		SucursalBanco banco = new SucursalBanco();
-		banco=(SucursalBanco)poi.getTipo();
-		poiReconstruido.setTipo(banco);
-	}else if (poi.getTipo().tipoPOI().equalsIgnoreCase("ParadaColectivo")){
-		ParadaColectivo parada = new ParadaColectivo();
-		parada=(ParadaColectivo)poi.getTipo();
-		poiReconstruido.setTipo(parada);
+		LocalDateTime fechaDesde=null;
+		LocalDateTime fechaHasta=null;
 		
-	}else if (poi.getTipo().tipoPOI().equalsIgnoreCase("LocalComercial")){
-		LocalComercial local = new LocalComercial();
-		local=(LocalComercial)poi.getTipo();
-		Kiosco kiosco = new Kiosco();
-		Libreria libreria = new Libreria();
-		if (local.getRubro().tipoRubro().equalsIgnoreCase("Kiosco")){
-			kiosco=(Kiosco)local.getRubro();
-			local.setRubro(kiosco);
-		}else if (local.getRubro().tipoRubro().equalsIgnoreCase("Libreria")){
-			libreria=(Libreria)local.getRubro();
-			local.setRubro(libreria);
-		}
-		poiReconstruido.setTipo(local);
-	}	
-	return poiReconstruido;
-}
-
-
-private  Boolean CumpleCondicionBusqueda(POI poi, String criterio) {
-
-	if (poi.getEstadoAlta()==true){
-		// Cumple condicion en el nombre
-		if (poi.getNombre().contains(criterio)) {
-			return true;
-		}
-
-		if (poi.getTipo().CumpleCondicionBusqueda(criterio)) {
-			return true;
+		if (this.fechaDesdeDate != null){
+			this.fechaDesde = convertStringToDate(this.fechaDesdeDate);
+			fechaDesde = LocalDateTime.ofInstant(this.fechaDesdeDate.toInstant(), ZoneId.systemDefault());
+			
 		}
 		
-		// Busqueda en las palabras claves del poi
+		if (this.fechaHastaDate != null){
+			this.fechaHasta = convertStringToDate(this.fechaHastaDate);
+			fechaHasta = LocalDateTime.ofInstant(this.fechaHastaDate.toInstant(), ZoneId.systemDefault());
+		}
+		
+		int soloUsuario=0;
+		ResultadoBusquedaParcialUsuario resultadoUsuario = new ResultadoBusquedaParcialUsuario();
+		ResultadoBusquedaParcialUsuario resultadoUsuarioFiltrado = new ResultadoBusquedaParcialUsuario();
+		
+		boolean tieneValorFechaDesde = tieneValorCargado(fechaDesde);
+		boolean tieneValorFechaHasta = tieneValorCargado(fechaHasta);
+		
+		//Con usuario
+		if (this.usuario != null && !this.usuario.equalsIgnoreCase("")) {
+			
+			tipoCargaFecha tipo = tipoCargaFecha.ninguna;
+			
+			if(!tieneValorFechaDesde && ! tieneValorFechaHasta)
+			{
+				tipo = tipoCargaFecha.ninguna;
+			}
+			
+			if(tieneValorFechaDesde && ! tieneValorFechaHasta)
+			{
+				tipo = tipoCargaFecha.soloDesde;
+			}
+			
+			if(!tieneValorFechaDesde && tieneValorFechaHasta)
+			{
+				tipo = tipoCargaFecha.soloHasta;
+			}
+			
+			if(tieneValorFechaDesde &&  tieneValorFechaHasta)
+			{
+				tipo = tipoCargaFecha.ambasCargadas;
+			}
+			
+			resultadoUsuario = HistorialConsultasUsuario.buscarUsuario(this.usuario);
+			
+			switch (tipo) {
+			case ninguna:
+				soloUsuario=1;
+				break;
+			case soloDesde:
+				resultadoUsuarioFiltrado = HistorialConsultasUsuario.filtrarUsuarioFechaDesde(fechaDesde, resultadoUsuario);
+				break;
+			case soloHasta:
+				resultadoUsuarioFiltrado = HistorialConsultasUsuario.filtrarUsuarioFechaHasta(fechaHasta, resultadoUsuario);
+				break;
+			case ambasCargadas:
+				resultadoUsuarioFiltrado = HistorialConsultasUsuario.filtrarUsuarioFechaDesdeHasta(fechaDesde,fechaHasta, resultadoUsuario);
+				break;
+			default:
+				break;
+			}
+			
+			if (soloUsuario==1){			
+				ResultadoBusquedaParcial resultadoBusquedaParcialEncontrado = new ResultadoBusquedaParcial();
+				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuario.getResultados()
+						.iterator(); consultaBusquedaParcial.hasNext();) {
+					
+					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
 
-		if (poi.getPalabrasClaves() != null && !poi.getPalabrasClaves().isEmpty()) {
-			for (String palabra : poi.getPalabrasClaves()) {
-				if (palabra.contains(criterio)) {
-					return true;
+				List<POI> poisFiltrados = (filtrarRepetidos(resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()));
+				
+				resultadoBusquedaParcialEncontrado.setCantidadResultados(poisFiltrados.size());
+					
+					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), fechaToString(resultadoBusquedaParcialEncontrado),
+							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
+					resultadoList.add(elemLista);
+				}						
+			}else{
+				ResultadoBusquedaParcial resultadoBusquedaParcialEncontrado = new ResultadoBusquedaParcial();
+				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioFiltrado.getResultados()
+						.iterator(); consultaBusquedaParcial.hasNext();) {
+					
+					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
+
+					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuario.getUsuario(), fechaToString(resultadoBusquedaParcialEncontrado),
+							resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
+					resultadoList.add(elemLista);
+				}	
+			}
+		
+		//Sin Usuario
+		}else{
+			List<ResultadoBusquedaParcialUsuario> ListaUsuarioObtenida = new ArrayList<ResultadoBusquedaParcialUsuario>();
+			//Solo fecha Desde
+			if (!this.fechaDesde.equalsIgnoreCase("")&&this.fechaHasta.equalsIgnoreCase("")){
+				ListaUsuarioObtenida = HistorialConsultasUsuario.buscarFechaDesde(fechaDesde);
+			}
+			//Solo fecha Hasta
+			else if (this.fechaDesde.equalsIgnoreCase("")&&!this.fechaHasta.equalsIgnoreCase("")){
+				ListaUsuarioObtenida = HistorialConsultasUsuario.buscarFechaHasta(fechaHasta);
+			}
+			//Sin usuario, fechaDesde y fechaHasta
+			else if (!this.fechaDesde.equalsIgnoreCase("")&&!this.fechaHasta.equalsIgnoreCase("")){
+				ListaUsuarioObtenida = HistorialConsultasUsuario.buscarFechaDesdeHasta(fechaDesde,fechaHasta);
+			
+			}
+			
+			ResultadoBusquedaParcialUsuario resultadoUsuarioParcialEncontrado = new ResultadoBusquedaParcialUsuario();
+
+			for (Iterator<ResultadoBusquedaParcialUsuario> consultaBusqueda = ListaUsuarioObtenida
+					.iterator(); consultaBusqueda.hasNext();) {
+				resultadoUsuarioParcialEncontrado = consultaBusqueda.next();	
+				ResultadoBusquedaParcial resultadoBusquedaParcialEncontrado = new ResultadoBusquedaParcial();
+				for (Iterator<ResultadoBusquedaParcial> consultaBusquedaParcial = resultadoUsuarioParcialEncontrado.getResultados()
+						.iterator(); consultaBusquedaParcial.hasNext();) {	
+					resultadoBusquedaParcialEncontrado = consultaBusquedaParcial.next();
+					resultadoHistorial elemLista = new resultadoHistorial(resultadoUsuarioParcialEncontrado.getUsuario(), resultadoBusquedaParcialEncontrado.getFecha().toString(),
+					resultadoBusquedaParcialEncontrado.getCriterioBusqueda(), resultadoBusquedaParcialEncontrado.getCantidadResultados(),resultadoBusquedaParcialEncontrado.getListaPOISbusquedaParcial()); 
+					resultadoList.add(elemLista);
+				}
+			}		
+		}
+		
+		filtrarResultado();
+		
+	return null;	
+	}
+	
+	public void filtrarResultado(){
+		
+		ArrayList<resultadoHistorial> resultadoPOISsinfiltrar = new ArrayList<resultadoHistorial>();
+		ArrayList<resultadoHistorial> resultadoPOISfiltrado = new ArrayList<resultadoHistorial>();
+		resultadoPOISsinfiltrar = resultadoList;
+	
+		for (int j = 0; j < (resultadoList.size()); j++) {
+			String fecha = resultadoList.get(j).getFecha();
+			String nombre = resultadoList.get(j).getParametros();
+			
+			int cantResultado = 0;
+			if (!resultadoPOISfiltrado.isEmpty())
+			for (int m = 0; m < (resultadoPOISfiltrado.size()); m++) {
+				if(resultadoPOISfiltrado.get(m).getParametros()!=null && resultadoPOISfiltrado.get(m).getFecha()!=null){
+					if (resultadoPOISfiltrado.get(m).getParametros().equals(nombre) &&resultadoPOISfiltrado.get(m).getFecha().equals(fecha)) {
+						cantResultado = 1;
+					}
 				}
 			}
+			
+			if (cantResultado == 0) {
+				resultadoPOISfiltrado.add(resultadoList.get(j));
+			}
+			
 		}
+		resultadoList.clear();
+		
+		resultadoList.addAll(resultadoPOISfiltrado);
+		
+	}
+	
+	
+public List<POI> filtrarRepetidos(List<POI> listaPois){
+		
+		listaPOIsAuxiliar.clear();
+		
+		for (int j = 0; j < (listaPois.size()); j++) {
+			Long idPOI = listaPois.get(j).getId();
+				int cantResultado= 0;
+				for (int m = 0; m < (listaPOIsAuxiliar.size()); m++) {
+					if(listaPOIsAuxiliar.get(m).getId()==(idPOI)){
+						cantResultado =1;
+					}								
+				}
+				if(cantResultado==0){
+					listaPOIsAuxiliar.add(listaPois.get(j));								
+				}						
+		}		
+		
+		return listaPOIsAuxiliar;		
+	}
+	
+	private static final List<POI> listaPOIsAuxiliar =
+	new ArrayList<POI>();
+	
+	public List<POI> getPoiList() {
+	return listaPOIsAuxiliar;
 	}
 
-	return false;
-}
-
-
+	public static LocalDateTime obtenerFecha(String fechaString) {   
+        int contador = 0;
+        int dia=0,mes=0,anio=0;
+        char[] c = fechaString.toCharArray();
+        StringBuilder p = new StringBuilder();
+        for (int i = 0; i < c.length;i++) {
+            int code = Character.codePointAt(c, i);
+            if (code!=47){
+            	p.append(c[i]);
+            }else{
+            	contador++;
+            	if (contador==1){
+            		dia = Integer.parseInt(p.toString());
+            		p.delete(0, p.length());
+            	}else if (contador==2){
+            		mes = Integer.parseInt(p.toString());
+            		p.delete(0, p.length());
+            	}
+            }
+        }
+        anio = Integer.parseInt(p.toString());
+        LocalDateTime fecha = LocalDateTime.of(anio,mes,dia,0,0,0,0);
+		return fecha;
+    }
+	
+	public class resultadoHistorial {
+		private String fecha;
+		private String usuario;
+		private String parametros;
+		private int cantidadPois;
+		private List<POI> listaPOIs;
+//		ArrayList<resultadoHistorial> resultadoList;
+		
+		public List<POI> getListaPOIs() {
+			return listaPOIs;
+		}
+		public void setListaPOIs(List<POI> listaPOIs) {
+			this.listaPOIs = listaPOIs;
+		}
+		public String getFecha() {
+			return fecha;
+		}
+		public void setFecha(String fecha) {
+			this.fecha = fecha;
+		}
+		public String getUsuario() {
+			return usuario;
+		}
+		public void setUsuario(String usuario) {
+			this.usuario = usuario;
+		}
+		public String getParametros() {
+			return parametros;
+		}
+		public void setParametros(String parametros) {
+			this.parametros = parametros;
+		}
+		public int getCantidadPois() {
+			return cantidadPois;
+		}
+		public void setCantidadPois(int cantidadPois) {
+			this.cantidadPois = cantidadPois;
+		}
+		
+		public resultadoHistorial(String usuario, String fecha,
+				String parametros, int cantidadPois,List<POI> listaPOIs) {
+			this.usuario = usuario;
+			this.fecha = fecha;
+			this.parametros = parametros;
+			this.cantidadPois = cantidadPois;
+			this.listaPOIs =listaPOIs;
+		}
+		
+	}
 }
